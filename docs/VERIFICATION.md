@@ -8,4 +8,6 @@ Responsive browser check at 390×844: stacked controls/figures and mobile source
 
 Browser filtered CSV downloaded to disk with one ASKAP row; every field matched the versioned full summary exactly, including the exact Gaia ID. Downloaded sky PDF and CMD SVG matched local versioned SHA-256 hashes. All 20 static HTML-relative assets/document/data links and all 58 source bundles returned HTTP 200 beneath the project prefix. Versioned archive and checksums are generated with `scripts/package.py`.
 
-GitHub Pages live verification is recorded below after deployment. Reference-manifest reachability checks are historical RC3 checks; external paper links were not all newly requested.
+GitHub Pages deployed successfully from public repository PSR-Jake/RAWDOG, main branch/root, at https://psr-jake.github.io/RAWDOG/. Initial Pages workflow 36409121244 completed successfully. Live browser rendering showed all 58 systems; exact Gaia-ID search returned AR Sco without precision loss. QS Vir source detail loaded all 10 observation rows, 141 measurement records, geometric posterior bounds and references. The live AR Sco evidence JSON retained MCSE wording.
+
+Live HTTP downloads of the index, catalog JSON, versioned summary, both plot-input tables, sky PDF, CMD SVG and complete archive returned HTTP 200 and matched validated local bytes exactly. The final documentation/archive update is also verified after deployment. Reference-manifest reachability checks are historical RC3 checks; external paper links were not all newly requested.
