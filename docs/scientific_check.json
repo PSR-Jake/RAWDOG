@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "systems": 58,
+  "observations": 96,
+  "measurements": 7183,
+  "references": 667,
+  "rejected_counterpart_records": 74,
+  "sky_included": 58,
+  "sky_excluded": 0,
+  "cmd_included": 56,
+  "cmd_excluded": 2,
+  "audited_galactic_components_compared": 110,
+  "max_agreement_difference_deg": 0.0002243648918351937,
+  "radio_region_selected_coverage": 22,
+  "wd_polar_selected_coverage": 3
+}

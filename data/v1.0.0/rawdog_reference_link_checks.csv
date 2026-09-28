@@ -1,0 +1,878 @@
+url_id,url,reference_keys,url_roles,checked_date,method,http_status,link_status,error
+URL0001,https://doi.org/10.1086/172479,Abada-Simon+93,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0002,https://ui.adsabs.harvard.edu/abs/1993ApJ...406..692A/abstract,Abada-Simon+93,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0003,https://doi.org/10.1016/j.asr.2020.04.007,Barrett+20; Barrett+20_Her1,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0004,https://doi.org/10.1051/0004-6361/201525648,2RXS_IMEri; 2RXS_IXVel; Boller+16,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0005,https://www.aanda.org/articles/aa/pdf/2016/04/aa25648-15.pdf,Boller+16,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0006,https://doi.org/10.1051/0004-6361/201935741,Bonnet-Bidaud+20,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0007,https://www.aanda.org/articles/aa/pdf/2020/01/aa35741-19.pdf,Bonnet-Bidaud+20,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0008,https://doi.org/10.1111/j.1365-2966.2009.16009.x,Collins+10,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0009,https://doi.org/10.1093/mnras/stv1225,Coppejans+15,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0010,https://doi.org/10.1093/mnras/stw2133,Coppejans+16,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0011,https://doi.org/10.1086/170716,Eracleous+91,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0012,https://doi.org/10.3847/1538-4365/ab7db9,2SXPS_CMPhe; 2SXPS_RXAnd; 2SXPS_TTAri; 2SXPS_V347Pup; 2SXPS_V3885Sgr; Evans+20,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0013,https://doi.org/10.1093/mnras/staa1747,Hewitt+20,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0014,https://doi.org/10.1038/nature18620,Marsh+16,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0015,https://arxiv.org/abs/1607.08265,Marsh+16,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0016,https://doi.org/10.1086/339454,Mauche+02,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0017,https://doi.org/10.1093/mnras/270.3.692,Ramsay+94,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0018,https://articles.adsabs.harvard.edu/pdf/1994MNRAS.270..692R,Ramsay+94,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0019,https://doi.org/10.1111/j.1365-2966.2004.07732.x,Ramsay+04,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0020,https://arxiv.org/abs/astro-ph/0309110,Ramsay+04,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0021,https://doi.org/10.1086/429283,Rana+05,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0022,https://arxiv.org/abs/astro-ph/0505241,Rana+05,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0023,https://doi.org/10.1093/mnras/stw1238,Russell+16,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0024,https://doi.org/10.1093/pasj/64.4.88,Saitou+12,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0025,https://doi.org/10.1051/0004-6361/200811485,Schwarz+09,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0026,https://www.aanda.org/articles/aa/pdf/2009/12/aa11485-08.pdf,Schwarz+09,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0027,https://doi.org/10.1051/0004-6361:20066928,Schwope+07,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0028,https://arxiv.org/abs/astro-ph/0703561,Schwope+07,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0029,https://doi.org/10.1086/376752,Still+01,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0030,https://doi.org/10.1086/307505,Szkody+99,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0031,https://articles.adsabs.harvard.edu/pdf/1999A%26A...349..389V,Voges+99,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0032,https://doi.org/10.1051/0004-6361:20066099,Vogel+07,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0033,https://arxiv.org/abs/astro-ph/0611758,Vogel+07,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0034,https://doi.org/10.1051/0004-6361/201937353,4XMMDR11_MQDra; 4XMM_DR9_STLMi; Webb+20,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0035,https://doi.org/10.1093/mnras/stad038,Ridder+23,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0036,https://doi.org/10.1038/s41550-023-01995-x,Pelisoli+23,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0037,https://arxiv.org/abs/2306.09272,Pelisoli+23,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0038,https://doi.org/10.1051/0004-6361/202346589,Schwope+23,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0039,https://arxiv.org/abs/2306.09732,Schwope+23,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0040,https://doi.org/10.1038/s41550-025-02491-0,deRuiter+25,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0041,https://arxiv.org/abs/2408.11536,deRuiter+25,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0042,https://doi.org/10.33232/001c.167716,Rodriguez+26,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0043,https://arxiv.org/abs/2604.18688,Rodriguez+26,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0044,https://doi.org/10.3847/2041-8213/ad890e,Hurley-Walker+24,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0045,https://arxiv.org/abs/2408.15757,Hurley-Walker+24,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0046,https://doi.org/10.1051/0004-6361/202553684,Rodriguez+25,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0047,https://arxiv.org/abs/2501.03315,Rodriguez+25,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0048,https://doi.org/10.1051/0004-6361/202555131,Bloot+25,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0049,https://arxiv.org/abs/2507.05078,Bloot+25,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0050,https://doi.org/10.3847/2041-8213/adeaab,Dong+25,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0051,https://arxiv.org/abs/2507.05139,Dong+25,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0052,https://doi.org/10.1038/s41550-026-02882-x,Rose+26,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0053,https://doi.org/10.1051/0004-6361/202660831,Imbrogno+26,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0054,https://arxiv.org/abs/astro-ph/9905392,Schwope+99,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0055,https://doi.org/10.48550/arXiv.astro-ph/9905392,Schwope+99,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0056,https://www.aavso.org/vsots_rxand,AAVSO_VSOTS_RXAnd,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0057,https://doi.org/10.1051/0004-6361:200810402,Anzolin+08_V1323Her,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0058,https://arxiv.org/abs/0808.1499,Anzolin+08_V1323Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0059,https://doi.org/10.1086/427914,AraujoBetancor+05_STLMi; AraujoBetancor+05_ZCam,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0060,https://arxiv.org/abs/astro-ph/0412180,AraujoBetancor+05_STLMi; AraujoBetancor+05_ZCam,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0061,https://academic.oup.com/mnras/article/311/1/135/990337,Arenas+00_V603Aql,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0062,https://doi.org/10.1046/j.1365-8711.2000.03061.x,Arenas+00_V603Aql,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0063,https://doi.org/10.1093/mnras/stt1335,Armstrong+13_IMEri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0064,https://arxiv.org/abs/1307.5479,Armstrong+13_IMEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0065,https://doi.org/10.1093/mnras/253.1.27,BaileyCropper+91,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0066,https://doi.org/10.1086/316536,Belle+00_QQVul,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0067,https://doi.org/10.48550/arXiv.astro-ph/9911529,Belle+00_QQVul,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0068,https://arxiv.org/abs/astro-ph/9911529,Belle+00_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0069,https://doi.org/10.1093/mnras/stt1434,Bernardini+13_IGRJ19552,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0070,https://arxiv.org/abs/1308.1230,Bernardini+13_IGRJ19552,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0071,https://doi.org/10.48550/arXiv.astro-ph/0001183,Beuermann+00,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0072,https://arxiv.org/abs/astro-ph/0001183,Beuermann+00,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0073,https://ui.adsabs.harvard.edu/abs/1988A%26A...195L..15B/abstract,Beuermann+88_UZFor,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0074,https://www.researchgate.net/publication/234538455_EXO_033319-25542_-_A_55-MG_eclipsing_AM_Herculis_binary,Beuermann+88_UZFor,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0075,https://ui.adsabs.harvard.edu/abs/1992A%26A...256..433B/abstract,Beuermann+92_RWSex,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0076,https://ui.adsabs.harvard.edu/abs/1990A%26A...230..326B/abstract,BeuermannThomas+90_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0077,https://doi.org/10.1086/517496,Bitner+07_SSCyg,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0078,https://arxiv.org/abs/astro-ph/0703087,Bitner+07_SSCyg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0079,https://doi.org/10.1093/mnras/stz1314,Blinova+19_AEAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0080,https://arxiv.org/abs/1804.10105,Blinova+19_AEAqr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0081,https://doi.org/10.1088/1538-3873/aace3e,BondMiszalski+18_V341Ara,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0082,https://arxiv.org/abs/1805.11682,BondMiszalski+18_V341Ara,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0083,https://arxiv.org/abs/1406.4061,Boyd+14_V1432Aql,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0084,https://doi.org/10.48550/arXiv.1406.4061,Boyd+14_V1432Aql,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0085,https://doi.org/10.1093/mnras/stz2381,Bruch+19_TTAri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0086,https://arxiv.org/abs/1909.05696,Bruch+19_TTAri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0087,https://doi.org/10.1038/s41550-016-0029,Buckley+17_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0088,https://arxiv.org/abs/1612.03185,Buckley+17_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0089,https://ui.adsabs.harvard.edu/abs/1995MNRAS.275.1028B/abstract,Buckley+95_V2400Oph,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0090,https://articles.adsabs.harvard.edu/pdf/1995MNRAS.275.1028B,Buckley+95_V2400Oph,download_url; original_download_url,2026-09-28,HEAD,,connection_error,timeout
+URL0091,https://doi.org/10.1086/589179,Campbell+08_STLMi,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0092,https://arxiv.org/abs/0807.1143,Campbell+08_STLMi,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0093,https://doi.org/10.1093/mnras/staa2516,CastroSegura+20_V341Ara,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0094,https://arxiv.org/abs/2008.07462,CastroSegura+20_V341Ara,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0095,https://doi.org/10.1093/mnras/stac1112,Chavez+22_V1007Her,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0096,https://arxiv.org/pdf/2209.04065,Chavez+22_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0097,https://real-j.mtak.hu/666/1/vol5001.pdf,Christian+01,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0098,https://ui.adsabs.harvard.edu/abs/2001IBVS.5032....1C/abstract,Christian+01,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0099,https://ui.adsabs.harvard.edu/abs/2008MNRAS.386.1568D/abstract,Dillon+08,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0100,https://doi.org/10.1111/j.1365-2966.2008.13170.x,Dillon+08,doi; download_url; original_doi; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0101,https://doi.org/10.1086/133900,Downes+97,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0102,https://doi.org/10.1086/518562,Echevarria+07_UGem,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0103,https://arxiv.org/abs/0704.1641,Echevarria+07_UGem,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0104,https://doi.org/10.1111/j.1365-2966.2008.13248.x,Echevarria+08_AEAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0105,https://arxiv.org/abs/0804.0291,Echevarria+08_AEAqr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0106,https://doi.org/10.1093/mnrasl/slz145,Fender+19_SSCyg,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0107,https://arxiv.org/abs/1909.07241,Fender+19_SSCyg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0108,https://doi.org/10.1007/s11214-015-0152-0,Ferrario+15,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0109,https://doi.org/10.1086/321464,Gaensicke+01_ARUMa,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0110,https://arxiv.org/abs/astro-ph/0103131,Gaensicke+01_ARUMa,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0111,https://doi.org/10.1086/425141,Gaensicke+04_APCrB,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0112,https://doi.org/10.1111/j.1365-2966.2005.09138.x,Gaensicke+05_IPs,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0113,https://arxiv.org/abs/astro-ph/0504460,Gaensicke+05_IPs,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0114,https://doi.org/10.1086/499358,Gaensicke+06_AMHer,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0115,https://arxiv.org/abs/astro-ph/0511100,Gaensicke+06_AMHer,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0116,https://ui.adsabs.harvard.edu/abs/1999A%26A...347..178G/abstract,Gaensicke+99_TTAri,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0117,https://www.researchgate.net/publication/234367892_TT_Arietis_the_low_state_revisited,Gaensicke+99_TTAri,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0118,https://doi.org/10.3847/1538-4357/abd4db,Garnavich+21_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0119,https://arxiv.org/abs/2012.09868,Garnavich+21_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0120,https://adsabs.harvard.edu/pdf/1982ApJ...258..209G,GreensteinOke+82_RWSex,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0121,https://doi.org/10.1086/160069,GreensteinOke+82_RWSex,doi; original_doi,2026-09-28,HEAD,,connection_error,SSLError
+URL0122,https://doi.org/10.1046/j.1365-8711.1998.01469.x,Greiner+98_V1007Her,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0123,https://arxiv.org/pdf/astro-ph/9711280,Greiner+98_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0124,https://doi.org/10.1088/2041-8205/791/1/L18,Harrison+14_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0125,https://doi.org/10.3847/2515-5172/aabd39,Harrison+18,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0126,https://ui.adsabs.harvard.edu/abs/2018RNAAS...2....5H/abstract,Harrison+18,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0127,https://academic.oup.com/mnras/article/363/1/285/1301772,Hartley+05_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0128,https://doi.org/10.1111/j.1365-2966.2005.09577.x,Hartley+05_V3885Sgr,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0129,https://doi.org/10.1086/428375,Hartley+05_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0130,https://doi.org/10.1046/j.1365-8711.2002.05199.x,HellierBeardmore+02_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0131,https://arxiv.org/abs/astro-ph/0201473,HellierBeardmore+02_V2400Oph,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0132,https://doi.org/10.1086/319541,Hoard+01_CMPhe,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0133,https://doi.org/10.1086/522694,Hoard+07,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0134,https://arxiv.org/abs/0708.2729,Hoard+07,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0135,https://doi.org/10.1086/507603,Howell+06,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0136,https://arxiv.org/abs/astro-ph/0607140,Howell+06,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0137,https://doi.org/10.1086/500540,Howell+06_VVPup,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0138,https://arxiv.org/abs/astro-ph/0512339,Howell+06_VVPup,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0139,https://doi.org/10.1086/319499,HowellCiardi+01,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0140,https://doi.org/10.48550/arXiv.astro-ph/0101572,HowellCiardi+01,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0141,https://arxiv.org/abs/astro-ph/0101572,HowellCiardi+01,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0142,https://arxiv.org/abs/1310.6802,Johnson+14_V603Aql,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0143,https://doi.org/10.1088/2041-8205/780/2/L25,Johnson+14_V603Aql,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0144,https://doi.org/10.1086/511785,Kafka+07_STLMi,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0145,https://arxiv.org/abs/astro-ph/0612298,Kafka+07_STLMi,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0146,https://doi.org/10.1086/132587,Kaitchuck+89_RXAnd,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0147,https://ui.adsabs.harvard.edu/abs/1989PASP..101.1129K/abstract,Kaitchuck+89_RXAnd,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0148,https://doi.org/10.1093/pasj/psy138,Kato+18_IWAnd,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0149,https://arxiv.org/abs/1811.05038,Kato+18_IWAnd,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0150,https://doi.org/10.1093/pasj/psz130,Kato+19_IMEri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0151,https://arxiv.org/abs/1911.01587,Kato+19_IMEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0152,https://arxiv.org/abs/2305.13754,Kato+23_ARUMa,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0153,https://doi.org/10.48550/arXiv.2305.13754,Kato+23_ARUMa,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0154,https://doi.org/10.3847/1538-4357/835/2/150,Katz+17_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,,connection_error,SSLError
+URL0155,https://arxiv.org/abs/1609.07172,Katz+17_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0156,https://doi.org/10.1093/mnras/staa080,Khangale+20,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0157,https://arxiv.org/abs/2001.06036,Khangale+20,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0158,https://doi.org/10.1111/j.1365-2966.2006.11096.x,Knigge+06_DonorSequence,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0159,https://ui.adsabs.harvard.edu/abs/2006MNRAS.373..484K/abstract,Knigge+06_DonorSequence,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0160,https://doi.org/10.1126/science.1155492,Koerding+08_SSCyg,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0161,https://arxiv.org/abs/0806.1002,Koerding+08_SSCyg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0162,https://academic.oup.com/mnrasl/article/418/1/L129/1021740,Koerding+11_IXVel; Koerding+11_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0163,https://doi.org/10.1111/j.1745-3933.2011.01158.x,Koerding+11_IXVel; Koerding+11_V3885Sgr,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0164,https://doi.org/10.1093/mnras/stab3676,Kolbin+22,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0165,https://arxiv.org/abs/2212.12464,Kolbin+22,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0166,https://arxiv.org/abs/2304.13655,Kolbin+23_BMCrB,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0167,https://doi.org/10.1134/S1063773723030040,Kolbin+23_BMCrB,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0168,https://arxiv.org/pdf/2304.13655,Kolbin+23_BMCrB,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0169,https://ui.adsabs.harvard.edu/abs/2023AstL...49..475K/abstract,Kolbin+23_FRLyn,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0170,https://doi.org/10.1134/s1063773723080029,Kolbin+23_FRLyn,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0171,https://arxiv.org/abs/2308.04597,Kolbin+23_FRLyn,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0172,https://arxiv.org/abs/astro-ph/9912442,Kube+00,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0173,https://doi.org/10.48550/arXiv.astro-ph/9912442,Kube+00,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0174,https://doi.org/10.3847/1538-3881/ac3010,Langford+22_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0175,https://arxiv.org/abs/2112.07729,Langford+22_V2400Oph,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0176,https://doi.org/10.3847/0004-637X/832/1/35,Li+16_AEAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0177,https://arxiv.org/abs/1608.06662,Li+16_AEAqr,download_url; original_download_url,2026-09-28,HEAD,,connection_error,SSLError
+URL0178,https://ui.adsabs.harvard.edu/abs/2007ApJ...662.1204L/abstract,Linnell+07_IXVel,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0179,https://doi.org/10.1086/517965,Linnell+07_IXVel,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0180,https://arxiv.org/pdf/astro-ph/0612657,Linnell+07_IXVel,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0181,https://arxiv.org/abs/0908.1525,Linnell+09_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0182,https://doi.org/10.1088/0004-637X/703/2/1839,Linnell+09_V3885Sgr,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0183,https://doi.org/10.1088/0004-637X/719/1/271,Linnell+10_RWSex,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0184,https://arxiv.org/abs/1006.2832,Linnell+10_RWSex,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0185,https://doi.org/10.1051/0004-6361:20052780,Littlefair+05,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0186,https://arxiv.org/abs/astro-ph/0506073,Littlefair+05,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0187,https://arxiv.org/abs/2004.08923,Littlefield+20,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0188,https://doi.org/10.48550/arXiv.2004.08923,Littlefield+20,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0189,https://arxiv.org/abs/astro-ph/0605266,Long+06_UGem,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0190,https://doi.org/10.1086/306721,LongGilliland+99_UGem,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0191,https://ui.adsabs.harvard.edu/abs/1999ApJ...511..916L/abstract,LongGilliland+99_UGem,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0192,https://doi.org/10.1051/0004-6361/201730948,Marcote+17_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0193,https://arxiv.org/abs/1705.00600,Marcote+17_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0194,https://doi.org/10.1086/169446,Marsh+90_UGem,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0195,https://ui.adsabs.harvard.edu/abs/1990ApJ...364..637M/abstract,Marsh+90_UGem,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0196,https://doi.org/10.1051/0004-6361:20065354,Mason+07,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0197,https://arxiv.org/abs/astro-ph/0703763,Mason+07,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0198,https://doi.org/10.1088/0004-637X/747/2/132,Matranga+12_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0199,https://arxiv.org/abs/1201.2682,Matranga+12_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0200,https://doi.org/10.1111/j.1365-2966.2006.10447.x,Mauche+06_AEAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0201,https://arxiv.org/abs/astro-ph/0604314,Mauche+06_AEAqr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0202,https://doi.org/10.1051/0004-6361:20011244,Mickaelian+02_V1084Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0203,https://doi.org/10.1126/science.1237145,MillerJones+13_SSCyg,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0204,https://arxiv.org/abs/1305.5846,MillerJones+13_SSCyg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0205,https://doi.org/10.1086/117406,MisseltShafter+95,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0206,https://doi.org/10.1086/378318,Mukai+03_V1432Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0207,https://arxiv.org/abs/astro-ph/0307195,Mukai+03_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0208,https://doi.org/10.1093/mnras/222.1.1P,MukaiCharles+86_MRSer; MukaiCharles+86_QQVul,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0209,https://articles.adsabs.harvard.edu/pdf/1986MNRAS.222P...1M,MukaiCharles+86_MRSer; MukaiCharles+86_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0210,https://arxiv.org/abs/astro-ph/0412545,MukaiOrio+05_V603Aql,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0211,https://doi.org/10.1086/427915,MukaiOrio+05_V603Aql,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0212,https://doi.org/10.1051/0004-6361:200500232,Norton+06,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0213,https://arxiv.org/abs/astro-ph/0512145,Norton+06,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0214,https://doi.org/10.1046/j.1365-8711.2003.06973.x,ODonoghue+03_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0215,https://arxiv.org/abs/astro-ph/0307144,ODonoghue+03_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0216,https://doi.org/10.1111/j.1365-2966.2006.10834.x,ODonoghue+06,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0217,https://arxiv.org/abs/astro-ph/0607266,ODonoghue+06,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0218,https://doi.org/10.1111/j.1365-2966.2010.18073.x,Parsons+11_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0219,https://arxiv.org/abs/1011.5235,Parsons+11_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0220,https://doi.org/10.1093/mnras/stw516,Parsons+16_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0221,https://arxiv.org/abs/1603.00881,Parsons+16_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0222,https://doi.org/10.1086/344587,Patterson+02_V1084Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0223,https://doi.org/10.1086/379220,Patterson+03_MMHya,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0224,https://arxiv.org/abs/astro-ph/0309100,Patterson+03_MMHya,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0225,https://doi.org/10.1093/mnras/stac2391,Pelisoli+22_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0226,https://arxiv.org/abs/2208.08450,Pelisoli+22_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0227,https://doi.org/10.1093/mnras/stad3442,Pelisoli+23_J1912UV,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0228,https://arxiv.org/abs/2311.05558,Pelisoli+23_J1912UV,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0229,https://wrap.warwick.ac.uk/id/eprint/181064/1/WRAP-Unveiling-white-dwarf-J191213.72-441045.1-ultraviolet-observations-23.pdf,Pelisoli+23_J1912UV,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0230,https://doi.org/10.1093/mnras/stae1275,Pelisoli+24; Pelisoli+24_V1007Her; Pelisoli+24_V388Peg,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0231,https://ui.adsabs.harvard.edu/abs/2006PASP..118..687P/abstract,PetersThorstensen+06_V603Aql,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0232,https://doi.org/10.1086/504641,PetersThorstensen+06_V603Aql,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0233,https://academic.oup.com/mnras/article/419/4/3537/2908085,Prinja+12_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0234,https://doi.org/10.1111/j.1365-2966.2011.19992.x,Prinja+12_V3885Sgr,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0235,https://doi.org/10.1051/aas:1999120,Reimers+99_HS1023,original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0236,https://cdsarc.cds.unistra.fr/ftp/ftp/cats/vizier/ftp/vizier/aa/papers/0358002/2300l45.pdf,ReimersHagen+00_HS0922,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0237,https://ui.adsabs.harvard.edu/abs/1994ApJ...426..288R/abstract,Remillard+94_ARUMa,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0238,https://arxiv.org/pdf/astro-ph/0007113,RetterNaylor+00_V603Aql,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0239,https://doi.org/10.1111/j.1365-8711.2000.03931.x,RetterNaylor+00_V603Aql,doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0240,https://doi.org/10.1111/j.1365-2966.2000.03931.x,RetterNaylor+00_V603Aql,original_doi,2026-09-28,GET range,404,not_found,Not Found
+URL0241,https://arxiv.org/abs/astro-ph/0702308,RibeiroDiaz+07_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0242,https://doi.org/10.1086/517966,RibeiroDiaz+07_V3885Sgr,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0243,https://doi.org/10.3847/1538-4357/ae69d5,Ridder+26_Broadband,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0244,https://doi.org/10.1051/0004-6361:20030330,RitterKolb+03_7.24,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0245,https://doi.org/10.1111/j.1365-2966.2009.14585.x,RodriguezGil+09_V1084Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,connection_error,SSLError
+URL0246,https://doi.org/10.1086/178160,Schmidt+96_ARUMa,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0247,https://doi.org/10.1086/318691,SchmidtStockman+01_V1432Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0248,https://arxiv.org/abs/astro-ph/0010011,SchmidtStockman+01_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0249,https://doi.org/10.1051/0004-6361:20020122,Schreiber+02_RXAnd,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0250,https://ui.adsabs.harvard.edu/abs/2002A&A...384L...6S/abstract,Schreiber+02_RXAnd,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0251,https://doi.org/10.1046/j.1365-8711.2000.03240.x,Schwope+00_QQVul,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0252,https://arxiv.org/abs/astro-ph/9911141,Schwope+00_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0253,https://doi.org/10.1051/0004-6361:20030235,Schwope+03_HUAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0254,https://www.aanda.org/articles/aa/pdf/2003/16/aah4069.pdf,Schwope+03_HUAqr,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0255,https://doi.org/10.1051/0004-6361/202557306,Schwope+25_HUAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0256,https://arxiv.org/abs/2512.13489,Schwope+25_HUAqr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0257,https://ui.adsabs.harvard.edu/abs/1993A%26A...278..487S/abstract,Schwope+93_MRSer,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0258,https://articles.adsabs.harvard.edu/pdf/1993A&A...278..487S,Schwope+93_MRSer,download_url; original_download_url,2026-09-28,HEAD,,connection_error,SSLError
+URL0259,https://doi.org/10.1002/asna.2113180209,SchwopeBeuermann+97,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0260,https://arxiv.org/abs/astro-ph/9701085,SchwopeBeuermann+97,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0261,https://doi.org/10.1051/0004-6361/200913341,SchwopeChristensen+10,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0262,https://arxiv.org/abs/1003.1629,SchwopeChristensen+10,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0263,https://doi.org/10.1086/341009,Sepinsky+02_RXAnd,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0264,https://ui.adsabs.harvard.edu/abs/2002ApJ...574..937S/abstract,Sepinsky+02_RXAnd,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0265,https://ashafter.sdsu.edu/Shafter_Thesis.pdf,Shafter+83_ZCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0266,https://doi.org/10.1093/mnras/282.2.362,ShahbazWood+96_STLMi,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0267,https://arxiv.org/abs/astro-ph/9606147,ShahbazWood+96_STLMi,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0268,https://doi.org/10.1086/321529,Sion+01_RXAnd,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0269,https://ui.adsabs.harvard.edu/abs/2001ApJ...555..834S/abstract,Sion+01_RXAnd,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0270,https://doi.org/10.1088/2041-8205/716/2/L157,Sion+10_SSCyg,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0271,https://arxiv.org/abs/1007.3158,Sion+10_SSCyg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0272,https://arxiv.org/abs/1506.01588,Sion+15_V603Aql,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0273,https://doi.org/10.1088/0004-6256/150/1/36,Sion+15_V603Aql,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0274,https://doi.org/10.1086/305378,Sion+98_UGem,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0275,https://arxiv.org/abs/astro-ph/9710299,Sion+98_UGem,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0276,https://doi.org/10.1088/0004-6256/135/3/991,Stark+08_LSIV-08-3,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0277,https://arxiv.org/pdf/0801.2963,Stark+08_LSIV-08-3,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0278,https://doi.org/10.1051/0004-6361:20030851,Staubert+03_V1432Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0279,https://arxiv.org/abs/astro-ph/0306072,Staubert+03_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0280,https://doi.org/10.1051/0004-6361/202450042,Suleimanov+24_TTAri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0281,https://arxiv.org/abs/2403.15254,Suleimanov+24_TTAri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0282,https://doi.org/10.1086/345418,Szkody+03_MQDra,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0283,https://arxiv.org/pdf/astro-ph/0208241,Szkody+03_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0284,https://ui.adsabs.harvard.edu/abs/2005AJ....129.2386S/abstract,Szkody+05,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0285,https://doi.org/10.1086/429595,Szkody+05; Szkody+05_RXJ0859,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0286,https://doi.org/10.1086/589138,Szkody+08_MQDra,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0287,https://arxiv.org/pdf/0804.1348,Szkody+08_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0288,https://doi.org/10.1088/0004-637X/716/2/1531,Szkody+10,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0289,https://arxiv.org/abs/1005.2434,Szkody+10,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0290,https://doi.org/10.1086/159454,SzkodyWade+81_ZCam,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0291,https://ntrs.nasa.gov/citations/19820035861,SzkodyWade+81_ZCam,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0292,https://doi.org/10.1111/j.1365-2966.2004.08195.x,Tappert+04_CTCV,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0293,https://arxiv.org/abs/astro-ph/0408357,Tappert+04_CTCV,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0294,https://arxiv.org/abs/astro-ph/9911200,Thomas+99_V1043Cen,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0295,https://doi.org/10.48550/arXiv.astro-ph/9911200,Thomas+99_V1043Cen,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0296,https://doi.org/10.1111/j.1365-2966.2004.08613.x,Thoroughgood+05_V347Pup,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0297,https://arxiv.org/abs/astro-ph/0411555,Thoroughgood+05_V347Pup,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0298,https://doi.org/10.1086/337998,ThorstensenFenton+02_APCrB,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0299,https://doi.org/10.1088/0004-6256/146/5/107,ThorstensenHalpern+13_XrayCVs,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0300,https://arxiv.org/abs/1308.5016,ThorstensenHalpern+13_XrayCVs,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0301,https://adsabs.harvard.edu/pdf/1995IBVS.4249....1T,ThorstensenRingwald+95_ZCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0302,https://doi.org/10.1086/164641,ThorstensenWadeOke+86_SUUMa,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0303,https://ui.adsabs.harvard.edu/abs/1986ApJ...309..721T/abstract,ThorstensenWadeOke+86_SUUMa,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0304,https://doi.org/10.1051/0004-6361:20011434,Tovmassian+01_APCrB,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0305,https://doi.org/10.1051/0004-6361/201731323,Tovmassian+17_IGRJ19552,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0306,https://arxiv.org/abs/1710.02126,Tovmassian+17_IGRJ19552,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0307,https://doi.org/10.1051/0004-6361:20053784,TovmassianZharikov+07_HS0922,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0308,https://doi.org/10.1086/501430,UrbanSion+06_DNe,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0309,https://arxiv.org/abs/astro-ph/0602126,UrbanSion+06_DNe,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0310,https://ui.adsabs.harvard.edu/abs/1997A%26A...317..476V/abstract,Vaeth+97_V2400Oph,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0311,https://articles.adsabs.harvard.edu/pdf/1997A%26A...317..476V,Vaeth+97_V2400Oph,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0312,https://academic.oup.com/mnras/article/342/1/151/1049062,VandePutte+03_RWSex,original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0313,https://doi.org/10.1046/j.1365-8711.2003.06524.x,VandePutte+03_RWSex,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0314,https://arxiv.org/abs/astro-ph/0302507,VandePutte+03_RWSex,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0315,https://real-j.mtak.hu/964/,Walker+65,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0316,https://real-j.mtak.hu/964/1/CoKonV4.pdf,Walker+65,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0317,https://doi.org/10.1088/1674-4527/21/12/315,Wang+21_V1432Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0318,https://arxiv.org/abs/2110.13483,Wang+21_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0319,https://doi.org/10.1046/j.1365-8711.2003.06381.x,Watson+03_RocheTomography,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0320,https://arxiv.org/abs/astro-ph/0302115,Watson+03_RocheTomography,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0321,https://doi.org/10.1046/j.1365-8711.2003.06936.x,Wheatley+03_SSCyg,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0322,https://arxiv.org/abs/astro-ph/0306471,Wheatley+03_SSCyg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0323,https://doi.org/10.1086/185478,Wickramasinghe+89,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0324,https://doi.org/10.1051/0004-6361/202038038,Worpel+20_V1084Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0325,https://doi.org/10.1046/j.1365-8711.2002.05613.x,WoudtWarner+02_FaintCVs,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0326,https://arxiv.org/pdf/astro-ph/0204483,WoudtWarner+02_FaintCVs,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0327,https://ui.adsabs.harvard.edu/abs/2002ApJ...569..418W/abstract,Wu+02_TTAri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0328,https://doi.org/10.1086/339278,Wu+02_TTAri,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0329,https://doi.org/10.1051/0004-6361:20034160,deMartino+04_SoftIPs,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0330,https://arxiv.org/abs/astro-ph/0311557,deMartino+04_SoftIPs,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0331,https://doi.org/10.3847/1538-4357/ab4e19,duPlessis+19_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0332,https://arxiv.org/abs/1910.07401,duPlessis+19_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0333,https://doi.org/10.1093/mnras/267.3.465,vanParadijs+94_YZCnc,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0334,https://arxiv.org/abs/astro-ph/0001525,Dhillon+00_IRCVIII,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0335,https://doi.org/10.1046/j.1365-8711.2000.03427.x,Dhillon+00_IRCVIII,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0336,https://arxiv.org/abs/astro-ph/0507241,Zhao+05_YZCnc,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0337,https://doi.org/10.1088/1009-9271/5/6/006,Zhao+05_YZCnc,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0338,https://arxiv.org/abs/astro-ph/9903224,Verbunt+99_YZCnc,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0339,https://doi.org/10.48550/arXiv.astro-ph/9903224,Verbunt+99_YZCnc,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0340,https://doi.org/10.1086/426807,Schmidt+05_FLCet,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0341,https://arxiv.org/abs/astro-ph/0410320,Schmidt+05_FLCet,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0342,https://doi.org/10.1051/0004-6361:20011200,Tovmassian+01_LWCam,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0343,https://arxiv.org/abs/astro-ph/0110050,Tovmassian+01_LWCam,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0344,https://doi.org/10.1086/309070,Tovmassian+00_V388Peg,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0345,https://www.mpe.mpg.de/~jcg/papers/rxj2157_apj537p927.pdf,Tovmassian+00_V388Peg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0346,https://doi.org/10.1111/j.1365-2966.2012.20476.x,Woudt+12_CSS1503,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0347,https://arxiv.org/abs/1201.0671,Woudt+12_CSS1503,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0348,https://doi.org/10.3847/1538-3881/aa610d,Oliveira+17_CSS1503,doi; stable_link,2026-09-28,HEAD,200,reachable,
+URL0349,https://arxiv.org/abs/1608.00650,Oliveira+17_CSS1503,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0350,https://doi.org/10.3847/1538-3873/aa610d,Oliveira+17_CSS1503,original_doi; original_stable_link,2026-09-28,GET range,404,not_found,Not Found
+URL0351,https://doi.org/10.1086/175236,Howell+95_EUUMa,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0352,https://articles.adsabs.harvard.edu/pdf/1995ApJ...439..991H,Howell+95_EUUMa,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0353,https://ui.adsabs.harvard.edu/abs/1995RvMA....8..125S/abstract,Schwope+95_EUUMa,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0354,https://doi.org/10.1086/424540,Szkody+04_MQDra,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0355,https://arxiv.org/pdf/astro-ph/0409718,Szkody+04_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0356,https://doi.org/10.1051/0004-6361:20054748,Schwope+06_APCrB,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0357,https://www.aanda.org/articles/aa/ref/2023/10/aa47183-23/aa47183-23.html,Kara+23_IXVel,original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0358,https://doi.org/10.1051/0004-6361/202347183,Kara+23_IXVel,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0359,https://arxiv.org/pdf/2308.01102,Kara+23_IXVel,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0360,https://doi.org/10.3847/1538-4357/aacbd9,Harrison+18_ZCamDonors,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0361,https://arxiv.org/pdf/1806.04612,Harrison+18_ZCamDonors,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0362,https://doi.org/10.3390/astronomy3030013,Boneva+24_ZCamATCnc,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0363,https://arxiv.org/pdf/2501.05214,Boneva+24_ZCamATCnc,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0364,https://doi.org/10.1111/j.1365-2966.2005.09262.x,Naylor+05_UGem,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0365,https://arxiv.org/abs/astro-ph/0506351,Naylor+05_UGem,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0366,https://doi.org/10.1134/S106377371511002X,Borisov+15_BSTri,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0367,https://link.springer.com/article/10.1134/S106377371511002X,Borisov+15_BSTri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0368,https://doi.org/10.1051/0004-6361:20021386,Schwope+02_RBS,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0369,https://arxiv.org/abs/astro-ph/0210059,Schwope+02_RBS,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0370,https://doi.org/10.1086/533488,Campbell+08_EQCet,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0371,https://doi.org/10.1111/j.1365-2966.2012.20965.x,Breedt+12,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0372,https://academic.oup.com/mnras/article/423/2/1437/962517,Breedt+12,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0373,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=5041907811522399488,GaiaDR3+22,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0374,https://doi.org/10.26093/CDS/VIZIER.1355,GaiaDR3+22; GaiaDR3+22_BSTri; GaiaDR3+22_FLCet; GaiaDR3+22_LWCam; GaiaDR3+22_Tau4; GaiaDR3+22_V1432Aql; GaiaDR3_BMCrB; GaiaDR3_J1955; GaiaDR3_V3885Sgr; GaiaDR3_V388Peg; GaiaDR3_V603Aql; GaiaDR3_VVPup,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0375,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/355/gaiadr3,GaiaDR3+22; GaiaDR3+22_BSTri; GaiaDR3+22_FLCet; GaiaDR3_J1955; VizieR_GaiaDR3_ASKAP174508,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0376,https://doi.org/10.3847/1538-3881/abd806,BailerJones+21; BailerJones+21_AEAqr; BailerJones+21_AMHer; BailerJones+21_APCrB; BailerJones+21_ARSco; BailerJones+21_BMCrB; BailerJones+21_BSTri; BailerJones+21_CMPhe; BailerJones+21_EFEri; BailerJones+21_EUUMa; BailerJones+21_FLCet; BailerJones+21_GLEAMXJ0704; BailerJones+21_HS0922; BailerJones+21_HUAqr; BailerJones+21_Her1; BailerJones+21_Hya1; BailerJones+21_ILTJ1101; BailerJones+21_IMEri; BailerJones+21_IXVel; BailerJones+21_J1503; BailerJones+21_J1912; BailerJones+21_J1955; BailerJones+21_LSIV083; BailerJones+21_LWCam; BailerJones+21_MQDra; BailerJones+21_MRSer; BailerJones+21_QQVul; BailerJones+21_QSVir; BailerJones+21_RWSex; BailerJones+21_RXAnd; BailerJones+21_RXJ0859; BailerJones+21_SSCyg; BailerJones+21_SUUMa; BailerJones+21_Tau4; BailerJones+21_UGem; BailerJones+21_UZFor; BailerJones+21_V1007Her; BailerJones+21_V1043Cen; BailerJones+21_V1084Her; BailerJones+21_V341Ara; BailerJones+21_V347Pup; BailerJones+21_V3885Sgr; BailerJones+21_V388Peg; BailerJones+21_V5662Sgr; BailerJones+21_V603Aql; BailerJones+21_VVPup; BailerJones+21_YZCnc; BailerJones+21_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0377,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/352/gedr3dis,BailerJones+21; BailerJones+21_BSTri; BailerJones+21_FLCet; BailerJones+21_HUAqr; BailerJones+21_J1955; BailerJones+21_V1084Her; BailerJones+21_ZCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0378,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=EQ%20Cet&output.format=ASCII,SIMBAD,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0379,https://simbad.cds.unistra.fr/simbad/,SIMBAD; SIMBAD_BSTri; SIMBAD_CHIME1634; SIMBAD_FLCet; SIMBAD_J1955; SIMBAD_LSIV083; SIMBAD_V1084Her; SIMBAD_V341Ara; SIMBAD_V347Pup; SIMBAD_ZCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0380,https://doi.org/10.3847/2515-5172/aa9d2a,Thorstensen+17_Cas1,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0381,https://arxiv.org/abs/1711.10423,Thorstensen+17_Cas1,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0382,https://doi.org/10.3847/1538-4365/addf41,Bruch+25_Cas1; Bruch+25_HS0922; Bruch+25_J1955; Bruch+25_V1323Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0383,https://doi.org/10.1086/313380,LiuHu+00_Cas1,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0384,https://articles.adsabs.harvard.edu/pdf/1995A%26A...297L..37H,HaberlMotch+95_Cas1,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,,connection_error,timeout
+URL0385,https://doi.org/10.1051/0004-6361/201015848,Butters+11_Cas1,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0386,https://aries.res.in/index.php/node/2236,Rao+26_ARIES_Cas1,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0387,https://doi.org/10.1086/423333,NortonWynnSomerscales+04,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0388,https://doi.org/10.1093/mnras/stae2524,Inight+25_FLCet,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0389,https://academic.oup.com/mnras/article/536/2/1057/7887833,Inight+25_FLCet,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0390,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=2507796391561705728,GaiaDR3+22_FLCet,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0391,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=FL%20Cet&output.format=ASCII,SIMBAD_FLCet,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0392,https://doi.org/10.1111/j.1365-2966.2004.08346.x,Wiehahn+04_FLCet,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0393,https://academic.oup.com/mnras/article/355/3/689/952135,Wiehahn+04_FLCet,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0394,https://doi.org/10.1111/j.1365-2966.2004.07843.x,Woudt+04_FLCet,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0395,https://adsabs.harvard.edu/pdf/2004MNRAS.351.1015W,Woudt+04_FLCet,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0396,https://doi.org/10.1134/S1063773706040050,Denisenko+06_BSTri,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0397,https://articles.adsabs.harvard.edu/pdf/2006AstL...32..252D,Denisenko+06_BSTri,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0398,https://doi.org/10.1088/1009-9271/1/1/57,Wu+01_BSTri,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0399,https://www.raa-journal.org/issues/all/2001/v1n1/202203/P020220325414696165550.pdf,Wu+01_BSTri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0400,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=107522105369340800,GaiaDR3+22_BSTri,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0401,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=BS%20Tri&output.format=ASCII,SIMBAD_BSTri,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0402,https://doi.org/10.1051/0004-6361/202554948,HernandezDiaz+25_BMCrB; HernandezDiaz+25_BSTri; HernandezDiaz+25_EFEri; HernandezDiaz+25_LWCam; HernandezDiaz+25_V1007Her; HernandezDiaz+25_V388Peg,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0403,https://arxiv.org/abs/2510.09165,HernandezDiaz+25_BSTri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0404,https://doi.org/10.26119/978-5-6045062-0-2_2020_256,Kolbin+20_BSTri,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0405,https://www.sao.ru/jet/conferences/pdfs/256.pdf,Kolbin+20_BSTri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0406,https://doi.org/10.1051/0004-6361:20066332,Beuermann+07_EFEri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0407,https://arxiv.org/abs/astro-ph/0610804,Beuermann+07_EFEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0408,https://doi.org/10.3847/1538-4357/add403,Filor+25_EFEri,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0409,https://arxiv.org/abs/2412.11273,Filor+25_EFEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0410,https://doi.org/10.1093/mnras/staf1754,Khangale+25_EFEri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0411,https://arxiv.org/abs/2510.08266,Khangale+25_EFEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0412,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/703/A166/tablea1,HernandezDiaz+25_EFEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0413,https://doi.org/10.1093/mnras/199.3.801,Bailey+82_EFEri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0414,https://academic.oup.com/mnras/article/199/3/801/969418,Bailey+82_EFEri,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0415,https://doi.org/10.1086/379308,Thorstensen+03_EFEri; Thorstensen+03_SUUMa; Thorstensen+03_YZCnc; Thorstensen+03_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0416,https://arxiv.org/abs/astro-ph/0308516,Thorstensen+03_EFEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0417,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/355/gaiadr3&Source=5099482805904892288,GaiaDR3+22_EFEri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0418,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/352/gedr3dis&Source=5099482805904892288,BailerJones+21_EFEri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0419,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=EF%20Eri,SIMBAD_EFEri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0420,https://doi.org/10.3847/1538-3881/aa93ff,Barrett+17_EUUMa; Barrett+17_Her1; Barrett+17_LWCam; Barrett+17_UZFor; Barrett+17_V1007Her; Barrett+17_V1323Her; Barrett+17_V603Aql; VizieRBarrett17_V1323Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0421,https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/154/252,VizieR_Barrett17_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0422,https://ui.adsabs.harvard.edu/abs/1990A%26A...230..120S/abstract,Schwope+90_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0423,https://doi.org/10.1086/167153,Ferrario+89_UZFor,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0424,https://ui.adsabs.harvard.edu/abs/1996A%26A...310..526R/abstract,Rousseau+96_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0425,https://ui.adsabs.harvard.edu/abs/2002ASPC..261..159N/abstract,Nogami+02_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0426,https://arxiv.org/abs/astro-ph/9701087,Schwope+97_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0427,https://doi.org/10.1111/j.1365-2966.2010.17384.x,Dai+10_UZFor,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0428,https://doi.org/10.1111/j.1365-2966.2011.19196.x,Potter+11_UZFor,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0429,https://doi.org/10.1051/0004-6361/201834039,Khangale+19_UZFor,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0430,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=5084805635638179584,GaiaDR3+22_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0431,https://doi.org/10.1051/0004-6361/202243940,GaiaDR3+22_AEAqr; GaiaDR3+22_EUUMa; GaiaDR3+22_J1503; GaiaDR3+22_QSVir; GaiaDR3+22_UZFor; GaiaDR3_ARSco; GaiaDR3_ARUMa; GaiaDR3_ASKAP174508; GaiaDR3_CHIME1634; GaiaDR3_GLEAMXJ0704; GaiaDR3_HS0922; GaiaDR3_Hya1; GaiaDR3_ILTJ1101; GaiaDR3_J1912; GaiaDR3_LSIV083; GaiaDR3_MQDra; GaiaDR3_MRSer; GaiaDR3_RWSex; GaiaDR3_SSCyg; GaiaDR3_STLMi; GaiaDR3_SUUMa; GaiaDR3_TTAri; GaiaDR3_V1084Her; GaiaDR3_V341Ara; GaiaDR3_V347Pup; GaiaDR3_V5662Sgr; GaiaDR3_WXLmi; GaiaDR3_YZCnc; GaiaDR3_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0432,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=5084805635638179584,BailerJones+21_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0433,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=UZ%20For,SIMBAD_UZFor,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0434,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=3393408546234335488,GaiaDR3+22_Tau4,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0435,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/352/gedr3dis&Source=3393408546234335488,BailerJones+21_Tau4,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0436,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/347/gaia2dis&Source=3393408546234335488,BailerJones+18_Tau4,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0437,https://doi.org/10.3847/1538-3881/aacb21,BailerJones+18_Hya1; BailerJones+18_IMEri; BailerJones+18_IXVel; BailerJones+18_LWCam; BailerJones+18_RXJ0859; BailerJones+18_Tau4; BailerJones+18_V1084Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0438,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=RX%20J0502.8%2B1624&output.format=ASCII,SIMBAD_Tau4,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0439,https://doi.org/10.1093/mnras/stac2482,Duffy+22_EUUMa; Duffy+22_LWCam; Duffy+22_Tau4; Duffy+22_V1007Her; Duffy+22_V388Peg,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0440,https://ui.adsabs.harvard.edu/abs/1996A%26A...307..459M/abstract,Motch+96_Tau4,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0441,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=LW%20Cam&output.format=ASCII,SIMBAD_LWCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0442,https://doi.org/10.1051/aas:2000332,SIMBAD_APCrB; SIMBAD_ARSco; SIMBAD_ARUMa; SIMBAD_ASKAP174508; SIMBAD_CHIME1634; SIMBAD_GLEAMXJ0704; SIMBAD_HS0922; SIMBAD_ILTJ1101; SIMBAD_IMEri; SIMBAD_IXVel; SIMBAD_J1912; SIMBAD_LSIV083; SIMBAD_LWCam; SIMBAD_QSVir; SIMBAD_RWSex; SIMBAD_RXAnd; SIMBAD_SSCyg; SIMBAD_STLMi; SIMBAD_SUUMa; SIMBAD_TTAri; SIMBAD_V1084Her; SIMBAD_V1432Aql; SIMBAD_V2400Oph; SIMBAD_V341Ara; SIMBAD_V3885Sgr; SIMBAD_V5662Sgr; SIMBAD_V603Aql; SIMBAD_WXLmi; SIMBAD_ZCam,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0443,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/355/gaiadr3&Source=1099223590090176896,GaiaDR3+22_LWCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0444,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/352/gedr3dis&Source=1099223590090176896,BailerJones+21_LWCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0445,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/347/gaia2dis&Source=1099223590090176896,BailerJones+18_LWCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0446,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A%2BA/703/A166/tablea1&GaiaDR3=1099223590090176896,HernandezDiaz+25_LWCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0447,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BDWS97%5D+Hya+1,SIMBAD_Hya1,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0448,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=5745881603063095680,GaiaDR3_Hya1,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0449,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=5745881603063095680,BailerJones+21_Hya1,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0450,https://ui.adsabs.harvard.edu/abs/2018AJ....156...58B/abstract,BailerJones+18_Hya1,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0451,https://arxiv.org/abs/1507.05610,Kato+15_MMHya,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0452,https://doi.org/10.1093/pasj/psv072,Kato+15_MMHya,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0453,https://arxiv.org/abs/1605.06221,Kato+16_MMHya,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0454,https://doi.org/10.1093/pasj/psw064,Kato+16_MMHya,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0455,https://doi.org/10.1111/j.1365-2966.2010.17881.x,Patterson+11_MMHya; Patterson+11_SUUMa; Patterson+11_YZCnc; Patterson+11_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0456,https://doi.org/10.1093/mnras/stw1120,OtulakowskaHypka+16_MMHya,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0457,https://doi.org/10.1051/0004-6361/202449358,MunozGiraldo+24_MMHya,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0458,https://ui.adsabs.harvard.edu/abs/2023A%26A...676A...7M/abstract,MunozGiraldo+23,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0459,https://doi.org/10.1093/mnras/stab3449,Pala+22,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0460,https://doi.org/10.1086/151568,Nauenberg+72,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0461,https://doi.org/10.3847/1538-4357/ae323e,Xu+26_PeriodBouncer,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0462,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=RX+J0859.1%2B0537,SIMBAD_RXJ0859,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0463,https://vizier.cds.unistra.fr/viz-bin/VizieR?source=I/355/gaiadr3&Source=583340808875713280,GaiaDR3_RXJ0859,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0464,https://doi.org/10.26093/cds/vizier.1355,GaiaDR3+22_V1007Her; GaiaDR3+22_V1043Cen; GaiaDR3_IMEri; GaiaDR3_IXVel; GaiaDR3_QQVul; GaiaDR3_RXJ0859; GaiaDR3_UGem,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0465,https://vizier.cds.unistra.fr/viz-bin/VizieR?source=I/352/gedr3dis&Source=583340808875713280,BailerJones+21_RXJ0859,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0466,https://vizier.cds.unistra.fr/viz-bin/VizieR?source=I/347/gaia2dis&Source=583340808875713280,BailerJones+18_RXJ0859,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0467,https://doi.org/10.1093/mnras/stz3016,Joshi+20_RXJ0859,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0468,https://arxiv.org/abs/1910.11058,Joshi+20_RXJ0859,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0469,https://doi.org/10.1051/0004-6361/202038598,Beuermann+21_RXJ0859,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0470,https://arxiv.org/abs/2010.11678,Beuermann+21_RXJ0859,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0471,https://doi.org/10.1088/0067-0049/219/2/32,Harrison+15_V1007Her; HarrisonCampbell+15_RXJ0859; HarrisonCampbell+15_V388Peg,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0472,https://astronomy.nmsu.edu/tharriso/Harrison_2015_ApJS_219_32.pdf,Harrison+15_V1007Her; HarrisonCampbell+15_RXJ0859; HarrisonCampbell+15_V388Peg,download_url; original_download_url,2026-09-28,HEAD,,connection_error,URLError
+URL0473,https://doi.org/10.1111/j.1365-2966.2009.15126.x,GansickeDillon+09_BMCrB; GansickeDillon+09_RXJ0859,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0474,https://arxiv.org/abs/0905.3476,GansickeDillon+09_RXJ0859,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0475,https://faculty.washington.edu/szkody/cvs/,Szkody+05_RXJ0859,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0476,https://doi.org/10.1051/0004-6361/201832832,Lallement+18_RXJ0859,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0477,https://arxiv.org/abs/1804.06060,Lallement+18_RXJ0859,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0478,https://doi.org/10.1051/0004-6361/201015275,Vogel+11_HS0922,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0479,https://doi.org/10.1093/mnras/stab284,Parsons+21_HS0922,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0480,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=594162958230409088,GaiaDR3_HS0922,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0481,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=594162958230409088,BailerJones+21_HS0922,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0482,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HS%200922%2B1333,SIMBAD_HS0922,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0483,https://doi.org/10.3847/1538-4357/ad2e95,Wang+24_HS0922,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0484,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=755705822218381184,GaiaDR3_WXLmi,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0485,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WX%20LMi,SIMBAD_WXLmi,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0486,https://doi.org/10.1093/mnras/stx518,TutarOzdarcan+17_WXLmi,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0487,https://academic.oup.com/mnras/article/468/3/2923/3737854,TutarOzdarcan+17_WXLmi,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0488,https://doi.org/10.1051/0004-6361:20010712,Schwarz+01_WXLmi,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0489,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=3996419759863758592,GaiaDR3_STLMi,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0490,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=ST%20LMi,SIMBAD_STLMi,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0491,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=IX/59/xmm4dr9s,4XMM_DR9_STLMi,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0492,https://ui.adsabs.harvard.edu/abs/1994MNRAS.269..779P/abstract,Pavelin+94_STLMi,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0493,https://adsabs.harvard.edu/pdf/1994MNRAS.269..779P,Pavelin+94_STLMi,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0494,https://doi.org/10.1086/316225,Ciardi+98_STLMi,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0495,https://doi.org/10.1086/308382,Howell+00_STLMi,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0496,https://doi.org/10.1093/mnras/231.3.597,Cropper+88_STLMi,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0497,https://doi.org/10.1093/mnras/262.2.285,Ferrario+93_STLMi,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0498,https://doi.org/10.1093/mnras/259.3.583,Peacock+92_STLMi,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0499,https://digitalcommons.macalester.edu/mjpa/vol13/iss1/2/,Rinkoski+25_STLMi,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0500,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=783921244796958208,GaiaDR3_ARUMa,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0501,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=AR%20UMa,SIMBAD_ARUMa,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0502,https://doi.org/10.3847/0004-637X/828/1/39,Bai+16_ARUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0503,https://doi.org/10.3847/1538-4357/ad27d7,Mason+24_AMHer; Mason+24_ARUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0504,https://doi.org/10.1046/j.1365-8711.2003.06044.x,Ferrario+03_ARUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0505,https://doi.org/10.1086/318044,Howell+01_ARUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0506,https://doi.org/10.1086/498067,Harrison+05_ARUMa; Harrison+05_MQDra,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0507,https://arxiv.org/abs/astro-ph/0509457,Harrison+05_ARUMa,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0508,https://doi.org/10.1086/513100,MasonGray+07_ARUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0509,https://doi.org/10.1093/mnras/258.2.277,Mittaz+92_EUUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0510,https://doi.org/10.1134/1.1537375,Somova+03_EUUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0511,https://www.sao.ru/hq/lizm/conferences/pdf/2003/2003_p272.pdf,Somov+04_EUUMa,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0512,https://doi.org/10.1016/j.newast.2014.10.003,Sanad+15_EUUMa,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0513,https://arxiv.org/abs/astro-ph/9910456,Gaensicke+00_V1043Cen,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0514,https://doi.org/10.1046/j.1365-8711.2002.05320.x,vanDerHeyden+02_V1043Cen,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0515,https://academic.oup.com/mnras/article/333/2/241/1018890,vanDerHeyden+02_V1043Cen,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0516,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/355/gaiadr3&Source=6179636986011888512,GaiaDR3+22_V1043Cen,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0517,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=6179636986011888512,BailerJones+21_V1043Cen,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0518,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V1043%20Cen&output.format=ASCII,SIMBAD_V1043Cen,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0519,https://doi.org/10.1051/0004-6361/201936626,Beuermann+20_V1043Cen,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0520,https://arxiv.org/abs/2001.01967,Beuermann+20_V1043Cen,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0521,https://doi.org/10.3847/1538-3881/ab6ded,Oliveira+20_CSS1503,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0522,https://arxiv.org/abs/2001.10582,Oliveira+20_CSS1503,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0523,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/355/gaiadr3&Source=6231616192056505984,GaiaDR3+22_J1503,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0524,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=6231616192056505984,BailerJones+21_J1503,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0525,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CRTS%20J150354.0-220710&output.format=ASCII,SIMBAD_J1503,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0526,https://doi.org/10.1051/0004-6361/202450537,Schwope+24_eROSITA,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0527,https://arxiv.org/abs/2407.20903,Schwope+24_eROSITA,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0528,https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/J/ApJ/938/46?format=html&tex=true,Abrahams+22_J1503; Abrahams+22_V388Peg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0529,https://doi.org/10.3847/1538-4357/ac87ab,Abrahams+22_J1503; Abrahams+22_V388Peg,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0530,https://www.swift.ac.uk/2SXPS/docs.php,Swift2SXPS_Docs,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0531,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=1374430388449392000,GaiaDR3_BMCrB,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0532,https://gea.esac.esa.int/archive/,GaiaDR2_CMPhe; GaiaDR2_ZCam; GaiaDR3_ARSco; GaiaDR3_ASKAP174508; GaiaDR3_BMCrB; GaiaDR3_CMPhe; GaiaDR3_GLEAMXJ0704; GaiaDR3_HUAqr; GaiaDR3_ILTJ1101; GaiaDR3_LSIV083; GaiaDR3_RWSex; GaiaDR3_SSCyg; GaiaDR3_SUUMa; GaiaDR3_V1084Her; GaiaDR3_V341Ara; GaiaDR3_V603Aql; GaiaDR3_ZCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0533,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2F352%2Fgedr3dis&Source=1374430388449392000,BailerJones+21_BMCrB,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0534,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%201374430388449392000&output.format=ASCII,SIMBAD_BMCrB,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0535,https://simbad.cds.unistra.fr/simbad/sim-tap/sync,SIMBAD_BMCrB; SIMBAD_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,400,http_error,400
+URL0536,https://arxiv.org/pdf/0905.3476,GansickeDillon+09_BMCrB,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0537,https://doi.org/10.1088/0004-6256/137/3/3606,Hilton+09_BMCrB,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0538,https://arxiv.org/pdf/0901.1850,Hilton+09_BMCrB,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0539,https://arxiv.org/pdf/2510.09165,HernandezDiaz+25_BMCrB; HernandezDiaz+25_V1007Her; HernandezDiaz+25_V388Peg,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0540,https://cdsarc.cds.unistra.fr/viz-bin/cat/IX/65,4XMMDR11_BMCrB; 4XMMDR11_QSVir,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0541,https://doi.org/10.26093/cds/vizier.9065,4XMMDR11_BMCrB; 4XMMDR11_IXVel,doi; original_doi,2026-09-28,GET range,404,not_found,Not Found
+URL0542,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=IX%2F65%2Fxmm4d11s&-c=235.269459%2B36.048012&-c.r=10&-c.u=arcsec,4XMMDR11_BMCrB,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0543,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2F355%2Fgaiadr3&Source=1203639265875666304,GaiaDR3_MRSer,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0544,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2F352%2Fgedr3dis&Source=1203639265875666304,BailerJones+21_MRSer,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0545,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=MR%20Ser,SIMBAD_MRSer,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0546,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=1597621426298361216,GaiaDR3_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0547,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=1597621426298361216,BailerJones+21_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0548,https://simbad.cds.unistra.fr/,SIMBAD_GLEAMXJ0704; SIMBAD_MQDra,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0549,https://simbad.cds.unistra.fr/simbad/sim-tap,SIMBAD_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0550,https://doi.org/10.1086/431969,Schmidt+05_MQDra,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0551,https://arxiv.org/pdf/astro-ph/0505385,Schmidt+05_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0552,https://doi.org/10.1088/0004-6256/136/5/2107,Thorstensen+08_MQDra,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0553,https://arxiv.org/pdf/0807.2856,Thorstensen+08_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0554,https://arxiv.org/pdf/astro-ph/0509457,Harrison+05_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0555,https://vizier.cds.unistra.fr/viz-bin/VizieR-3?-source=IX/65,4XMMDR11_MQDra,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0556,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=1223491257550872192,GaiaDR3_APCrB,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0557,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V%2A+AP+CrB,SIMBAD_APCrB,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0558,https://doi.org/10.1088/0004-6256/135/3/785,West+08_APCrB,doi; stable_link,2026-09-28,HEAD,200,reachable,
+URL0559,https://doi.org/10.1088/0004-6256/135/2/785,West+08_APCrB,download_url; original_doi; original_download_url; original_stable_link,2026-09-28,GET range,404,not_found,Not Found
+URL0560,https://doi.org/10.1086/423997,Szkody+04_Her1,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,,connection_error,SSLError
+URL0561,https://doi.org/10.3847/1538-3881/aa9ede,Szkody+18_Her1,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0562,https://doi.org/10.3847/1538-3881/ad2fcd,Szkody+24_Her1,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0563,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2F355%2Fgaiadr3&Source=1325655193647771008&-out.all=1&-out.max=10,GaiaDR3_Her1,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0564,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2F345%2Fgaia2&Source=1325655193647771008&-out.all=1&-out.max=10,GaiaDR2_Her1,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0565,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2F352%2Fgedr3dis&Source=1325655193647771008&-out.all=1&-out.max=10,BailerJones+21_Her1,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0566,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2F347%2Fgaia2dis&Source=1325655193647771008&-out.all=1&-out.max=10,BailerJones+18_Her1,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0567,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=SDSS%20J162608.16%2B332827.8&output.format=ASCII,SIMBAD_Her1,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0568,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=PG%201617%2B150&output.format=ASCII,SIMBAD_Her1_oldpos,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0569,https://arxiv.org/pdf/1702.07631,Barrett+17_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0570,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/AJ/154/252/table34&GCVS=V1007%20Her,Barrett17_CDS_V1007Her,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0571,https://doi.org/10.26093/cds/vizier.51540252,Barrett17_CDS_V1007Her,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0572,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=J/AJ/154/252,Barrett17_CDS_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0573,https://doi.org/10.1088/1538-3873/aa7a99,Yang+17_V1007Her,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0574,https://arxiv.org/pdf/1706.06731,Yang+17_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0575,https://doi.org/10.1093/mnras/stt499,Pretorius+13_V1007Her,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0576,https://arxiv.org/pdf/1303.4270,Pretorius+13_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0577,https://academic.oup.com/mnras/article/516/3/3144/6692883,Duffy+22_V1007Her; Duffy+22_V388Peg,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0578,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=1347851790791563136,GaiaDR3+22_V1007Her,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0579,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/355/gaiadr3&Source=1347851790791563136&-out.all=1,GaiaDR3+22_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0580,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=1347851790791563136,BailerJones+21_V1007Her,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0581,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=1347851790791563136&-out.all=1,BailerJones+21_V1007Her,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0582,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=RX%20J1724.0%2B4114&output.format=ASCII,SIMBAD_V1007Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0583,https://academic.oup.com/mnras/article/531/1/1805/7675517,Pelisoli+24_V1007Her; Pelisoli+24_V388Peg,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0584,https://doi.org/10.3847/1538-3881/ad6260,Bruch+24_V1323Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0585,https://academic.oup.com/mnras/article/548/1/stag514/8524018,Dag+26_V1084Her; Dag+26_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0586,https://doi.org/10.1093/mnras/stag514,Dag+26_V1084Her; Dag+26_V1323Her,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0587,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=4611319954072608384,GaiaDR3_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0588,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=4611319954072608384,BailerJones+21_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0589,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/paramp&Source=4611319954072608384,GaiaGSPPhot_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0590,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V%2A+V1323+Her,SIMBAD_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0591,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=IX/69/xmm4dr11&-c=270.91524%2040.20558&-c.rs=30,XMM4XMMDR11_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0592,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=J/AJ/154/252,VizieRBarrett17_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0593,https://asd.gsfc.nasa.gov/Koji.Mukai/iphome/systems/v1323her.html,MukaiIPHome_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0594,https://ui.adsabs.harvard.edu/abs/2015ASPC..496..252P/abstract,Petrik+15_V1323Her,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0595,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=2123837555230207744,GaiaDR3_AMHer,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0596,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=AM%20Her,SIMBAD_AMHer,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0597,https://doi.org/10.1093/mnras/stx3175,Gawronski+18_AMHer,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0598,https://doi.org/10.1086/161363,Dulk+83_AMHer,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0599,https://ui.adsabs.harvard.edu/abs/1981ApJ...245.1043Y/abstract,Young+81_AMHer,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0600,https://ui.adsabs.harvard.edu/abs/1985MNRAS.212..353W/abstract,WickramasingheMartin+85_AMHer,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0601,https://ui.adsabs.harvard.edu/abs/1991MNRAS.251P..37B/abstract,Bailey+91_AMHer,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0602,https://doi.org/10.1088/0004-637X/774/2/153,Dai+13_AMHer,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0603,https://ui.adsabs.harvard.edu/abs/1995A%26A...302...90S/abstract,Southwell+95_AMHer,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0604,https://ui.adsabs.harvard.edu/abs/1996MNRAS.280..481D/abstract,DaveySmith+96_AMHer,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0605,https://doi.org/10.1086/177022,Silber+96_AMHer,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0606,https://doi.org/10.1093/mnras/stv462,Littlefield+15_V1432Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0607,https://arxiv.org/abs/1408.4207,Littlefield+15_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0608,https://doi.org/10.1093/mnras/staa2592,Shaw+20_V1432Aql; Shaw+20_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0609,https://arxiv.org/abs/2008.09684,Shaw+20_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0610,https://doi.org/10.1086/133556,Patterson+95_V1432Aql,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0611,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=4193346037615507968,GaiaDR3+22_V1432Aql,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0612,https://gea.esac.esa.int/tap-server/tap/sync,GaiaDR3+22_V1432Aql,download_url; original_download_url,2026-09-28,HEAD,500,server_error,500
+URL0613,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V1432%20Aql,SIMBAD_V1432Aql,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0614,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=4240284979281473920,GaiaDR3_J1955,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0615,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=4240284979281473920,BailerJones+21_J1955,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0616,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=IGR%20J19552%2B0044,SIMBAD_J1955,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0617,https://doi.org/10.54503/0571-7132-2024.67.2-161,Babina+24_J1955_RU,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0618,https://arar.sci.am/Content/376088/2024%2C2.pdf,Babina+24_J1955_RU,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0619,https://doi.org/10.1007/s10511-024-09825-2,Babina+24_J1955_EN,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0620,https://link.springer.com/article/10.1007/s10511-024-09825-2,Babina+24_J1955_EN,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0621,https://doi.org/10.1093/mnras/226.1.209,MukaiCharles+87_QQVul,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0622,https://articles.adsabs.harvard.edu/pdf/1987MNRAS.226..209M,MukaiCharles+87_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0623,https://doi.org/10.1086/161739,Nousek+84_QQVul,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0624,https://articles.adsabs.harvard.edu/pdf/1984ApJ...277..682N,Nousek+84_QQVul,download_url; original_download_url,2026-09-28,HEAD,,connection_error,timeout
+URL0625,https://doi.org/10.1046/j.1365-8711.1998.00610.x,Cropper+98Mass_QQVul,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0626,https://articles.adsabs.harvard.edu/pdf/1998MNRAS.293..222C,Cropper+98Mass_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0627,https://doi.org/10.1046/j.1365-8711.1999.02972.x,Catalan+99_QQVul,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0628,https://academic.oup.com/mnras/article/310/1/123/1015586,Catalan+99_QQVul,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0629,https://doi.org/10.1046/j.1365-8711.1998.01333.x,Cropper+98Polarimetry_QQVul,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0630,https://articles.adsabs.harvard.edu/pdf/1998MNRAS.295..353C,Cropper+98Polarimetry_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0631,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/355/gaiadr3&-out.max=2&Source=1833014187092198912,GaiaDR3_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0632,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&-out.max=2&Source=1833014187092198912,BailerJones+21_QQVul,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0633,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=QQ+Vul,SIMBAD_QQVul,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0634,https://adsabs.harvard.edu/pdf/1987ApJ...323L.131B,BookbinderLamb+87_AEAqr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0635,https://doi.org/10.1086/185072,BookbinderLamb+87_AEAqr,doi; original_doi,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0636,https://adsabs.harvard.edu/pdf/1988ApJ...324..431B,Bastian+88_AEAqr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0637,https://doi.org/10.1086/165906,Bastian+88_AEAqr,doi; original_doi,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0638,https://academic.oup.com/mnras/article/508/1/665/6367154,Echevarria+21_AEAqr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0639,https://doi.org/10.1093/mnras/stab2542,Echevarria+21_AEAqr,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0640,https://scholar.ufs.ac.za/items/a81881d2-7285-47c9-b967-696bde12fb96,Madzime+21_AEAqr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0641,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=4226332451596335616,GaiaDR3+22_AEAqr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0642,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=4226332451596335616,BailerJones+21_AEAqr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0643,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V*+AE+Aqr,SIMBAD_AEAqr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0644,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V388%20Peg,SIMBAD_V388Peg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0645,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=2725143108496515840,GaiaDR3_V388Peg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0646,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=2725143108496515840,BailerJones+21_V388Peg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0647,https://doi.org/10.1016/j.newast.2022.101924,ZenginCamurdan+23_V388Peg,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0648,https://www.sciencedirect.com/science/article/abs/pii/S1384107622001087,ZenginCamurdan+23_V388Peg,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0649,https://doi.org/10.1111/j.1365-2966.2006.10836.x,Barlow+06_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0650,https://doi.org/10.1051/0004-6361/200811285,Brunschweiger+09_V2400Oph,doi; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0651,https://doi.org/10.1051/0004-6361:200810425,Brunschweiger+09_V2400Oph,original_doi; original_stable_link,2026-09-28,GET range,404,not_found,Not Found
+URL0652,https://doi.org/10.1051/0004-6361/201014542,Yuasa+10_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0653,https://doi.org/10.1093/mnras/sty2952,Suleimanov+19_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0654,https://doi.org/10.3847/1538-4357/ab1fe1,XuYuLi+19_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0655,https://doi.org/10.3847/1538-4357/acd001,Hayashi+23_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0656,https://doi.org/10.3847/1538-3881/ab1ea6,Joshi+19_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0657,https://doi.org/10.1134/1.1819495,Revnivtsev+04_V2400Oph,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0658,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V2400%20Oph,SIMBAD_V2400Oph,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0659,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IX/65/xmm4d11s,4XMMDR11_V2400Oph,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0660,https://asd.gsfc.nasa.gov/Koji.Mukai/iphome/iphome.html,NASAIPHome_V2400Oph,stable_link,2026-09-28,HEAD,200,reachable,
+URL0661,https://asd.gsfc.nasa.gov/Koji.Mukai/iphome/sources/v2400oph.html,NASAIPHome_V2400Oph,original_stable_link,2026-09-28,GET range,404,not_found,Not Found
+URL0662,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=374510294830244992,GaiaDR3_RXAnd,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0663,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/352/gedr3dis&Source=374510294830244992,BailerJones+21_RXAnd,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0664,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V*%20RX%20And,SIMBAD_RXAnd,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0665,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=IX/58/2sxps&-c=16.14809426617+41.29928403488&-c.rm=1&-out.all=1,2SXPS_RXAnd,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0666,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=78395045917118976,GaiaDR3_TTAri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0667,https://doi.org/10.1051/0004-6361/202039995,BailerJones+21_TTAri,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0668,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=78395045917118976,BailerJones+21_TTAri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0669,https://simbad.u-strasbg.fr/simbad/sim-id?Ident=V*+TT+Ari,SIMBAD_TTAri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0670,https://vizier.cds.unistra.fr/viz-bin/cat/IX/58,2SXPS_TTAri,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0671,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=IX/58/2sxps&-c=31.72112157741%2B15.29485318618&-c.rm=1&-out.all=1,2SXPS_TTAri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0672,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=5091939988633728640,GaiaDR3_IMEri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0673,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=5091939988633728640,BailerJones+21_IMEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0674,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/345/gaia2&Source=5091939988633728640,GaiaDR2_IMEri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0675,https://doi.org/10.26093/cds/vizier.1345,GaiaDR2_IMEri; GaiaDR2_IXVel,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0676,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/347/gaia2dis&Source=5091939988633728640,BailerJones+18_IMEri,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0677,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V%2A+IM+Eri,SIMBAD_IMEri,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0678,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=IX/58/2rxs,2RXS_IMEri; 2RXS_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0679,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/355/gaiadr3&Source=5515820034889610112,GaiaDR3_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0680,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/345/gaia2&Source=5515820034889610112,GaiaDR2_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0681,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/352/gedr3dis&Source=5515820034889610112,BailerJones+21_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0682,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=I/347/gaia2dis&Source=5515820034889610112,BailerJones+18_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0683,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V%2A%20IX%20Vel,SIMBAD_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0684,https://vizier.cds.unistra.fr/viz-bin/VizieR-4?-source=IX/65/xmm4d11s,4XMMDR11_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0685,https://erosita.mpe.mpg.de/dr1/AllSkySurveyData_dr1/Catalogues_dr1/,eRASS1_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0686,https://doi.org/10.1051/0004-6361/202347165,eRASS1_IXVel,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0687,https://doi.org/10.1088/1538-3873/ada185,Rodriguez+25_IXVel,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0688,https://arxiv.org/abs/2111.15145,Kato+21_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0689,https://ui.adsabs.harvard.edu/abs/1994ApJ...426..704L/abstract,Long+94_IXVel,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0690,https://doi.org/10.1086/174107,Long+94_IXVel,doi; original_doi,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0691,https://doi.org/10.7907/83wt-0h57,Wade+81_ZCamThesis,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0692,https://thesis.library.caltech.edu/,Wade+81_ZCamThesis,download_url; original_download_url,2026-09-28,HEAD,,connection_error,URLError
+URL0693,https://doi.org/10.1051/0004-6361:2000332,SIMBAD_V1084Her; SIMBAD_ZCam,original_doi,2026-09-28,GET range,404,not_found,Not Found
+URL0694,https://doi.org/10.1051/0004-6361/201833051,GaiaDR2_ZCam,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0695,https://doi.org/10.1051/0004-6361:20000068,Hog+00_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0696,https://ui.adsabs.harvard.edu/abs/1988ApJ...325..266A/abstract,Anderson+88_ZCam,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0697,https://doi.org/10.1086/303607,Knigge+97_ZCam,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0698,https://adsabs.harvard.edu/pdf/1988ApJ...335..829M,Mauche+88_RWSex; MaucheRaymondCordova+88_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0699,https://doi.org/10.1046/j.1365-8711.2003.06307.x,Prinja+03_RWSex,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0700,https://doi.org/10.1093/mnras/stx1341,Hernandez+17_RWSex,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0701,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=3769067109159364608,BailerJones+21_RWSex,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0702,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V%2A%20RW%20Sex,SIMBAD_RWSex,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0703,https://doi.org/10.1016/j.newast.2007.08.003,Ak+08_V1084Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0704,https://doi.org/10.1093/mnras/stad2089,Bruch+23_V1084Her,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0705,https://doi.org/10.1086/133903,Patterson+97_V603Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0706,https://adsabs.harvard.edu/pdf/1997PASP..109..468P,Patterson+97_V603Aql,download_url; original_download_url,2026-09-28,HEAD,,connection_error,timeout
+URL0707,https://arxiv.org/abs/1702.07631,Barrett+17_V603Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0708,https://doi.org/10.1088/0004-637X/767/1/7,Harrison+13_V603Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0709,https://arxiv.org/abs/1302.3245,Harrison+13_V603Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0710,https://doi.org/10.1093/mnras/sty2388,Schaefer+18_V603Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0711,https://arxiv.org/abs/1809.00180,Schaefer+18_V603Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0712,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=4266547566124966912,BailerJones+21_V603Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0713,https://simbad.u-strasbg.fr/simbad/,SIMBAD_ILTJ1101; SIMBAD_V603Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0714,https://doi.org/10.1016/j.newast.2018.02.002,BruchCook+18_V603Aql,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0715,https://arxiv.org/abs/1802.08056,BruchCook+18_V603Aql,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0716,https://doi.org/10.1038/s41550-025-02540-8,deRuiter+25_correction,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0717,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=855784912471554176,BailerJones+21_ILTJ1101,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0718,https://cdsarc.cds.unistra.fr/viz-bin/cat/I/352,BailerJones+21_GLEAMXJ0704; BailerJones+21_UGem,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,,connection_error,URLError
+URL0719,https://vizier.cds.unistra.fr/viz-bin/VizieR-3?-source=I/352/gedr3dis&Source=5566254014771398912,BailerJones+21_GLEAMXJ0704,download_url; original_download_url,2026-09-28,HEAD,,connection_error,URLError
+URL0720,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205566254014771398912,SIMBAD_GLEAMXJ0704,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0721,https://doi.org/10.3847/1538-4357/ae2864,Yang+26,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0722,https://www.astronomerstelegram.org/?read=17333,Fedorova+25_ATel17333,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0723,https://www.astronomerstelegram.org/?read=17434,Shin+25_ATel17434,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0724,https://www.astronomerstelegram.org/?read=17440,Men+25_ATel17440,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0725,https://www.astronomerstelegram.org/?read=17474,Ng+25_ATel17474,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0726,https://www.astronomerstelegram.org/?read=17478,Lundy+25_ATel17478,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0727,https://www.astronomerstelegram.org/?read=17562,Dudeja+25_ATel17562,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0728,https://www.astronomerstelegram.org/?read=17565,Dudeja+25_ATel17565,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0729,https://vizier.cds.unistra.fr/viz-bin/cat/I/355,GaiaDR3_CHIME1634,stable_link,2026-09-28,HEAD,200,reachable,
+URL0730,"https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/355/gaiadr3&-c=248.62483+44.83708&-c.rs=30&-out=Source,RA_ICRS,DE_ICRS,Plx,e_Plx,pmRA,e_pmRA,pmDE,e_pmDE,Gmag,BPmag,RPmag&-out.add=_r",GaiaDR3_CHIME1634,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0731,https://cdsarc.cds.unistra.fr/cat/I/355,GaiaDR3_CHIME1634,original_stable_link,2026-09-28,GET range,404,not_found,Not Found
+URL0732,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CHIME%20J1634%2B44&output.format=ASCII,SIMBAD_CHIME1634,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0733,https://arxiv.org/abs/2604.11317,Zhan+26,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0734,https://doi.org/10.48550/arXiv.2604.11317,Zhan+26,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0735,https://doi.org/10.1038/s41550-025-02760-y,Horvath+26,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0736,https://arxiv.org/abs/2507.15352,Horvath+26,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0737,https://arxiv.org/abs/2606.28993,Knigge+26,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0738,https://doi.org/10.48550/arXiv.2606.28993,Knigge+26,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0739,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=ASKAP%20J174508.9-505149,SIMBAD_ASKAP174508,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0740,https://doi.org/10.5281/zenodo.17365566,Rose+26_data,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0741,https://github.com/krose098/askap_j1745/commit/3d168b7262295c3fb90443784de6b83ccf38612a,RoseCode_ASKAP174508,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0742,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/355/gaiadr3&Source=5719598950133755392,GaiaDR3_VVPup,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0743,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=5719598950133755392,BailerJones+21_VVPup,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0744,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=FR%20Lyn,SIMBAD_FRLyn,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0745,https://gea.esac.esa.int/archive/documentation/GDR3/,GaiaDR3_FRLyn; GaiaDR3_HUAqr,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0746,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=719893044876142848,VizieR_GaiaDR3_FRLyn,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0747,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=719893044876142848,BailerJones+21_FRLyn,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0748,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=IX/10A/1rxs&1RXS=J085413.1%2B390543,VizieR_RASS_BSC_FRLyn,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0749,https://doi.org/10.1051/0004-6361/201016373,Schwope+11_HUAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0750,https://wrap.warwick.ac.uk/id/eprint/38516/1/WRAP_Steeghs_aa16373-10.pdf,Schwope+11_HUAqr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0751,https://doi.org/10.1093/mnras/stu1879,Bours+14_HUAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0752,https://academic.oup.com/mnras/article/445/2/1924/1415063,Bours+14_HUAqr,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0753,https://doi.org/10.1002/asna.201813526,SchwopeThinius+18_HUAqr,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0754,https://onlinelibrary.wiley.com/doi/10.1002/asna.201813526,SchwopeThinius+18_HUAqr,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0755,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HU%20Aqr,SIMBAD_HUAqr,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0756,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=6911950900211768704,VizieR_GaiaDR3_HUAqr,original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0757,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CM+Phe,SIMBAD_CMPhe,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0758,https://doi.org/10.26093/CDS/VizieR.1355,GaiaDR3_CMPhe,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0759,https://vizier.cds.unistra.fr/viz-bin/VizieR-3?-source=I%2f352%2fgedr3dis,BailerJones+21_CMPhe,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0760,https://doi.org/10.26093/CDS/VizieR.1345,GaiaDR2_CMPhe,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0761,https://www.swift.ac.uk/2SXPS/,2SXPS_CMPhe; 2SXPS_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0762,https://doi.org/10.1088/0067-0049/199/1/7,Froning+12_FUSECV,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0763,https://arxiv.org/abs/1112.1972,Froning+12_FUSECV,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0764,https://aas.org/sites/default/files/2020-02/AAS_211_Program_Book.pdf,RawlsAAS211_CMPhe,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0765,https://doi.org/10.1086/168794,Buckley+90_V347Pup,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0766,https://doi.org/10.1086/307745,DiazHubeny+99_V347Pup,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0767,https://doi.org/10.1086/173894,Mauche+94_V347Pup,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0768,https://doi.org/10.1046/j.1365-8711.1998.01806.x,Still+98_V347Pup,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0769,https://simbad.u-strasbg.fr/simbad/sim-basic?Ident=U_Geminorum,SIMBAD_UGem,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0770,https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355,GaiaDR3_UGem,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0771,https://doi.org/10.1086/311982,Harrison+99_SSCyg; Harrison+99_UGem,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0772,https://arxiv.org/abs/astro-ph/9902216,Harrison+99_UGem,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0773,https://doi.org/10.1086/380228,Harrison+04_YZCnc; HarrisonJohnson+04_SSCyg; HarrisonJohnson+04_UGem,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0774,https://astronomy.nmsu.edu/tharriso/mvporb.pdf,HarrisonJohnson+04_UGem,download_url; original_download_url,2026-09-28,HEAD,,connection_error,URLError
+URL0775,https://doi.org/10.1111/j.1365-2966.2006.10336.x,UndaSanzana+06_UGem,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0776,https://academic.oup.com/mnras/article/369/2/805/3101547,UndaSanzana+06_UGem,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0777,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V*%20YZ%20Cnc,SIMBAD_YZCnc,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0778,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=683908812437792000,GaiaDR3_YZCnc,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0779,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=683908812437792000,BailerJones+21_YZCnc,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0780,https://doi.org/10.1086/114626,ShafterHessman+88_YZCnc,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0781,https://doi.org/10.1086/112483,Patterson+79_YZCnc,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0782,https://doi.org/10.1086/320810,Patterson+01_EpsilonQ,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0783,https://doi.org/10.1086/447771,Patterson+05_EpsilonQ,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0784,https://doi.org/10.1093/mnras/205.2.265,SherringtonJameson+83_YZCnc,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0785,https://doi.org/10.1111/j.1365-8711.1998.02065.x,SmithDhillon+98_CVDonors,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0786,https://doi.org/10.1051/0004-6361:20035843,Hakala+04_YZCnc,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0787,https://ui.adsabs.harvard.edu/abs/1992A&A...257..523P/abstract,Pezzuto+92_YZCnc,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0788,https://doi.org/10.1086/190940,Patterson+84_YZCnc,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0789,https://arxiv.org/abs/2609.06566,Dai+26_YZSH,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0790,https://arxiv.org/abs/2609.18646,Dai+26_YZSpectra,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0791,https://doi.org/10.1051/0004-6361/202661949,Dai+26_YZSpectra,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0792,https://doi.org/10.3847/1538-4357/ab5362,Green+19_Bayestar,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0793,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V%2A%20SU%20UMa,SIMBAD_SUUMa,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0794,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=1091051096255456384,BailerJones+21_SUUMa,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0795,https://ui.adsabs.harvard.edu/abs/2011MNRAS.411.2695P/abstract,Patterson+11_SUUMa,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0796,https://ui.adsabs.harvard.edu/abs/2003AJ....126.3017T/abstract,Thorstensen+03_SUUMa,download_url; original_download_url,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0797,https://doi.org/10.1038/302045a0,Benz+83_SUUMa,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0798,https://www.nature.com/articles/302045a0,Benz+83_SUUMa,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0799,https://ui.adsabs.harvard.edu/abs/1986A&A...154..377F/abstract,Fuerst+86_SUUMa,original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0800,https://ntrs.nasa.gov/citations/19860042119,Fuerst+86_SUUMa,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0801,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V%2A%20QS%20Vir,SIMBAD_QSVir,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0802,https://gea.esac.esa.int/tap-server/,GaiaDR3+22_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0803,https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync,BailerJones+21_QSVir,download_url; original_download_url,2026-09-28,HEAD,400,http_error,400
+URL0804,https://doi.org/10.1093/mnras/stt2186,Drake+14_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0805,https://arxiv.org/abs/1401.7348,Drake+14_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0806,https://doi.org/10.1111/j.1365-2966.2010.17063.x,Parsons+10b_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0807,https://academic.oup.com/mnras/article/407/4/2362/1000308,Parsons+10b_QSVir,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0808,https://doi.org/10.1111/j.1745-3933.2009.00780.x,Qian+10_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0809,https://academic.oup.com/mnrasl/article/401/1/L34/1072306,Qian+10_QSVir,download_url; original_download_url,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0810,https://doi.org/10.1093/mnras/stt1420,Horner+13_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0811,https://arxiv.org/abs/1307.7893,Horner+13_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0812,https://doi.org/10.1093/mnras/staf1636,Pulley+25_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0813,https://arxiv.org/abs/2507.06748,Pulley+25_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0814,https://doi.org/10.1051/0004-6361/202452711,Ridder+25_QSVir,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0815,https://arxiv.org/abs/2410.24157,Ridder+25_QSVir,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0816,https://doi.org/10.1051/0004-6361/202555525e,Ridder+25corr_QSVir,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0817,https://doi.org/10.1016/j.newast.2016.07.011,Bruch+Diaz+17_LSIV-08-3,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0818,https://arxiv.org/pdf/1608.07181,Bruch+Diaz+17_LSIV-08-3,download_url; original_download_url,2026-09-28,HEAD,,connection_error,URLError
+URL0819,https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=I/352/gedr3dis&Source=4339398736975240192,BailerJones+21_LSIV083,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0820,https://heasarc.gsfc.nasa.gov/W3Browse/all/wgacat.html,WGACAT_LSIV083,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0821,https://outters.fr/wp-content/uploads/2015/12/Frew_thesis_2008_final.pdf,Frew2008_Thesis_V341Ara,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0822,https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I/352/gedr3dis&Source=5818105674344768768,BailerJones+21_V341Ara,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0823,https://doi.org/10.3847/2041-8213/ae4aa7,Ilkiewicz+26_V341Ara,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0824,https://arxiv.org/abs/2603.11742,Ilkiewicz+26_V341Ara,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0825,https://doi.org/10.1093/mnras/staf500,Santamaria+25_NovaRemnants,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0826,https://vizier.cds.unistra.fr/viz-bin/VizieR-3?-source=I/355/gaiadr3&Source=6688624794231054976,GaiaDR3_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0827,https://vizier.cds.unistra.fr/viz-bin/VizieR-3?-source=I/352/gedr3dis&Source=6688624794231054976,BailerJones+21_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0828,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%206688624794231054976,SIMBAD_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0829,https://doi.org/10.1051/0004-6361/202244014,GilmozziSelvelli+24_V3885Sgr,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0830,https://ui.adsabs.harvard.edu/abs/1994A%26AS..104...79B/abstract,BruchEngel+94_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0831,https://ui.adsabs.harvard.edu/abs/1987A%26AS...71..339V/abstract,Verbunt+87_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0832,https://ui.adsabs.harvard.edu/abs/1971PASP...83..485B/abstract,BondLandolt+71_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0833,https://adsabs.harvard.edu/pdf/1977ApJ...214..471C,CowleyCramptonHesser+77_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0834,https://doi.org/10.1086/166971,MaucheRaymondCordova+88_V3885Sgr,doi; original_doi,2026-09-28,GET range,405,connection_error,URLError
+URL0835,https://ui.adsabs.harvard.edu/abs/1991A%26A...252..100L/abstract,LaDous+91_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,405,restricted_to_automated_check,Not Allowed
+URL0836,https://doi.org/10.1086/522112,PueblaDiazHubeny+07_V3885Sgr,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0837,https://academic.oup.com/mnras/article/503/1/953/6149450,Bruch+21_V3885Sgr,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0838,https://doi.org/10.1093/mnras/stab516,Bruch+21_V3885Sgr,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0839,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=6749618724313541760,GaiaDR3_V5662Sgr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0840,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=6749618724313541760,BailerJones+21_V5662Sgr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0841,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%206749618724313541760,SIMBAD_V5662Sgr,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0842,https://doi.org/10.3847/0004-637X/833/1/14,Harrison+16_SSCyg,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0843,https://doi.org/10.14311/APP.2015.02.0035,SionGodon+15_SSCyg,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0844,https://doi.org/10.1088/2041-8205/773/2/L26,NelanBond+13_SSCyg,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0845,https://aas.org/files/resources/aas_227_abstract_pdf.pdf,HarrisonMcArthur+16_AAS227,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0846,https://academic.oup.com/pasj/article/78/4/1268/8703943,Ishida+26_SSCyg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0847,https://doi.org/10.1093/pasj/psag060,Ishida+26_SSCyg,doi; original_doi,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0848,https://britastro.org/vss/VSSC207.pdf,Sharp+26_SSCyg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0849,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=1972957892448494592,GaiaDR3_SSCyg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0850,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=1972957892448494592,BailerJones+21_SSCyg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0851,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V*%20SS%20Cyg,SIMBAD_SSCyg,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0852,https://doi.org/10.1086/323870,MaucheRobinson+01_SSCyg,doi; download_url; original_doi; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0853,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=6050296829033196032,BailerJones+21_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0854,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=AR+Scorpii,SIMBAD_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0855,https://doi.org/10.1093/mnras/stad327,Jiang+23_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0856,https://arxiv.org/abs/2301.13470,Jiang+23_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0857,https://doi.org/10.1051/0004-6361/201732380,Stanway+18_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0858,https://arxiv.org/abs/1801.07258,Stanway+18_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0859,https://doi.org/10.3847/2041-8213/ad0be7,Garnavich+23_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0860,https://arxiv.org/abs/2311.04967,Garnavich+23_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0861,https://doi.org/10.3847/1538-4357/add725,BarrettGurwell+25_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0862,https://arxiv.org/abs/2505.06468,BarrettGurwell+25_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0863,https://doi.org/10.1093/mnras/stab3595,duPlessis+22_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0864,https://arxiv.org/abs/2112.08708,duPlessis+22_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0865,https://doi.org/10.1093/mnras/stae1791,duPlessis+24_ARSco,doi; original_doi; original_stable_link; stable_link,2026-09-28,GET range,403,restricted_to_automated_check,Forbidden
+URL0866,https://arxiv.org/abs/2407.16505,duPlessis+24_ARSco,download_url; original_download_url,2026-09-28,HEAD,200,reachable,
+URL0867,https://arxiv.org/abs/2004.11474,Lyutikov+20_ARSco,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0868,https://doi.org/10.48550/arXiv.2004.11474,Lyutikov+20_ARSco,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0869,https://arxiv.org/abs/2609.27543,Buckley+26_ARSco,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0870,https://doi.org/10.48550/arXiv.2609.27543,Buckley+26_ARSco,doi; original_doi,2026-09-28,HEAD,200,reachable,
+URL0871,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/355/gaiadr3&Source=6712706405280342784,GaiaDR3_J1912,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0872,https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I/352/gedr3dis&Source=6712706405280342784,BailerJones+21_J1912,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0873,https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%206712706405280342784,SIMBAD_J1912,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0874,https://doi.org/10.22323/1.514.0061,Meintjes+25_J1912,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0875,https://pos.sissa.it/514/061/pdf,Meintjes+25_J1912,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0876,https://doi.org/10.22323/1.514.0062,Minnie+25_J1912,doi; original_doi; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,
+URL0877,https://pos.sissa.it/514/062/pdf,Minnie+25_J1912,download_url; original_download_url; original_stable_link; stable_link,2026-09-28,HEAD,200,reachable,

@@ -1,0 +1,22 @@
+# Scientific release decisions
+
+The RC3 tables preserve competing evidence and apply the conservative display defaults below. These are the four author presentation choices with the clearest effect on how readers interpret membership, detections, or physical claims. “P1” items should be confirmed before calling the archive final.
+
+Author review, 2026-09-28: choices 1–3 below are accepted for the present release. The AR Sco unit interpretation was rechecked after the author suggested 43 MG; the evidence and current export status are recorded in item 4. This documentation update does not change the RC3 numerical exports.
+
+## P1 — Author decisions for final archive
+
+1. **CHIME/ILT J1634+44: candidate host membership — accepted 2026-09-28.** Keep it in the 58-system table as a long-period radio transient with unresolved WD-versus-neutron-star-like interpretation, no Gaia counterpart, and no assumed WD properties. This retains the audited radio source while preventing its WD status from appearing established (review issues CHIME1634-001–006).
+2. **Hya 1 and other marginal reports: detection wording — accepted 2026-09-28.** Keep the Hya 1 signal as “Marginal reported signal,” not a secure detection and not an upper limit. Apply source-published wording to the other marginal records; do not recalculate a uniform significance from heterogeneous reports. With observation-specific evidence association, the table has 3 secure reported detections, 5 marginal reported signals, 8 upper limits, 63 reported detections without a common significance assessment, and 17 reported fluxes without a harmonized detection assessment (HYA1-003; related per-source radio-significance issues).
+3. **ASKAP J174508.9-505149: overlapping class labels — accepted 2026-09-28.** Publish it with both long-period-radio-transient and proposed magnetic-CV tags, while leaving the WD-host confidence inferred/proposed and the polar/IP subtype qualified. The multi-label presentation prevents one interpretation from erasing the other (ASKAP174508-005–008).
+4. **AR Sco magnetic-field unit interpretation.** [Barrett & Gurwell (2025), Table 2](https://arxiv.org/html/2505.06468v1) gives a fast-cooling synchrotron-region field of 42.7±0.2 G; the discussion and conclusions repeat approximately 43 G. The separately inferred WD polar field is approximately 15 MG. The abstract's 43 MG appears to be a unit typo: this is an inference from the consistent table/body/conclusions, not an author-confirmed correction. Keep the abstract wording in provenance, rather than treating it as an equally supported model result. The RC3 preferred field values remain blank as exported; any next-release selection should retain the distinction between the local model field and the inferred WD polar field, and preserve the stated MCSE uncertainty convention (ARSCO-001; ARSCO-005).
+
+## P2 — Can remain documented in this release
+
+5. **Cas 1 magnetic subclass.** Keep CV identity in the broad class and label the IP/magnetic subclass disputed or candidate; do not promote it to a secure IP pending the queued evidence (CAS1-001–002).
+6. **QS Vir accretion and system class.** Preserve the detached/pre-CV and possible accretion interpretations alongside the evidence; do not force one evolutionary state or infer a new population sequence (QSVIR-001–003).
+7. **Property-specific scalar choices.** RC3 selects defensible values separately for WD photospheric temperature, mean photospheric field, polar field, local emission-region field, WD mass, and companion properties, with record IDs, references, methods, uncertainties/bounds, and model qualifications. Tau 4's 7250 K photospheric fit and 15 MG photospheric field are separate from its 12 MG local field; the non-unique 0.61 M☉ model example stays unselected. Confirm whether this component-by-component display, including qualified model-dependent results, is suitable. Other unresolved or conflicting values remain blank with source-specific reasons and all alternatives in the ledger.
+
+## Release correctness versus future research
+
+RC3 corrects observation-epoch matching, flux/error-supported observation links, applicable radio method/state metadata, and summary interval metadata. P1 choices 1–3 are accepted; item 4 records the subsequent AR Sco literature check without changing the numerical snapshot. The 313 open review issues are not 313 release blockers: other evidence, access, and interpretation items remain qualified in the public issue table for later versioned updates.
