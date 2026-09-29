@@ -9,3 +9,8 @@ Public check: `python scripts/check.py`. Membership, unique keys, observation/so
 58 / 58 sky systems (57 native Gaia positions and one literature fallback), no exclusions. 56 / 58 CMD systems; CHIME/ILT J1634+44 and ASKAP J174508.9-505149 excluded with source-specific reasons. Selected radio-region-field coverage is 22 / 58, increased from 21 by AR Sco; selected WD-polar coverage is 3 / 58, increased from 2. Preferred catalog distances remain 50 / 58; six plot-specific geometric posterior adoptions give 56 CMD inputs. No old coverage count is forced onto this release.
 
 Reference reachability results retain their original dated checks; no blanket claim of newly tested external links. Private paths were sanitized with a per-field log, and paper PDFs/private proposal material are absent. Scientific checks cannot establish completeness, settle all model disputes or recover an unknown historical Gaia cache query. Review issues remain documented, not silently resolved. Browser/deployment verification is recorded separately in VERIFICATION.md.
+
+
+## Web r1 audit
+
+The 2026-09-29 revision changes presentation and adds an evidence-linked LPT method comparison; it makes no catalog-data selection changes. The original check, RC3 regression and temporary RC3 export/validation passed again. The comparison check independently audits all 56 main-CMD photometry/distance joins, checks four source/method rows, exact Gaia strings, retained ILT alternatives, nonlinear distance endpoints and interactive SVG joins. See CMD_AUDIT_WEB_R1.md and VERIFICATION.md. Original v1.0.0 products and tag are retained.

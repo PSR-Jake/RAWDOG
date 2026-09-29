@@ -1,0 +1,10 @@
+5d8f770d91dc18b483ed933a94d48bf0eb656596a0593f3ff1c718fb7abb652f  data/v1.0.0-web-r1/lpt_cmd_comparison.csv
+afb2be9d99fac7bd7386df024b7af8575527374aabf3dc21f8573d062ed11ace  figures/v1.0.0-web-r1/rawdog_cmd.pdf
+ac9e89643f5f250e10fb97b768a8be0d3d4a8204235e3a8cff813ba3dc6a4b24  figures/v1.0.0-web-r1/rawdog_cmd.png
+16675166f63441e4b5d3bee286539d33c828fe48c88e2351520cc1f146c0ebda  figures/v1.0.0-web-r1/rawdog_cmd.svg
+35c1a46d52c6f10bd7f56b2bbb152197dbcf8ffe4879a38e8fd413965e5d10e7  figures/v1.0.0-web-r1/rawdog_lpt_comparison.pdf
+a1e772ec10c0cfae377fd2280d012192007ddcb6dfac1d54bb927e4e7ba7a3a5  figures/v1.0.0-web-r1/rawdog_lpt_comparison.png
+2a3f13bcc19af241a36e0b68a8a997c94dfc820f4914fb2e5aaca2fd8094029c  figures/v1.0.0-web-r1/rawdog_lpt_comparison.svg
+672d309bda6eeb13212a0861ed7ceafe6cd40979404796cbdb35ebbed5173828  figures/v1.0.0-web-r1/rawdog_sky.pdf
+d0d055893664515f17b1963f205569ea8e0d0be413594dd7bddf4689b5438916  figures/v1.0.0-web-r1/rawdog_sky.png
+aace91fa867d9494098a22b95aefd3d2eee5ed5dc9e4e3b3ffc1f94ab685d131  figures/v1.0.0-web-r1/rawdog_sky.svg

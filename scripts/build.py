@@ -10,7 +10,7 @@ from matplotlib.lines import Line2D
 import numpy as np
 from astropy.coordinates import SkyCoord
 import astropy.units as u
-ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data/v1.0.0';FIG=ROOT/'figures/v1.0.0'
+ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data/v1.0.0';FIG=ROOT/'figures/v1.0.0-web-r1'
 STYLES={'magnetic_cv':('#1864ab','o','Magnetic-CV tag'),'cataclysmic_variable':('#087f5b','s','Other CV'),'white_dwarf_pulsar':('#7048a5','D','WD pulsar'),'long_period_transient':('#b95000','^','Long-period transient')}
 ADOPTIONS={'CM Phe':'M05626','IX Vel':'M03659','J191213.72-441045.1':'M07093','V1084 Her':'M04045','V347 Pup':'M05703','VV Pup':'M05315'}
 
@@ -77,17 +77,17 @@ def point(ax,row,x,y):
     color,marker,_=STYLES[row['display_group']]
     edge='#1864ab' if row['display_group']=='long_period_transient' and 'magnetic_cv' in row['classification_labels'] else color
     p=ax.scatter([x],[y],s=55,marker=marker,facecolors='none' if row['qualified_status']=='true' else color,edgecolors=edge,linewidths=1.3,zorder=5)
-    p.set_gid('point-'+row['token']+'-'+str(len(ax.figure.axes)));p.set_urls(['../../index.html#source='+urllib.parse.quote(row['source_id'],safe='')])
+    p.set_gid('point-'+row.get('glyph_token',row['token'])+'-'+str(len(ax.figure.axes)));p.set_urls(['../../index.html#source='+urllib.parse.quote(row['source_id'],safe='')])
 
 def exports(fig,name,rows):
     FIG.mkdir(parents=True,exist_ok=True)
     for ext in ['svg','pdf','png']:fig.savefig(FIG/(name+'.'+ext),dpi=350)
     plt.close(fig)
-    path=FIG/(name+'.svg');tree=ET.parse(path);root=tree.getroot();ns='{http://www.w3.org/2000/svg}';lookup={r['token']:r for r in rows}
+    path=FIG/(name+'.svg');tree=ET.parse(path);root=tree.getroot();ns='{http://www.w3.org/2000/svg}';lookup={r.get('glyph_token',r['token']):r for r in rows}
     for node in root.iter():
         ident=node.get('id','')
         if ident.startswith(('point-','bound-','color-')):
-            r=lookup[ident.split('-')[1]];node.set('data-source',r['source_id']);node.set('data-token',r['token']);title=ET.Element(ns+'title');title.text=r['source_name']+' · '+r['classification_labels']+' · '+r['white_dwarf_host_confidence']+' · '+r.get('qualifications',r.get('coordinate_qualification',''));node.insert(0,title)
+            r=lookup[ident.split('-')[1]];node.set('data-source',r['source_id']);node.set('data-token',r['token']);title=ET.Element(ns+'title');title.text=r['source_name']+' · '+r['classification_labels']+' · '+r['white_dwarf_host_confidence']+' · '+r.get('comparison_method','')+' · '+r.get('qualifications',r.get('coordinate_qualification',''));node.insert(0,title)
             for a in node.iter(ns+'a'):a.set('target','_top');a.set('aria-label','Open '+r['source_name']);a.set('tabindex','0')
     tree.write(path,encoding='unicode',xml_declaration=True)
 
@@ -98,11 +98,11 @@ def legend(fig):
 
 def plots(sky,cmd):
     plt.rcParams.update({'font.size':11,'svg.fonttype':'none','font.family':'DejaVu Sans','axes.spines.top':False,'axes.spines.right':False})
-    fig=plt.figure(figsize=(12,9));fig.subplots_adjust(top=.88,bottom=.14,hspace=.44,left=.08,right=.96)
+    fig=plt.figure(figsize=(14,11));fig.subplots_adjust(top=.89,bottom=.13,hspace=.46,left=.08,right=.96)
     for n,(lon,lat,title,label) in enumerate([('ra_deg','dec_deg','Equatorial · Gaia ICRS J2016.0 + one literature radio position','Right ascension (hours; increases leftward)'),('galactic_l_deg','galactic_b_deg','Galactic · transformed from the same selected position','Galactic longitude (degrees; increases leftward)')],1):
         ax=fig.add_subplot(2,1,n,projection='mollweide');ax.grid(alpha=.35,linewidth=.6);ticks=np.arange(-150,180,30);ax.set_xticks(np.radians(ticks));ax.set_xticklabels([str(int((-t)%360/15))+'h' if n==1 else str(int((-t)%360))+'°' for t in ticks]);ax.set_xlabel(label);ax.set_ylabel('Declination' if n==1 else 'Galactic latitude');ax.set_title(title,fontsize=12,pad=16)
         for r in sky:point(ax,r,wrap(r[lon]),math.radians(r[lat]))
-    fig.suptitle('RAWDOG 1.0.0 · 58 literature-selected systems',fontsize=16);legend(fig);exports(fig,'rawdog_sky',sky)
+    fig.suptitle('RAWDOG 1.0.0 · sky presentation r1 · 58 systems',fontsize=16);legend(fig);exports(fig,'rawdog_sky',sky)
     fig,ax=plt.subplots(figsize=(9,9));fig.subplots_adjust(bottom=.18,top=.91,left=.12,right=.96)
     density=read('cmd_background_density.csv');h=np.zeros((220,230))
     for r in density:
@@ -114,7 +114,8 @@ def plots(sky,cmd):
         if r['M_G_lower_from_distance_upper'] is not None and r['M_G_upper_from_distance_lower'] is not None:ax.vlines(x,r['M_G_lower_from_distance_upper'],r['M_G_upper_from_distance_lower'],color=color,lw=.7,alpha=.6,zorder=4).set_gid('bound-'+r['token'])
         if r['BP_RP_error_approx_mag'] is not None:ax.hlines(y,x-r['BP_RP_error_approx_mag'],x+r['BP_RP_error_approx_mag'],color=color,lw=.7,alpha=.6,zorder=4).set_gid('color-'+r['token'])
         point(ax,r,x,y)
-    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle('RAWDOG 1.0.0 · Gaia CMD · 56 / 58 systems',fontsize=16);legend(fig);exports(fig,'rawdog_cmd',used)
+        if r['source_name']=='GLEAM-X J0704-37':ax.annotate('GLEAM-X\nprior sensitive',(x,y),xytext=(9,-16),textcoords='offset points',fontsize=8,color=color).set_gid('bound-'+r['token']+'-label')
+    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle('RAWDOG 1.0.0 · geometric-distance CMD · 56 / 58 systems',fontsize=16);legend(fig);exports(fig,'rawdog_cmd',used)
 
 def website_data(summary,measurements,sky,cmd):
     out=ROOT/'assets/sources';out.mkdir(parents=True,exist_ok=True)
@@ -129,8 +130,10 @@ def website_data(summary,measurements,sky,cmd):
     (ROOT/'assets/catalog.json').write_text(json.dumps({'version':'1.0.0','systems':index},ensure_ascii=False,separators=(',',':')))
 
 def main():
-    summary=read('rawdog_source_summary.csv');measurements=read('rawdog_measurements.csv');by_source=defaultdict(list)
-    for r in measurements:by_source[r['source_id']].append(r)
-    sky,cmd=build_inputs(summary,by_source,{r['measurement_id']:r for r in measurements});plots(sky,cmd);website_data(summary,measurements,sky,cmd)
-    print('Built sky:',len(sky),'CMD:',sum(r['included']=='true' for r in cmd))
+    sky=read('sky_plot_input.csv');cmd=read('cmd_plot_input.csv')
+    for rows,keys in [(sky,['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg']),(cmd,['BP_RP_observed_mag','M_G_observed_mag','M_G_lower_from_distance_upper','M_G_upper_from_distance_lower','BP_RP_error_approx_mag'])]:
+        for r in rows:
+            for k in keys:r[k]=number(r[k])
+    plots(sky,cmd)
+    print('Revised figures from unchanged v1.0.0 inputs; no catalog tables written.')
 if __name__=='__main__':main()

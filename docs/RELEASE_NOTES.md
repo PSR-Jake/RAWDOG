@@ -22,3 +22,7 @@ Paper PDFs, personal paths and private local evidence artifacts are not distribu
 ## Remaining limitations
 
 313 open RC3 review issues remain disclosed; model and counterpart disagreements are not all resolved. Heterogeneous radio states, bands and uncertainty conventions prevent a common detection threshold. Unresolved, uncorrected Gaia mean photometry cannot be interpreted as component photometry. Background cache historical query/selection was not recovered. One literature-coordinate fallback has only a published J2000 designation, requiring an explicit coarse ICRS-alignment approximation. Some reference URLs restrict automated access; dated RC3 checks are retained, not presented as fresh reachability checks. No persistent archive DOI exists; cite the repository and version with access date.
+
+## Website/figure revision web r1 — 2026-09-29
+
+Catalog data version remains 1.0.0. Adds the exact name expansion, concise source overviews with full evidence disclosures, larger full-width sky maps, and a separately labeled Gaia/SED LPT comparison. Main CMD distances, photometry and eligibility stay unchanged (56/58); sky stays 58/58. Original versioned data/figures, archive and v1.0.0 tag remain preserved. Original-paper analysis text clarifies the SED p16/p84 convention in new comparison provenance while retaining unchanged ledger wording. See CMD_AUDIT_WEB_R1.md. This website revision makes no new catalog preferred-distance selections.

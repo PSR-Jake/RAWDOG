@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns2="http://creativecommons.org/ns#" xmlns:ns4="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="720pt" height="576pt" viewBox="0 0 720 576" version="1.1">
+ <ns0:metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:date>2026-09-29T10:04:58.867197</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </ns0:metadata>
+ <ns0:defs>
+  <ns0:style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</ns0:style>
+ </ns0:defs>
+ <ns0:g id="figure_1">
+  <ns0:g id="patch_1">
+   <ns0:path d="M 0 576  L 720 576  L 720 0  L 0 0  z " style="fill: #ffffff" />
+  </ns0:g>
+  <ns0:g id="axes_1">
+   <ns0:g id="patch_2">
+    <ns0:path d="M 72 460.8  L 698.4 460.8  L 698.4 92.16  L 72 92.16  z " style="fill: #ffffff" />
+   </ns0:g>
+   <ns0:g id="bound-da96639c5a57g-connector" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Negative, low-significance Gaia parallax (M04402: −0.2227831463 ± 0.98077434 mas); broad prior-sensitive geometric posterior, not a precise empirical distance constraint</ns0:title><ns0:path d="M 251.409193 211.449258  L 251.409193 426.597582  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke-dasharray: 1.5,2.475; stroke-dashoffset: 0; stroke: #b95000; stroke-opacity: 0.5; stroke-width: 1.5" />
+   </ns0:g>
+   <ns0:g id="bound-7a018809145cg-connector" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Host/subclass candidate or disputed; inspect source evidence; Bayesian geometric prior; unresolved system photometry and variability; Broad distance posterior; prior sensitivity matters</ns0:title><ns0:path d="M 469.774738 359.972645  L 469.774738 413.877573  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke-dasharray: 1.5,2.475; stroke-dashoffset: 0; stroke: #b95000; stroke-opacity: 0.5; stroke-width: 1.5" />
+   </ns0:g>
+   <ns0:g id="matplotlib.axis_1">
+    <ns0:g id="xtick_1">
+     <ns0:g id="line2d_1">
+      <ns0:path d="M 89.897143 460.8  L 89.897143 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_2">
+      <ns0:defs>
+       <ns0:path id="mba78c2c0bd" d="M 0 0  L 0 3.5  " style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:defs>
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="89.897143" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_1">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="89.897143" y="476.157422" transform="rotate(-0 89.897143 476.157422)">1.4</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_2">
+     <ns0:g id="line2d_3">
+      <ns0:path d="M 161.485714 460.8  L 161.485714 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_4">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="161.485714" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_2">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="161.485714" y="476.157422" transform="rotate(-0 161.485714 476.157422)">1.6</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_3">
+     <ns0:g id="line2d_5">
+      <ns0:path d="M 233.074286 460.8  L 233.074286 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_6">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="233.074286" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_3">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="233.074286" y="476.157422" transform="rotate(-0 233.074286 476.157422)">1.8</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_4">
+     <ns0:g id="line2d_7">
+      <ns0:path d="M 304.662857 460.8  L 304.662857 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_8">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="304.662857" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_4">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="304.662857" y="476.157422" transform="rotate(-0 304.662857 476.157422)">2.0</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_5">
+     <ns0:g id="line2d_9">
+      <ns0:path d="M 376.251429 460.8  L 376.251429 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_10">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="376.251429" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_5">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="376.251429" y="476.157422" transform="rotate(-0 376.251429 476.157422)">2.2</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_6">
+     <ns0:g id="line2d_11">
+      <ns0:path d="M 447.84 460.8  L 447.84 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_12">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="447.84" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_6">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="447.84" y="476.157422" transform="rotate(-0 447.84 476.157422)">2.4</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_7">
+     <ns0:g id="line2d_13">
+      <ns0:path d="M 519.428571 460.8  L 519.428571 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_14">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="519.428571" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_7">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="519.428571" y="476.157422" transform="rotate(-0 519.428571 476.157422)">2.6</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_8">
+     <ns0:g id="line2d_15">
+      <ns0:path d="M 591.017143 460.8  L 591.017143 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_16">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="591.017143" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_8">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="591.017143" y="476.157422" transform="rotate(-0 591.017143 476.157422)">2.8</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="xtick_9">
+     <ns0:g id="line2d_17">
+      <ns0:path d="M 662.605714 460.8  L 662.605714 92.16  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_18">
+      <ns0:g>
+       <ns0:use ns4:href="#mba78c2c0bd" x="662.605714" y="460.8" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_9">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="662.605714" y="476.157422" transform="rotate(-0 662.605714 476.157422)">3.0</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="text_10">
+     <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="385.2" y="491.158281" transform="rotate(-0 385.2 491.158281)">Observed Gaia BP − RP (mag)</ns0:text>
+    </ns0:g>
+   </ns0:g>
+   <ns0:g id="matplotlib.axis_2">
+    <ns0:g id="ytick_1">
+     <ns0:g id="line2d_19">
+      <ns0:path d="M 72 96.947532  L 698.4 96.947532  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_20">
+      <ns0:defs>
+       <ns0:path id="m6487a502f9" d="M 0 0  L -3.5 0  " style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:defs>
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="96.947532" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_11">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="101.126243" transform="rotate(-0 65 101.126243)">6</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="ytick_2">
+     <ns0:g id="line2d_21">
+      <ns0:path d="M 72 144.822857  L 698.4 144.822857  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_22">
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="144.822857" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_12">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="149.001568" transform="rotate(-0 65 149.001568)">7</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="ytick_3">
+     <ns0:g id="line2d_23">
+      <ns0:path d="M 72 192.698182  L 698.4 192.698182  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_24">
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="192.698182" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_13">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="196.876893" transform="rotate(-0 65 196.876893)">8</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="ytick_4">
+     <ns0:g id="line2d_25">
+      <ns0:path d="M 72 240.573506  L 698.4 240.573506  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_26">
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="240.573506" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_14">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="244.752217" transform="rotate(-0 65 244.752217)">9</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="ytick_5">
+     <ns0:g id="line2d_27">
+      <ns0:path d="M 72 288.448831  L 698.4 288.448831  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_28">
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="288.448831" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_15">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="292.627542" transform="rotate(-0 65 292.627542)">10</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="ytick_6">
+     <ns0:g id="line2d_29">
+      <ns0:path d="M 72 336.324156  L 698.4 336.324156  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_30">
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="336.324156" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_16">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="340.502867" transform="rotate(-0 65 340.502867)">11</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="ytick_7">
+     <ns0:g id="line2d_31">
+      <ns0:path d="M 72 384.199481  L 698.4 384.199481  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_32">
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="384.199481" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_17">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="388.378191" transform="rotate(-0 65 388.378191)">12</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="ytick_8">
+     <ns0:g id="line2d_33">
+      <ns0:path d="M 72 432.074805  L 698.4 432.074805  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.18; stroke-width: 0.8; stroke-linecap: square" />
+     </ns0:g>
+     <ns0:g id="line2d_34">
+      <ns0:g>
+       <ns0:use ns4:href="#m6487a502f9" x="72" y="432.074805" style="stroke: #000000; stroke-width: 0.8" />
+      </ns0:g>
+     </ns0:g>
+     <ns0:g id="text_18">
+      <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="65" y="436.253516" transform="rotate(-0 65 436.253516)">13</ns0:text>
+     </ns0:g>
+    </ns0:g>
+    <ns0:g id="text_19">
+     <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="44.359922" y="276.48" transform="rotate(-90 44.359922 276.48)">Absolute Gaia G magnitude (mag)</ns0:text>
+    </ns0:g>
+   </ns0:g>
+   <ns0:g id="bound-da96639c5a57g" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Negative, low-significance Gaia parallax (M04402: −0.2227831463 ± 0.98077434 mas); broad prior-sensitive geometric posterior, not a precise empirical distance constraint</ns0:title><ns0:path d="M 251.409193 138.956012  L 251.409193 279.385244  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+   </ns0:g>
+   <ns0:g id="color-da96639c5a57g" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Negative, low-significance Gaia parallax (M04402: −0.2227831463 ± 0.98077434 mas); broad prior-sensitive geometric posterior, not a precise empirical distance constraint</ns0:title><ns0:path d="M 164.745545 211.449258  L 338.072841 211.449258  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-opacity: 0.65; stroke-width: 0.8" />
+   </ns0:g>
+   <ns0:g id="bound-da96639c5a57s" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:path d="M 251.409193 423.897171  L 251.409193 429.370011  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+   </ns0:g>
+   <ns0:g id="color-da96639c5a57s" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:path d="M 164.745545 426.597582  L 338.072841 426.597582  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-opacity: 0.65; stroke-width: 0.8" />
+   </ns0:g>
+   <ns0:g id="bound-7a018809145cg" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Host/subclass candidate or disputed; inspect source evidence; Bayesian geometric prior; unresolved system photometry and variability; Broad distance posterior; prior sensitivity matters</ns0:title><ns0:path d="M 469.774738 333.229506  L 469.774738 385.333565  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+   </ns0:g>
+   <ns0:g id="color-7a018809145cg" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Host/subclass candidate or disputed; inspect source evidence; Bayesian geometric prior; unresolved system photometry and variability; Broad distance posterior; prior sensitivity matters</ns0:title><ns0:path d="M 416.672769 359.972645  L 522.876708 359.972645  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-opacity: 0.65; stroke-width: 0.8" />
+   </ns0:g>
+   <ns0:g id="bound-7a018809145cs" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:path d="M 469.774738 403.969131  L 469.774738 424.830846  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+   </ns0:g>
+   <ns0:g id="color-7a018809145cs" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:path d="M 416.672769 413.877573  L 522.876708 413.877573  " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-opacity: 0.65; stroke-width: 0.8" />
+   </ns0:g>
+   <ns0:g id="patch_3">
+    <ns0:path d="M 72 460.8  L 72 92.16  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </ns0:g>
+   <ns0:g id="patch_4">
+    <ns0:path d="M 698.4 460.8  L 698.4 92.16  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </ns0:g>
+   <ns0:g id="patch_5">
+    <ns0:path d="M 72 460.8  L 698.4 460.8  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </ns0:g>
+   <ns0:g id="patch_6">
+    <ns0:path d="M 72 92.16  L 698.4 92.16  " style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square" />
+   </ns0:g>
+   <ns0:g id="bound-da96639c5a57g-label" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Negative, low-significance Gaia parallax (M04402: −0.2227831463 ± 0.98077434 mas); broad prior-sensitive geometric posterior, not a precise empirical distance constraint</ns0:title><ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(263.409193 203.447305)">Gaia geometric</ns0:text>
+    <ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(263.409193 215.449258)">3010 pc</ns0:text>
+   </ns0:g>
+   <ns0:g id="bound-da96639c5a57s-label" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(263.409193 418.595628)">Published SED</ns0:text>
+    <ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(263.409193 430.597582)">380 pc</ns0:text>
+   </ns0:g>
+   <ns0:g id="bound-7a018809145cg-label" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Host/subclass candidate or disputed; inspect source evidence; Bayesian geometric prior; unresolved system photometry and variability; Broad distance posterior; prior sensitivity matters</ns0:title><ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(481.774738 351.970692)">Gaia geometric</ns0:text>
+    <ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(481.774738 363.972645)">504 pc</ns0:text>
+   </ns0:g>
+   <ns0:g id="bound-7a018809145cs-label" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(481.774738 405.87562)">Published SED</ns0:text>
+    <ns0:text style="font-size: 10px; font-family: 'DejaVu Sans'" transform="translate(481.774738 417.877573)">300 pc</ns0:text>
+   </ns0:g>
+   <ns0:g id="bound-da96639c5a57g-title" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Negative, low-significance Gaia parallax (M04402: −0.2227831463 ± 0.98077434 mas); broad prior-sensitive geometric posterior, not a precise empirical distance constraint</ns0:title><ns0:text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="251.409193" y="104.128831" transform="rotate(-0 251.409193 104.128831)">GLEAM-X J0704−37</ns0:text>
+   </ns0:g>
+   <ns0:g id="bound-7a018809145cg-title" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Host/subclass candidate or disputed; inspect source evidence; Bayesian geometric prior; unresolved system photometry and variability; Broad distance posterior; prior sensitivity matters</ns0:title><ns0:text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="469.774738" y="104.128831" transform="rotate(-0 469.774738 104.128831)">ILT J1101+5521</ns0:text>
+   </ns0:g>
+   <ns0:g id="text_20">
+    <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="385.2" y="80.16" transform="rotate(-0 385.2 80.16)">Two systems, four alternative placements · NOT extinction corrected</ns0:text>
+   </ns0:g>
+   <ns0:g id="point-da96639c5a57g" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Negative, low-significance Gaia parallax (M04402: −0.2227831463 ± 0.98077434 mas); broad prior-sensitive geometric posterior, not a precise empirical distance constraint</ns0:title><ns0:a ns4:href="../../index.html#source=gaia-dr3%3A5566254014771398912" target="_top" aria-label="Open GLEAM-X J0704-37" tabindex="0">
+     <ns0:path d="M 251.409193 206.449258  L 246.409193 216.449258  L 256.409193 216.449258  L 251.409193 206.449258  z " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+    </ns0:a>
+   </ns0:g>
+   <ns0:g id="point-da96639c5a57s" data-source="gaia-dr3:5566254014771398912" data-token="da96639c5a57">
+    <ns0:title>GLEAM-X J0704-37 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:a ns4:href="../../index.html#source=gaia-dr3%3A5566254014771398912" target="_top" aria-label="Open GLEAM-X J0704-37" tabindex="0">
+     <ns0:path d="M 246.409193 431.597582  L 256.409193 431.597582  L 256.409193 421.597582  L 246.409193 421.597582  L 246.409193 431.597582  z " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+    </ns0:a>
+   </ns0:g>
+   <ns0:g id="point-7a018809145cg" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Gaia geometric · Host/subclass candidate or disputed; inspect source evidence; Bayesian geometric prior; unresolved system photometry and variability; Broad distance posterior; prior sensitivity matters</ns0:title><ns0:a ns4:href="../../index.html#source=gaia-dr3%3A855784912471554176" target="_top" aria-label="Open ILT J1101+5521" tabindex="0">
+     <ns0:path d="M 469.774738 354.972645  L 464.774738 364.972645  L 474.774738 364.972645  L 469.774738 354.972645  z " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+    </ns0:a>
+   </ns0:g>
+   <ns0:g id="point-7a018809145cs" data-source="gaia-dr3:855784912471554176" data-token="7a018809145c">
+    <ns0:title>ILT J1101+5521 · long_period_transient; long_period_radio_transient · inferred_or_proposed · Published SED · Model-dependent WD+M-dwarf spectrum fit; observed unresolved Gaia light, not extinction corrected; photometric uncertainty separate; ledger wording retained alongside paper-verified interval convention</ns0:title><ns0:a ns4:href="../../index.html#source=gaia-dr3%3A855784912471554176" target="_top" aria-label="Open ILT J1101+5521" tabindex="0">
+     <ns0:path d="M 464.774738 418.877573  L 474.774738 418.877573  L 474.774738 408.877573  L 464.774738 408.877573  L 464.774738 418.877573  z " clip-path="url(#pde9a5b34b0)" style="fill: none; stroke: #b95000; stroke-width: 1.7" />
+    </ns0:a>
+   </ns0:g>
+  </ns0:g>
+  <ns0:g id="text_21">
+   <ns0:text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: middle" x="360" y="22.157812" transform="rotate(-0 360 22.157812)">RAWDOG 1.0.0 · LPT distance-method comparison · web r1</ns0:text>
+  </ns0:g>
+  <ns0:g id="text_22">
+   <ns0:text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(159.640313 550.797539)">Vertical: recorded p16/p84 distance endpoints transformed at fixed G; G errors separate.</ns0:text>
+   <ns0:text style="font-size: 9px; font-family: 'DejaVu Sans'" transform="translate(158.757188 561.6)">GLEAM-X Gaia posterior is strongly prior sensitive; symbols do not add catalog members.</ns0:text>
+  </ns0:g>
+  <ns0:g id="legend_1">
+   <ns0:g id="line2d_35">
+    <ns0:defs>
+     <ns0:path id="m11a852340b" d="M 0 -3  L -3 3  L 3 3  z " style="stroke: #b95000; stroke-linejoin: miter" />
+    </ns0:defs>
+    <ns0:g>
+     <ns0:use ns4:href="#m11a852340b" x="105.668828" y="513.527422" style="fill-opacity: 0; stroke: #b95000; stroke-linejoin: miter" />
+    </ns0:g>
+   </ns0:g>
+   <ns0:g id="text_23">
+    <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start" x="125.468828" y="517.377422" transform="rotate(-0 125.468828 517.377422)">Gaia geometric posterior (main CMD)</ns0:text>
+   </ns0:g>
+   <ns0:g id="line2d_36">
+    <ns0:defs>
+     <ns0:path id="m817e773a52" d="M -3 3  L 3 3  L 3 -3  L -3 -3  z " style="stroke: #b95000; stroke-linejoin: miter" />
+    </ns0:defs>
+    <ns0:g>
+     <ns0:use ns4:href="#m817e773a52" x="364.481641" y="513.527422" style="fill-opacity: 0; stroke: #b95000; stroke-linejoin: miter" />
+    </ns0:g>
+   </ns0:g>
+   <ns0:g id="text_24">
+    <ns0:text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start" x="384.281641" y="517.377422" transform="rotate(-0 384.281641 517.377422)">Published SED posterior (model dependent)</ns0:text>
+   </ns0:g>
+  </ns0:g>
+ </ns0:g>
+ <ns0:defs>
+  <ns0:clipPath id="pde9a5b34b0">
+   <ns0:rect x="72" y="92.16" width="626.4" height="368.64" />
+  </ns0:clipPath>
+ </ns0:defs>
+</ns0:svg>
