@@ -24,3 +24,8 @@ The browser-downloaded comparison CSV matches validated local bytes exactly. The
 
 
 GitHub Pages revision deployment 36510941972 completed successfully for commit ed562878a701bd70d4bb2371372bf49f5f85f1b2. The live browser showed the exact name expansion, GLEAM-X concise overview/prior warning, expandable complete references and both LPT method placements. Live browser-downloaded comparison CSV and PDF matched current local bytes. Fourteen representative live assets/downloads (including the original archive/figure, unchanged main inputs, new comparison/checksums and revised sky/CMD figures) returned HTTP 200 and matched local bytes exactly. No live browser warning/error logs were reported.
+
+
+## Website revision web r2 — 2026-09-29
+
+Author feedback removed the embedded LPT comparison from the main page; the historical comparison products, inputs and audit are retained in a named download disclosure. Local browser verification found exactly two embedded plots, the clarified sortable “Radio observations” heading with its count tooltip, functioning keyboard sorting, and zero-match opt-in sky/CMD counts without any missing-element errors. Supplementary downloads remain accessible after expanding their disclosure. JavaScript syntax and the existing scientific check passed; scientific inputs and figure products are unchanged.

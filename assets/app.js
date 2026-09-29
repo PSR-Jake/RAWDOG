@@ -18,11 +18,11 @@ function render(){
 }
 function updatePlots(){
  const on=$('#plot-filter').checked,allowed=new Set(shown.map(x=>x.token));
- for(let id of ['sky','cmd','lpt']){
+ for(let id of ['sky','cmd']){
   const obj=$('#'+id),doc=obj.contentDocument;
   if(doc)for(let p of doc.querySelectorAll('[data-token]'))p.style.display=(!on||allowed.has(p.getAttribute('data-token')))?'':'none';
-  const eligible=systems.filter(x=>id==='sky'||(id==='lpt'?['GLEAM-X J0704-37','ILT J1101+5521'].includes(x.summary.source_name):x.cmd.included==='true')),matches=eligible.filter(x=>allowed.has(x.token)).length;
-  $('#'+id+'-count').textContent=`${on?matches:eligible.length} plotted / ${eligible.length} eligible${id==='lpt'?' systems · two method placements per system':''}${on?' · catalog filters applied':''}${id==='cmd'?' · 2 excluded by scientific inputs':''}`;
+  const eligible=systems.filter(x=>id==='sky'||x.cmd.included==='true'),matches=eligible.filter(x=>allowed.has(x.token)).length;
+  $('#'+id+'-count').textContent=`${on?matches:eligible.length} plotted / ${eligible.length} eligible${on?' · catalog filters applied':''}${id==='cmd'?' · 2 excluded by scientific inputs':''}`;
  }
 }
 function setupPlot(obj){const doc=obj.contentDocument;if(!doc)return;for(let g of doc.querySelectorAll('[data-source]')){g.style.cursor='pointer';g.addEventListener('click',ev=>{ev.preventDefault();openSource(g.getAttribute('data-source'));});g.addEventListener('keydown',ev=>{if(ev.key==='Enter'){ev.preventDefault();openSource(g.getAttribute('data-source'));}});}updatePlots();}
@@ -49,9 +49,9 @@ function propertyOverview(s){return properties.filter(([k])=>s['preferred_'+k]!=
  }).join('');}
 function cmdNote(d){let c=d.cmd;if(c.included!=='true')return `Main CMD: excluded. ${c.exclusion_reason}`;
  let note=`Main CMD: geometric distance ${displayNumber(c.distance_pc)} pc, observed BP−RP ${displayNumber(c.BP_RP_observed_mag,3)} mag, M_G ${displayNumber(c.M_G_observed_mag,3)} mag; unresolved light, not extinction corrected.`;
- if(d.summary.source_name==='GLEAM-X J0704-37')note+=' Negative low-significance Gaia parallax; the broad, strongly prior-sensitive posterior is not a precise empirical distance constraint. Published model-dependent SED placement is shown separately.';
+ if(d.summary.source_name==='GLEAM-X J0704-37')note+=' Negative low-significance Gaia parallax; the broad, strongly prior-sensitive posterior is not a precise empirical distance constraint. Published model-dependent SED placement is available in supplementary downloads.';
  else note+=' '+c.qualifications;
- if(d.summary.source_name==='ILT J1101+5521')note+=' Published model-dependent SED placement is shown separately.';
+ if(d.summary.source_name==='ILT J1101+5521')note+=' Published model-dependent SED placement is available in supplementary downloads.';
  return note;}
 async function openSource(sid,hash=true){
  const x=systems.find(x=>x.summary.source_id===sid);if(!x)return;let seq=++detailRequest;

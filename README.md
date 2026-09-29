@@ -1,6 +1,6 @@
 # RAWDOG — RAdio White Dwarf catalOG
 
-Catalog data version **1.0.0**; website/figure revision **web r1**. Public version **1.0.0**, prepared **2026-09-28**. A literature-curated catalog of radio observations and reported radio emission from white-dwarf systems and related candidates: 58 systems, 96 observation rows, 7,183 provenance records and 667 references. Membership, classifications and radio evidence are qualified and nonexclusive; this is not a complete or uniformly surveyed population.
+Catalog data version **1.0.0**; website revision **web r2** (figure products: **web r1**). Public version **1.0.0**, prepared **2026-09-28**. A literature-curated catalog of radio observations and reported radio emission from white-dwarf systems and related candidates: 58 systems, 96 observation rows, 7,183 provenance records and 667 references. Membership, classifications and radio evidence are qualified and nonexclusive; this is not a complete or uniformly surveyed population.
 
 [Website](https://PSR-Jake.github.io/RAWDOG/) · [Release decisions](docs/RELEASE_NOTES.md) · [Data dictionary](docs/DATA_DICTIONARY.md) · [Methods](docs/PLOTTING_METHODS.md) · [Validation](docs/VALIDATION_REPORT.md)
 

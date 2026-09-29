@@ -26,3 +26,7 @@ Paper PDFs, personal paths and private local evidence artifacts are not distribu
 ## Website/figure revision web r1 — 2026-09-29
 
 Catalog data version remains 1.0.0. Adds the exact name expansion, concise source overviews with full evidence disclosures, larger full-width sky maps, and a separately labeled Gaia/SED LPT comparison. Main CMD distances, photometry and eligibility stay unchanged (56/58); sky stays 58/58. Original versioned data/figures, archive and v1.0.0 tag remain preserved. Original-paper analysis text clarifies the SED p16/p84 convention in new comparison provenance while retaining unchanged ledger wording. See CMD_AUDIT_WEB_R1.md. This website revision makes no new catalog preferred-distance selections.
+
+## Website revision web r2 — 2026-09-29
+
+Removes the supplementary LPT comparison from the main-page figure stack at the author’s request; all versioned formats, inputs and audit remain available in a named download disclosure. Renames the ambiguous “Rows” column to “Radio observations”, with a tooltip and catalog-reading explanation: counts include detection, marginal-signal and upper-limit observation records, not just detections. No data, figures, scientific selections or eligibility changes.
