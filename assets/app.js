@@ -5,7 +5,7 @@ const styles={magnetic_cv:['#1864ab','●','○'],cataclysmic_variable:['#087f5b
 const pretty=k=>({non_magnetic_cv:'Non-magnetic CV',AM:'Polar (AM Her)',IP:'Intermediate polar (IP)'}[k]||k).replaceAll('_',' ').replace(/\bgaia\b/g,'Gaia').replace(/\bwd\b/g,'WD');
 let systems=[],shown=[],sortKey='source_name',sortAsc=true,lastFocus=null,detailRequest=0;
 const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog_measurements.csv','rawdog_references.csv','rawdog_physical_properties.csv','rawdog_gaia_counterparts.csv','rawdog_source_references.csv','rawdog_review_issues.csv','rawdog_excluded_counterparts.csv','rawdog_reference_link_checks.csv'];
-$('#download-list').innerHTML=files.map(f=>`<li><a download href="data/v1.0.0/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
+$('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.0/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 function tags(s){return [...new Set(s.classification_labels.split(';').map(x=>x.trim()).filter(x=>x!=='long_period_transient'))].map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
 function symbol(x){let [c,a,b]=styles[x.sky.display_group];return `<span class="symbol" style="color:${c}" aria-label="${x.sky.qualified_status==='true'?'Qualified':'Established'} ${esc(labels[x.sky.display_group])}">${x.sky.qualified_status==='true'?b:a}</span> `;}
 function render(){
@@ -13,7 +13,7 @@ function render(){
  shown=systems.filter(x=>{let s=x.summary;return (!q||[s.source_name,s.aliases,s.gaia_dr3_id,s.source_reference_keys].join(' ').toLowerCase().includes(q))&&(!cls||s.classification_labels.split(';').map(t=>t.trim()).includes(cls))&&(!host||s.white_dwarf_host_confidence===host)&&(!radio||x.radio_labels.includes(radio));});
  const numeric=['preferred_orbital_period_h','preferred_distance_pc','radio_observation_count'].includes(sortKey);
  shown.sort((a,b)=>{let av=a.summary[sortKey],bv=b.summary[sortKey];if(av===''||bv==='')return av===''?(bv===''?0:1):-1;let c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return sortAsc?c:-c;});
- $('#systems tbody').innerHTML=shown.map(x=>{let s=x.summary;return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td><div class="tags">${tags(s)}</div><span class="subtext">${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</span></td><td>${esc(displayNumber(s.preferred_orbital_period_h,6))}</td><td>${esc(displayNumber(s.preferred_distance_pc))}</td><td>${esc(s.radio_detection_status)}</td><td>${esc(s.radio_observation_count)}</td></tr>`;}).join('');
+ $('#systems tbody').innerHTML=shown.map(x=>{let s=x.summary;return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td><div class="tags">${tags(s)}</div><span class="subtext">${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</span></td><td>${esc(tableNumber(s.preferred_orbital_period_h))}</td><td>${esc(tableNumber(s.preferred_distance_pc))}</td><td>${esc(s.radio_detection_status)}</td><td>${esc(s.radio_observation_count)}</td></tr>`;}).join('');
  $('#count').textContent=`${shown.length} / 58 systems · RAWDOG 1.0.0`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){
@@ -35,6 +35,7 @@ function fields(r,keys){return `<dl class="raw-fields">${keys.filter(k=>r[k]!=='
 function value(r){return estimate(r.value_numeric!==''&&r.value_numeric!=null?r.value_numeric:r.value_text||'No numeric value selected/reported',r.error_minus,r.error_plus,r.lower_bound,r.upper_bound,r.unit);}
 function refLink(r){let url=r.public_reference_url;return /^https?:\/\//.test(url)?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(r.key)}</a>`:esc(r.key);}
 function displayNumber(v,digits=4){if(v===''||v==null)return '—';return Number.isFinite(Number(v))?String(Number(Number(v).toPrecision(digits))):String(v);}
+function tableNumber(v){return v===''||v==null?'—':Number.isFinite(Number(v))?Number(v).toFixed(2):String(v);}
 function present(v){return v!==''&&v!=null;}
 function numberMarkup(v,digits=4){
  const text=displayNumber(v,digits),match=text.match(/^(.+)e([+-]?\d+)$/i);

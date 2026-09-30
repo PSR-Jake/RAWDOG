@@ -1,6 +1,6 @@
 # RAWDOG — RAdio White Dwarf catalOG
 
-Catalog data version **1.0.0**; website revision **web r3** (figure products: **web r1**). Public version **1.0.0**, prepared **2026-09-28**. A literature-curated catalog of radio observations and reported radio emission from white-dwarf systems and related candidates: 58 systems, 96 observation rows, 7,183 provenance records and 667 references. Membership, classifications and radio evidence are qualified and nonexclusive; this is not a complete or uniformly surveyed population.
+Catalog data version **1.0.0**; website revision **web r4** (figure products: **web r1**). Public version **1.0.0**, prepared **2026-09-28**. A literature-curated catalog of radio observations and reported radio emission from white-dwarf systems and related candidates: 58 systems, 96 observation rows, 7,183 provenance records and 667 references. Membership, classifications and radio evidence are qualified and nonexclusive; this is not a complete or uniformly surveyed population.
 
 [Website](https://PSR-Jake.github.io/RAWDOG/) · [Release decisions](docs/RELEASE_NOTES.md) · [Data dictionary](docs/DATA_DICTIONARY.md) · [Methods](docs/PLOTTING_METHODS.md) · [Validation](docs/VALIDATION_REPORT.md)
 
@@ -8,7 +8,7 @@ Catalog data version **1.0.0**; website revision **web r3** (figure products: **
 
 The static website provides search, sorting, overlapping-class/host/radio filters, every observation row, selected properties, all alternatives, source methods, uncertainty conventions, references and unresolved issues. Figures: dual equatorial/Galactic Mollweide sky distribution (58 systems) and observed unresolved Gaia CMD (56 systems; two documented exclusions), with a separate Gaia/SED comparison of two LPT systems. The main CMD retains geometric distances. Concise source overviews disclose full evidence on expansion. Versioned CSVs and source-keyed plot inputs are in `data/v1.0.0/`; Current PDF/SVG/350-dpi PNG exports are in `figures/v1.0.0-web-r1/`; comparison inputs are in `data/v1.0.0-web-r1/`. Original `figures/v1.0.0/`, data, archive and tag remain immutable. [CMD audit](docs/CMD_AUDIT_WEB_R1.md). The background is a retained density product, not hundreds of thousands of browser points.
 
-The compact dog-and-white-dwarf [SVG logo](assets/logo.svg) is used in the header and favicon. Host confidence remains in each source detail and the host filter; the main table omits its separate column.
+The compact dog-and-white-dwarf [SVG logo](assets/logo.svg) is used in the header and favicon. Main-table periods and distances display two decimal places; sorting, source evidence and exports retain stored precision. Common downloads stay visible; additional tables and audit documentation are collapsed. Host confidence remains in each source detail and the host filter; the main table omits its separate column.
 
 ## Reproduce
 

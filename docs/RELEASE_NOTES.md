@@ -34,3 +34,7 @@ Removes the supplementary LPT comparison from the main-page figure stack at the 
 ## Website revision web r3 — 2026-09-30
 
 Adds a compact dog-and-white-dwarf SVG logo to the header and favicon; removes the redundant header subtitle. Removes the main-table WD-host column while retaining confidence in source details, the filter and unchanged downloads. Numeric property and measurement summaries use consistent symmetric ± or stacked asymmetric offsets, preserving interval/confidence conventions and component distinctions. Display precision follows recorded uncertainties; full evidence and exported values are unchanged. Scientific catalog version remains 1.0.0, with 58 sky systems and 56 CMD systems.
+
+## Website revision web r4 — 2026-09-30
+
+Rounds main-table orbital periods and distances to two decimal places for display; source precision, sorting inputs and downloads are unchanged. Reduces the default download area to system summary, radio observations, complete data archive, data dictionary and plotting methods. Additional evidence tables and audit documentation remain available in a closed native disclosure, alongside existing supplementary/historical downloads. No scientific data or figure changes.
