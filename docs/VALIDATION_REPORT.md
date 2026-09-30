@@ -1,3 +1,11 @@
+# RAWDOG 1.0.1 publication validation
+
+Prepared 2026-09-30. The runnable check is `python scripts/check.py`; its current result is recorded in `scientific_check.json`. The addition-specific assertions cover the 109 evidence records, references, established CV host, candidate polar, distinct orbital and radio clocks, posterior uncertainty convention, integrated continuum versus burst flux, missing model-derived scalar selections, radio position, five open issues and source-bundle joins. All pre-existing catalogue rows retain their documented RC3/public values.
+
+Sky coverage: 59/59 (57 native Gaia and two literature radio positions). CMD coverage: 56/59; ASKAP J144834-685644 joins the two existing documented exclusions because no secure Gaia counterpart, complete Gaia photometry or adopted distance is available. Radio-region and WD-polar selected coverage remain 22 and 3 respectively. Both newly supplied paper links returned HTTP 200 on 2026-09-30; historical checks retain their original dates. Private paths are sanitized and paper PDFs are not redistributed.
+
+This validates public data consistency, not population completeness or the unresolved scientific interpretations. Historical validation below applies to the original 1.0.0 release only; the temporary 1.0.1 research exporter was used to obtain addition rows and does not establish a new RC3 validation result.
+
 # RAWDOG 1.0.0 publication validation
 
 Status: **PASS**. Prepared 2026-09-28.

@@ -1,3 +1,11 @@
+# RAWDOG 1.0.1 — 2026-09-30 (web r5)
+
+Adds ASKAP J144834-685644 from [Anumarlapudi et al. (2025)](https://arxiv.org/abs/2507.13453) and [Mo et al. (2026)](https://arxiv.org/abs/2609.35980): one system, one observation summary, 109 provenance records, two references and five open review issues. Totals: 59 systems, 97 observations, 7,292 provenance records (7,218 member and 74 rejected), 669 references, 318 open issues. Existing records, v1.0.0 data/archive and historical figures are preserved.
+
+The optical evidence establishes a CV host; polar and period-bouncer interpretations remain qualified. The 98.6 +4.2/−4.1 min orbital posterior (68% credible interval) and 93.8513 ±0.0008 min radio recurrence remain distinct. No WD spin, distance, Gaia association, component mass/temperature or magnetic-field scalar is adopted from illustrative models. The 760 ±40 μJy discovery-image integrated continuum measurement is distinguished from 19 burst measurements. X-ray flux alternatives retain their absorption/model metadata without assigning an unspecified integration band.
+
+Sky coverage is 59/59 using the new MeerKAT literature position; CMD coverage is 56/59 with an explicit new exclusion. New versioned CSVs, plot inputs, PDF/SVG/PNG figures, checksums and archive are provided. Scientific and presentation checks validate the addition and preservation of all previous catalogue rows.
+
 # RAWDOG 1.0.0 public snapshot — 2026-09-28
 
 Publication basis: reviewed 1.0.0-rc3. This is a separate public snapshot; audited root masters and historical release directories were preserved. Version 1.0.0 reflects acceptance of the specified presentation decisions and passing publication consistency checks, not resolution of all scientific review questions. No DOI, author list or license is assigned.

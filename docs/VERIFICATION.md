@@ -41,3 +41,8 @@ The actual local browser verified the dog/star header logo, removal of the subti
 The presentation check now covers two-decimal formatting, trailing zeros, real zero and missing values, and the closed additional-downloads disclosure. JavaScript syntax and the scientific check passed. All 89 protected files and every web-r1 scientific product retained their SHA-256 hashes.
 
 Local browser checks beneath `/RAWDOG/` verified AE Aqr 9.88 h / 91.34 pc, other rounded rows and missing-value dashes; distance sorting in both directions still uses raw values. The default download section exposes five common links. Keyboard expansion reveals all eight additional CSV tables and audit documentation; it collapses again correctly. Desktop and 390×844 mobile screenshots were visually checked, with wrapped download links and no page-wide overflow. Viewport override was reset and no warning/error logs were reported. Catalog data, source details, exports, plot inputs and figure products are unchanged.
+
+
+## Catalogue addition 1.0.1 / web r5 — 2026-09-30
+
+Scientific and presentation checks pass for 59 systems, 97 observations, 7,292 evidence records and 669 references. Local browser search for ASKAP J1448 returns the added source; its dialog displays the established CV host, qualified polar/bouncer interpretation, distinct orbital and recurrence clocks, explicit CMD exclusion, 109 evidence records, five review issues and both references. The full map has 59 systems and the CMD 56 with three exclusions. Versioned catalogue/source requests avoid stale browser caches. Historical data, source bundles, figures and archive are checked byte-for-byte against the preceding commit.

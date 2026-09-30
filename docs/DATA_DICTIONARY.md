@@ -1,4 +1,4 @@
-# RAWDOG 1.0.0 public data dictionary
+# RAWDOG 1.0.1 public data dictionary
 
 All files are UTF-8 CSV. Blank fields mean no selected or reported value in that field; they do not mean zero. Text from audited source records may still contain strings such as “not reported” or “NA”. The summary cleans explicit NA-like Gaia-ID sentinels to blank while preserving accepted Gaia IDs as exact decimal strings.
 
@@ -6,14 +6,14 @@ All files are UTF-8 CSV. Blank fields mean no selected or reported value in that
 
 | Table | Rows | Key and relationship |
 |---|---:|---|
-| rawdog_source_summary.csv | 58 | One row per member; primary key source_id. |
-| rawdog_radio_observations.csv | 96 | Primary key observation_id; source_id joins to the summary. |
-| rawdog_measurements.csv | 7,183 | Version-scoped measurement_id; source_id joins member rows to the summary. Includes 7,109 members and 74 excluded MM Hya counterpart records. |
-| rawdog_references.csv | 667 | Preserves existing reference key and manifest ID. Other tables join through reference keys; reference_ids are manifest IDs. |
-| rawdog_physical_properties.csv | 58 | Audited compatibility fields plus source_id. |
-| rawdog_gaia_counterparts.csv | 58 | Audited counterpart fields plus source_id. Gaia source IDs are text. |
-| rawdog_source_references.csv | 58 | Source-level reference lists plus source_id. |
-| rawdog_review_issues.csv | 321 | issue_id identifies the review row; optional source_id joins to a member or excluded counterpart. |
+| rawdog_source_summary.csv | 59 | One row per member; primary key source_id. |
+| rawdog_radio_observations.csv | 97 | Primary key observation_id; source_id joins to the summary. |
+| rawdog_measurements.csv | 7,292 | Version-scoped measurement_id; source_id joins member rows to the summary. Includes 7,218 members and 74 excluded MM Hya counterpart records. |
+| rawdog_references.csv | 669 | Preserves existing reference key and manifest ID. Other tables join through reference keys; reference_ids are manifest IDs. |
+| rawdog_physical_properties.csv | 59 | Audited compatibility fields plus source_id. |
+| rawdog_gaia_counterparts.csv | 59 | Audited counterpart fields plus source_id. Gaia source IDs are text. |
+| rawdog_source_references.csv | 59 | Source-level reference lists plus source_id. |
+| rawdog_review_issues.csv | 326 | issue_id identifies the review row; optional source_id joins to a member or excluded counterpart. |
 | rawdog_excluded_counterparts.csv | 1 | Identity-audit index; its measurement_ids join to the measurement ledger. |
 | rawdog_reference_link_checks.csv | Generated | One row per unique URL checked on the stated date. |
 

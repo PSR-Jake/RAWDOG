@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build validated source-keyed inputs, figure exports and static source evidence bundles."""
-import csv, hashlib, json, math, urllib.parse, xml.etree.ElementTree as ET
+import argparse, csv, hashlib, json, math, urllib.parse, xml.etree.ElementTree as ET
 from pathlib import Path
 from collections import defaultdict
 import matplotlib
@@ -35,8 +35,10 @@ def build_inputs(summary,by_source,by_id):
         base={'source_id':sid,'source_name':s['source_name'],'gaia_dr3_id':s['gaia_dr3_id'],'token':token(sid),'classification_labels':s['classification_labels'],'display_group':group,'qualified_status':str(qualified).lower(),'white_dwarf_host_confidence':s['white_dwarf_host_confidence']}
         ra=number(s['gaia_ra_icrs_deg']);dec=number(s['gaia_dec_icrs_deg']);fallback=ra is None or dec is None
         if fallback:
-            r,d=by_id['M04513'],by_id['M04514'];ra=float(r['value_numeric']);dec=float(d['value_numeric'])
-            coord_ids='M04513; M04514';ref=r['reference_key'];frame='Published J2000 coordinates; exact reference-system realization unspecified';epoch=r['epoch_or_state'];note='VLA calibrated radio localization, not a Gaia counterpart. ICRS alignment assumed only for this coarse all-sky transformation; no FK5 or proper-motion propagation asserted. Compare published rounded Galactic position M04521/M04522.'
+            r,=[x for x in records if x['parameter'] in {'radio_localization_ra_vla_j2000','ra_j2000'} and x['value_numeric']]
+            d,=[x for x in records if x['parameter'] in {'radio_localization_dec_vla_j2000','dec_j2000'} and x['value_numeric']]
+            ra=float(r['value_numeric']);dec=float(d['value_numeric'])
+            coord_ids=r['measurement_id']+'; '+d['measurement_id'];ref=r['reference_key'];frame='Published J2000 coordinates; exact reference-system realization unspecified';epoch=r['epoch_or_state'] or 'Published J2000 label; no astrometric reference epoch specified';note='Published radio localization, not a Gaia counterpart. ICRS alignment assumed only for this coarse all-sky transformation; no FK5 or proper-motion propagation asserted.'
         else:
             selected=[r for r in records if r['unit'].startswith('deg') and number(r['value_numeric']) is not None and ('ra' in r['parameter'].lower() or 'dec' in r['parameter'].lower() or r['parameter']=='equatorial_position') and (abs(float(r['value_numeric'])-ra)<1e-7 or abs(float(r['value_numeric'])-dec)<1e-7)]
             coord_ids='; '.join(r['measurement_id'] for r in selected);ref='; '.join(sorted(set(r['reference_key'] for r in selected)));frame='ICRS';epoch='J2016.0';note='Audited Gaia DR3 native reference-epoch position; no propagation to epoch 2000.'
@@ -99,10 +101,11 @@ def legend(fig):
 def plots(sky,cmd):
     plt.rcParams.update({'font.size':11,'svg.fonttype':'none','font.family':'DejaVu Sans','axes.spines.top':False,'axes.spines.right':False})
     fig=plt.figure(figsize=(14,11));fig.subplots_adjust(top=.89,bottom=.13,hspace=.46,left=.08,right=.96)
-    for n,(lon,lat,title,label) in enumerate([('ra_deg','dec_deg','Equatorial · Gaia ICRS J2016.0 + one literature radio position','Right ascension (hours; increases leftward)'),('galactic_l_deg','galactic_b_deg','Galactic · transformed from the same selected position','Galactic longitude (degrees; increases leftward)')],1):
+    version=DATA.name.removeprefix('v');fallback=sum(r['fallback_status']=='literature radio position' for r in sky)
+    for n,(lon,lat,title,label) in enumerate([('ra_deg','dec_deg',f'Equatorial · Gaia ICRS J2016.0 + {fallback} literature radio position(s)','Right ascension (hours; increases leftward)'),('galactic_l_deg','galactic_b_deg','Galactic · transformed from the same selected position','Galactic longitude (degrees; increases leftward)')],1):
         ax=fig.add_subplot(2,1,n,projection='mollweide');ax.grid(alpha=.35,linewidth=.6);ticks=np.arange(-150,180,30);ax.set_xticks(np.radians(ticks));ax.set_xticklabels([str(int((-t)%360/15))+'h' if n==1 else str(int((-t)%360))+'°' for t in ticks]);ax.set_xlabel(label);ax.set_ylabel('Declination' if n==1 else 'Galactic latitude');ax.set_title(title,fontsize=12,pad=16)
         for r in sky:point(ax,r,wrap(r[lon]),math.radians(r[lat]))
-    fig.suptitle('RAWDOG 1.0.0 · sky presentation r1 · 58 systems',fontsize=16);legend(fig);exports(fig,'rawdog_sky',sky)
+    fig.suptitle(f'RAWDOG {version} · {len(sky)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_sky',sky)
     fig,ax=plt.subplots(figsize=(9,9));fig.subplots_adjust(bottom=.18,top=.91,left=.12,right=.96)
     density=read('cmd_background_density.csv');h=np.zeros((220,230))
     for r in density:
@@ -115,7 +118,7 @@ def plots(sky,cmd):
         if r['BP_RP_error_approx_mag'] is not None:ax.hlines(y,x-r['BP_RP_error_approx_mag'],x+r['BP_RP_error_approx_mag'],color=color,lw=.7,alpha=.6,zorder=4).set_gid('color-'+r['token'])
         point(ax,r,x,y)
         if r['source_name']=='GLEAM-X J0704-37':ax.annotate('GLEAM-X\nprior sensitive',(x,y),xytext=(9,-16),textcoords='offset points',fontsize=8,color=color).set_gid('bound-'+r['token']+'-label')
-    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle('RAWDOG 1.0.0 · geometric-distance CMD · 56 / 58 systems',fontsize=16);legend(fig);exports(fig,'rawdog_cmd',used)
+    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle(f'RAWDOG {version} · geometric-distance CMD · {len(used)} / {len(cmd)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_cmd',used)
 
 def website_data(summary,measurements,sky,cmd):
     out=ROOT/'assets/sources';out.mkdir(parents=True,exist_ok=True)
@@ -127,7 +130,7 @@ def website_data(summary,measurements,sky,cmd):
         data={'summary':s,'observations':obs,'measurements':record,'issues':issues,'references':[refs[k] for k in sorted(keys) if k in refs],'sky':coord,'cmd':cm}
         (out/(coord['token']+'.json')).write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')))
         index.append({'summary':s,'sky':coord,'cmd':cm,'token':coord['token'],'radio_labels':sorted(set(r['radio_evidence_label'] for r in obs))})
-    (ROOT/'assets/catalog.json').write_text(json.dumps({'version':'1.0.0','systems':index},ensure_ascii=False,separators=(',',':')))
+    (ROOT/'assets/catalog.json').write_text(json.dumps({'version':DATA.name.removeprefix('v'),'systems':index},ensure_ascii=False,separators=(',',':')))
 
 def main():
     sky=read('sky_plot_input.csv');cmd=read('cmd_plot_input.csv')
@@ -135,5 +138,9 @@ def main():
         for r in rows:
             for k in keys:r[k]=number(r[k])
     plots(sky,cmd)
-    print('Revised figures from unchanged v1.0.0 inputs; no catalog tables written.')
-if __name__=='__main__':main()
+    print(f'Revised figures from {DATA.name} inputs; no catalog tables written.')
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1']);args=parser.parse_args()
+    if args.version!='1.0.0':
+        DATA=ROOT/('data/v'+args.version);FIG=ROOT/('figures/v'+args.version)
+    main()
