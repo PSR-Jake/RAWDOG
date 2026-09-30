@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">RAWDOG: dog and white-dwarf star</title>
+  <rect width="128" height="128" rx="26" fill="#11263a"/>
+  <path d="M28 99V65Q25 47 40 35L36 20Q54 21 62 39Q73 40 77 51L96 59Q104 63 97 73L78 82L74 99" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M41 38Q30 50 39 71Q48 80 55 61L57 43" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="68" cy="53" r="3.5" fill="#fff"/>
+  <path d="M96 59L103 63L98 70" fill="#fff"/>
+  <path d="M99 20V42M88 31H110" stroke="#7ac9f2" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="99" cy="31" r="6" fill="#fff"/>
+</svg>
