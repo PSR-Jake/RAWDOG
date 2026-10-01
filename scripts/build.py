@@ -140,7 +140,7 @@ def main():
     plots(sky,cmd)
     print(f'Revised figures from {DATA.name} inputs; no catalog tables written.')
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1']);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1','1.0.2']);args=parser.parse_args()
     if args.version!='1.0.0':
         DATA=ROOT/('data/v'+args.version);FIG=ROOT/('figures/v'+args.version)
     main()

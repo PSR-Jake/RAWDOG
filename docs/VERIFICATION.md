@@ -46,3 +46,10 @@ Local browser checks beneath `/RAWDOG/` verified AE Aqr 9.88 h / 91.34 pc, other
 ## Catalogue addition 1.0.1 / web r5 — 2026-09-30
 
 Scientific and presentation checks pass for 59 systems, 97 observations, 7,292 evidence records and 669 references. Local browser search for ASKAP J1448 returns the added source; its dialog displays the established CV host, qualified polar/bouncer interpretation, distinct orbital and recurrence clocks, explicit CMD exclusion, 109 evidence records, five review issues and both references. The full map has 59 systems and the CMD 56 with three exclusions. Versioned catalogue/source requests avoid stale browser caches. Historical data, source bundles, figures and archive are checked byte-for-byte against the preceding commit.
+
+
+## Membership withdrawal 1.0.2 / web r6 — 2026-10-01
+
+The withdrawal check compares all surviving public CSV rows with 1.0.1, preserves their IDs and scientific values, and requires the withdrawn source to be absent from current tables and figures. Current release counts are 58 sky systems and 56 CMD systems, with two CMD exclusions. Archived releases, figures and downloads remain available. Browser and live deployment checks are performed before reporting publication completion.
+
+Local browser verification: searching the exact withdrawn name returns 0/58 and the no-matches message; opt-in sky filtering reports 0/58. ASKAP J1448 still returns 1/58. No browser warning/error logs were reported. All 62 historical data/archive/figure files match their preceding committed bytes. Current relative download paths, checksums and ZIP integrity pass.

@@ -1,0 +1,142 @@
+[
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "preferred_radio_emission_region_field_gauss",
+    "rc3": "",
+    "public": "42.7",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_error_minus_gauss",
+    "rc3": "",
+    "public": "0.2",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_error_plus_gauss",
+    "rc3": "",
+    "public": "0.2",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_uncertainty_convention",
+    "rc3": "",
+    "public": "MCMC standard error (MCSE)",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_component",
+    "rc3": "",
+    "public": "near_WD_synchrotron_region",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_method",
+    "rc3": "",
+    "public": "fast-cooling synchrotron SED fit; MCMC over nu_c, gamma_e, n_e, B, R and L",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_assumption",
+    "rc3": "",
+    "public": "nu_a, nu_m and p fixed from fit-by-eye; compact low-density emission zone; model B is in G in Table 2/body",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_reference_keys",
+    "rc3": "",
+    "public": "BarrettGurwell+25_ARSco",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_measurement_ids",
+    "rc3": "",
+    "public": "M07011",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_status",
+    "rc3": "Conservative author presentation choice; no preferred radio-emission-region field selected",
+    "public": "Author-accepted model-derived selection; alternatives retained",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "radio_emission_region_field_note",
+    "rc3": "No direct global WD surface-field measurement. Garnavich+21 gives conditional photospheric Ly-alpha Zeeman upper limit <=100 MG; Buckley+17 spin-down dipole upper scale <=500 MG; Katz+17 abstract ~100 MG but vacuum-dipole Table 1 Bp=1100–3600 MG*csc(theta); Lyutikov+20 low-field propeller model ~1 MG; BarrettGurwell+25 full-text model infers ~15-MG pole, but abstract/body emission-region unit is disputed. Keep branches distinct.; 42.7±0.2 G fast-cooling synchrotron-region MCMC (20 G slow-cooling alternative; BarrettGurwell+25 body/Table 2); the abstract instead prints 43 MG. Katz+17 donor-interaction model uses ~100 G; not a WD surface field.; Conflicting 43 G and 43 MG claims remain separate; see ARSCO-001 and ARSCO-005.",
+    "public": "Table 2 fast-cooling synchrotron-region field: 42.7 ± 0.2 G. Error is MCSE, not a physical confidence interval. Slow-cooling 20 G remains an alternative (M07012). Abstract 43 MG (M07013) is retained; likely unit typo is an inference from the table/body/conclusions, not an author-confirmed correction.",
+    "measurement_id": "M07011"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "preferred_wd_polar_field_mg",
+    "rc3": "",
+    "public": "15",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_uncertainty_convention",
+    "rc3": "",
+    "public": "Approximate model inference; no statistical uncertainty reported",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_component",
+    "rc3": "",
+    "public": "white_dwarf_pole",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_method",
+    "rc3": "",
+    "public": "author extrapolation from modeled ~43-G synchrotron zone to a WD dipole polar field",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_assumption",
+    "rc3": "",
+    "public": "emission zone at ~0.6 orbital radii from WD and dipolar field geometry; no direct surface-field measurement",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_reference_keys",
+    "rc3": "",
+    "public": "BarrettGurwell+25_ARSco",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_measurement_ids",
+    "rc3": "",
+    "public": "M07014",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_status",
+    "rc3": "Conservative author presentation choice; no preferred polar field selected",
+    "public": "Author-accepted model-derived selection; alternatives retained",
+    "measurement_id": "M07014"
+  },
+  {
+    "source_id": "gaia-dr3:6050296829033196032",
+    "field": "wd_polar_field_note",
+    "rc3": "No direct global WD surface-field measurement. Garnavich+21 gives conditional photospheric Ly-alpha Zeeman upper limit <=100 MG; Buckley+17 spin-down dipole upper scale <=500 MG; Katz+17 abstract ~100 MG but vacuum-dipole Table 1 Bp=1100–3600 MG*csc(theta); Lyutikov+20 low-field propeller model ~1 MG; BarrettGurwell+25 full-text model infers ~15-MG pole, but abstract/body emission-region unit is disputed. Keep branches distinct.; 42.7±0.2 G fast-cooling synchrotron-region MCMC (20 G slow-cooling alternative; BarrettGurwell+25 body/Table 2); the abstract instead prints 43 MG. Katz+17 donor-interaction model uses ~100 G; not a WD surface field.; Conflicting 43 G and 43 MG claims remain separate; see ARSCO-001 and ARSCO-005.",
+    "public": "Approximately 15 MG WD polar field inferred by dipole extrapolation; distinct from 42.7 G synchrotron-region field. Alternative WD-field models and bounds retained.",
+    "measurement_id": "M07014"
+  }
+]

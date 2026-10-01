@@ -5,7 +5,7 @@ const styles={magnetic_cv:['#1864ab','●','○'],cataclysmic_variable:['#087f5b
 const pretty=k=>({non_magnetic_cv:'Non-magnetic CV',AM:'Polar (AM Her)',IP:'Intermediate polar (IP)'}[k]||k).replaceAll('_',' ').replace(/\bgaia\b/g,'Gaia').replace(/\bwd\b/g,'WD');
 let systems=[],shown=[],sortKey='source_name',sortAsc=true,lastFocus=null,detailRequest=0;
 const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog_measurements.csv','rawdog_references.csv','rawdog_physical_properties.csv','rawdog_gaia_counterparts.csv','rawdog_source_references.csv','rawdog_review_issues.csv','rawdog_excluded_counterparts.csv','rawdog_reference_link_checks.csv'];
-$('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.1/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
+$('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 function tags(s){return [...new Set(s.classification_labels.split(';').map(x=>x.trim()).filter(x=>x!=='long_period_transient'))].map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
 function symbol(x){let [c,a,b]=styles[x.sky.display_group];return `<span class="symbol" style="color:${c}" aria-label="${x.sky.qualified_status==='true'?'Qualified':'Established'} ${esc(labels[x.sky.display_group])}">${x.sky.qualified_status==='true'?b:a}</span> `;}
 function render(){
@@ -14,7 +14,7 @@ function render(){
  const numeric=['preferred_orbital_period_h','preferred_distance_pc','radio_observation_count'].includes(sortKey);
  shown.sort((a,b)=>{let av=a.summary[sortKey],bv=b.summary[sortKey];if(av===''||bv==='')return av===''?(bv===''?0:1):-1;let c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return sortAsc?c:-c;});
  $('#systems tbody').innerHTML=shown.map(x=>{let s=x.summary;return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td><div class="tags">${tags(s)}</div><span class="subtext">${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</span></td><td>${esc(tableNumber(s.preferred_orbital_period_h))}</td><td>${esc(tableNumber(s.preferred_distance_pc))}</td><td>${esc(s.radio_detection_status)}</td><td>${esc(s.radio_observation_count)}</td></tr>`;}).join('');
- $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.1`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
+ $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.2`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){
  const on=$('#plot-filter').checked,allowed=new Set(shown.map(x=>x.token));
@@ -29,7 +29,7 @@ function setupPlot(obj){const doc=obj.contentDocument;if(!doc)return;for(let g o
 for(let obj of document.querySelectorAll('.plot'))obj.addEventListener('load',()=>setupPlot(obj));
 $('#filters').addEventListener('input',render);$('#filters').addEventListener('submit',e=>e.preventDefault());$('#filters').addEventListener('reset',()=>setTimeout(render,0));$('#plot-filter').addEventListener('change',updatePlots);
 $('#systems').addEventListener('click',ev=>{const s=ev.target.closest('[data-source]');if(s)openSource(s.dataset.source);const b=ev.target.closest('[data-sort]');if(b){sortAsc=sortKey===b.dataset.sort?!sortAsc:true;sortKey=b.dataset.sort;for(let th of $('#systems').querySelectorAll('th'))th.removeAttribute('aria-sort');b.closest('th').setAttribute('aria-sort',sortAsc?'ascending':'descending');render();}});
-function exportCSV(){const columns=Object.keys(systems[0].summary),quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';let text=[columns,...shown.map(x=>columns.map(k=>x.summary[k]))].map(row=>row.map(quote).join(',')).join('\r\n')+'\r\n';const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.1-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportCSV(){const columns=Object.keys(systems[0].summary),quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';let text=[columns,...shown.map(x=>columns.map(k=>x.summary[k]))].map(row=>row.map(quote).join(',')).join('\r\n')+'\r\n';const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.2-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('#export').addEventListener('click',exportCSV);
 function fields(r,keys){return `<dl class="raw-fields">${keys.filter(k=>r[k]!==''&&r[k]!=null).map(k=>`<dt>${esc(pretty(k))}</dt><dd>${esc(k==='component'||k.endsWith('_component')||k==='gaia_match_status'?pretty(r[k]):r[k])}</dd>`).join('')}</dl>`;}
 function value(r){return estimate(r.value_numeric!==''&&r.value_numeric!=null?r.value_numeric:r.value_text||'No numeric value selected/reported',r.error_minus,r.error_plus,r.lower_bound,r.upper_bound,r.unit);}
@@ -74,7 +74,7 @@ function cmdNote(d){let c=d.cmd;if(c.included!=='true')return `Main CMD: exclude
 async function openSource(sid,hash=true){
  const x=systems.find(x=>x.summary.source_id===sid);if(!x)return;let seq=++detailRequest;
  lastFocus=document.activeElement;if(hash)history.pushState(null,'','#source='+encodeURIComponent(sid));$('#detail-body').innerHTML='<p role="status">Loading source evidence…</p>';if(!$('#detail').open)$('#detail').showModal();
- try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.1');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;let s=d.summary;
+ try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.2');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;let s=d.summary;
  let html=`<h2>${symbol(x)}${esc(s.source_name)}</h2><div class="tags">${tags(s)}</div><p><strong>WD host: ${esc(labels[s.white_dwarf_host_confidence])}.</strong> ${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</p>`;
  if(s.aliases||s.gaia_dr3_id)html+=`<details class="record"><summary>Aliases & counterpart identity</summary>${fields(s,['aliases','gaia_dr3_id','system_class_evidence','white_dwarf_host_evidence','proposed_or_disputed_interpretation'])}</details>`;
  if(s.source_name==='AR Sco')html+='<p class="help"><strong>Field interpretation:</strong> 42.7±0.2 G describes the modeled synchrotron region (MCSE, not physical confidence). The separately inferred WD polar field is approximately 15 MG. The abstract’s 43 MG remains in the evidence as a likely unit typo—an inference.</p>';
@@ -98,4 +98,4 @@ function closeSource(){++detailRequest;$('#detail').close();if(location.hash.sta
 $('#close').addEventListener('click',closeSource);$('#detail').addEventListener('cancel',e=>{e.preventDefault();closeSource();});
 function route(){if(location.hash.startsWith('#source=')){try{openSource(decodeURIComponent(location.hash.slice(8)),false);}catch(e){}}else if($('#detail').open){++detailRequest;$('#detail').close();}}
 window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
-fetch('assets/catalog.json?v=1.0.1').then(r=>{if(!r.ok)throw Error('Catalog unavailable');return r.json();}).then(data=>{systems=data.systems;render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});
+fetch('assets/catalog.json?v=1.0.2').then(r=>{if(!r.ok)throw Error('Catalog unavailable');return r.json();}).then(data=>{systems=data.systems;render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});

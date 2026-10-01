@@ -25,4 +25,4 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert(!html.includes('SCIENTIFIC CATALOG'));assert(!html.includes('data-sort="white_dwarf_host_confidence"'));
 assert(html.includes('id="additional-downloads"'));assert(!html.includes('id="additional-downloads" open'));
 assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
-console.log('PASS: symmetric/asymmetric errors, scientific notation, zero/missing/bounds, escaping, 59 unchanged summaries and retained host filter.');
+console.log('PASS: symmetric/asymmetric errors, scientific notation, zero/missing/bounds, escaping, 58 unchanged summaries and retained host filter.');

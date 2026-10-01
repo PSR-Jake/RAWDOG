@@ -1,3 +1,9 @@
+# RAWDOG 1.0.2 publication validation
+
+Prepared 2026-10-01. Run `python scripts/check.py`; the result is recorded in `scientific_check.json`. The check compares every surviving current CSV record with 1.0.1, asserts the withdrawn source is absent from membership, observations, evidence and plot inputs, and verifies 58 systems, 96 observations, 7,175 evidence records, 320 review items and 669 retained bibliographic references. The sanitization log row numbers are remapped to the filtered tables.
+
+Sky coverage is 58/58 (57 Gaia plus ASKAP J144834-685644's MeerKAT position). CMD coverage is 56/58 with the two existing ASKAP exclusions. Existing evidence, units, clock distinctions, uncertainties, IDs and component selections remain unchanged. Historical validation sections below apply to their dated releases.
+
 # RAWDOG 1.0.1 publication validation
 
 Prepared 2026-09-30. The runnable check is `python scripts/check.py`; its current result is recorded in `scientific_check.json`. The addition-specific assertions cover the 109 evidence records, references, established CV host, candidate polar, distinct orbital and radio clocks, posterior uncertainty convention, integrated continuum versus burst flux, missing model-derived scalar selections, radio position, five open issues and source-bundle joins. All pre-existing catalogue rows retain their documented RC3/public values.

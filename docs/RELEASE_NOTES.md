@@ -1,3 +1,9 @@
+# RAWDOG 1.0.2 — 2026-10-01 (web r6)
+
+Withdraws CHIME/ILT J1634+44 from active catalogue membership at the author request because its nature and white-dwarf interpretation are unclear. Its one observation row, 117 evidence records, six review items and source-level rows are removed from current public tables, website search/details and plots. This is a membership decision, not a rejected-counterpart identification; historical releases and the 669-entry bibliographic manifest remain preserved.
+
+Current counts: 58 systems, 96 observation rows, 7,175 evidence records (7,101 member and 74 rejected-counterpart records), 320 review items (312 open). All surviving source values and IDs are unchanged, including ASKAP J144834-685644 and accepted AR Sco fields. The sky uses 57 Gaia positions and one MeerKAT literature position. CMD coverage remains 56/58, with only the two ASKAP systems excluded. New versioned data, figures, checksums and archive supersede 1.0.1 without overwriting it.
+
 # RAWDOG 1.0.1 — 2026-09-30 (web r5)
 
 Adds ASKAP J144834-685644 from [Anumarlapudi et al. (2025)](https://arxiv.org/abs/2507.13453) and [Mo et al. (2026)](https://arxiv.org/abs/2609.35980): one system, one observation summary, 109 provenance records, two references and five open review issues. Totals: 59 systems, 97 observations, 7,292 provenance records (7,218 member and 74 rejected), 669 references, 318 open issues. Existing records, v1.0.0 data/archive and historical figures are preserved.
