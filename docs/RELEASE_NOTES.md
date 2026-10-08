@@ -1,3 +1,7 @@
+# Website revision web r7 — 2026-10-08
+
+Standardizes all source detail views with the same five sections and labeled observation summaries. Available property cards follow a shared order, identify components and retain their recorded uncertainty conventions; missing selections are explicit. Aliases, full observation metadata, methods, alternatives, review history and complete references remain expandable, with measurement groups sorted by name. This is a presentation revision only: catalog data remains 1.0.2, with no changed scientific selections, source values, membership, exports or figure products.
+
 # RAWDOG 1.0.2 — 2026-10-01 (web r6)
 
 Withdraws CHIME/ILT J1634+44 from active catalogue membership at the author request because its nature and white-dwarf interpretation are unclear. Its one observation row, 117 evidence records, six review items and source-level rows are removed from current public tables, website search/details and plots. This is a membership decision, not a rejected-counterpart identification; historical releases and the 669-entry bibliographic manifest remain preserved.
