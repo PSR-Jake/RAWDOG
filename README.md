@@ -1,6 +1,6 @@
 # RAWDOG — RAdio White Dwarf catalOG
 
-Catalog data version **1.0.2**; website revision **web r7**. Public version **1.0.2**, prepared **2026-10-01**. A literature-curated catalog of radio observations and reported radio emission from white-dwarf systems and related candidates: 58 systems, 96 observation rows, 7,175 provenance records and 669 references. CHIME/ILT J1634+44 was withdrawn from active membership because its nature and white-dwarf interpretation are unclear; previous snapshots are retained. Membership, classifications and radio evidence are qualified and nonexclusive; this is not a complete or uniformly surveyed population.
+Catalog data version **1.0.2**; website revision **web r8**. Public version **1.0.2**, prepared **2026-10-01**. A literature-curated catalog of radio observations and reported radio emission from white-dwarf systems and related candidates: 58 systems, 96 observation rows, 7,175 provenance records and 669 references. CHIME/ILT J1634+44 was withdrawn from active membership because its nature and white-dwarf interpretation are unclear; previous snapshots are retained. Membership, classifications and radio evidence are qualified and nonexclusive; this is not a complete or uniformly surveyed population.
 
 [Website](https://PSR-Jake.github.io/RAWDOG/) · [Release decisions](docs/RELEASE_NOTES.md) · [Data dictionary](docs/DATA_DICTIONARY.md) · [Methods](docs/PLOTTING_METHODS.md) · [Validation](docs/VALIDATION_REPORT.md)
 
@@ -10,7 +10,7 @@ The static website provides search, sorting, overlapping-class/host/radio filter
 
 The compact dog-and-white-dwarf [SVG logo](assets/logo.svg) is used in the header and favicon. Main-table periods and distances display two decimal places; sorting, source evidence and exports retain stored precision. Common downloads stay visible; additional tables and audit documentation are collapsed. Host confidence remains in each source detail and the host filter; the main table omits its separate column.
 
-Every source detail follows the same order: source overview, selected properties and periods, CMD placement, radio observations, then evidence and references. Observations share labeled band, flux/limit, observable, radio-evidence, uncertainty and reference rows. Missing selections are explicit without empty property cards; all detailed evidence remains expandable.
+Every source detail follows the same order: source overview, selected properties and periods, CMD placement, radio observations, then evidence and references. Selected properties use compact quantity/value rows with units and brief qualifications; full components, uncertainty conventions, methods, assumptions and evidence IDs are under “Property notes & uncertainty conventions.” Observations share labeled band, flux/limit, observable, radio-evidence, uncertainty and reference rows. Missing selections are explicit without empty property rows; all detailed evidence remains expandable.
 
 ## Reproduce
 

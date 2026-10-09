@@ -59,12 +59,24 @@ function estimate(val,em,ep,lo,hi,unit='',digits=4){
 const properties=[
  ['distance_pc','Distance','pc','distance'],['orbital_period_h','Orbital period','h','orbital_period'],['wd_spin_period_s','WD spin period','s','wd_spin'],['ip_beat_period_s','Spin–orbit beat period','s','ip_beat'],['radio_recurrence_period_s','Radio recurrence period','s','radio_recurrence'],
  ['wd_photospheric_teff_k','WD photospheric temperature','K','wd_photospheric_teff'],['wd_mean_photospheric_field_mg','WD mean photospheric field','MG','wd_mean_photospheric_field'],['wd_polar_field_mg','WD polar field','MG','wd_polar_field'],['wd_local_emission_region_field_mg','WD local emission-region field','MG','wd_local_emission_region_field'],['wd_mass_msun','WD mass','M☉','wd_mass'],['companion_spectral_type','Companion spectral type','','companion_spectral_type'],['companion_mass_msun','Companion mass','M☉','companion_mass'],['companion_teff_k','Companion temperature','K','companion_teff'],['radio_emission_region_field_gauss','Radio emission-region field','G','radio_emission_region_field']];
-function propertyOverview(s){return properties.filter(([k])=>s['preferred_'+k]!==''&&s['preferred_'+k]!=null).map(([k,label,unit,prefix])=>{
+function propertyOverview(s){
+ const notes=[];
+ const rows=properties.filter(([k])=>present(s['preferred_'+k])).map(([k,label,unit,prefix])=>{
  const get=suffix=>s[prefix+suffix+(unit?'_'+k.split('_').at(-1):'')],val=s['preferred_'+k];
  const lo=get('_lower_bound'),hi=get('_upper_bound'),em=get('_error_minus'),ep=get('_error_plus');
  const convention=s[prefix+'_uncertainty_convention']||((em||ep||lo||hi)?'Interval/confidence convention unspecified; see evidence.':''),component=s[prefix+'_component']||'',method=s[prefix+'_method']||'';
- return `<article class="property"><h4>${esc(label)}</h4><p><strong>${estimate(val,em,ep,lo,hi,unit,k.includes('period')?6:4)}</strong></p>${component?'<p><strong>Component:</strong> '+esc(pretty(component))+'</p>':''}${/fit|model|infer|synchrotron|mcmc/i.test(method)?'<p>Model dependent / inferred; see methods.</p>':''}${s[prefix+'_assumption']?'<p class="muted">Model/epoch assumptions apply; see methods.</p>':''}<p class="muted"><strong>Uncertainty:</strong> ${esc(convention||'Not reported.')}</p></article>`;
- }).join('');}
+ const hints=[];
+ if(/approximate/i.test(convention))hints.push('approximate');
+ if(/fit|model|infer|synchrotron|mcmc/i.test(method)||s[prefix+'_assumption'])hints.push('model / assumptions');
+ if(/MCSE/i.test(convention))hints.push('MCSE');
+ else if(/p16|16th/i.test(convention)&&/p84|84th/i.test(convention))hints.push('p16–p84');
+ else if(/68% credible/i.test(convention))hints.push('68% credible');
+ if(Number.isFinite(Number(val))&&![em,ep,lo,hi].some(present))hints.push('no adopted error');
+ notes.push(`<div class="property-note"><h4>${esc(label)}</h4>${fields({component,uncertainty:convention||'Not reported.',method,assumptions:s[prefix+'_assumption'],measurement_ids:s[prefix+'_measurement_ids'],reference_keys:s[prefix+'_reference_keys']},['component','uncertainty','method','assumptions','measurement_ids','reference_keys'])}</div>`);
+ return `<div class="property-row"><dt>${esc(label)}</dt><dd><strong>${estimate(val,em,ep,lo,hi,unit,k.includes('period')?6:4)}</strong>${hints.length?'<span class="property-qualification">'+esc(hints.join(' · '))+'</span>':''}</dd></div>`;
+ }).join('');
+ return rows?'<dl class="property-list">'+rows+'</dl><details class="record property-notes"><summary>Property notes & uncertainty conventions</summary>'+notes.join('')+'</details>':'';
+}
 function cmdNote(d){let c=d.cmd;if(c.included!=='true')return `Main CMD: excluded. ${c.exclusion_reason}`;
  let note=`Main CMD: geometric distance ${displayNumber(c.distance_pc)} pc, observed BP−RP ${displayNumber(c.BP_RP_observed_mag,3)} mag, M_G ${displayNumber(c.M_G_observed_mag,3)} mag; unresolved light, not extinction corrected.`;
  if(d.summary.source_name==='GLEAM-X J0704-37')note+=' Negative low-significance Gaia parallax; the broad, strongly prior-sensitive posterior is not a precise empirical distance constraint. Published model-dependent SED placement is available in supplementary downloads.';
@@ -75,7 +87,7 @@ function sourceDetail(d,x){
  const s=d.summary;
  let html=`<h2>${symbol(x)}${esc(s.source_name)}</h2><h3>Source overview</h3><div class="tags">${tags(s)}</div><p><strong>WD host: ${esc(labels[s.white_dwarf_host_confidence])}.</strong> ${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</p>`;
  html+=`<details class="record"><summary>Aliases & counterpart identity</summary>${fields(s,['aliases','gaia_dr3_id','system_class_evidence','white_dwarf_host_evidence','proposed_or_disputed_interpretation'])}${s.gaia_dr3_id?'':'<p class="muted">No selected Gaia counterpart.</p>'}</details>`;
- const cards=propertyOverview(s);html+='<h3>Selected properties & periods</h3>'+(cards?'<div class="property-grid">'+cards+'</div>':'<p class="muted">No selected physical properties or periods. Published alternatives remain in the evidence below.</p>');
+ const overview=propertyOverview(s);html+='<h3>Selected properties & periods</h3>'+(overview||'<p class="muted">No selected physical properties or periods. Published alternatives remain in the evidence below.</p>');
  if(s.source_name==='AR Sco')html+='<p class="help"><strong>Field interpretation:</strong> 42.7±0.2 G describes the modeled synchrotron region (MCSE, not physical confidence). The separately inferred WD polar field is approximately 15 MG. The abstract’s 43 MG remains in the evidence as a likely unit typo—an inference.</p>';
  html+='<h3>CMD placement</h3><p class="help">'+esc(cmdNote(d))+'</p>';
  html+='<h3>Radio observations</h3><p class="muted">'+d.observations.length+' observation '+(d.observations.length===1?'row':'rows')+'. Expand an observation for methods and full metadata.</p>';

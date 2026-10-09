@@ -1,3 +1,7 @@
+# Website revision web r8 — 2026-10-09
+
+Replaces large selected-property cards with compact quantity/value rows. Units and formatted errors remain visible, with brief approximate/model/interval/MCSE qualifications where applicable. Repeated component and explanatory metadata move to the closed “Property notes & uncertainty conventions” disclosure, including full methods, assumptions, measurement IDs and references. Source section order, radio observations and all existing evidence disclosures remain intact. Catalog data stays 1.0.2; scientific values, exports and figures are unchanged.
+
 # Website revision web r7 — 2026-10-08
 
 Standardizes all source detail views with the same five sections and labeled observation summaries. Available property cards follow a shared order, identify components and retain their recorded uncertainty conventions; missing selections are explicit. Aliases, full observation metadata, methods, alternatives, review history and complete references remain expandable, with measurement groups sorted by name. This is a presentation revision only: catalog data remains 1.0.2, with no changed scientific selections, source values, membership, exports or figure products.
