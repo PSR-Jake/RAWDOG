@@ -27,7 +27,7 @@ function tableRow(x){
  const s=x.summary,classes=displayClassCodes(s).map(t=>({cataclysmic_variable:'CV',magnetic_cv:'mCV',white_dwarf_pulsar:'WD pulsar',long_period_radio_transient:'LPT'}[t]||pretty(t))).join(' · ');
  const numbers=[tableNumber(s.preferred_distance_pc),tableNumber(s.preferred_orbital_period_h),tableNumber(s.preferred_wd_spin_period_s),tableNumber(s.preferred_radio_recurrence_period_s),tableConstraint(s,'wd_photospheric_teff','k',0),tableConstraint(s,'wd_mass','msun',2)];
  const cells=numbers.map(v=>'<td class="numeric">'+esc(v)+'</td>');
- return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>${cells.slice(0,4).join('')}${emissionCell(x,'radio')}${emissionCell(x,'xray')}${cells.slice(4).join('')}<td>${esc(s.preferred_companion_spectral_type||'—')}</td></tr>`;
+ return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td class="gaia-id">${esc(s.gaia_dr3_id||'—')}</td><td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>${cells.slice(0,4).join('')}${emissionCell(x,'radio')}${emissionCell(x,'xray')}${cells.slice(4).join('')}<td>${esc(s.preferred_companion_spectral_type||'—')}</td></tr>`;
 }
 function luminosityValue(r){
  if(!r.display_value_numeric&&!r.display_lower_bound&&!r.display_upper_bound)return esc(r.value_text);

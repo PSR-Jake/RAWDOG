@@ -28,10 +28,18 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 }
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- assert.equal(cells.length,11);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
- if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[1].includes('mCV'));assert(!cells[1].includes('CV · mCV'));}
- for(let i=0;i<4;i++)assert.equal(cells[i+2],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
+ assert.equal(cells.length,12);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ assert.equal(typeof x.summary.gaia_dr3_id,'string');assert.equal(cells[1],x.summary.gaia_dr3_id||'—');
+ if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[2].includes('mCV'));assert(!cells[2].includes('CV · mCV'));}
+ for(let i=0;i<4;i++)assert.equal(cells[i+3],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
 }
+for(const ascending of [true,false]){
+ const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,'gaia_dr3_id',ascending));
+ assert.equal(sorted.at(-1).summary.gaia_dr3_id,'');
+ const ids=sorted.map(x=>x.summary.gaia_dr3_id).filter(Boolean).map(BigInt);
+ for(let i=1;i<ids.length;i++)assert(ascending?ids[i]>=ids[i-1]:ids[i]<=ids[i-1]);
+}
+assert(context.compareSystems({summary:{gaia_dr3_id:'6050296829033196032'}},{summary:{gaia_dr3_id:'6050296829033196033'}},'gaia_dr3_id',true)<0);
 assert.equal(context.tableConstraint({wd_mass_lower_bound_msun:'0.81',wd_mass_upper_bound_msun:'1.29'},'wd_mass','msun',2),'[0.81, 1.29]');
 assert.equal(context.tableConstraint({wd_photospheric_teff_upper_bound_k:'9750'},'wd_photospheric_teff','k',0),'≤ 9750');
 assert.equal(context.tableConstraint({wd_mass_lower_bound_msun:'0'},'wd_mass','msun',2),'≥ 0.00');
@@ -91,5 +99,5 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert(!html.includes('SCIENTIFIC CATALOG'));assert(!html.includes('data-sort="white_dwarf_host_confidence"'));
 assert(html.includes('id="additional-downloads"'));assert(!html.includes('id="additional-downloads" open'));
 assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
-assert.equal((html.match(/data-sort=/g)||[]).length,9);
-console.log('PASS: 58 eleven-column rows, nonredundant mCV labels, radio evidence, luminosity units/limits/scalings/logs, six numeric sorts and unchanged scientific data.');
+assert.equal((html.match(/data-sort=/g)||[]).length,10);
+console.log('PASS: 58 twelve-column rows, exact Gaia ID strings and sorting, nonredundant mCV labels, radio/X-ray evidence, six numeric sorts and unchanged scientific data.');

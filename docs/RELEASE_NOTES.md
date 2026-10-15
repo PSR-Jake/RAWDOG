@@ -1,3 +1,7 @@
+# Website revision web r11 — 2026-10-15
+
+Adds a sortable Gaia DR3 source-ID column beside each source name. All 57 recorded identifiers retain their full string precision; ASKAP J144834−685644 has no selected Gaia counterpart and displays a dash. Missing IDs sort last in both directions. Catalog data remains 1.0.2; scientific values, exports, evidence and figures are unchanged.
+
 # Website revision web r10 — 2026-10-15
 
 Adds radio flux density and recorded X-ray luminosity columns to the open parameter table, with bands, limits, peak-brightness labels and historical-distance context. Each value opens the corresponding source evidence; all sources now have a consistent X-ray section containing every available luminosity record and expandable methods. Previews are explicitly the first recorded entry, not an average or new preferred selection. The 52 available luminosity/limit/scaling records cover 26 systems; unsupported luminosities remain missing. No flux conversion, distance rescaling or scientific selection is introduced. Original ledger fields remain in supplementary versioned inputs under `data/v1.0.2-web-r10/`.
