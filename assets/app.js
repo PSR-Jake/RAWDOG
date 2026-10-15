@@ -8,12 +8,30 @@ const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog
 $('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 function tags(s){return [...new Set(s.classification_labels.split(';').map(x=>x.trim()).filter(x=>x!=='long_period_transient'))].map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
 function symbol(x){let [c,a,b]=styles[x.sky.display_group];return `<span class="symbol" style="color:${c}" aria-label="${x.sky.qualified_status==='true'?'Qualified':'Established'} ${esc(labels[x.sky.display_group])}">${x.sky.qualified_status==='true'?b:a}</span> `;}
+function compareSystems(a,b,key,ascending){
+ const av=a.summary[key],bv=b.summary[key];
+ if(!present(av)||!present(bv))return !present(av)?(!present(bv)?0:1):-1;
+ const numeric=['preferred_orbital_period_h','preferred_distance_pc','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun'].includes(key);
+ const c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return ascending?c:-c;
+}
+function tableConstraint(s,prefix,unit,digits){
+ const format=v=>Number(v).toFixed(digits),val=s['preferred_'+prefix+'_'+unit],lo=s[prefix+'_lower_bound_'+unit],hi=s[prefix+'_upper_bound_'+unit];
+ if(present(val))return format(val);
+ if(present(lo)&&present(hi))return '['+format(lo)+', '+format(hi)+']';
+ if(present(hi))return '≤ '+format(hi);
+ if(present(lo))return '≥ '+format(lo);
+ return '—';
+}
+function tableRow(x){
+ const s=x.summary,classes=[...new Set(s.classification_labels.split(';').map(t=>t.trim()).filter(t=>t&&t!=='long_period_transient'))].map(t=>({cataclysmic_variable:'CV',magnetic_cv:'mCV',white_dwarf_pulsar:'WD pulsar',long_period_radio_transient:'LPT'}[t]||pretty(t))).join(' · ');
+ const numbers=[tableNumber(s.preferred_distance_pc),tableNumber(s.preferred_orbital_period_h),tableNumber(s.preferred_wd_spin_period_s),tableNumber(s.preferred_radio_recurrence_period_s),tableConstraint(s,'wd_photospheric_teff','k',0),tableConstraint(s,'wd_mass','msun',2)];
+ return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>${numbers.map(v=>'<td class="numeric">'+esc(v)+'</td>').join('')}<td>${esc(s.preferred_companion_spectral_type||'—')}</td></tr>`;
+}
 function render(){
  const q=$('#search').value.toLowerCase().trim(),cls=$('#classification').value,host=$('#host').value,radio=$('#radio').value;
  shown=systems.filter(x=>{let s=x.summary;return (!q||[s.source_name,s.aliases,s.gaia_dr3_id,s.source_reference_keys].join(' ').toLowerCase().includes(q))&&(!cls||s.classification_labels.split(';').map(t=>t.trim()).includes(cls))&&(!host||s.white_dwarf_host_confidence===host)&&(!radio||x.radio_labels.includes(radio));});
- const numeric=['preferred_orbital_period_h','preferred_distance_pc','radio_observation_count'].includes(sortKey);
- shown.sort((a,b)=>{let av=a.summary[sortKey],bv=b.summary[sortKey];if(av===''||bv==='')return av===''?(bv===''?0:1):-1;let c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return sortAsc?c:-c;});
- $('#systems tbody').innerHTML=shown.map(x=>{let s=x.summary;return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td><div class="tags">${tags(s)}</div><span class="subtext">${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</span></td><td>${esc(tableNumber(s.preferred_orbital_period_h))}</td><td>${esc(tableNumber(s.preferred_distance_pc))}</td><td>${esc(s.radio_detection_status)}</td><td>${esc(s.radio_observation_count)}</td></tr>`;}).join('');
+ shown.sort((a,b)=>compareSystems(a,b,sortKey,sortAsc));
+ $('#systems tbody').innerHTML=shown.map(tableRow).join('');
  $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.2`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){

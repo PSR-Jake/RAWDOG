@@ -1,3 +1,7 @@
+# Website revision web r9 — 2026-10-15
+
+Tries a compact, full-length scientific parameter table: system, nonexclusive class, distance, orbital period, WD spin, radio recurrence, WD photospheric temperature, WD mass and companion spectral type. Long subclass/radio narratives and observation counts move out of the main table; they remain in source details, filters and unchanged exports. Existing WD-temperature/mass bounds and ranges are displayed without adopting central values or a common confidence level. Sorting uses raw selected scalars, keeping missing/range-only values last in both directions. Source names stay fixed during mobile horizontal scrolling. This is a website presentation revision; catalog 1.0.2, scientific selections, data archives and figures are unchanged.
+
 # Website revision web r8 — 2026-10-09
 
 Replaces large selected-property cards with compact quantity/value rows. Units and formatted errors remain visible, with brief approximate/model/interval/MCSE qualifications where applicable. Repeated component and explanatory metadata move to the closed “Property notes & uncertainty conventions” disclosure, including full methods, assumptions, measurement IDs and references. Source section order, radio observations and all existing evidence disclosures remain intact. Catalog data stays 1.0.2; scientific values, exports and figures are unchanged.

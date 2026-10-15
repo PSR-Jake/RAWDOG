@@ -18,6 +18,24 @@ assert.match(format('4','','','0','8'),/interval \[0, 8\]/);
 assert.match(format('9.87973152','4.8e-9','4.8e-9','','','h'),/± 4\.8 × 10<sup>−9<\/sup> h/);
 assert.equal(format('<img onerror=bad>','','','',''), '&lt;img onerror=bad&gt;');
 const catalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'))),before=JSON.stringify(catalog);
+const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun'];
+for(const key of numericColumns)for(const ascending of [true,false]){
+ const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
+ let missing=false,previous=null;
+ for(const x of sorted){const v=x.summary[key];if(v===''||v==null){missing=true;continue;}assert(!missing,key);if(previous!==null)assert(ascending?Number(v)>=previous:Number(v)<=previous,key);previous=Number(v);}
+}
+for(const x of catalog.systems){
+ const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
+ assert.equal(cells.length,9);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ for(let i=0;i<4;i++)assert.equal(cells[i+2],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
+}
+assert.equal(context.tableConstraint({wd_mass_lower_bound_msun:'0.81',wd_mass_upper_bound_msun:'1.29'},'wd_mass','msun',2),'[0.81, 1.29]');
+assert.equal(context.tableConstraint({wd_photospheric_teff_upper_bound_k:'9750'},'wd_photospheric_teff','k',0),'≤ 9750');
+assert.equal(context.tableConstraint({wd_mass_lower_bound_msun:'0'},'wd_mass','msun',2),'≥ 0.00');
+assert.equal(context.tableConstraint({preferred_wd_mass_msun:'0'},'wd_mass','msun',2),'0.00');
+assert.equal(context.tableConstraint({},'wd_mass','msun',2),'—');
+const gleamRow=context.tableRow(catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37'));
+assert.match(gleamRow,/3010\.02/);assert.match(gleamRow,/<td class="numeric">—<\/td><td class="numeric">10496\.55<\/td>/);
 const sections=['Source overview','Selected properties & periods','CMD placement','Radio observations','Evidence & references'];
 const observationLabels=['Band','Reported flux or limit','Observable','Radio evidence','Uncertainty','Reference'];
 for(const x of catalog.systems){
@@ -58,4 +76,5 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert(!html.includes('SCIENTIFIC CATALOG'));assert(!html.includes('data-sort="white_dwarf_host_confidence"'));
 assert(html.includes('id="additional-downloads"'));assert(!html.includes('id="additional-downloads" open'));
 assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
-console.log('PASS: 58 compact source details; section order, property notes, observation labels, evidence IDs, references, error conventions and unchanged data preserved.');
+assert.equal((html.match(/data-sort=/g)||[]).length,9);
+console.log('PASS: 58 nine-column parameter rows, six numeric sorts, distinct clocks, ranges/limits/zeros, unchanged source details and scientific data.');
