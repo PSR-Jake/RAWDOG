@@ -17,7 +17,9 @@ assert.match(format('1','', '0.2'),/minus unreported/);
 assert.match(format('4','','','0','8'),/interval \[0, 8\]/);
 assert.match(format('9.87973152','4.8e-9','4.8e-9','','','h'),/± 4\.8 × 10<sup>−9<\/sup> h/);
 assert.equal(format('<img onerror=bad>','','','',''), '&lt;img onerror=bad&gt;');
-const catalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'))),before=JSON.stringify(catalog);
+const rawCatalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'))),rawBefore=JSON.stringify(rawCatalog);
+const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r10/emission_evidence.json'))),emissionMap=new Map(emissions.systems.map(e=>[e.source_id,e]));
+const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
 const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun'];
 for(const key of numericColumns)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
@@ -26,7 +28,8 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 }
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- assert.equal(cells.length,9);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ assert.equal(cells.length,11);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[1].includes('mCV'));assert(!cells[1].includes('CV · mCV'));}
  for(let i=0;i<4;i++)assert.equal(cells[i+2],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
 }
 assert.equal(context.tableConstraint({wd_mass_lower_bound_msun:'0.81',wd_mass_upper_bound_msun:'1.29'},'wd_mass','msun',2),'[0.81, 1.29]');
@@ -36,11 +39,11 @@ assert.equal(context.tableConstraint({preferred_wd_mass_msun:'0'},'wd_mass','msu
 assert.equal(context.tableConstraint({},'wd_mass','msun',2),'—');
 const gleamRow=context.tableRow(catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37'));
 assert.match(gleamRow,/3010\.02/);assert.match(gleamRow,/<td class="numeric">—<\/td><td class="numeric">10496\.55<\/td>/);
-const sections=['Source overview','Selected properties & periods','CMD placement','Radio observations','Evidence & references'];
+const sections=['Source overview','Selected properties & periods','CMD placement','Radio observations','X-ray luminosity','Evidence & references'];
 const observationLabels=['Band','Reported flux or limit','Observable','Radio evidence','Uncertainty','Reference'];
 for(const x of catalog.systems){
  const d=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',x.token+'.json'))),original=JSON.stringify(d),html=context.sourceDetail(d,x);
- assert.deepEqual(Array.from(html.matchAll(/<h3>([^<]+)<\/h3>/g),m=>m[1]),sections);
+ assert.deepEqual(Array.from(html.matchAll(/<h3(?: [^>]*)?>([^<]+)<\/h3>/g),m=>m[1]),sections);
  assert(!/NaN|undefined/.test(html),x.summary.source_name);
  assert(html.includes('class="property-list"'));assert(!html.includes('class="property-grid"'));
  assert.equal((html.match(/class="property-row"/g)||[]).length,(html.match(/class="property-note"/g)||[]).length);
@@ -71,10 +74,21 @@ assert.equal((aeOverview.match(/class="property-row"/g)||[]).length,5);
 assert.match(aeOverview,/Property notes & uncertainty conventions/);assert.match(aeOverview,/p16–p84/);
 assert.match(aeOverview,/M02945/);assert.match(aeOverview,/no adopted error/);
 assert(!context.propertyOverview({preferred_wd_mass_msun:'0',wd_mass_error_minus_msun:'0',wd_mass_error_plus_msun:'0'}).includes('no adopted error'));
+const lx=emissions.systems.flatMap(e=>e.xray),byid=new Map(lx.map(r=>[r.measurement_id,r]));
+assert.match(context.luminosityValue(byid.get('M04492')),/^≤ /);assert(!context.luminosityValue(byid.get('M04492')).includes('±'));
+assert.match(context.luminosityValue(byid.get('M07159')),/1\.4 × 10<sup>30<\/sup>/);
+assert.match(context.luminosityValue(byid.get('M06586')),/^log₁₀/);
+assert.match(context.luminosityValue(byid.get('M02358')),/× \(d \/ 100 pc\)²/);
+assert.match(context.luminosityValue(byid.get('M04373')),/L_X &lt;/);
+assert.match(context.xrayContext(byid.get('M04490')),/power law/);assert.match(context.xrayContext(byid.get('M04491')),/blackbody/);
+assert.match(context.emissionCell(catalog.systems.find(x=>x.summary.source_name==='AE Aqr'),'radio'),/5123 ± 9/);
+assert.match(context.emissionCell(catalog.systems.find(x=>x.summary.source_name==='J191213.72-441045.1'),'radio'),/peak brightness/);
+assert.match(context.emissionCell(added,'xray'),/flux records only/);
 assert.equal(JSON.stringify(catalog),before);
+assert.equal(JSON.stringify(rawCatalog),rawBefore);
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert(!html.includes('SCIENTIFIC CATALOG'));assert(!html.includes('data-sort="white_dwarf_host_confidence"'));
 assert(html.includes('id="additional-downloads"'));assert(!html.includes('id="additional-downloads" open'));
 assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
 assert.equal((html.match(/data-sort=/g)||[]).length,9);
-console.log('PASS: 58 nine-column parameter rows, six numeric sorts, distinct clocks, ranges/limits/zeros, unchanged source details and scientific data.');
+console.log('PASS: 58 eleven-column rows, nonredundant mCV labels, radio evidence, luminosity units/limits/scalings/logs, six numeric sorts and unchanged scientific data.');
