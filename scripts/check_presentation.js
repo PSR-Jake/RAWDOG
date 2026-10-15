@@ -83,6 +83,7 @@ assert.match(context.luminosityValue(byid.get('M04373')),/L_X &lt;/);
 assert.match(context.xrayContext(byid.get('M04490')),/power law/);assert.match(context.xrayContext(byid.get('M04491')),/blackbody/);
 assert.match(context.emissionCell(catalog.systems.find(x=>x.summary.source_name==='AE Aqr'),'radio'),/5123 ± 9/);
 assert.match(context.emissionCell(catalog.systems.find(x=>x.summary.source_name==='J191213.72-441045.1'),'radio'),/peak brightness/);
+assert.match(context.emissionCell(catalog.systems.find(x=>x.summary.source_name==='ILT J1101+5521'),'radio'),/µJy beam⁻¹/);
 assert.match(context.emissionCell(added,'xray'),/flux records only/);
 assert.equal(JSON.stringify(catalog),before);
 assert.equal(JSON.stringify(rawCatalog),rawBefore);

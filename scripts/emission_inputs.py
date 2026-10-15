@@ -51,6 +51,8 @@ def products():
     assert sum(any(r['available'] for r in s['xray']) for s in systems) == 26
     assert all(r['source_id'] in ids for r in radio + lx)
     byid = {r['measurement_id']: r for r in measurements}
+    assert byid['M04345']['unit'] == byid['M07166']['unit'] == 'mJy beam-1'
+    assert {r['source_name'] for r in radio if 'Peak' in r['flux_quantity_kind']} == {'ILT J1101+5521', 'J191213.72-441045.1'}
     refs = {r['key'] for r in read('rawdog_references.csv')}
     for r in lx:
         assert all(r[k] == v for k, v in byid[r['measurement_id']].items())
