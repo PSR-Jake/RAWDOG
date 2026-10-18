@@ -29,7 +29,13 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
  assert.equal(cells.length,12);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
- assert.equal(typeof x.summary.gaia_dr3_id,'string');assert.equal(cells[1],x.summary.gaia_dr3_id||'—');
+ assert.equal(typeof x.summary.gaia_dr3_id,'string');assert.equal(cells[1].replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
+ if(x.summary.gaia_dr3_id){
+  const url=new URL(cells[1].match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
+  assert.equal(url.origin,'https://vizier.cds.unistra.fr');assert.equal(url.pathname,'/viz-bin/VizieR-5');
+  assert.equal(url.searchParams.get('-source'),'I/355/gaiadr3');assert.equal(url.searchParams.get('Source'),x.summary.gaia_dr3_id);
+  assert.match(cells[1],/target="_blank" rel="noopener"/);
+ }else assert(!cells[1].includes('<a'));
  if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[2].includes('mCV'));assert(!cells[2].includes('CV · mCV'));}
  for(let i=0;i<4;i++)assert.equal(cells[i+3],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
 }
@@ -96,8 +102,12 @@ assert.match(context.emissionCell(added,'xray'),/flux records only/);
 assert.equal(JSON.stringify(catalog),before);
 assert.equal(JSON.stringify(rawCatalog),rawBefore);
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+for(const [,target] of html.matchAll(/\b(?:href|src|data)="([^"]+)"/g)){
+ if(target.startsWith('#')||/^[a-z]+:/i.test(target))continue;
+ assert(fs.existsSync(path.join(root,target.split(/[?#]/)[0])),'Missing relative asset: '+target);
+}
 assert(!html.includes('SCIENTIFIC CATALOG'));assert(!html.includes('data-sort="white_dwarf_host_confidence"'));
 assert(html.includes('id="additional-downloads"'));assert(!html.includes('id="additional-downloads" open'));
 assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
 assert.equal((html.match(/data-sort=/g)||[]).length,10);
-console.log('PASS: 58 twelve-column rows, exact Gaia ID strings and sorting, nonredundant mCV labels, radio/X-ray evidence, six numeric sorts and unchanged scientific data.');
+console.log('PASS: 58 twelve-column rows, exact Gaia ID strings/links/sorting, valid relative assets, radio/X-ray evidence and unchanged scientific data.');

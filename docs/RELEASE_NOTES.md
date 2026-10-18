@@ -1,3 +1,7 @@
+# Website revision web r12 — 2026-10-18
+
+Makes each recorded Gaia DR3 ID a link to the corresponding VizieR full-record view in I/355/gaiadr3, constrained by the exact Source identifier. Links open a new tab; missing counterparts remain unlinked dashes. Repairs the X-ray evidence CSV download path to its preserved web-r10 product, which had been inadvertently changed during the web-r11 revision. Catalog data remains 1.0.2; values, classifications, exports, source bundles and figures are unchanged.
+
 # Website revision web r11 — 2026-10-15
 
 Adds a sortable Gaia DR3 source-ID column beside each source name. All 57 recorded identifiers retain their full string precision; ASKAP J144834−685644 has no selected Gaia counterpart and displays a dash. Missing IDs sort last in both directions. Catalog data remains 1.0.2; scientific values, exports, evidence and figures are unchanged.
