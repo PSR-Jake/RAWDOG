@@ -106,6 +106,10 @@ def plots(sky,cmd):
         ax=fig.add_subplot(2,1,n,projection='mollweide');ax.grid(alpha=.35,linewidth=.6);ticks=np.arange(-150,180,30);ax.set_xticks(np.radians(ticks));ax.set_xticklabels([str(int((-t)%360/15))+'h' if n==1 else str(int((-t)%360))+'°' for t in ticks]);ax.set_xlabel(label);ax.set_ylabel('Declination' if n==1 else 'Galactic latitude');ax.set_title(title,fontsize=12,pad=16)
         for r in sky:point(ax,r,wrap(r[lon]),math.radians(r[lat]))
     fig.suptitle(f'RAWDOG {version} · {len(sky)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_sky',sky)
+    cmd_plot(cmd,version)
+
+def cmd_plot(cmd,version,annotate_gleam=True,basis='geometric-distance CMD'):
+    plt.rcParams.update({'font.size':11,'svg.fonttype':'none','font.family':'DejaVu Sans','axes.spines.top':False,'axes.spines.right':False})
     fig,ax=plt.subplots(figsize=(9,9));fig.subplots_adjust(bottom=.18,top=.91,left=.12,right=.96)
     density=read('cmd_background_density.csv');h=np.zeros((220,230))
     for r in density:
@@ -117,8 +121,8 @@ def plots(sky,cmd):
         if r['M_G_lower_from_distance_upper'] is not None and r['M_G_upper_from_distance_lower'] is not None:ax.vlines(x,r['M_G_lower_from_distance_upper'],r['M_G_upper_from_distance_lower'],color=color,lw=.7,alpha=.6,zorder=4).set_gid('bound-'+r['token'])
         if r['BP_RP_error_approx_mag'] is not None:ax.hlines(y,x-r['BP_RP_error_approx_mag'],x+r['BP_RP_error_approx_mag'],color=color,lw=.7,alpha=.6,zorder=4).set_gid('color-'+r['token'])
         point(ax,r,x,y)
-        if r['source_name']=='GLEAM-X J0704-37':ax.annotate('GLEAM-X\nprior sensitive',(x,y),xytext=(9,-16),textcoords='offset points',fontsize=8,color=color).set_gid('bound-'+r['token']+'-label')
-    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle(f'RAWDOG {version} · geometric-distance CMD · {len(used)} / {len(cmd)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_cmd',used)
+        if annotate_gleam and r['source_name']=='GLEAM-X J0704-37':ax.annotate('GLEAM-X\nprior sensitive',(x,y),xytext=(9,-16),textcoords='offset points',fontsize=8,color=color).set_gid('bound-'+r['token']+'-label')
+    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle(f'RAWDOG {version} · {basis} · {len(used)} / {len(cmd)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_cmd',used)
 
 def website_data(summary,measurements,sky,cmd):
     out=ROOT/'assets/sources';out.mkdir(parents=True,exist_ok=True)

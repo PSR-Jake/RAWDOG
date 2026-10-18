@@ -1,3 +1,9 @@
+# Website / CMD figure revision web r13 — 2026-10-18
+
+Removes the permanent GLEAM-X source-name/prior-sensitivity annotation. At the author request, that source's CMD-only distance now uses M04418, 380±10 pc from the published spectrum/SED fit, reaffirmed in Rodriguez et al. (2026), Table 2. With unchanged observed Gaia photometry this gives M_G=12.885594 mag at BP−RP=1.851223. The recorded p16/p84 distance endpoints are transformed nonlinearly, with model dependence retained in inputs, hover and details. Other 57 input rows, membership and both exclusions are unchanged.
+
+New CMD inputs/exports are under `data/v1.0.2-web-r13/` and `figures/v1.0.2-web-r13/`. The website uses those rows for CMD details; the catalog summary's geometric distance, original source bundles, all prior figures/tables and archives remain immutable. Catalog data remains 1.0.2. This explicitly supersedes the earlier Gaia-only plotting policy for GLEAM-X, not for other systems. [Evidence, methods and preserved alternatives](CMD_REVISION_WEB_R13.md).
+
 # Website revision web r12 — 2026-10-18
 
 Makes each recorded Gaia DR3 ID a link to the corresponding VizieR full-record view in I/355/gaiadr3, constrained by the exact Source identifier. Links open a new tab; missing counterparts remain unlinked dashes. Repairs the X-ray evidence CSV download path to its preserved web-r10 product, which had been inadvertently changed during the web-r11 revision. Catalog data remains 1.0.2; values, classifications, exports, source bundles and figures are unchanged.

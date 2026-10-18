@@ -1,0 +1,5 @@
+501042c3c9c164a009ffff61dd68a8fe120036b84c8c8ac6be0db226780f9154  data/v1.0.2-web-r13/cmd_plot_input.csv
+926e68a4a23a68fed65f865236d0de1b99e4d86a9b118f690790ee5f32b1dbcc  data/v1.0.2-web-r13/cmd_plot_input.json
+22e8eee162d43b99a2fa61b714599f865d16ac3f66c1ceb758e067203ce7d26a  figures/v1.0.2-web-r13/rawdog_cmd.pdf
+7cb395f8091aca306255e08968cbfd5a2440208a13efb758447e02919cb92875  figures/v1.0.2-web-r13/rawdog_cmd.svg
+ce8a22dcb50db8a54cacdf1f53c3ef84ee3133fddfe1c875b6ed4a8fb8375403  figures/v1.0.2-web-r13/rawdog_cmd.png

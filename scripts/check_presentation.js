@@ -19,7 +19,8 @@ assert.match(format('9.87973152','4.8e-9','4.8e-9','','','h'),/± 4\.8 × 10<sup
 assert.equal(format('<img onerror=bad>','','','',''), '&lt;img onerror=bad&gt;');
 const rawCatalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'))),rawBefore=JSON.stringify(rawCatalog);
 const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r10/emission_evidence.json'))),emissionMap=new Map(emissions.systems.map(e=>[e.source_id,e]));
-const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
+const cmd=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r13/cmd_plot_input.json'))),cmdMap=new Map(cmd.systems.map(c=>[c.source_id,c]));
+const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,cmd:cmdMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
 const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun'];
 for(const key of numericColumns)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
@@ -53,6 +54,10 @@ assert.equal(context.tableConstraint({preferred_wd_mass_msun:'0'},'wd_mass','msu
 assert.equal(context.tableConstraint({},'wd_mass','msun',2),'—');
 const gleamRow=context.tableRow(catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37'));
 assert.match(gleamRow,/3010\.02/);assert.match(gleamRow,/<td class="numeric">—<\/td><td class="numeric">10496\.55<\/td>/);
+const gleam=catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37');
+assert.match(context.cmdNote({summary:gleam.summary},gleam.cmd),/spectrum\/SED distance \(model dependent\) 380 pc/);
+assert.match(context.cmdNote({summary:gleam.summary},gleam.cmd),/M_G 12\.9/);
+assert.equal(gleam.cmd.distance_measurement_ids,'M04418');
 const sections=['Source overview','Selected properties & periods','CMD placement','Radio observations','X-ray luminosity','Evidence & references'];
 const observationLabels=['Band','Reported flux or limit','Observable','Radio evidence','Uncertainty','Reference'];
 for(const x of catalog.systems){
