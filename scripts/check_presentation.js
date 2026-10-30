@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),app=fs.readFileSync(path.join(root,'assets/app.js'),'utf8');
 const context={};vm.createContext(context);
-vm.runInContext(app.split('\n').filter(l=>/^const (\$|labels=|styles=|pretty=)/.test(l)).join('\n')+'\n'+app.slice(app.indexOf('function tags'),app.indexOf('function render'))+'\n'+app.slice(app.indexOf('function fields'),app.indexOf('async function openSource')),context);
+vm.runInContext(app.split('\n').filter(l=>/^const (\$|labels=|styles=|pretty=)/.test(l)).join('\n')+'\n'+app.slice(app.indexOf('const columnDefinitions'),app.indexOf('function render'))+'\n'+app.slice(app.indexOf('function fields'),app.indexOf('async function openSource')),context);
 const format=(...args)=>context.estimate(...args);
 const escapeText=vm.runInContext('esc',context);
 assert.equal(context.tableNumber('9.87973152'),'9.88');
@@ -29,7 +29,7 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 }
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- assert.equal(cells.length,12);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ assert.equal(cells.length,14);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
  assert.equal(typeof x.summary.gaia_dr3_id,'string');assert.equal(cells[1].replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
  if(x.summary.gaia_dr3_id){
   const url=new URL(cells[1].match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
@@ -114,5 +114,24 @@ for(const [,target] of html.matchAll(/\b(?:href|src|data)="([^"]+)"/g)){
 assert(!html.includes('SCIENTIFIC CATALOG'));assert(!html.includes('data-sort="white_dwarf_host_confidence"'));
 assert(html.includes('id="additional-downloads"'));assert(!html.includes('id="additional-downloads" open'));
 assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
-assert.equal((html.match(/data-sort=/g)||[]).length,10);
-console.log('PASS: 58 twelve-column rows, exact Gaia ID strings/links/sorting, valid relative assets, radio/X-ray evidence and unchanged scientific data.');
+const presets=vm.runInContext('columnPresets',context),definitions=vm.runInContext('columnDefinitions',context);
+assert.deepEqual(Object.values(presets).map(p=>p.length),[7,10,7,14]);
+assert.equal(new Set(Object.values(presets).flat()).size,14);
+for(const keys of Object.values(presets)){
+ assert.equal((context.tableHead(keys).match(/<th\b/g)||[]).length,keys.length);
+ for(const x of catalog.systems)assert.equal((context.tableRow(x,keys).match(/<td\b/g)||[]).length,keys.length);
+}
+assert.equal((context.tableHead(presets.all).match(/data-sort=/g)||[]).length,11);
+assert(!context.tableHead(presets.all).includes('data-sort="radio_detection_status"'));
+for(const c of definitions.filter(c=>c.unit))assert(context.tableHead([c.key]).includes(c.unit));
+const qs=catalog.systems.find(x=>x.summary.source_name==='QS Vir'),qsData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',qs.token+'.json'))),radioLabel='Reported flux; significance not harmonized';
+assert(context.matchesFilters(qs,'qs vir','cataclysmic_variable','established',radioLabel));
+assert(!context.matchesFilters(qs,'qs vir','white_dwarf_pulsar','established',radioLabel));
+assert.equal((context.sourceDetail(qsData,qs,radioLabel).match(/radio-row radio-match/g)||[]).length,9);
+assert.match(context.tableRow(qs,presets.emission,radioLabel),/970 ± 160/);
+assert.match(context.tableRow(qs,presets.essentials,radioLabel),/View matching radio observations/);
+const columns=Object.keys(catalog.systems[0].summary),csv=context.csvText([qs],columns);
+assert(csv.includes('"3612227169936143360"'));assert(csv.includes('"50.1018677"'));
+assert.equal(context.csvText([],columns),csv.split('\r\n')[0]+'\r\n');
+assert.equal(context.csvText([{summary:{name:'a,"b\nc'}}],['name']),'"name"\r\n"a,""b\nc"\r\n');
+console.log('PASS: 58 systems in four column presets, exact Gaia strings/links/sorting, full-precision CSV, matching radio rows and unchanged scientific data.');

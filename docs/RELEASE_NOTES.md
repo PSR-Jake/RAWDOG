@@ -1,3 +1,11 @@
+# Website revision web r14 — 2026-10-30
+
+Adds Essentials (7), Physical properties (10), Radio/X-ray (7) and All columns (14) views, retaining all original table fields. Filter tokens, result counts and a visible sort summary preserve context when a sorted column is hidden. WD-host confidence remains in its independent filter and source detail. The compact header exposes version, download and citation links.
+
+Radio evidence uses existing source-level label counts without a new confidence ranking. Radio filtering still matches any observation; first-record previews are unchanged. Matching-record actions highlight the corresponding source observations while retaining every row. Filtered systems CSV downloads preserve the complete 210-field summary schema, stored strings, current row order and exact Gaia IDs, including header-only empty exports.
+
+Catalog data remains 1.0.2 and CMD figure/input revision remains web r13. All 157 protected data, figure, archive, catalog-index and source-bundle files are unchanged. [Implementation checks](P0_VERIFICATION.md).
+
 # Website / CMD figure revision web r13 — 2026-10-18
 
 Removes the permanent GLEAM-X source-name/prior-sensitivity annotation. At the author request, that source's CMD-only distance now uses M04418, 380±10 pc from the published spectrum/SED fit, reaffirmed in Rodriguez et al. (2026), Table 2. With unchanged observed Gaia photometry this gives M_G=12.885594 mag at BP−RP=1.851223. The recorded p16/p84 distance endpoints are transformed nonlinearly, with model dependence retained in inputs, hover and details. Other 57 input rows, membership and both exclusions are unchanged.
