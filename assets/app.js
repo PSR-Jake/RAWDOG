@@ -119,6 +119,7 @@ function refLink(r){let url=r.public_reference_url;return /^https?:\/\//.test(ur
 function displayNumber(v,digits=4){if(v===''||v==null)return '—';return Number.isFinite(Number(v))?String(Number(Number(v).toPrecision(digits))):String(v);}
 function tableNumber(v){return v===''||v==null?'—':Number.isFinite(Number(v))?Number(v).toFixed(2):String(v);}
 function present(v){return v!==''&&v!=null;}
+function evidenceLinks(ids){return String(ids||'').split(';').map(id=>id.trim()).filter(Boolean).map(id=>'<button type="button" class="evidence-link" data-measurement="'+esc(id)+'">Evidence '+esc(id)+'</button>').join(' ');}
 function numberMarkup(v,digits=4){
  const text=displayNumber(v,digits),match=text.match(/^(.+)e([+-]?\d+)$/i);
  return match?`${esc(match[1])} × 10<sup>${Number(match[2])<0?'−':''}${Math.abs(Number(match[2]))}</sup>`:esc(text);
@@ -147,6 +148,7 @@ function propertyOverview(s){
  const get=suffix=>s[prefix+suffix+(unit?'_'+k.split('_').at(-1):'')],val=s['preferred_'+k];
  const lo=get('_lower_bound'),hi=get('_upper_bound'),em=get('_error_minus'),ep=get('_error_plus');
  const convention=s[prefix+'_uncertainty_convention']||((em||ep||lo||hi)?'Interval/confidence convention unspecified; see evidence.':''),component=s[prefix+'_component']||'',method=s[prefix+'_method']||'';
+ const metadataKey=k.replace(/_(pc|h|s|k|mg|msun|gauss)$/,''),measurementIds=s[prefix+'_measurement_ids']||s[metadataKey+'_measurement_ids'],referenceKeys=s[prefix+'_reference_keys']||s[metadataKey+'_reference_keys'];
  const hints=[];
  if(/approximate/i.test(convention))hints.push('approximate');
  if(/fit|model|infer|synchrotron|mcmc/i.test(method)||s[prefix+'_assumption'])hints.push('model / assumptions');
@@ -154,41 +156,68 @@ function propertyOverview(s){
  else if(/p16|16th/i.test(convention)&&/p84|84th/i.test(convention))hints.push('p16–p84');
  else if(/68% credible/i.test(convention))hints.push('68% credible');
  if(Number.isFinite(Number(val))&&![em,ep,lo,hi].some(present))hints.push('no adopted error');
- notes.push(`<div class="property-note"><h4>${esc(label)}</h4>${fields({component,uncertainty:convention||'Not reported.',method,assumptions:s[prefix+'_assumption'],measurement_ids:s[prefix+'_measurement_ids'],reference_keys:s[prefix+'_reference_keys']},['component','uncertainty','method','assumptions','measurement_ids','reference_keys'])}</div>`);
- return `<div class="property-row"><dt>${esc(label)}</dt><dd><strong>${estimate(val,em,ep,lo,hi,unit,k.includes('period')?6:4)}</strong>${hints.length?'<span class="property-qualification">'+esc(hints.join(' · '))+'</span>':''}</dd></div>`;
+ notes.push(`<div class="property-note"><h4>${esc(label)}</h4>${fields({component,uncertainty:convention||'Not reported.',method,assumptions:s[prefix+'_assumption'],measurement_ids:measurementIds,reference_keys:referenceKeys},['component','uncertainty','method','assumptions','measurement_ids','reference_keys'])}</div>`);
+ return `<div class="property-row"><dt>${esc(label)}</dt><dd><strong>${estimate(val,em,ep,lo,hi,unit,k.includes('period')?6:4)}</strong>${hints.length?'<span class="property-qualification">'+esc(hints.join(' · '))+'</span>':''}${evidenceLinks(measurementIds)}</dd></div>`;
  }).join('');
- return rows?'<dl class="property-list">'+rows+'</dl><details class="record property-notes"><summary>Property notes & uncertainty conventions</summary>'+notes.join('')+'</details>':'';
+ const missing=properties.filter(([k])=>!present(s['preferred_'+k])).map(([k,label,unit,prefix])=>{
+ const status=s[prefix+'_status']||s[k.replace(/_(pc|h|s|k|mg|msun|gauss)$/,'')+'_status'],note=s[prefix+'_note']||s[k.replace(/_(pc|h|s|k|mg|msun|gauss)$/,'')+'_note'];
+ return status||note?'<dt>'+esc(label)+'</dt><dd>'+esc([status,note].filter(Boolean).join(' '))+'</dd>':'';
+ }).join('');
+ return (rows?'<dl class="property-list">'+rows+'</dl><details class="record property-notes"><summary>Property notes & uncertainty conventions</summary>'+notes.join('')+'</details>':(missing?'<p class="muted">No selected physical properties or periods. Published alternatives remain in the evidence below.</p>':''))+(missing?'<details class="record"><summary>Unselected quantities — recorded reasons</summary><dl class="raw-fields">'+missing+'</dl></details>':'');
 }
 function cmdNote(d,c=d.cmd){if(c.included!=='true')return `Main CMD: excluded. ${c.exclusion_reason}`;
  let note=`Main CMD: ${/SED/.test(c.distance_method)?'published spectrum/SED distance (model dependent)':'geometric distance'} ${displayNumber(c.distance_pc)} pc, observed BP−RP ${displayNumber(c.BP_RP_observed_mag,3)} mag, M_G ${displayNumber(c.M_G_observed_mag,3)} mag; unresolved light, not extinction corrected.`;
  note+=' '+c.qualifications;
+ if(!present(d.summary.preferred_distance_pc))note+=' This is a CMD-only distance adoption; no catalog preferred distance is selected.';
  if(d.summary.source_name==='ILT J1101+5521')note+=' Published model-dependent SED placement is available in supplementary downloads.';
  return note;}
+function observationCell(label,html){return '<td role="cell"><span class="cell-label" aria-hidden="true">'+esc(label)+'</span>'+html+'</td>';}
+function observationTable(kind,headings,rows){return '<table id="'+kind+'-table" class="observation-table" role="table"><caption class="sr-only">'+(kind==='radio'?'Radio observations':'X-ray luminosity records')+'</caption><thead role="rowgroup"><tr role="row">'+headings.map(h=>'<th scope="col" role="columnheader">'+esc(h)+'</th>').join('')+'</tr></thead>'+rows.join('')+'</table>';}
+function radioOverview(d,refs,radioLabel){
+ const rows=d.observations.map(r=>{
+ const cited=r.radio_reference_keys.split(';').map(k=>k.trim()).filter(Boolean).map(k=>refs.has(k)?refLink(refs.get(k)):esc(k)).join('; '),matching=radioLabel&&r.radio_evidence_label===radioLabel;
+ const flux=esc(r.flux_quantity_kind==='Missing'?'Not selected/reported':(r.reported_flux_text||r.flux_quantity_kind).replace(/\+\/-/g,'±'))+(r.reported_flux_text&&r.flux_quantity_kind!=='Missing'?' '+radioUnit(r):'');
+ return '<tbody role="rowgroup" class="radio-row'+(matching?' radio-match':'')+'" id="observation-'+esc(r.observation_id)+'" tabindex="-1" aria-label="'+esc(r.observation_id)+'"><tr role="row">'+
+ observationCell('Observation ID','<strong>'+esc(r.observation_id)+'</strong>'+(matching?'<span class="record-context radio-match-label">Matches selected radio evidence</span>':''))+
+ observationCell('Band / method & state',(r.radio_band_ghz_as_reported?esc(r.radio_band_ghz_as_reported)+' GHz':'Not reported')+'<span class="record-context">'+esc(r.flux_method_and_state||'Method / epoch / state not specified in this observation summary; see full metadata.')+'</span>')+
+ observationCell('Observable',esc(r.flux_quantity_kind==='Missing'?'Not selected/reported':r.flux_quantity_kind))+
+ observationCell('Reported flux or limit','<strong>'+flux+'</strong><span class="record-context">Uncertainty: '+esc(r.flux_uncertainty_convention||'Not reported; see full metadata.')+'</span>')+
+ observationCell('Radio evidence',esc(r.radio_evidence_label||'Not reported'))+observationCell('Reference',cited||'Not reported')+
+ '</tr><tr role="row" class="observation-metadata"><td role="cell" colspan="6"><details class="record"><summary>Full observation '+esc(r.observation_id)+' — uncertainty & metadata</summary>'+fields(r,Object.keys(r).filter(k=>!['source_id','source_name','observational_class_code'].includes(k)))+evidenceLinks(r.measurement_ids)+'</details></td></tr></tbody>';
+ });
+ return observationTable('radio',['Observation ID','Band / method & state','Observable','Reported flux or limit','Radio evidence','Reference'],rows);
+}
 function xrayOverview(x,refs){
  const e=x.emission||{xray:[]},rows=e.xray.filter(r=>r.available);
  let html='<p class="help">Recorded estimates, limits and distance scalings; no new flux-to-luminosity calculation or rescaling to the catalog distance. Bands, components, states and assumptions differ.</p>';
  if(!rows.length)html+='<p>No luminosity estimate recorded in this release.'+(e.xray_flux_record_count?' '+e.xray_flux_record_count+' flux records remain in the full measurement evidence.':'')+'</p>';
- for(const r of rows){const cited=r.reference_key.split(';').map(k=>k.trim()).filter(Boolean).map(k=>refs.has(k)?refLink(refs.get(k)):esc(k)).join('; ');
- html+='<article class="xray-record"><p><strong>'+luminosityValue(r)+(r.log10_luminosity||(!r.display_value_numeric&&!r.display_lower_bound&&!r.display_upper_bound&&/erg/i.test(r.value_text))?'':' erg s⁻¹')+'</strong></p><p>'+esc(xrayContext(r))+'</p><p class="muted">'+esc(r.component||'Component unspecified')+' · '+esc(r.epoch_or_state||'Epoch/state unspecified')+'</p><p>'+cited+'</p>';
- if(r.upper_limit&&r.public_limit_label==='No limit flag')html+='<p class="muted">Upper limit identified by the recorded parameter name; the numeric value is a bound, not a detection.</p>';
- html+='<details class="record"><summary>'+esc(r.measurement_id)+' · method, distance & uncertainty</summary>'+fields(r,['parameter','component','value_numeric','value_text','unit','error_minus','error_plus','lower_bound','upper_bound','limit_type','uncertainty_convention','method','assumption','epoch_or_state','reference_key','location','evidence_label','is_derived','derived_from','adoption_reason'])+'</details></article>';}
+ if(rows.length)html+=observationTable('xray',['Record','Band / epoch / state','Luminosity / limit','Component / model / distance','Evidence','Reference'],rows.map(r=>{
+ const cited=r.reference_key.split(';').map(k=>k.trim()).filter(Boolean).map(k=>refs.has(k)?refLink(refs.get(k)):esc(k)).join('; ');
+ const val=luminosityValue(r)+(r.log10_luminosity||(!r.display_value_numeric&&!r.display_lower_bound&&!r.display_upper_bound&&/erg/i.test(r.value_text))?'':' erg s⁻¹');
+ return '<tbody class="xray-record" role="rowgroup"><tr role="row">'+observationCell('Record',esc(r.measurement_id))+
+ observationCell('Band / epoch / state',esc(r.band_label)+'<span class="record-context">'+esc(r.epoch_or_state||'Epoch/state unspecified')+'</span>')+
+ observationCell('Luminosity / limit','<strong>'+val+'</strong>'+(r.upper_limit&&r.public_limit_label==='No limit flag'?'<span class="record-context">Upper limit identified by the recorded parameter name; a bound, not a detection.</span>':''))+
+ observationCell('Component / model / distance',esc(xrayContext(r))+'<span class="record-context">'+esc(r.component||'Component unspecified')+'</span>')+
+ observationCell('Evidence',esc(r.evidence_label||'See recorded method'))+observationCell('Reference',cited||'Not reported')+
+ '</tr><tr role="row" class="observation-metadata"><td role="cell" colspan="6"><details class="record"><summary>'+esc(r.measurement_id)+' · method, distance & uncertainty</summary>'+fields(r,['parameter','component','value_numeric','value_text','unit','error_minus','error_plus','lower_bound','upper_bound','limit_type','uncertainty_convention','method','assumption','epoch_or_state','reference_key','location','evidence_label','is_derived','derived_from','adoption_reason'])+evidenceLinks(r.measurement_id)+'</details></td></tr></tbody>';
+ }));
  for(const r of e.xray.filter(r=>!r.available))html+='<details class="record"><summary>'+esc(r.measurement_id)+' · recorded luminosity status</summary>'+fields(r,['value_text','method','assumption','reference_key','location'])+'</details>';
  return html;
 }
 function sourceDetail(d,x,radioLabel=''){
  const s=d.summary;
- let html=`<h2>${symbol(x)}${esc(s.source_name)}</h2><h3>Source overview</h3><div class="tags">${tags(s)}</div><p><strong>WD host: ${esc(labels[s.white_dwarf_host_confidence])}.</strong> ${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</p>`;
+ let html=`<h2>${symbol(x)}${esc(s.source_name)}</h2><h3 id="source-overview" tabindex="-1">Source overview</h3><div class="tags">${tags(s)}</div><p><strong>WD host: ${esc(labels[s.white_dwarf_host_confidence])}.</strong> ${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</p>`;
+ if(s.gaia_dr3_id)html+=`<p class="source-identity">Gaia DR3 <a href="https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I%2F355%2Fgaiadr3&amp;Source=${encodeURIComponent(s.gaia_dr3_id)}" target="_blank" rel="noopener">${esc(s.gaia_dr3_id)}</a></p>`;
  html+=`<details class="record"><summary>Aliases & counterpart identity</summary>${fields(s,['aliases','gaia_dr3_id','system_class_evidence','white_dwarf_host_evidence','proposed_or_disputed_interpretation'])}${s.gaia_dr3_id?'':'<p class="muted">No selected Gaia counterpart.</p>'}</details>`;
- const overview=propertyOverview(s);html+='<h3>Selected properties & periods</h3>'+(overview||'<p class="muted">No selected physical properties or periods. Published alternatives remain in the evidence below.</p>');
+ const overview=propertyOverview(s);html+='<h3 id="selected-properties" tabindex="-1">Selected properties & periods</h3>'+(overview||'<p class="muted">No selected physical properties or periods. Published alternatives remain in the evidence below.</p>');
  if(s.source_name==='AR Sco')html+='<p class="help"><strong>Field interpretation:</strong> 42.7±0.2 G describes the modeled synchrotron region (MCSE, not physical confidence). The separately inferred WD polar field is approximately 15 MG. The abstract’s 43 MG remains in the evidence as a likely unit typo—an inference.</p>';
- html+='<h3>CMD placement</h3><p class="help">'+esc(cmdNote(d,x.cmd))+'</p>';
- html+='<h3 id="radio-observations" tabindex="-1">Radio observations</h3><p class="muted">'+d.observations.length+' observation '+(d.observations.length===1?'row':'rows')+'. Expand an observation for methods and full metadata.</p>';
+ html+='<h3 id="cmd-placement" tabindex="-1">CMD placement</h3><p class="help">'+esc(cmdNote(d,x.cmd))+'</p>';
+ html+='<h3 id="radio-observations" tabindex="-1">Radio observations</h3><p class="muted">'+d.observations.length+' observation '+(d.observations.length===1?'row':'rows')+'. Expand an observation for methods and full metadata.</p><button type="button" data-collapse-observations>Collapse observation details</button>';
  if(radioLabel)html+='<p id="radio-match-note" class="help">Matching '+esc(radioLabel)+' records are highlighted. All observations remain shown. <button type="button" data-show-all-radio>Show all observations</button></p>';
  const refs=new Map(d.references.map(r=>[r.key,r]));
- for(let [i,r] of d.observations.entries()){let cited=r.radio_reference_keys.split(';').map(k=>k.trim()).filter(Boolean).map(k=>refs.has(k)?refLink(refs.get(k)):esc(k)).join('; ');
- html+=`<div class="radio-row${radioLabel&&r.radio_evidence_label===radioLabel?' radio-match':''}" tabindex="-1"><h4>Observation ${i+1}</h4><dl class="raw-fields observation-summary"><dt>Band</dt><dd>${r.radio_band_ghz_as_reported?esc(r.radio_band_ghz_as_reported)+' GHz':'Not reported'}</dd><dt>Reported flux or limit</dt><dd>${esc(r.flux_quantity_kind==='Missing'?'Not selected/reported':(r.reported_flux_text||r.flux_quantity_kind).replace(/\+\/-/g,'±'))}${r.reported_flux_text&&r.flux_quantity_kind!=='Missing'?' '+radioUnit(r):''}</dd><dt>Observable</dt><dd>${r.flux_quantity_kind==='Missing'?'Not selected/reported':esc(r.flux_quantity_kind)}</dd><dt>Radio evidence</dt><dd>${esc(r.radio_evidence_label||'Not reported')}</dd><dt>Uncertainty</dt><dd>${esc(r.flux_uncertainty_convention||'Not reported; see full metadata.')}</dd><dt>Reference</dt><dd>${cited||'Not reported'}</dd></dl><details class="record"><summary>Full observation ${esc(r.observation_id)} — uncertainty & metadata</summary>${fields(r,Object.keys(r).filter(k=>!['source_id','source_name','observational_class_code'].includes(k)))}</details></div>`;}
+ html+=radioOverview(d,refs,radioLabel);
  html+='<h3 id="xray-luminosity" tabindex="-1">X-ray luminosity</h3>'+xrayOverview(x,refs);
- html+='<h3>Evidence & references</h3><details class="record"><summary><strong>Selected-property methods, assumptions & evidence links</strong></summary>'+fields(s,Object.keys(s).filter(k=>k!=='aliases'&&k!=='source_id'))+'</details>';
+ html+='<h3 id="source-evidence" tabindex="-1">Evidence & references</h3><details class="record"><summary><strong>Selected-property methods, assumptions & evidence links</strong></summary>'+fields(s,Object.keys(s).filter(k=>k!=='aliases'&&k!=='source_id'))+'</details>';
  html+='<details class="record"><summary><strong>Plot inputs, coordinate provenance & distance qualifications</strong></summary><h4>Sky coordinates</h4>'+fields(d.sky,Object.keys(d.sky).filter(k=>!['token','display_group'].includes(k)))+'<h4>Main Gaia CMD</h4>'+fields(x.cmd,Object.keys(x.cmd).filter(k=>!['token','display_group'].includes(k)))+'</details>';
  html+='<details class="record"><summary><strong>All measurement evidence & alternatives</strong> · '+d.measurements.length+' records</summary><p class="muted">Original values, components, methods, assumptions and uncertainty conventions retained.</p>';
  const groups={};for(let r of d.measurements)(groups[r.public_property_group]??=[]).push(r);
@@ -197,16 +226,31 @@ function sourceDetail(d,x,radioLabel=''){
  html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${r.public_reference_link_status?'<span class="subtext">'+esc(r.public_reference_link_status)+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.2 source evidence JSON</a></p>';
  return html;
 }
-async function openSource(sid,hash=true,section='',radioLabel=''){
- const x=systems.find(x=>x.summary.source_id===sid);if(!x)return;let seq=++detailRequest;
- lastFocus=document.activeElement;if(hash)history.pushState(null,'','#source='+encodeURIComponent(sid));$('#detail-body').innerHTML='<p role="status">Loading source evidence…</p>';if(!$('#detail').open)$('#detail').showModal();
- try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.2');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;
- $('#detail-body').innerHTML=sourceDetail(d,x,radioLabel);$('#detail').scrollTop=0;$('#close').focus();if(section){const target=(radioLabel&&$('#detail-body .radio-match'))||$('#'+section);if(target){target.focus();target.scrollIntoView({block:'start'});}}
- }catch(e){$('#detail-body').innerHTML='<p role="alert">'+esc(e.message)+'. Download the versioned CSVs for the evidence tables.</p>';}
+function jumpToEvidence(target){
+ if(!target)return;
+ for(let p=target;p&&p!==$('#detail');p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;
+ $('#detail').style.setProperty('--detail-header-height',$('.detail-toolbar').offsetHeight+'px');
+ target.scrollIntoView({block:'start'});(target.tagName==='DETAILS'?target.querySelector('summary'):target).focus({preventScroll:true});
 }
-function closeSource(){++detailRequest;$('#detail').close();if(location.hash.startsWith('#source='))history.replaceState(null,'',location.pathname+location.search+'#catalog');if(lastFocus?.isConnected)lastFocus.focus();}
-$('#close').addEventListener('click',closeSource);$('#detail').addEventListener('cancel',e=>{e.preventDefault();closeSource();});
-$('#detail-body').addEventListener('click',ev=>{if(ev.target.closest('[data-show-all-radio]')){for(const row of document.querySelectorAll('.radio-match'))row.classList.remove('radio-match');$('#radio-match-note').hidden=true;$('#radio-observations').focus();$('#radio-observations').scrollIntoView({block:'start'});}});
-function route(){if(location.hash.startsWith('#source=')){try{openSource(decodeURIComponent(location.hash.slice(8)),false);}catch(e){}}else if($('#detail').open){++detailRequest;$('#detail').close();}}
+async function openSource(sid,hash=true,section='',radioLabel=''){
+ const x=systems.find(x=>x.summary.source_id===sid);let seq=++detailRequest;
+ if(!$('#detail').open)lastFocus=document.activeElement;
+ if(hash)history.pushState(null,'','#source='+encodeURIComponent(sid));
+ $('#detail-name').textContent=x?x.summary.source_name:'Source not found';$('.detail-nav').hidden=true;$('#detail-status').hidden=true;
+ $('#detail-body').innerHTML='<p role="status">Loading source evidence…</p>';if(!$('#detail').open)$('#detail').showModal();$('#close').focus();
+ if(!x){$('#detail-body').innerHTML='<p role="alert">No source in catalog 1.0.2 matches '+esc(sid)+'. Close this view and search the catalog.</p>';return;}
+ try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.2');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;
+ $('#detail-body').innerHTML=sourceDetail(d,x,radioLabel);$('.detail-nav').hidden=false;$('#detail').scrollTop=0;$('#close').focus();if(section)jumpToEvidence((radioLabel&&$('#detail-body .radio-match'))||$('#'+section));
+ }catch(e){if(seq!==detailRequest)return;$('.detail-nav').hidden=true;$('#detail-body').innerHTML='<p role="alert">Source evidence could not be loaded. Try reopening this source or <a download href="data/v1.0.2/rawdog_measurements.csv">download the versioned evidence CSV</a>.</p>';}
+}
+function closeSource(updateHash=true){++detailRequest;$('#detail').close();if(updateHash&&location.hash.startsWith('#source='))history.replaceState(null,'',location.pathname+location.search+'#catalog');if(lastFocus?.isConnected&&lastFocus!==document.body)lastFocus.focus();else $('#search').focus();}
+$('#close').addEventListener('click',()=>closeSource());$('#detail').addEventListener('cancel',e=>{e.preventDefault();closeSource();});
+$('.detail-nav').addEventListener('click',ev=>{const b=ev.target.closest('[data-jump]');if(b)jumpToEvidence($('#'+b.dataset.jump));});
+$('#detail-body').addEventListener('click',ev=>{
+ const evidence=ev.target.closest('[data-measurement]');if(evidence){const target=document.getElementById(evidence.dataset.measurement);if(target&&$('#detail-body').contains(target))jumpToEvidence(target);else{$('#detail-status').textContent='Linked measurement unavailable in this source bundle; use the versioned evidence download.';$('#detail-status').hidden=false;}}
+ const collapse=ev.target.closest('[data-collapse-observations]');if(collapse){for(const detail of document.querySelectorAll('.observation-table details[open]'))detail.open=false;collapse.focus();}
+ if(ev.target.closest('[data-show-all-radio]')){for(const row of document.querySelectorAll('.radio-match')){row.classList.remove('radio-match');row.querySelector('.radio-match-label')?.remove();}$('#radio-match-note').hidden=true;jumpToEvidence($('#radio-observations'));}
+});
+function route(){if(location.hash.startsWith('#source=')){let sid=location.hash.slice(8);try{sid=decodeURIComponent(sid);}catch(e){}openSource(sid,false);}else if($('#detail').open)closeSource(false);}
 window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
 Promise.all(['assets/catalog.json?v=1.0.2','data/v1.0.2-web-r10/emission_evidence.json','data/v1.0.2-web-r13/cmd_plot_input.json'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();}))).then(([data,evidence,currentCmd])=>{const cmdById=new Map(currentCmd.systems.map(c=>[c.source_id,c]));const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));systems=data.systems.map(x=>({...x,cmd:cmdById.get(x.summary.source_id),emission:byid.get(x.summary.source_id)}));render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});

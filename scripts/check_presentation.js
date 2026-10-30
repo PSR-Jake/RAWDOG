@@ -59,16 +59,22 @@ assert.match(context.cmdNote({summary:gleam.summary},gleam.cmd),/spectrum\/SED d
 assert.match(context.cmdNote({summary:gleam.summary},gleam.cmd),/M_G 12\.9/);
 assert.equal(gleam.cmd.distance_measurement_ids,'M04418');
 const sections=['Source overview','Selected properties & periods','CMD placement','Radio observations','X-ray luminosity','Evidence & references'];
-const observationLabels=['Band','Reported flux or limit','Observable','Radio evidence','Uncertainty','Reference'];
+const observationLabels=['Observation ID','Band / method &amp; state','Observable','Reported flux or limit','Radio evidence','Reference'];
 for(const x of catalog.systems){
  const d=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',x.token+'.json'))),original=JSON.stringify(d),html=context.sourceDetail(d,x);
  assert.deepEqual(Array.from(html.matchAll(/<h3(?: [^>]*)?>([^<]+)<\/h3>/g),m=>m[1]),sections);
  assert(!/NaN|undefined/.test(html),x.summary.source_name);
  assert(html.includes('class="property-list"'));assert(!html.includes('class="property-grid"'));
  assert.equal((html.match(/class="property-row"/g)||[]).length,(html.match(/class="property-note"/g)||[]).length);
+ for(const row of html.matchAll(/<div class="property-row">(.*?)<\/div>/g))assert(row[1].includes('data-measurement='),x.summary.source_name+': selected property has a direct evidence link');
  for(const [key,v] of Object.entries(d.summary))if(key.endsWith('_uncertainty_convention')&&v)assert(html.includes(escapeText(v)),key);
  assert.equal((html.match(/class="radio-row"/g)||[]).length,d.observations.length);
- for(const row of html.matchAll(/<dl class="raw-fields observation-summary">(.*?)<\/dl>/g))assert.deepEqual(Array.from(row[1].matchAll(/<dt>([^<]+)<\/dt>/g),m=>m[1]),observationLabels);
+ const radioHTML=context.radioOverview(d,new Map(d.references.map(r=>[r.key,r])),''),headings=Array.from(radioHTML.matchAll(/<th\b[^>]*>([^<]+)<\/th>/g),m=>m[1]);
+ assert.deepEqual(headings,observationLabels);
+ assert.deepEqual(Array.from(radioHTML.matchAll(/id="observation-([^"]+)"/g),m=>m[1]),d.observations.map(r=>r.observation_id));
+ assert.equal((html.match(/class="xray-record"/g)||[]).length,x.emission.xray.filter(r=>r.available).length);
+ const ids=new Set(d.measurements.map(r=>r.measurement_id));
+ for(const [,id] of html.matchAll(/data-measurement="([^"]+)"/g))assert(ids.has(id),'Evidence link must resolve within source: '+id);
  assert(!/<details[^>]*\sopen(?:\s|>)/.test(html),'Evidence should start collapsed');
  for(const r of d.measurements)assert.equal(html.split('id="'+r.measurement_id+'"').length-1,1,r.measurement_id);
  for(const r of d.references)assert(html.includes(escapeText(r.key)));
@@ -85,7 +91,7 @@ for(const key of Object.keys(empty.summary))if(key.startsWith('preferred_'))empt
 empty.observations[0].radio_band_ghz_as_reported='';empty.observations[0].flux_quantity_kind='Missing';
 const emptyHTML=context.sourceDetail(empty,added);
 assert(!emptyHTML.includes('class="property-list"'));assert.match(emptyHTML,/No selected physical properties or periods/);
-assert.match(emptyHTML,/<dt>Band<\/dt><dd>Not reported<\/dd>/);assert.match(emptyHTML,/<dt>Reported flux or limit<\/dt><dd>Not selected\/reported<\/dd>/);
+assert(emptyHTML.includes('Band / method &amp; state</span>Not reported'),'Missing band stays explicit');assert(emptyHTML.includes('Reported flux or limit</span><strong>Not selected/reported</strong>'),'Missing flux is not invented');
 const ar=catalog.systems.find(x=>x.summary.source_name==='AR Sco').summary;
 assert.match(context.propertyOverview(ar),/MCSE/);assert.match(context.propertyOverview(ar),/15 MG/);
 const ae=catalog.systems.find(x=>x.summary.source_name==='AE Aqr').summary,aeOverview=context.propertyOverview(ae);
@@ -93,6 +99,11 @@ assert.equal((aeOverview.match(/class="property-row"/g)||[]).length,5);
 assert.match(aeOverview,/Property notes & uncertainty conventions/);assert.match(aeOverview,/p16–p84/);
 assert.match(aeOverview,/M02945/);assert.match(aeOverview,/no adopted error/);
 assert(!context.propertyOverview({preferred_wd_mass_msun:'0',wd_mass_error_minus_msun:'0',wd_mass_error_plus_msun:'0'}).includes('no adopted error'));
+const j1912=catalog.systems.find(x=>x.summary.source_name==='J191213.72-441045.1'),j1912Overview=context.propertyOverview(j1912.summary);
+assert.equal(j1912.summary.preferred_distance_pc,'');assert.equal(j1912.cmd.distance_pc,'236.729919');
+assert(j1912Overview.includes(escapeText(j1912.summary.distance_status)));
+assert(!j1912Overview.match(/<dl class="property-list">(.*?)<\/dl>/)[1].includes('<dt>Distance</dt>'));
+assert.match(context.cmdNote({summary:j1912.summary},j1912.cmd),/CMD-only distance adoption/);
 const lx=emissions.systems.flatMap(e=>e.xray),byid=new Map(lx.map(r=>[r.measurement_id,r]));
 assert.match(context.luminosityValue(byid.get('M04492')),/^≤ /);assert(!context.luminosityValue(byid.get('M04492')).includes('±'));
 assert.match(context.luminosityValue(byid.get('M07159')),/1\.4 × 10<sup>30<\/sup>/);
@@ -114,6 +125,8 @@ for(const [,target] of html.matchAll(/\b(?:href|src|data)="([^"]+)"/g)){
 assert(!html.includes('SCIENTIFIC CATALOG'));assert(!html.includes('data-sort="white_dwarf_host_confidence"'));
 assert(html.includes('id="additional-downloads"'));assert(!html.includes('id="additional-downloads" open'));
 assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
+assert(html.includes('aria-labelledby="detail-name"'));
+assert.equal((html.match(/data-jump=/g)||[]).length,6);
 const presets=vm.runInContext('columnPresets',context),definitions=vm.runInContext('columnDefinitions',context);
 assert.deepEqual(Object.values(presets).map(p=>p.length),[7,10,7,14]);
 assert.equal(new Set(Object.values(presets).flat()).size,14);
@@ -134,4 +147,19 @@ const columns=Object.keys(catalog.systems[0].summary),csv=context.csvText([qs],c
 assert(csv.includes('"3612227169936143360"'));assert(csv.includes('"50.1018677"'));
 assert.equal(context.csvText([],columns),csv.split('\r\n')[0]+'\r\n');
 assert.equal(context.csvText([{summary:{name:'a,"b\nc'}}],['name']),'"name"\r\n"a,""b\nc"\r\n');
-console.log('PASS: 58 systems in four column presets, exact Gaia strings/links/sorting, full-precision CSV, matching radio rows and unchanged scientific data.');
+async function checkSourceFailures(){
+ // A delayed failed request must not replace a newer source's evidence.
+ const nodes=Object.fromEntries(['#detail','#detail-name','.detail-nav','#detail-status','#detail-body','#close'].map(k=>[k,{focus(){},showModal(){this.open=true;}}]));
+ const pending=new Map(),sourceContext={document:{activeElement:{}},nodes,fetch:url=>new Promise((resolve,reject)=>pending.set(url,{resolve,reject}))};
+ vm.createContext(sourceContext);
+ vm.runInContext(`const $=s=>nodes[s],esc=s=>String(s).replaceAll('<','&lt;');let detailRequest=0,lastFocus;const systems=['older','newer'].map(id=>({token:id,summary:{source_id:id,source_name:id}}));function sourceDetail(d,x){return x.summary.source_name;}`+app.slice(app.indexOf('async function openSource'),app.indexOf('function closeSource')),sourceContext);
+ const older=sourceContext.openSource('older',false),newer=sourceContext.openSource('newer',false);
+ pending.get('assets/sources/newer.json?v=1.0.2').resolve({ok:true,json:async()=>({})});await newer;
+ pending.get('assets/sources/older.json?v=1.0.2').reject(new Error('Delayed failure'));await older;
+ assert.equal(nodes['#detail-body'].innerHTML,'newer');assert.equal(nodes['.detail-nav'].hidden,false);
+ const broken=sourceContext.openSource('older',false);
+ pending.get('assets/sources/older.json?v=1.0.2').resolve({ok:true,json:async()=>{throw new SyntaxError('Invalid JSON');}});await broken;
+ assert(nodes['#detail-body'].innerHTML.includes('download the versioned evidence CSV'));assert.equal(nodes['.detail-nav'].hidden,true);
+ await sourceContext.openSource('<unknown>',false);assert(nodes['#detail-body'].innerHTML.includes('&lt;unknown>'));
+}
+checkSourceFailures().then(()=>console.log('PASS: 58 systems, four presets, exact Gaia IDs, CSV precision, source/observation evidence, missing values, safe asynchronous failures and unchanged scientific data.')).catch(e=>{console.error(e);process.exitCode=1;});
