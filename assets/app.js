@@ -6,13 +6,39 @@ const pretty=k=>({non_magnetic_cv:'Non-magnetic CV',AM:'Polar (AM Her)',IP:'Inte
 let systems=[],shown=[],sortKey='source_name',sortAsc=true,lastFocus=null,detailRequest=0;
 const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog_measurements.csv','rawdog_references.csv','rawdog_physical_properties.csv','rawdog_gaia_counterparts.csv','rawdog_source_references.csv','rawdog_review_issues.csv','rawdog_excluded_counterparts.csv','rawdog_reference_link_checks.csv'];
 $('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
+const columnDefinitions=[
+ {key:'source_name',label:'System',sort:true},
+ {key:'gaia_dr3_id',label:'Gaia DR3 ID',sort:true},
+ {key:'classification_labels',label:'Class',sort:true},
+ {key:'preferred_distance_pc',label:'Distance',unit:'pc',sort:true,numeric:true},
+ {key:'preferred_orbital_period_h',label:'Orbital period',unit:'h',sort:true,numeric:true},
+ {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true},
+ {key:'preferred_radio_recurrence_period_s',label:'Radio recurrence',unit:'s',sort:true,numeric:true},
+ {key:'radio_preview',label:'Radio Sν',unit:'µJy · recorded band'},
+ {key:'xray_preview',label:'X-ray Lₓ',unit:'erg s⁻¹ · recorded band'},
+ {key:'preferred_wd_photospheric_teff_k',label:'WD photospheric temperature',unit:'K',sort:true,numeric:true},
+ {key:'preferred_wd_mass_msun',label:'WD mass',unit:'M☉',sort:true,numeric:true},
+ {key:'preferred_companion_spectral_type',label:'Companion spectral type',sort:true},
+ {key:'radio_observation_count',label:'Radio observations',unit:'rows',sort:true,numeric:true},
+ {key:'radio_detection_status',label:'Radio evidence'}
+];
+const columnPresets={
+ essentials:['source_name','classification_labels','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','radio_observation_count'],
+ physical:['source_name','gaia_dr3_id','classification_labels','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun','preferred_companion_spectral_type'],
+ emission:['source_name','classification_labels','preferred_distance_pc','radio_observation_count','radio_detection_status','radio_preview','xray_preview'],
+ all:columnDefinitions.map(c=>c.key)
+};
+function tableHead(keys,key='source_name',ascending=true){return '<tr>'+keys.map(k=>{
+ const c=columnDefinitions.find(c=>c.key===k),label=esc(c.label)+(c.unit?'<span class="column-unit">'+esc(c.unit)+'</span>':'');
+ return '<th scope="col"'+(c.numeric?' class="numeric"':'')+(c.sort&&k===key?' aria-sort="'+(ascending?'ascending':'descending')+'"':'')+'>'+(c.sort?'<button data-sort="'+k+'">'+label+'<span aria-hidden="true"> ↕</span></button>':label)+'</th>';
+}).join('')+'</tr>';}
 function tags(s){return displayClassCodes(s).map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
 function displayClassCodes(s){const codes=[...new Set(s.classification_labels.split(';').map(t=>t.trim()).filter(Boolean))];return codes.filter(t=>t!=='long_period_transient'&&(t!=='cataclysmic_variable'||!codes.includes('magnetic_cv')));}
 function symbol(x){let [c,a,b]=styles[x.sky.display_group];return `<span class="symbol" style="color:${c}" aria-label="${x.sky.qualified_status==='true'?'Qualified':'Established'} ${esc(labels[x.sky.display_group])}">${x.sky.qualified_status==='true'?b:a}</span> `;}
 function compareSystems(a,b,key,ascending){
  const av=a.summary[key],bv=b.summary[key];
  if(!present(av)||!present(bv))return !present(av)?(!present(bv)?0:1):-1;
- const numeric=['preferred_orbital_period_h','preferred_distance_pc','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun'].includes(key);
+ const numeric=columnDefinitions.some(c=>c.key===key&&c.numeric);
  const c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return ascending?c:-c;
 }
 function tableConstraint(s,prefix,unit,digits){
@@ -23,11 +49,21 @@ function tableConstraint(s,prefix,unit,digits){
  if(present(lo))return '≥ '+format(lo);
  return '—';
 }
-function tableRow(x){
+function tableRow(x,keys=columnPresets.all,radioLabel=''){
  const s=x.summary,classes=displayClassCodes(s).map(t=>({cataclysmic_variable:'CV',magnetic_cv:'mCV',white_dwarf_pulsar:'WD pulsar',long_period_radio_transient:'LPT'}[t]||pretty(t))).join(' · ');
- const numbers=[tableNumber(s.preferred_distance_pc),tableNumber(s.preferred_orbital_period_h),tableNumber(s.preferred_wd_spin_period_s),tableNumber(s.preferred_radio_recurrence_period_s),tableConstraint(s,'wd_photospheric_teff','k',0),tableConstraint(s,'wd_mass','msun',2)];
- const cells=numbers.map(v=>'<td class="numeric">'+esc(v)+'</td>');
- return `<tr><td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button></td><td class="gaia-id">${s.gaia_dr3_id?`<a href="https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I%2F355%2Fgaiadr3&amp;Source=${encodeURIComponent(s.gaia_dr3_id)}" target="_blank" rel="noopener" title="View this Gaia DR3 source in VizieR (opens in a new tab)">${esc(s.gaia_dr3_id)}</a>`:'—'}</td><td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>${cells.slice(0,4).join('')}${emissionCell(x,'radio')}${emissionCell(x,'xray')}${cells.slice(4).join('')}<td>${esc(s.preferred_companion_spectral_type||'—')}</td></tr>`;
+ const cells={
+ source_name:`<td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button>${radioLabel?`<button class="matching-radio-link" data-source="${esc(s.source_id)}" data-section="radio-observations" data-match-radio="${esc(radioLabel)}">View matching radio observations</button>`:''}</td>`,
+ gaia_dr3_id:`<td class="gaia-id">${s.gaia_dr3_id?`<a href="https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I%2F355%2Fgaiadr3&amp;Source=${encodeURIComponent(s.gaia_dr3_id)}" target="_blank" rel="noopener" title="View this Gaia DR3 source in VizieR (opens in a new tab)">${esc(s.gaia_dr3_id)}</a>`:'—'}</td>`,
+ classification_labels:`<td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>`,
+ radio_preview:emissionCell(x,'radio'),xray_preview:emissionCell(x,'xray'),
+ preferred_wd_photospheric_teff_k:'<td class="numeric">'+esc(tableConstraint(s,'wd_photospheric_teff','k',0))+'</td>',
+ preferred_wd_mass_msun:'<td class="numeric">'+esc(tableConstraint(s,'wd_mass','msun',2))+'</td>',
+ preferred_companion_spectral_type:'<td>'+esc(s.preferred_companion_spectral_type||'—')+'</td>',
+ radio_observation_count:`<td class="numeric"><button class="emission-link" data-source="${esc(s.source_id)}" data-section="radio-observations" aria-label="${esc(s.source_name)}: ${esc(s.radio_observation_count)} radio observation ${s.radio_observation_count==='1'?'row':'rows'}">${esc(s.radio_observation_count)}</button></td>`,
+ radio_detection_status:'<td class="radio-status">'+esc(s.radio_detection_status||'Not reported')+'</td>'
+ };
+ for(const key of ['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s'])cells[key]='<td class="numeric">'+esc(tableNumber(s[key]))+'</td>';
+ return '<tr>'+keys.map(k=>cells[k]).join('')+'</tr>';
 }
 function luminosityValue(r){
  if(!r.display_value_numeric&&!r.display_lower_bound&&!r.display_upper_bound)return esc(r.value_text);
@@ -45,11 +81,19 @@ function emissionCell(x,kind){
  const context=!r?(kind==='xray'&&e.xray_flux_record_count?'flux records only':'no recorded value'):kind==='radio'?((r.radio_band_ghz_as_reported||'band unspecified')+(r.radio_band_ghz_as_reported?' GHz':'')+(r.flux_quantity_kind.includes('Peak')?' · peak brightness ('+radioUnit(r)+')':'')+(/^Marginal/.test(r.radio_evidence_label)?' · marginal':'')+(r.flux_quantity_kind==='Missing'?' · no selected flux':'')):xrayContext(r);
  return `<td class="emission-cell"><button class="emission-link" data-source="${esc(x.summary.source_id)}" data-section="${section}" aria-label="${esc(x.summary.source_name)}: ${kind==='radio'?'radio observations':'X-ray luminosity evidence'}">${val}</button><span class="emission-note">${esc(context)}</span>${r?'<span class="emission-note">'+(rows.length>1?'first of '+rows.length+' records':'1 record')+' · view evidence</span>':''}</td>`;
 }
+function matchesFilters(x,q,cls,host,radio){const s=x.summary;return (!q||[s.source_name,s.aliases,s.gaia_dr3_id,s.source_reference_keys].join(' ').toLowerCase().includes(q))&&(!cls||s.classification_labels.split(';').map(t=>t.trim()).includes(cls))&&(!host||s.white_dwarf_host_confidence===host)&&(!radio||x.radio_labels.includes(radio));}
+function csvText(rows,columns){const quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';return [columns,...rows.map(x=>columns.map(k=>x.summary[k]))].map(row=>row.map(quote).join(',')).join('\r\n')+'\r\n';}
 function render(){
  const q=$('#search').value.toLowerCase().trim(),cls=$('#classification').value,host=$('#host').value,radio=$('#radio').value;
- shown=systems.filter(x=>{let s=x.summary;return (!q||[s.source_name,s.aliases,s.gaia_dr3_id,s.source_reference_keys].join(' ').toLowerCase().includes(q))&&(!cls||s.classification_labels.split(';').map(t=>t.trim()).includes(cls))&&(!host||s.white_dwarf_host_confidence===host)&&(!radio||x.radio_labels.includes(radio));});
+ shown=systems.filter(x=>matchesFilters(x,q,cls,host,radio));
  shown.sort((a,b)=>compareSystems(a,b,sortKey,sortAsc));
- $('#systems tbody').innerHTML=shown.map(tableRow).join('');
+ const keys=columnPresets[$('#columns').value];
+ $('#systems thead').innerHTML=tableHead(keys,sortKey,sortAsc);
+ $('#systems tbody').innerHTML=shown.map(x=>tableRow(x,keys,radio)).join('');
+ $('#sort-state').textContent='Sorted by '+columnDefinitions.find(c=>c.key===sortKey).label+' · '+(sortAsc?'ascending':'descending')+(keys.includes(sortKey)?'':' · column hidden in this view');
+ $('#active-filters').innerHTML=['search','classification','host','radio'].filter(id=>$('#'+id).value).map(id=>{const el=$('#'+id),label=id==='search'?'Search: '+el.value:el.selectedOptions[0].textContent;return '<button type="button" data-clear-filter="'+id+'" aria-label="Remove '+esc(label)+' filter">'+esc(label)+' <span aria-hidden="true">×</span></button>';}).join('')||'<span>No active filters</span>';
+ $('#radio-filter-note').hidden=!radio;
+ $('#active-filters').hidden=![q,cls,host,radio].some(Boolean);$('#emission-note').hidden=!keys.includes('radio_preview');
  $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.2`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){
@@ -64,8 +108,10 @@ function updatePlots(){
 function setupPlot(obj){const doc=obj.contentDocument;if(!doc)return;for(let g of doc.querySelectorAll('[data-source]')){g.style.cursor='pointer';g.addEventListener('click',ev=>{ev.preventDefault();openSource(g.getAttribute('data-source'));});g.addEventListener('keydown',ev=>{if(ev.key==='Enter'){ev.preventDefault();openSource(g.getAttribute('data-source'));}});}updatePlots();}
 for(let obj of document.querySelectorAll('.plot'))obj.addEventListener('load',()=>setupPlot(obj));
 $('#filters').addEventListener('input',render);$('#filters').addEventListener('submit',e=>e.preventDefault());$('#filters').addEventListener('reset',()=>setTimeout(render,0));$('#plot-filter').addEventListener('change',updatePlots);
-$('#systems').addEventListener('click',ev=>{const s=ev.target.closest('[data-source]');if(s)openSource(s.dataset.source,true,s.dataset.section);const b=ev.target.closest('[data-sort]');if(b){sortAsc=sortKey===b.dataset.sort?!sortAsc:true;sortKey=b.dataset.sort;for(let th of $('#systems').querySelectorAll('th'))th.removeAttribute('aria-sort');b.closest('th').setAttribute('aria-sort',sortAsc?'ascending':'descending');render();}});
-function exportCSV(){const columns=Object.keys(systems[0].summary),quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';let text=[columns,...shown.map(x=>columns.map(k=>x.summary[k]))].map(row=>row.map(quote).join(',')).join('\r\n')+'\r\n';const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.2-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('#columns').addEventListener('change',render);
+$('#active-filters').addEventListener('click',ev=>{const b=ev.target.closest('[data-clear-filter]');if(b){const el=$('#'+b.dataset.clearFilter);el.value='';render();el.focus();}});
+$('#systems').addEventListener('click',ev=>{const s=ev.target.closest('[data-source]');if(s)openSource(s.dataset.source,true,s.dataset.section,s.dataset.matchRadio);const b=ev.target.closest('[data-sort]');if(b){sortAsc=sortKey===b.dataset.sort?!sortAsc:true;sortKey=b.dataset.sort;render();$('#systems [data-sort="'+sortKey+'"]').focus();}});
+function exportCSV(){const text=csvText(shown,Object.keys(systems[0].summary));const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.2-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('#export').addEventListener('click',exportCSV);
 function fields(r,keys){return `<dl class="raw-fields">${keys.filter(k=>r[k]!==''&&r[k]!=null).map(k=>`<dt>${esc(pretty(k))}</dt><dd>${esc(k==='component'||k.endsWith('_component')||k==='gaia_match_status'?pretty(r[k]):r[k])}</dd>`).join('')}</dl>`;}
 function value(r){return estimate(r.value_numeric!==''&&r.value_numeric!=null?r.value_numeric:r.value_text||'No numeric value selected/reported',r.error_minus,r.error_plus,r.lower_bound,r.upper_bound,r.unit);}
@@ -129,7 +175,7 @@ function xrayOverview(x,refs){
  for(const r of e.xray.filter(r=>!r.available))html+='<details class="record"><summary>'+esc(r.measurement_id)+' · recorded luminosity status</summary>'+fields(r,['value_text','method','assumption','reference_key','location'])+'</details>';
  return html;
 }
-function sourceDetail(d,x){
+function sourceDetail(d,x,radioLabel=''){
  const s=d.summary;
  let html=`<h2>${symbol(x)}${esc(s.source_name)}</h2><h3>Source overview</h3><div class="tags">${tags(s)}</div><p><strong>WD host: ${esc(labels[s.white_dwarf_host_confidence])}.</strong> ${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</p>`;
  html+=`<details class="record"><summary>Aliases & counterpart identity</summary>${fields(s,['aliases','gaia_dr3_id','system_class_evidence','white_dwarf_host_evidence','proposed_or_disputed_interpretation'])}${s.gaia_dr3_id?'':'<p class="muted">No selected Gaia counterpart.</p>'}</details>`;
@@ -137,9 +183,10 @@ function sourceDetail(d,x){
  if(s.source_name==='AR Sco')html+='<p class="help"><strong>Field interpretation:</strong> 42.7±0.2 G describes the modeled synchrotron region (MCSE, not physical confidence). The separately inferred WD polar field is approximately 15 MG. The abstract’s 43 MG remains in the evidence as a likely unit typo—an inference.</p>';
  html+='<h3>CMD placement</h3><p class="help">'+esc(cmdNote(d,x.cmd))+'</p>';
  html+='<h3 id="radio-observations" tabindex="-1">Radio observations</h3><p class="muted">'+d.observations.length+' observation '+(d.observations.length===1?'row':'rows')+'. Expand an observation for methods and full metadata.</p>';
+ if(radioLabel)html+='<p id="radio-match-note" class="help">Matching '+esc(radioLabel)+' records are highlighted. All observations remain shown. <button type="button" data-show-all-radio>Show all observations</button></p>';
  const refs=new Map(d.references.map(r=>[r.key,r]));
  for(let [i,r] of d.observations.entries()){let cited=r.radio_reference_keys.split(';').map(k=>k.trim()).filter(Boolean).map(k=>refs.has(k)?refLink(refs.get(k)):esc(k)).join('; ');
- html+=`<div class="radio-row"><h4>Observation ${i+1}</h4><dl class="raw-fields observation-summary"><dt>Band</dt><dd>${r.radio_band_ghz_as_reported?esc(r.radio_band_ghz_as_reported)+' GHz':'Not reported'}</dd><dt>Reported flux or limit</dt><dd>${esc(r.flux_quantity_kind==='Missing'?'Not selected/reported':(r.reported_flux_text||r.flux_quantity_kind).replace(/\+\/-/g,'±'))}${r.reported_flux_text&&r.flux_quantity_kind!=='Missing'?' '+radioUnit(r):''}</dd><dt>Observable</dt><dd>${r.flux_quantity_kind==='Missing'?'Not selected/reported':esc(r.flux_quantity_kind)}</dd><dt>Radio evidence</dt><dd>${esc(r.radio_evidence_label||'Not reported')}</dd><dt>Uncertainty</dt><dd>${esc(r.flux_uncertainty_convention||'Not reported; see full metadata.')}</dd><dt>Reference</dt><dd>${cited||'Not reported'}</dd></dl><details class="record"><summary>Full observation ${esc(r.observation_id)} — uncertainty & metadata</summary>${fields(r,Object.keys(r).filter(k=>!['source_id','source_name','observational_class_code'].includes(k)))}</details></div>`;}
+ html+=`<div class="radio-row${radioLabel&&r.radio_evidence_label===radioLabel?' radio-match':''}" tabindex="-1"><h4>Observation ${i+1}</h4><dl class="raw-fields observation-summary"><dt>Band</dt><dd>${r.radio_band_ghz_as_reported?esc(r.radio_band_ghz_as_reported)+' GHz':'Not reported'}</dd><dt>Reported flux or limit</dt><dd>${esc(r.flux_quantity_kind==='Missing'?'Not selected/reported':(r.reported_flux_text||r.flux_quantity_kind).replace(/\+\/-/g,'±'))}${r.reported_flux_text&&r.flux_quantity_kind!=='Missing'?' '+radioUnit(r):''}</dd><dt>Observable</dt><dd>${r.flux_quantity_kind==='Missing'?'Not selected/reported':esc(r.flux_quantity_kind)}</dd><dt>Radio evidence</dt><dd>${esc(r.radio_evidence_label||'Not reported')}</dd><dt>Uncertainty</dt><dd>${esc(r.flux_uncertainty_convention||'Not reported; see full metadata.')}</dd><dt>Reference</dt><dd>${cited||'Not reported'}</dd></dl><details class="record"><summary>Full observation ${esc(r.observation_id)} — uncertainty & metadata</summary>${fields(r,Object.keys(r).filter(k=>!['source_id','source_name','observational_class_code'].includes(k)))}</details></div>`;}
  html+='<h3 id="xray-luminosity" tabindex="-1">X-ray luminosity</h3>'+xrayOverview(x,refs);
  html+='<h3>Evidence & references</h3><details class="record"><summary><strong>Selected-property methods, assumptions & evidence links</strong></summary>'+fields(s,Object.keys(s).filter(k=>k!=='aliases'&&k!=='source_id'))+'</details>';
  html+='<details class="record"><summary><strong>Plot inputs, coordinate provenance & distance qualifications</strong></summary><h4>Sky coordinates</h4>'+fields(d.sky,Object.keys(d.sky).filter(k=>!['token','display_group'].includes(k)))+'<h4>Main Gaia CMD</h4>'+fields(x.cmd,Object.keys(x.cmd).filter(k=>!['token','display_group'].includes(k)))+'</details>';
@@ -150,15 +197,16 @@ function sourceDetail(d,x){
  html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${r.public_reference_link_status?'<span class="subtext">'+esc(r.public_reference_link_status)+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.2 source evidence JSON</a></p>';
  return html;
 }
-async function openSource(sid,hash=true,section=''){
+async function openSource(sid,hash=true,section='',radioLabel=''){
  const x=systems.find(x=>x.summary.source_id===sid);if(!x)return;let seq=++detailRequest;
  lastFocus=document.activeElement;if(hash)history.pushState(null,'','#source='+encodeURIComponent(sid));$('#detail-body').innerHTML='<p role="status">Loading source evidence…</p>';if(!$('#detail').open)$('#detail').showModal();
  try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.2');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;
- $('#detail-body').innerHTML=sourceDetail(d,x);$('#detail').scrollTop=0;$('#close').focus();if(section){const target=$('#'+section);if(target){target.focus();target.scrollIntoView({block:'start'});}}
+ $('#detail-body').innerHTML=sourceDetail(d,x,radioLabel);$('#detail').scrollTop=0;$('#close').focus();if(section){const target=(radioLabel&&$('#detail-body .radio-match'))||$('#'+section);if(target){target.focus();target.scrollIntoView({block:'start'});}}
  }catch(e){$('#detail-body').innerHTML='<p role="alert">'+esc(e.message)+'. Download the versioned CSVs for the evidence tables.</p>';}
 }
 function closeSource(){++detailRequest;$('#detail').close();if(location.hash.startsWith('#source='))history.replaceState(null,'',location.pathname+location.search+'#catalog');if(lastFocus?.isConnected)lastFocus.focus();}
 $('#close').addEventListener('click',closeSource);$('#detail').addEventListener('cancel',e=>{e.preventDefault();closeSource();});
+$('#detail-body').addEventListener('click',ev=>{if(ev.target.closest('[data-show-all-radio]')){for(const row of document.querySelectorAll('.radio-match'))row.classList.remove('radio-match');$('#radio-match-note').hidden=true;$('#radio-observations').focus();$('#radio-observations').scrollIntoView({block:'start'});}});
 function route(){if(location.hash.startsWith('#source=')){try{openSource(decodeURIComponent(location.hash.slice(8)),false);}catch(e){}}else if($('#detail').open){++detailRequest;$('#detail').close();}}
 window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
 Promise.all(['assets/catalog.json?v=1.0.2','data/v1.0.2-web-r10/emission_evidence.json','data/v1.0.2-web-r13/cmd_plot_input.json'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();}))).then(([data,evidence,currentCmd])=>{const cmdById=new Map(currentCmd.systems.map(c=>[c.source_id,c]));const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));systems=data.systems.map(x=>({...x,cmd:cmdById.get(x.summary.source_id),emission:byid.get(x.summary.source_id)}));render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});
