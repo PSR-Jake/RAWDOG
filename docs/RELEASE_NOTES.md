@@ -1,3 +1,11 @@
+# Website revision web r15 — 2026-10-30
+
+Adds a named source dialog with a sticky source heading and local navigation, preserving the existing hash routes and section order. Radio and X-ray comparisons retain original row/measurement IDs, values, uncertainty conventions, bands, states, components, models and references. Narrow screens show the same records as labeled blocks without horizontal scrolling; metadata stays individually expandable with a collapse control.
+
+Selected properties link directly to their measurement evidence, automatically opening the relevant disclosures. Recorded missing-selection reasons are accessible without inventing values. J1912's catalog preferred distance remains blank, with its existing geometric adoption explicitly labeled CMD-only. Existing period evidence-key variants are resolved without changing any clock or source data. Browser Back/Escape restore catalog context and focus; unknown routes and unavailable source bundles provide recovery guidance. Late request failures cannot overwrite a newer source view.
+
+Catalog data remains 1.0.2; CMD inputs/exports remain web r13. All 157 protected files remain byte-identical to the reviewed baseline. [Checks and limitations](P0_VERIFICATION.md).
+
 # Website revision web r14 — 2026-10-30
 
 Adds Essentials (7), Physical properties (10), Radio/X-ray (7) and All columns (14) views, retaining all original table fields. Filter tokens, result counts and a visible sort summary preserve context when a sorted column is hidden. WD-host confidence remains in its independent filter and source detail. The compact header exposes version, download and citation links.
