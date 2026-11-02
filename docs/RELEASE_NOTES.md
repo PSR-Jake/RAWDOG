@@ -1,3 +1,11 @@
+# Website revision web r17 — 2026-11-02
+
+Replaces column presets with one fixed 11-column catalog table: System, Class, RA, Dec, Gl, Gb, Distance, Orbital period, WD spin, Radio recurrence and Radio observations. All columns remain present during filtering and sorting. The coordinate inputs, decimal display precision, frame/epoch qualifications and full-precision numeric sorting are unchanged.
+
+Gaia identifiers, stellar temperature/mass/companion properties, radio-evidence wording and individual radio/X-ray measurements are presented in source details. Removes first-record radio/X-ray previews from the main table; no source-level flux or luminosity is newly selected. Existing WD-temperature and mass ranges/bounds without central values now appear directly in the property overview with their notes, uncertainty conventions and evidence links. J1912’s unselected preferred distance and separate CMD adoption remain distinct.
+
+The table guide states the fixed column set, observation-row counting semantics and where the detailed quantities live. Filters, matching-record navigation, all 210 summary-export fields, the coordinate CSV and source evidence remain available. Catalog data stays 1.0.2 and CMD stays web r13. [Checks and limitations](P0_VERIFICATION.md).
+
 # Website revision web r16 — 2026-11-02
 
 Adds sortable RA, Dec, Gl (Galactic longitude) and Gb (Galactic latitude) columns, available together in a seven-column Positions view and in All columns (18). Values come directly from the unchanged released sky inputs; there is no new coordinate transform, epoch propagation or Gaia association. Coordinates display six decimal degrees and sort on full-precision values, including zero and signed latitude/declination.

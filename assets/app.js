@@ -8,33 +8,19 @@ const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog
 $('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 const columnDefinitions=[
  {key:'source_name',label:'System',sort:true},
- {key:'gaia_dr3_id',label:'Gaia DR3 ID',sort:true},
  {key:'classification_labels',label:'Class',sort:true},
+ {key:'ra_deg',label:'RA',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'dec_deg',label:'Dec',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'galactic_l_deg',label:'Gl',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'galactic_b_deg',label:'Gb',unit:'deg',sort:true,numeric:true,sky:true},
  {key:'preferred_distance_pc',label:'Distance',unit:'pc',sort:true,numeric:true},
  {key:'preferred_orbital_period_h',label:'Orbital period',unit:'h',sort:true,numeric:true},
  {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true},
  {key:'preferred_radio_recurrence_period_s',label:'Radio recurrence',unit:'s',sort:true,numeric:true},
- {key:'radio_preview',label:'Radio Sν',unit:'µJy · recorded band'},
- {key:'xray_preview',label:'X-ray Lₓ',unit:'erg s⁻¹ · recorded band'},
- {key:'preferred_wd_photospheric_teff_k',label:'WD photospheric temperature',unit:'K',sort:true,numeric:true},
- {key:'preferred_wd_mass_msun',label:'WD mass',unit:'M☉',sort:true,numeric:true},
- {key:'preferred_companion_spectral_type',label:'Companion spectral type',sort:true},
- {key:'radio_observation_count',label:'Radio observations',unit:'rows',sort:true,numeric:true},
- {key:'radio_detection_status',label:'Radio evidence'},
- {key:'ra_deg',label:'RA',unit:'deg',sort:true,numeric:true,sky:true},
- {key:'dec_deg',label:'Dec',unit:'deg',sort:true,numeric:true,sky:true},
- {key:'galactic_l_deg',label:'Gl',unit:'deg',sort:true,numeric:true,sky:true},
- {key:'galactic_b_deg',label:'Gb',unit:'deg',sort:true,numeric:true,sky:true}
+ {key:'radio_observation_count',label:'Radio observations',unit:'rows',sort:true,numeric:true}
 ];
-const columnPresets={
- essentials:['source_name','classification_labels','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','radio_observation_count'],
- physical:['source_name','gaia_dr3_id','classification_labels','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun','preferred_companion_spectral_type'],
- emission:['source_name','classification_labels','preferred_distance_pc','radio_observation_count','radio_detection_status','radio_preview','xray_preview'],
- positions:['source_name','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','gaia_dr3_id','classification_labels'],
- all:columnDefinitions.map(c=>c.key)
-};
-function tableHead(keys,key='source_name',ascending=true){return '<tr>'+keys.map(k=>{
- const c=columnDefinitions.find(c=>c.key===k),label=esc(c.label)+(c.unit?'<span class="column-unit">'+esc(c.unit)+'</span>':'');
+function tableHead(key='source_name',ascending=true){return '<tr>'+columnDefinitions.map(c=>{
+ const k=c.key,label=esc(c.label)+(c.unit?'<span class="column-unit">'+esc(c.unit)+'</span>':'');
  return '<th scope="col"'+(c.numeric?' class="numeric"':'')+(c.sort&&k===key?' aria-sort="'+(ascending?'ascending':'descending')+'"':'')+'>'+(c.sort?'<button data-sort="'+k+'">'+label+'<span aria-hidden="true"> ↕</span></button>':label)+'</th>';
 }).join('')+'</tr>';}
 function tags(s){return displayClassCodes(s).map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
@@ -46,33 +32,19 @@ function compareSystems(a,b,key,ascending){
  const numeric=column?.numeric;
  const c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return ascending?c:-c;
 }
-function tableConstraint(s,prefix,unit,digits){
- const format=v=>Number(v).toFixed(digits),val=s['preferred_'+prefix+'_'+unit],lo=s[prefix+'_lower_bound_'+unit],hi=s[prefix+'_upper_bound_'+unit];
- if(present(val))return format(val);
- if(present(lo)&&present(hi))return '['+format(lo)+', '+format(hi)+']';
- if(present(hi))return '≤ '+format(hi);
- if(present(lo))return '≥ '+format(lo);
- return '—';
-}
-function tableRow(x,keys=columnPresets.all,radioLabel=''){
+function tableRow(x,radioLabel=''){
  const s=x.summary,classes=displayClassCodes(s).map(t=>({cataclysmic_variable:'CV',magnetic_cv:'mCV',white_dwarf_pulsar:'WD pulsar',long_period_radio_transient:'LPT'}[t]||pretty(t))).join(' · ');
  const cells={
  source_name:`<td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button>${radioLabel?`<button class="matching-radio-link" data-source="${esc(s.source_id)}" data-section="radio-observations" data-match-radio="${esc(radioLabel)}">View matching radio observations</button>`:''}</td>`,
- gaia_dr3_id:`<td class="gaia-id">${s.gaia_dr3_id?`<a href="https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I%2F355%2Fgaiadr3&amp;Source=${encodeURIComponent(s.gaia_dr3_id)}" target="_blank" rel="noopener" title="View this Gaia DR3 source in VizieR (opens in a new tab)">${esc(s.gaia_dr3_id)}</a>`:'—'}</td>`,
  classification_labels:`<td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>`,
- radio_preview:emissionCell(x,'radio'),xray_preview:emissionCell(x,'xray'),
- preferred_wd_photospheric_teff_k:'<td class="numeric">'+esc(tableConstraint(s,'wd_photospheric_teff','k',0))+'</td>',
- preferred_wd_mass_msun:'<td class="numeric">'+esc(tableConstraint(s,'wd_mass','msun',2))+'</td>',
- preferred_companion_spectral_type:'<td>'+esc(s.preferred_companion_spectral_type||'—')+'</td>',
- radio_observation_count:`<td class="numeric"><button class="emission-link" data-source="${esc(s.source_id)}" data-section="radio-observations" aria-label="${esc(s.source_name)}: ${esc(s.radio_observation_count)} radio observation ${s.radio_observation_count==='1'?'row':'rows'}">${esc(s.radio_observation_count)}</button></td>`,
- radio_detection_status:'<td class="radio-status">'+esc(s.radio_detection_status||'Not reported')+'</td>'
+ radio_observation_count:`<td class="numeric"><button class="emission-link" data-source="${esc(s.source_id)}" data-section="radio-observations" aria-label="${esc(s.source_name)}: ${esc(s.radio_observation_count)} radio observation ${s.radio_observation_count==='1'?'row':'rows'}">${esc(s.radio_observation_count)}</button></td>`
  };
  for(const key of ['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s'])cells[key]='<td class="numeric">'+esc(tableNumber(s[key]))+'</td>';
  for(const key of ['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg']){
  const v=x.sky?.[key],origin=key==='ra_deg'&&present(v)?'<span class="coordinate-origin">'+(x.sky.fallback_status==='Gaia DR3'?'ICRS · J2016.0':'Radio · published J2000')+'</span>':'';
  cells[key]='<td class="numeric" title="'+esc([x.sky?.coordinate_frame,x.sky?.coordinate_epoch,x.sky?.coordinate_qualification].filter(Boolean).join(' · '))+'">'+(present(v)?Number(v).toFixed(6):'—')+origin+'</td>';
  }
- return '<tr>'+keys.map(k=>cells[k]).join('')+'</tr>';
+ return '<tr>'+columnDefinitions.map(c=>cells[c.key]).join('')+'</tr>';
 }
 function luminosityValue(r){
  if(!r.display_value_numeric&&!r.display_lower_bound&&!r.display_upper_bound)return esc(r.value_text);
@@ -84,26 +56,18 @@ function luminosityValue(r){
 }
 function xrayContext(r){const model=/powerlaw/i.test(r.parameter)?'power law':/blackbody/i.test(r.parameter)?'blackbody':/_model/i.test(r.parameter)?'model dependent':null;return [r.band_label,r.distance_label,model,r.component&&!/^(system|unresolved)/i.test(r.component)?pretty(r.component):null,/^(yes|true)$/i.test(r.is_derived)?'derived':null].filter(Boolean).join(' · ');}
 function radioUnit(r){return r.flux_quantity_kind.includes('Peak')?'µJy beam⁻¹':'µJy';}
-function emissionCell(x,kind){
- const e=x.emission||{radio:[],xray:[]},rows=kind==='radio'?e.radio:e.xray.filter(r=>r.available),r=rows[0],section=kind==='radio'?'radio-observations':'xray-luminosity';
- const val=!r?'—':kind==='radio'?(r.flux_quantity_kind==='Missing'?'—':esc(r.reported_flux_text.replace(/\+\/-/g,'±'))):luminosityValue(r);
- const context=!r?(kind==='xray'&&e.xray_flux_record_count?'flux records only':'no recorded value'):kind==='radio'?((r.radio_band_ghz_as_reported||'band unspecified')+(r.radio_band_ghz_as_reported?' GHz':'')+(r.flux_quantity_kind.includes('Peak')?' · peak brightness ('+radioUnit(r)+')':'')+(/^Marginal/.test(r.radio_evidence_label)?' · marginal':'')+(r.flux_quantity_kind==='Missing'?' · no selected flux':'')):xrayContext(r);
- return `<td class="emission-cell"><button class="emission-link" data-source="${esc(x.summary.source_id)}" data-section="${section}" aria-label="${esc(x.summary.source_name)}: ${kind==='radio'?'radio observations':'X-ray luminosity evidence'}">${val}</button><span class="emission-note">${esc(context)}</span>${r?'<span class="emission-note">'+(rows.length>1?'first of '+rows.length+' records':'1 record')+' · view evidence</span>':''}</td>`;
-}
 function matchesFilters(x,q,cls,host,radio){const s=x.summary;return (!q||[s.source_name,s.aliases,s.gaia_dr3_id,s.source_reference_keys].join(' ').toLowerCase().includes(q))&&(!cls||s.classification_labels.split(';').map(t=>t.trim()).includes(cls))&&(!host||s.white_dwarf_host_confidence===host)&&(!radio||x.radio_labels.includes(radio));}
 function csvText(rows,columns){const quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';return [columns,...rows.map(x=>columns.map(k=>x.summary[k]))].map(row=>row.map(quote).join(',')).join('\r\n')+'\r\n';}
 function render(){
  const q=$('#search').value.toLowerCase().trim(),cls=$('#classification').value,host=$('#host').value,radio=$('#radio').value;
  shown=systems.filter(x=>matchesFilters(x,q,cls,host,radio));
  shown.sort((a,b)=>compareSystems(a,b,sortKey,sortAsc));
- const keys=columnPresets[$('#columns').value];
- $('#systems thead').innerHTML=tableHead(keys,sortKey,sortAsc);
- $('#systems tbody').innerHTML=shown.map(x=>tableRow(x,keys,radio)).join('');
- $('#sort-state').textContent='Sorted by '+columnDefinitions.find(c=>c.key===sortKey).label+' · '+(sortAsc?'ascending':'descending')+(keys.includes(sortKey)?'':' · column hidden in this view');
+ $('#systems thead').innerHTML=tableHead(sortKey,sortAsc);
+ $('#systems tbody').innerHTML=shown.map(x=>tableRow(x,radio)).join('');
+ $('#sort-state').textContent='Sorted by '+columnDefinitions.find(c=>c.key===sortKey).label+' · '+(sortAsc?'ascending':'descending');
  $('#active-filters').innerHTML=['search','classification','host','radio'].filter(id=>$('#'+id).value).map(id=>{const el=$('#'+id),label=id==='search'?'Search: '+el.value:el.selectedOptions[0].textContent;return '<button type="button" data-clear-filter="'+id+'" aria-label="Remove '+esc(label)+' filter">'+esc(label)+' <span aria-hidden="true">×</span></button>';}).join('')||'<span>No active filters</span>';
  $('#radio-filter-note').hidden=!radio;
- $('#active-filters').hidden=![q,cls,host,radio].some(Boolean);$('#emission-note').hidden=!keys.includes('radio_preview');
- $('#coordinate-note').hidden=!keys.some(k=>columnDefinitions.find(c=>c.key===k).sky);
+ $('#active-filters').hidden=![q,cls,host,radio].some(Boolean);
  $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.2`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){
@@ -118,7 +82,6 @@ function updatePlots(){
 function setupPlot(obj){const doc=obj.contentDocument;if(!doc)return;for(let g of doc.querySelectorAll('[data-source]')){g.style.cursor='pointer';g.addEventListener('click',ev=>{ev.preventDefault();openSource(g.getAttribute('data-source'));});g.addEventListener('keydown',ev=>{if(ev.key==='Enter'){ev.preventDefault();openSource(g.getAttribute('data-source'));}});}updatePlots();}
 for(let obj of document.querySelectorAll('.plot'))obj.addEventListener('load',()=>setupPlot(obj));
 $('#filters').addEventListener('input',render);$('#filters').addEventListener('submit',e=>e.preventDefault());$('#filters').addEventListener('reset',()=>setTimeout(render,0));$('#plot-filter').addEventListener('change',updatePlots);
-$('#columns').addEventListener('change',render);
 $('#active-filters').addEventListener('click',ev=>{const b=ev.target.closest('[data-clear-filter]');if(b){const el=$('#'+b.dataset.clearFilter);el.value='';render();el.focus();}});
 $('#systems').addEventListener('click',ev=>{const s=ev.target.closest('[data-source]');if(s)openSource(s.dataset.source,true,s.dataset.section,s.dataset.matchRadio);const b=ev.target.closest('[data-sort]');if(b){sortAsc=sortKey===b.dataset.sort?!sortAsc:true;sortKey=b.dataset.sort;render();$('#systems [data-sort="'+sortKey+'"]').focus();}});
 function exportCSV(){const text=csvText(shown,Object.keys(systems[0].summary));const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.2-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
@@ -135,6 +98,7 @@ function numberMarkup(v,digits=4){
  return match?`${esc(match[1])} × 10<sup>${Number(match[2])<0?'−':''}${Math.abs(Number(match[2]))}</sup>`:esc(text);
 }
 function estimate(val,em,ep,lo,hi,unit='',digits=4){
+ if(!present(val)&&(present(lo)||present(hi)))return (present(lo)&&present(hi)?'['+numberMarkup(lo,digits)+', '+numberMarkup(hi,digits)+']':present(hi)?'≤ '+numberMarkup(hi,digits):'≥ '+numberMarkup(lo,digits))+(unit?' '+esc(unit):'');
  const errors=[em,ep].filter(v=>present(v)&&Number.isFinite(Number(v))&&Number(v)>0).map(Number);
  let central=numberMarkup(val,digits);
  if(errors.length&&present(val)&&Number.isFinite(Number(val))){
@@ -154,22 +118,24 @@ const properties=[
  ['wd_photospheric_teff_k','WD photospheric temperature','K','wd_photospheric_teff'],['wd_mean_photospheric_field_mg','WD mean photospheric field','MG','wd_mean_photospheric_field'],['wd_polar_field_mg','WD polar field','MG','wd_polar_field'],['wd_local_emission_region_field_mg','WD local emission-region field','MG','wd_local_emission_region_field'],['wd_mass_msun','WD mass','M☉','wd_mass'],['companion_spectral_type','Companion spectral type','','companion_spectral_type'],['companion_mass_msun','Companion mass','M☉','companion_mass'],['companion_teff_k','Companion temperature','K','companion_teff'],['radio_emission_region_field_gauss','Radio emission-region field','G','radio_emission_region_field']];
 function propertyOverview(s){
  const notes=[];
- const rows=properties.filter(([k])=>present(s['preferred_'+k])).map(([k,label,unit,prefix])=>{
+ const listed=properties.filter(([k,label,unit,prefix])=>present(s['preferred_'+k])||(['wd_photospheric_teff_k','wd_mass_msun'].includes(k)&&[s[prefix+'_lower_bound_'+k.split('_').at(-1)],s[prefix+'_upper_bound_'+k.split('_').at(-1)]].some(present)));
+ const rows=listed.map(([k,label,unit,prefix])=>{
  const get=suffix=>s[prefix+suffix+(unit?'_'+k.split('_').at(-1):'')],val=s['preferred_'+k];
  const lo=get('_lower_bound'),hi=get('_upper_bound'),em=get('_error_minus'),ep=get('_error_plus');
  const convention=s[prefix+'_uncertainty_convention']||((em||ep||lo||hi)?'Interval/confidence convention unspecified; see evidence.':''),component=s[prefix+'_component']||'',method=s[prefix+'_method']||'';
  const metadataKey=k.replace(/_(pc|h|s|k|mg|msun|gauss)$/,''),measurementIds=s[prefix+'_measurement_ids']||s[metadataKey+'_measurement_ids'],referenceKeys=s[prefix+'_reference_keys']||s[metadataKey+'_reference_keys'];
  const hints=[];
+ if(!present(val))hints.push(pretty(s[prefix+'_limit_type']||'bound / range')+' · no selected central value');
  if(/approximate/i.test(convention))hints.push('approximate');
  if(/fit|model|infer|synchrotron|mcmc/i.test(method)||s[prefix+'_assumption'])hints.push('model / assumptions');
  if(/MCSE/i.test(convention))hints.push('MCSE');
  else if(/p16|16th/i.test(convention)&&/p84|84th/i.test(convention))hints.push('p16–p84');
  else if(/68% credible/i.test(convention))hints.push('68% credible');
- if(Number.isFinite(Number(val))&&![em,ep,lo,hi].some(present))hints.push('no adopted error');
- notes.push(`<div class="property-note"><h4>${esc(label)}</h4>${fields({component,uncertainty:convention||'Not reported.',method,assumptions:s[prefix+'_assumption'],measurement_ids:measurementIds,reference_keys:referenceKeys},['component','uncertainty','method','assumptions','measurement_ids','reference_keys'])}</div>`);
+ if(present(val)&&Number.isFinite(Number(val))&&![em,ep,lo,hi].some(present))hints.push('no adopted error');
+ notes.push(`<div class="property-note"><h4>${esc(label)}</h4>${fields({component,uncertainty:convention||'Not reported.',method,assumptions:s[prefix+'_assumption'],status:!present(val)?s[prefix+'_status']:'',note:!present(val)?s[prefix+'_note']:'',measurement_ids:measurementIds,reference_keys:referenceKeys},['component','uncertainty','method','assumptions','status','note','measurement_ids','reference_keys'])}</div>`);
  return `<div class="property-row"><dt>${esc(label)}</dt><dd><strong>${estimate(val,em,ep,lo,hi,unit,k.includes('period')?6:4)}</strong>${hints.length?'<span class="property-qualification">'+esc(hints.join(' · '))+'</span>':''}${evidenceLinks(measurementIds)}</dd></div>`;
  }).join('');
- const missing=properties.filter(([k])=>!present(s['preferred_'+k])).map(([k,label,unit,prefix])=>{
+ const missing=properties.filter(p=>!listed.includes(p)).map(([k,label,unit,prefix])=>{
  const status=s[prefix+'_status']||s[k.replace(/_(pc|h|s|k|mg|msun|gauss)$/,'')+'_status'],note=s[prefix+'_note']||s[k.replace(/_(pc|h|s|k|mg|msun|gauss)$/,'')+'_note'];
  return status||note?'<dt>'+esc(label)+'</dt><dd>'+esc([status,note].filter(Boolean).join(' '))+'</dd>':'';
  }).join('');

@@ -44,6 +44,23 @@ Passed:
 - At 390 px, document clientWidth and scrollWidth are both 375 px; the 686 px Positions table scrolls inside its 343 px container. Desktop and mobile screenshots were inspected.
 - Protected path set and SHA-256 values remain identical for all 157 files.
 
+## Fixed catalog table / web r17 — 2026-11-02
+
+Supersedes the column presets introduced in web r14/r16. One fixed table now contains System, Class, RA, Dec, Gl, Gb, Distance, Orbital period, WD spin, Radio recurrence and Radio observations. There is no column selector or hidden sort column.
+
+Field selection: all 58 systems have the four released sky coordinates; selected central values cover 50 distances, 54 orbital periods, 12 WD spin periods and 3 radio recurrence periods. The distinct clocks stay in the main comparison despite incomplete coverage. Stellar temperatures (19 selected central values), WD masses (12) and companion spectral types (28) move to source details with their component/model context. Gaia identifiers and individual radio/X-ray values also live in source details; observation counts remain a direct route to the full radio table. No first-record flux or luminosity is shown as a source-level comparison value.
+
+Passed:
+
+- `node scripts/check_presentation.js`: all 58 systems have exactly the same 11 columns; coordinate values, full-precision sorting, zero/missing cases, original Gaia strings/links/search, CSV precision, every source measurement ID, references and asynchronous failure handling remain covered.
+- Existing WD-mass and photospheric-temperature ranges/bounds without a central value appear in the source property overview with original notes, conventions and direct evidence links. All eight such source/property cases are checked; J1912's unselected preferred distance stays unselected.
+- `python scripts/check.py`: 58 systems, 96 observation rows, 7,175 provenance records, 669 references, 58 sky systems and 56 CMD systems with 2 exclusions. Same runtime limitations as the earlier checks apply.
+- In-app browser: all 11 columns fit the 1,163 px table container at a 1,280 px viewport. Gl sorts in both directions; combined search/class/host/radio filters retain the same column set; reset and zero-result feedback work.
+- QS Vir: 9 matching rows highlighted, all 10 radio rows and 6 luminosity records retained. The actual downloaded one-row CSV matches every field of the released 210-field source summary. Empty-export headers pass the formatter assertion; a repeated empty-result browser download did not yield a new captured file in this session, so that end-to-end check is not claimed.
+- AR Sco: mass range and historical temperature upper limit are visible in properties; the mass evidence action opens M06988. At 390 px, AP CrB's temperature range and source evidence remain accessible and the detail client/scroll widths both equal 375 px.
+- At 390 px, document client/scroll widths both equal 375 px; the 1,057 px main table scrolls within its 343 px region, including access to the last column while source names stay visible. Desktop and mobile screenshots were inspected.
+- Identical path sets and SHA-256 values for all 157 protected files under `data/`, `figures/`, `assets/sources/` and `assets/catalog.json`.
+
 ## Scope and remaining release checks
 
 These results concern the local implementation. No merge or production deployment was performed. External-reference reachability, a full screen-reader audit and complete WCAG certification were not established. The selected source and figure interactions above were checked in the in-app browser; no cross-browser certification is claimed.
