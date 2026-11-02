@@ -8,11 +8,12 @@ const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog
 $('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 const columnDefinitions=[
  {key:'source_name',label:'System',sort:true},
+ {key:'gaia_dr3_id',label:'Gaia DR3 ID',sort:true},
  {key:'classification_labels',label:'Class',sort:true},
- {key:'ra_deg',label:'RA',frame:'ICRS · J2016.0*',unit:'hh:mm:ss.sss',sort:true,numeric:true,sky:true},
- {key:'dec_deg',label:'Dec',frame:'ICRS · J2016.0*',unit:'±dd:mm:ss.ss',sort:true,numeric:true,sky:true},
- {key:'galactic_l_deg',label:'Gl',unit:'deg',sort:true,numeric:true,sky:true},
- {key:'galactic_b_deg',label:'Gb',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'ra_deg',label:'RA',frame:'FK5 · J2000*',unit:'hh:mm:ss.sss',sort:true,numeric:true,position:true},
+ {key:'dec_deg',label:'Dec',frame:'FK5 · J2000*',unit:'±dd:mm:ss.ss',sort:true,numeric:true,position:true},
+ {key:'galactic_l_deg',label:'Gl',unit:'deg',sort:true,numeric:true,position:true},
+ {key:'galactic_b_deg',label:'Gb',unit:'deg',sort:true,numeric:true,position:true},
  {key:'preferred_distance_pc',label:'Distance',unit:'pc',sort:true,numeric:true},
  {key:'preferred_orbital_period_h',label:'Orbital period',unit:'h',sort:true,numeric:true},
  {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true}
@@ -23,9 +24,10 @@ function tableHead(key='source_name',ascending=true){return '<tr>'+columnDefinit
 }).join('')+'</tr>';}
 function tags(s){return displayClassCodes(s).map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
 function displayClassCodes(s){const codes=[...new Set(s.classification_labels.split(';').map(t=>t.trim()).filter(Boolean))];return codes.filter(t=>t!=='long_period_transient'&&(t!=='cataclysmic_variable'||!codes.includes('magnetic_cv')));}
+function gaiaLink(id){return id?`<a href="https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I%2F355%2Fgaiadr3&amp;Source=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="View this Gaia DR3 source in VizieR (opens in a new tab)">${esc(id)}</a>`:'—';}
 function symbol(x){let [c,a,b]=styles[x.sky.display_group];return `<span class="symbol" style="color:${c}" aria-label="${x.sky.qualified_status==='true'?'Qualified':'Established'} ${esc(labels[x.sky.display_group])}">${x.sky.qualified_status==='true'?b:a}</span> `;}
 function compareSystems(a,b,key,ascending){
- const column=columnDefinitions.find(c=>c.key===key),av=column?.sky?a.sky?.[key]:a.summary[key],bv=column?.sky?b.sky?.[key]:b.summary[key];
+ const column=columnDefinitions.find(c=>c.key===key),av=column?.position?a.position?.[key]:a.summary[key],bv=column?.position?b.position?.[key]:b.summary[key];
  if(!present(av)||!present(bv))return !present(av)?(!present(bv)?0:1):-1;
  const numeric=column?.numeric;
  const c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return ascending?c:-c;
@@ -42,13 +44,14 @@ function tableRow(x,radioLabel=''){
  const s=x.summary,classes=displayClassCodes(s).map(t=>({cataclysmic_variable:'CV',magnetic_cv:'mCV',white_dwarf_pulsar:'WD pulsar',long_period_radio_transient:'LPT'}[t]||pretty(t))).join(' · ');
  const cells={
  source_name:`<td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button>${radioLabel?`<button class="matching-radio-link" data-source="${esc(s.source_id)}" data-section="radio-observations" data-match-radio="${esc(radioLabel)}">View matching radio observations</button>`:''}</td>`,
+ gaia_dr3_id:'<td class="gaia-id">'+gaiaLink(s.gaia_dr3_id)+'</td>',
  classification_labels:`<td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>`
  };
  for(const key of ['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'])cells[key]='<td class="numeric">'+esc(tableNumber(s[key]))+'</td>';
  for(const key of ['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg']){
- const v=x.sky?.[key],equatorial=key==='ra_deg'||key==='dec_deg',origin=equatorial&&present(v)&&x.sky.fallback_status!=='Gaia DR3'?'<span class="coordinate-origin">Published J2000*</span>':'';
+ const v=x.position?.[key],equatorial=key==='ra_deg'||key==='dec_deg',origin=equatorial&&present(v)&&x.position.assumed_alignment?'<span class="coordinate-origin">Frame assumed*</span>':'';
  const text=equatorial?sexagesimal(v,key==='ra_deg'):(present(v)?Number(v).toFixed(6):'—');
- cells[key]='<td class="numeric" title="'+esc([x.sky?.coordinate_frame,x.sky?.coordinate_epoch,x.sky?.coordinate_qualification].filter(Boolean).join(' · '))+'">'+esc(text)+origin+'</td>';
+ cells[key]='<td class="numeric" title="'+esc([x.position?.coordinate_frame,x.position?.coordinate_equinox,x.position?.position_epoch,x.position?.qualification].filter(Boolean).join(' · '))+'">'+esc(text)+origin+'</td>';
  }
  return '<tr>'+columnDefinitions.map(c=>cells[c.key]).join('')+'</tr>';
 }
@@ -189,8 +192,9 @@ function xrayOverview(x,refs){
 function sourceDetail(d,x,radioLabel=''){
  const s=d.summary;
  let html=`<h2>${symbol(x)}${esc(s.source_name)}</h2><h3 id="source-overview" tabindex="-1">Source overview</h3><div class="tags">${tags(s)}</div><p><strong>WD host: ${esc(labels[s.white_dwarf_host_confidence])}.</strong> ${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}</p>`;
- if(s.gaia_dr3_id)html+=`<p class="source-identity">Gaia DR3 <a href="https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I%2F355%2Fgaiadr3&amp;Source=${encodeURIComponent(s.gaia_dr3_id)}" target="_blank" rel="noopener">${esc(s.gaia_dr3_id)}</a></p>`;
+ if(s.gaia_dr3_id)html+=`<p class="source-identity">Gaia DR3 ${gaiaLink(s.gaia_dr3_id)}</p>`;
  html+=`<details class="record"><summary>Aliases & counterpart identity</summary>${fields(s,['aliases','gaia_dr3_id','system_class_evidence','white_dwarf_host_evidence','proposed_or_disputed_interpretation'])}${s.gaia_dr3_id?'':'<p class="muted">No selected Gaia counterpart.</p>'}</details>`;
+ if(x.position)html+='<details class="record"><summary>Table coordinates — FK5/J2000 & provenance</summary>'+fields(x.position,['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','coordinate_frame','coordinate_equinox','position_epoch','input_ra_deg','input_dec_deg','input_frame','input_file','input_sha256','qualification'])+'</details>';
  const overview=propertyOverview(s);html+='<h3 id="selected-properties" tabindex="-1">Selected properties & periods</h3>'+(overview||'<p class="muted">No selected physical properties or periods. Published alternatives remain in the evidence below.</p>');
  if(s.source_name==='AR Sco')html+='<p class="help"><strong>Field interpretation:</strong> 42.7±0.2 G describes the modeled synchrotron region (MCSE, not physical confidence). The separately inferred WD polar field is approximately 15 MG. The abstract’s 43 MG remains in the evidence as a likely unit typo—an inference.</p>';
  html+='<h3 id="cmd-placement" tabindex="-1">CMD placement</h3><p class="help">'+esc(cmdNote(d,x.cmd))+'</p>';
@@ -235,4 +239,4 @@ $('#detail-body').addEventListener('click',ev=>{
 });
 function route(){if(location.hash.startsWith('#source=')){let sid=location.hash.slice(8);try{sid=decodeURIComponent(sid);}catch(e){}openSource(sid,false);}else if($('#detail').open)closeSource(false);}
 window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
-Promise.all(['assets/catalog.json?v=1.0.2','data/v1.0.2-web-r10/emission_evidence.json','data/v1.0.2-web-r13/cmd_plot_input.json'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();}))).then(([data,evidence,currentCmd])=>{const cmdById=new Map(currentCmd.systems.map(c=>[c.source_id,c]));const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));systems=data.systems.map(x=>({...x,cmd:cmdById.get(x.summary.source_id),emission:byid.get(x.summary.source_id)}));render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});
+Promise.all(['assets/catalog.json?v=1.0.2','data/v1.0.2-web-r10/emission_evidence.json','data/v1.0.2-web-r13/cmd_plot_input.json','assets/table_coordinates_fk5_j2000.json?v=web-r19'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();}))).then(([data,evidence,currentCmd,positions])=>{const cmdById=new Map(currentCmd.systems.map(c=>[c.source_id,c]));const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));const positionById=new Map(positions.systems.map(p=>[p.source_id,p]));systems=data.systems.map(x=>{const position=positionById.get(x.summary.source_id);if(!position||position.gaia_dr3_id!==x.summary.gaia_dr3_id)throw Error('Table coordinate join mismatch');return {...x,position,cmd:cmdById.get(x.summary.source_id),emission:byid.get(x.summary.source_id)};});render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});

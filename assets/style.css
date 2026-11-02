@@ -24,3 +24,5 @@ body:has(#detail[open]){overflow:hidden}
 header a:focus-visible,.detail-bar button:focus-visible{outline-color:white}
 
 #systems .coordinate-origin{display:block;font-size:.75rem;line-height:1.4;color:var(--muted);font-weight:400;white-space:normal;margin-top:.25rem}
+
+#systems .gaia-id{white-space:nowrap;font-variant-numeric:tabular-nums}

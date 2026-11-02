@@ -34,7 +34,9 @@ assert.equal(format('','','','0','','M☉'),'≥ 0 M☉');
 const rawCatalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'))),rawBefore=JSON.stringify(rawCatalog);
 const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r10/emission_evidence.json'))),emissionMap=new Map(emissions.systems.map(e=>[e.source_id,e]));
 const cmd=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r13/cmd_plot_input.json'))),cmdMap=new Map(cmd.systems.map(c=>[c.source_id,c]));
-const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,cmd:cmdMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
+const positions=JSON.parse(fs.readFileSync(path.join(root,'assets/table_coordinates_fk5_j2000.json'))),positionMap=new Map(positions.systems.map(p=>[p.source_id,p]));
+assert.equal(positionMap.size,58);assert.equal(positions.systems.filter(p=>p.assumed_alignment).length,1);
+const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,position:positionMap.get(x.summary.source_id),cmd:cmdMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
 const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'];
 for(const key of numericColumns)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
@@ -43,10 +45,24 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 }
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- assert.equal(cells.length,9);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
- if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[1].includes('mCV'));assert(!cells[1].includes('CV · mCV'));}
- for(let i=0;i<3;i++)assert.equal(cells[i+6],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
+ assert.equal(cells.length,10);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ assert.equal(x.position.gaia_dr3_id,x.summary.gaia_dr3_id);
+ assert.equal(cells[1].replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
+ if(x.summary.gaia_dr3_id){
+  const url=new URL(cells[1].match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
+  assert.equal(url.origin,'https://vizier.cds.unistra.fr');assert.equal(url.searchParams.get('-source'),'I/355/gaiadr3');assert.equal(url.searchParams.get('Source'),x.summary.gaia_dr3_id);
+  assert.match(cells[1],/target="_blank" rel="noopener"/);
+ }else assert(!cells[1].includes('<a'));
+ if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[2].includes('mCV'));assert(!cells[2].includes('CV · mCV'));}
+ for(let i=0;i<3;i++)assert.equal(cells[i+7],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
 }
+for(const ascending of [true,false]){
+ const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,'gaia_dr3_id',ascending));
+ assert.equal(sorted.at(-1).summary.gaia_dr3_id,'');
+ const ids=sorted.map(x=>x.summary.gaia_dr3_id).filter(Boolean).map(BigInt);
+ for(let i=1;i<ids.length;i++)assert(ascending?ids[i]>=ids[i-1]:ids[i]<=ids[i-1]);
+}
+assert(context.compareSystems({summary:{gaia_dr3_id:'6050296829033196032'}},{summary:{gaia_dr3_id:'6050296829033196033'}},'gaia_dr3_id',true)<0);
 const gleamRow=context.tableRow(catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37'));
 assert.match(gleamRow,/3010\.02/);assert(!gleamRow.includes('10496.55'));
 const gleam=catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37');
@@ -60,6 +76,7 @@ for(const x of catalog.systems){
  const d=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',x.token+'.json'))),original=JSON.stringify(d),html=context.sourceDetail(d,x);
  assert.deepEqual(Array.from(html.matchAll(/<h3(?: [^>]*)?>([^<]+)<\/h3>/g),m=>m[1]),sections);
  assert(!/NaN|undefined/.test(html),x.summary.source_name);
+ assert(html.includes('Table coordinates — FK5/J2000 & provenance'));assert(html.includes(x.position.input_sha256));
  assert.equal(typeof d.summary.gaia_dr3_id,'string');
  if(d.summary.gaia_dr3_id){
   assert(context.matchesFilters(x,d.summary.gaia_dr3_id,'','',''),'Gaia ID remains searchable from the fixed table');
@@ -142,43 +159,44 @@ assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
 assert(html.includes('aria-labelledby="detail-name"'));
 assert.equal((html.match(/data-jump=/g)||[]).length,6);
 const definitions=vm.runInContext('columnDefinitions',context);
-assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s']);
-assert.equal((context.tableHead().match(/<th\b/g)||[]).length,9);
-assert.equal((context.tableHead().match(/data-sort=/g)||[]).length,9);
-assert.equal((context.tableHead().match(/ICRS · J2016\.0\*/g)||[]).length,2);
+assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','gaia_dr3_id','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s']);
+assert.equal((context.tableHead().match(/<th\b/g)||[]).length,10);
+assert.equal((context.tableHead().match(/data-sort=/g)||[]).length,10);
+assert.equal((context.tableHead().match(/FK5 · J2000\*/g)||[]).length,2);
 assert(!context.tableHead().includes('Radio recurrence'));assert(!context.tableHead().includes('Radio observations'));
 assert(!html.includes('id="columns"'));assert(!app.includes('columnPresets'));assert(!app.includes('column hidden'));
 for(const c of definitions.filter(c=>c.unit))assert(context.tableHead().includes(c.unit));
 const coordinateKeys=['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg'];
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- const ra=cells[2].split('<')[0],dec=cells[3].split('<')[0];
+ const ra=cells[3].split('<')[0],dec=cells[4].split('<')[0];
  assert.match(ra,/^\d{2}:\d{2}:\d{2}\.\d{3}$/);assert.match(dec,/^[+−]\d{2}:\d{2}:\d{2}\.\d{2}$/);
  const parsedRA=ra.split(':').map(Number),parsedDec=dec.slice(1).split(':').map(Number);
  assert(parsedRA[0]<24&&parsedRA[1]<60&&parsedRA[2]<60);assert(parsedDec[1]<60&&parsedDec[2]<60);
- const raDeg=15*(parsedRA[0]+parsedRA[1]/60+parsedRA[2]/3600),decDeg=(dec[0]==='−'?-1:1)*(parsedDec[0]+parsedDec[1]/60+parsedDec[2]/3600),raError=Math.abs(raDeg-x.sky.ra_deg);
+ const raDeg=15*(parsedRA[0]+parsedRA[1]/60+parsedRA[2]/3600),decDeg=(dec[0]==='−'?-1:1)*(parsedDec[0]+parsedDec[1]/60+parsedDec[2]/3600),raError=Math.abs(raDeg-x.position.ra_deg);
  assert(Math.min(raError,360-raError)<=0.0005*15/3600+1e-12,'RA rounding: '+x.summary.source_name);
- assert(Math.abs(decDeg-x.sky.dec_deg)<=0.005/3600+1e-12,'Dec rounding: '+x.summary.source_name);
- coordinateKeys.slice(2).forEach((key,i)=>assert.equal(cells[i+4],Number(x.sky[key]).toFixed(6)));
- if(x.sky.fallback_status==='Gaia DR3')assert(!cells[2].includes('coordinate-origin'));
- else {assert(cells[2].includes('Published J2000*'));assert(cells[3].includes('Published J2000*'));}
+ assert(Math.abs(decDeg-x.position.dec_deg)<=0.005/3600+1e-12,'Dec rounding: '+x.summary.source_name);
+ coordinateKeys.slice(2).forEach((key,i)=>assert.equal(cells[i+5],Number(x.position[key]).toFixed(6)));
+ if(!x.position.assumed_alignment)assert(!cells[3].includes('coordinate-origin'));
+ else {assert(cells[3].includes('Frame assumed*'));assert(cells[4].includes('Frame assumed*'));}
 }
 for(const key of coordinateKeys)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
- for(let i=1;i<sorted.length;i++)assert(ascending?sorted[i].sky[key]>=sorted[i-1].sky[key]:sorted[i].sky[key]<=sorted[i-1].sky[key],key);
- const zero={summary:{},sky:{[key]:0}},missing={summary:{},sky:{[key]:''}};
+ for(let i=1;i<sorted.length;i++)assert(ascending?sorted[i].position[key]>=sorted[i-1].position[key]:sorted[i].position[key]<=sorted[i-1].position[key],key);
+ const zero={summary:{},position:{[key]:0}},missing={summary:{},position:{[key]:''}};
  assert(context.compareSystems(zero,missing,key,ascending)<0,'Missing coordinate stays last');
  assert(context.compareSystems(missing,zero,key,ascending)>0);
- const a={summary:{},sky:{[key]:1.0000001}},b={summary:{},sky:{[key]:1.0000002}};
+ const a={summary:{},position:{[key]:1.0000001}},b={summary:{},position:{[key]:1.0000002}};
  assert(context.compareSystems(a,b,key,true)<0,'Sort retains sub-display precision');
 }
-const zeroPosition={...added,sky:{...added.sky,ra_deg:0,dec_deg:0,galactic_l_deg:0,galactic_b_deg:0}};
+const zeroPosition={...added,position:{...added.position,ra_deg:0,dec_deg:0,galactic_l_deg:0,galactic_b_deg:0}};
 assert.match(context.tableRow(zeroPosition),/00:00:00\.000/);assert.match(context.tableRow(zeroPosition),/\+00:00:00\.00/);
 assert.equal((context.tableRow(zeroPosition).match(/0\.000000/g)||[]).length,2);
-const missingPosition={...added,sky:{...added.sky,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
-assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(2,6).every(c=>c==='—'));
+const missingPosition={...added,position:{...added.position,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
+assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(3,7).every(c=>c==='—'));
 assert(html.includes('id="coordinate-note"'));assert(!html.includes('id="coordinate-note" class="help" hidden'));
 assert(html.includes('data/v1.0.2/sky_plot_input.csv'));
+assert(html.includes('assets/table_coordinates_fk5_j2000.csv'));
 const qs=catalog.systems.find(x=>x.summary.source_name==='QS Vir'),qsData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',qs.token+'.json'))),radioLabel='Reported flux; significance not harmonized';
 assert(context.matchesFilters(qs,'qs vir','cataclysmic_variable','established',radioLabel));
 assert(!context.matchesFilters(qs,'qs vir','white_dwarf_pulsar','established',radioLabel));
@@ -205,4 +223,4 @@ async function checkSourceFailures(){
  assert(nodes['#detail-body'].innerHTML.includes('download the versioned evidence CSV'));assert.equal(nodes['.detail-nav'].hidden,true);
  await sourceContext.openSource('<unknown>',false);assert(nodes['#detail-body'].innerHTML.includes('&lt;unknown>'));
 }
-checkSourceFailures().then(()=>console.log('PASS: 58 systems, one fixed 9-column table, sexagesimal RA/Dec with carry/sign/wrap checks, frame/epoch exception, full-precision sorting, source evidence and unchanged scientific data.')).catch(e=>{console.error(e);process.exitCode=1;});
+checkSourceFailures().then(()=>console.log('PASS: 58 systems, fixed 10-column FK5/J2000 table, exact Gaia ID links/sorting, sexagesimal display, coordinate joins/provenance, source evidence and unchanged released data.')).catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,6 +1,6 @@
 # P0 presentation verification — 2026-10-30
 
-Reviewed scientific baseline: `0d53553544a6f36522273a563605089f57049455` (catalog 1.0.2, website web r13). No scientific values or selections are revised by P0.
+Reviewed scientific baseline: `0d53553544a6f36522273a563605089f57049455` (catalog 1.0.2, website web r13). Existing released catalog values and selections are preserved. Web r19 adds a separately documented derived table-coordinate product.
 
 ## Catalog / web r14
 
@@ -73,6 +73,19 @@ Passed:
 - Browser: nine headers; sexagesimal values and shared frame/epoch labels; both RA and Dec sort directions; positive and negative Dec; published-J2000 exception in both cells. GLEAM-X J0704−37's recurrence remains 10496.5522 ± 0.0008 s in the source property overview, with M04430 and its original radio row available.
 - At a 1280 px viewport, all nine columns fit the 1163 px table region. At 390 px, document client/scroll widths both equal 375 px; the 884 px table scrolls inside its 343 px region. Desktop/mobile screenshots inspected; viewport override reset afterward.
 - Protected path sets and SHA-256 values remain identical for all 157 data, figure, catalog-index and source-bundle files. Full-precision degree inputs and all 210 source-summary export fields are unchanged. No new export format or cross-browser certification is claimed.
+
+## FK5/J2000 and linked Gaia IDs / web r19 — 2026-11-02
+
+The fixed main table has ten columns: System, Gaia DR3 ID, Class, RA, Dec, Gl, Gb, Distance, Orbital period and WD spin. Both equatorial headers specify FK5/J2000. New table-coordinate JSON/CSV products are generated from the frozen epoch-2000 counterpart fields; U Gem's explicitly FK5 coordinates are not converted twice. The published radio localization retains an assumed-alignment marker. Original catalog/source/figure files remain intact. [Methods](TABLE_COORDINATES_FK5_J2000.md).
+
+Passed:
+
+- `python scripts/table_coordinates.py --check`: 58 unique joined positions and Gaia IDs; 56 ICRS-to-FK5 conversions, U Gem's existing FK5 input retained, one qualified radio alignment; equatorial/Galactic numerical closure below one microarcsecond. Already-FK5 and radio RA/Dec are asserted numerically unchanged. No new proper-motion/covariance propagation.
+- `node scripts/check_presentation.js`: ten columns for all 58 systems, exact string Gaia links/search/sorting and missing IDs, sexagesimal formatting, full-precision sorting on the new table coordinates, provenance joins, all original source evidence and CSV contracts.
+- `python scripts/check.py`: original scientific-consistency checks pass; identical protected path sets and SHA-256 values for all 157 released data/figure/catalog/source files.
+- Browser: ten headers fit the 1163 px region at 1280 px viewport width; 57 Gaia links, correct full-ID filtering and both Gaia-ID sort directions with the missing counterpart last. Clicking AR Sco's ID opens a new VizieR tab with the exact source query. Source details expose the derived FK5 and input ICRS values, input hash and qualification.
+- Actual 58-row FK5/J2000 coordinate CSV downloaded through the browser file-link API is byte-identical to the generated CSV, including exact Gaia identifiers. The original summary schema remains separate.
+- At 390 px, document client/scroll widths both equal 375 px; the 1054 px table scrolls inside its 343 px region, retaining the sticky source name. Gaia IDs and the FK5 RA column remain accessible. Desktop/mobile screenshots inspected and viewport override reset.
 
 ## Scope and remaining release checks
 

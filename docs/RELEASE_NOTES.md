@@ -1,3 +1,11 @@
+# Website revision web r19 — 2026-11-02
+
+Adds the exact Gaia DR3 identifier and VizieR source link back to the fixed main table (ten columns). Identifiers stay strings in display, search, sorting and exports; ASKAP J144834−685644 remains without an assigned Gaia counterpart.
+
+The equatorial main-table frame is now FK5, equinox J2000, with sexagesimal display. A separate derived coordinate product uses the released epoch-2000 fields: 56 ICRS positions are transformed, while U Gem’s explicitly FK5 input is retained unchanged. The published radio localization keeps a visible assumed-FK5-alignment qualification. Gl/Gb are derived from the same table position. No new proper-motion or covariance propagation is performed. Source details and a full-precision CSV expose input values/frame, SHA-256 and qualifications. [Methods and reproduction](TABLE_COORDINATES_FK5_J2000.md).
+
+All 157 existing released data, source-bundle, catalog-index and figure files remain unchanged; the original sky map retains its native position-epoch convention. Filtered systems CSV keeps its original 210-field schema. Catalog data stays 1.0.2 and CMD stays web r13. [Checks and limitations](P0_VERIFICATION.md).
+
 # Website revision web r18 — 2026-11-02
 
 Reduces the fixed catalog table to nine columns by moving Radio recurrence and Radio observations to source details. Their data, the full observation tables and all 210 source-summary export fields remain intact.
