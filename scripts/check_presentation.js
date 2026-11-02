@@ -29,7 +29,7 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 }
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- assert.equal(cells.length,14);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ assert.equal(cells.length,18);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
  assert.equal(typeof x.summary.gaia_dr3_id,'string');assert.equal(cells[1].replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
  if(x.summary.gaia_dr3_id){
   const url=new URL(cells[1].match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
@@ -128,15 +128,36 @@ assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
 assert(html.includes('aria-labelledby="detail-name"'));
 assert.equal((html.match(/data-jump=/g)||[]).length,6);
 const presets=vm.runInContext('columnPresets',context),definitions=vm.runInContext('columnDefinitions',context);
-assert.deepEqual(Object.values(presets).map(p=>p.length),[7,10,7,14]);
-assert.equal(new Set(Object.values(presets).flat()).size,14);
+assert.deepEqual(Object.values(presets).map(p=>p.length),[7,10,7,7,18]);
+assert.equal(new Set(Object.values(presets).flat()).size,18);
 for(const keys of Object.values(presets)){
  assert.equal((context.tableHead(keys).match(/<th\b/g)||[]).length,keys.length);
  for(const x of catalog.systems)assert.equal((context.tableRow(x,keys).match(/<td\b/g)||[]).length,keys.length);
 }
-assert.equal((context.tableHead(presets.all).match(/data-sort=/g)||[]).length,11);
+assert.equal((context.tableHead(presets.all).match(/data-sort=/g)||[]).length,15);
 assert(!context.tableHead(presets.all).includes('data-sort="radio_detection_status"'));
 for(const c of definitions.filter(c=>c.unit))assert(context.tableHead([c.key]).includes(c.unit));
+const coordinateKeys=['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg'];
+for(const x of catalog.systems){
+ const row=context.tableRow(x,presets.positions),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
+ coordinateKeys.forEach((key,i)=>assert(cells[i+1].startsWith(Number(x.sky[key]).toFixed(6)),x.summary.source_name+': '+key));
+ if(x.sky.fallback_status==='Gaia DR3')assert(row.includes('ICRS · J2016.0'));else assert(row.includes('Radio · published J2000'));
+}
+for(const key of coordinateKeys)for(const ascending of [true,false]){
+ const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
+ for(let i=1;i<sorted.length;i++)assert(ascending?sorted[i].sky[key]>=sorted[i-1].sky[key]:sorted[i].sky[key]<=sorted[i-1].sky[key],key);
+ const zero={summary:{},sky:{[key]:0}},missing={summary:{},sky:{[key]:''}};
+ assert(context.compareSystems(zero,missing,key,ascending)<0,'Missing coordinate stays last');
+ assert(context.compareSystems(missing,zero,key,ascending)>0);
+ const a={summary:{},sky:{[key]:1.0000001}},b={summary:{},sky:{[key]:1.0000002}};
+ assert(context.compareSystems(a,b,key,true)<0,'Sort retains sub-display precision');
+}
+const zeroPosition={...added,sky:{...added.sky,ra_deg:0,dec_deg:0,galactic_l_deg:0,galactic_b_deg:0}};
+assert.equal((context.tableRow(zeroPosition,presets.positions).match(/0\.000000/g)||[]).length,4);
+const missingPosition={...added,sky:{...added.sky,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
+assert.equal((context.tableRow(missingPosition,presets.positions).match(/class="numeric"[^>]*>—/g)||[]).length,4);
+assert(html.includes('value="positions"'));assert(html.includes('id="coordinate-note"'));
+assert(html.includes('data/v1.0.2/sky_plot_input.csv'));
 const qs=catalog.systems.find(x=>x.summary.source_name==='QS Vir'),qsData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',qs.token+'.json'))),radioLabel='Reported flux; significance not harmonized';
 assert(context.matchesFilters(qs,'qs vir','cataclysmic_variable','established',radioLabel));
 assert(!context.matchesFilters(qs,'qs vir','white_dwarf_pulsar','established',radioLabel));
@@ -162,4 +183,4 @@ async function checkSourceFailures(){
  assert(nodes['#detail-body'].innerHTML.includes('download the versioned evidence CSV'));assert.equal(nodes['.detail-nav'].hidden,true);
  await sourceContext.openSource('<unknown>',false);assert(nodes['#detail-body'].innerHTML.includes('&lt;unknown>'));
 }
-checkSourceFailures().then(()=>console.log('PASS: 58 systems, four presets, exact Gaia IDs, CSV precision, source/observation evidence, missing values, safe asynchronous failures and unchanged scientific data.')).catch(e=>{console.error(e);process.exitCode=1;});
+checkSourceFailures().then(()=>console.log('PASS: 58 systems, five presets, sky-coordinate values/precision/sorting, exact Gaia IDs, CSV precision, source evidence, safe asynchronous failures and unchanged scientific data.')).catch(e=>{console.error(e);process.exitCode=1;});

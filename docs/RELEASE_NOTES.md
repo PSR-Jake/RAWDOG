@@ -1,3 +1,9 @@
+# Website revision web r16 — 2026-11-02
+
+Adds sortable RA, Dec, Gl (Galactic longitude) and Gb (Galactic latitude) columns, available together in a seven-column Positions view and in All columns (18). Values come directly from the unchanged released sky inputs; there is no new coordinate transform, epoch propagation or Gaia association. Coordinates display six decimal degrees and sort on full-precision values, including zero and signed latitude/declination.
+
+Row origin labels and the coordinate key distinguish 57 Gaia ICRS J2016.0 positions from ASKAP J144834−685644's published J2000 radio position and qualified Galactic transformation. The existing coordinate-input CSV provides complete precision and provenance; filtered systems CSV retains its 210-field source-summary contract. Catalog data remains 1.0.2 and CMD revision remains web r13.
+
 # Website revision web r15 — 2026-10-30
 
 Adds a named source dialog with a sticky source heading and local navigation, preserving the existing hash routes and section order. Radio and X-ray comparisons retain original row/measurement IDs, values, uncertainty conventions, bands, states, components, models and references. Narrow screens show the same records as labeled blocks without horizontal scrolling; metadata stays individually expandable with a collapse control.

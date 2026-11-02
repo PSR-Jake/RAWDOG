@@ -33,6 +33,17 @@ Passed:
 - Palette checks: primary text/page 14.85:1, secondary text/white 6.03:1, link/focus color/white 6.73:1, control border/wash 5.41:1. Dark-header controls use white focus outlines. These spot checks do not establish complete accessibility compliance.
 - Scientific, CMD, emission and presentation commands passed after the source renderer changes; final protected path/hash comparison again finds all 157 files unchanged.
 
+## Coordinates / web r16 — 2026-11-02
+
+- Adds RA, Dec, Gl and Gb from the existing released sky fields to Positions and All columns (18). No coordinate transform, propagation or source-data update is introduced.
+- Presentation assertions compare all four displayed values for all 58 systems with the sky inputs; check both sort directions, negative coordinates, zero, missing values and sub-display precision. Original Gaia-string sorting, source renderers and CSV contracts still pass.
+- `python scripts/check.py` passes the existing coordinate, Galactic-agreement, provenance and scientific-consistency checks.
+- Browser: Positions has System, RA, Dec, Gl, Gb, Gaia DR3 ID and Class; Gl sorts numerically in both directions. Switching to Essentials retains the hidden Gl sort and its visible state. All columns contains 18 headers and retains the search result.
+- ASKAP J144834−685644 shows its existing radio RA/Dec and qualified Gl/Gb while keeping the Gaia identifier blank. The origin label and expandable coordinate key retain the published-J2000/reference-epoch qualification and documented transformation approximation.
+- Actual coordinate CSV download is byte-identical to `data/v1.0.2/sky_plot_input.csv`: all 58 rows and full-precision coordinate/provenance fields. The filtered systems CSV keeps its original 210-field source-summary schema.
+- At 390 px, document clientWidth and scrollWidth are both 375 px; the 686 px Positions table scrolls inside its 343 px container. Desktop and mobile screenshots were inspected.
+- Protected path set and SHA-256 values remain identical for all 157 files.
+
 ## Scope and remaining release checks
 
 These results concern the local implementation. No merge or production deployment was performed. External-reference reachability, a full screen-reader audit and complete WCAG certification were not established. The selected source and figure interactions above were checked in the in-app browser; no cross-browser certification is claimed.

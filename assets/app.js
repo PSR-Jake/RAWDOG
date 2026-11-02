@@ -20,12 +20,17 @@ const columnDefinitions=[
  {key:'preferred_wd_mass_msun',label:'WD mass',unit:'M☉',sort:true,numeric:true},
  {key:'preferred_companion_spectral_type',label:'Companion spectral type',sort:true},
  {key:'radio_observation_count',label:'Radio observations',unit:'rows',sort:true,numeric:true},
- {key:'radio_detection_status',label:'Radio evidence'}
+ {key:'radio_detection_status',label:'Radio evidence'},
+ {key:'ra_deg',label:'RA',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'dec_deg',label:'Dec',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'galactic_l_deg',label:'Gl',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'galactic_b_deg',label:'Gb',unit:'deg',sort:true,numeric:true,sky:true}
 ];
 const columnPresets={
  essentials:['source_name','classification_labels','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','radio_observation_count'],
  physical:['source_name','gaia_dr3_id','classification_labels','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun','preferred_companion_spectral_type'],
  emission:['source_name','classification_labels','preferred_distance_pc','radio_observation_count','radio_detection_status','radio_preview','xray_preview'],
+ positions:['source_name','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','gaia_dr3_id','classification_labels'],
  all:columnDefinitions.map(c=>c.key)
 };
 function tableHead(keys,key='source_name',ascending=true){return '<tr>'+keys.map(k=>{
@@ -36,9 +41,9 @@ function tags(s){return displayClassCodes(s).map(t=>`<span class="tag">${esc(lab
 function displayClassCodes(s){const codes=[...new Set(s.classification_labels.split(';').map(t=>t.trim()).filter(Boolean))];return codes.filter(t=>t!=='long_period_transient'&&(t!=='cataclysmic_variable'||!codes.includes('magnetic_cv')));}
 function symbol(x){let [c,a,b]=styles[x.sky.display_group];return `<span class="symbol" style="color:${c}" aria-label="${x.sky.qualified_status==='true'?'Qualified':'Established'} ${esc(labels[x.sky.display_group])}">${x.sky.qualified_status==='true'?b:a}</span> `;}
 function compareSystems(a,b,key,ascending){
- const av=a.summary[key],bv=b.summary[key];
+ const column=columnDefinitions.find(c=>c.key===key),av=column?.sky?a.sky?.[key]:a.summary[key],bv=column?.sky?b.sky?.[key]:b.summary[key];
  if(!present(av)||!present(bv))return !present(av)?(!present(bv)?0:1):-1;
- const numeric=columnDefinitions.some(c=>c.key===key&&c.numeric);
+ const numeric=column?.numeric;
  const c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return ascending?c:-c;
 }
 function tableConstraint(s,prefix,unit,digits){
@@ -63,6 +68,10 @@ function tableRow(x,keys=columnPresets.all,radioLabel=''){
  radio_detection_status:'<td class="radio-status">'+esc(s.radio_detection_status||'Not reported')+'</td>'
  };
  for(const key of ['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s'])cells[key]='<td class="numeric">'+esc(tableNumber(s[key]))+'</td>';
+ for(const key of ['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg']){
+ const v=x.sky?.[key],origin=key==='ra_deg'&&present(v)?'<span class="coordinate-origin">'+(x.sky.fallback_status==='Gaia DR3'?'ICRS · J2016.0':'Radio · published J2000')+'</span>':'';
+ cells[key]='<td class="numeric" title="'+esc([x.sky?.coordinate_frame,x.sky?.coordinate_epoch,x.sky?.coordinate_qualification].filter(Boolean).join(' · '))+'">'+(present(v)?Number(v).toFixed(6):'—')+origin+'</td>';
+ }
  return '<tr>'+keys.map(k=>cells[k]).join('')+'</tr>';
 }
 function luminosityValue(r){
@@ -94,6 +103,7 @@ function render(){
  $('#active-filters').innerHTML=['search','classification','host','radio'].filter(id=>$('#'+id).value).map(id=>{const el=$('#'+id),label=id==='search'?'Search: '+el.value:el.selectedOptions[0].textContent;return '<button type="button" data-clear-filter="'+id+'" aria-label="Remove '+esc(label)+' filter">'+esc(label)+' <span aria-hidden="true">×</span></button>';}).join('')||'<span>No active filters</span>';
  $('#radio-filter-note').hidden=!radio;
  $('#active-filters').hidden=![q,cls,host,radio].some(Boolean);$('#emission-note').hidden=!keys.includes('radio_preview');
+ $('#coordinate-note').hidden=!keys.some(k=>columnDefinitions.find(c=>c.key===k).sky);
  $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.2`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){
