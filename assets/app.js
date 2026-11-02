@@ -9,18 +9,16 @@ $('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/
 const columnDefinitions=[
  {key:'source_name',label:'System',sort:true},
  {key:'classification_labels',label:'Class',sort:true},
- {key:'ra_deg',label:'RA',unit:'deg',sort:true,numeric:true,sky:true},
- {key:'dec_deg',label:'Dec',unit:'deg',sort:true,numeric:true,sky:true},
+ {key:'ra_deg',label:'RA',frame:'ICRS · J2016.0*',unit:'hh:mm:ss.sss',sort:true,numeric:true,sky:true},
+ {key:'dec_deg',label:'Dec',frame:'ICRS · J2016.0*',unit:'±dd:mm:ss.ss',sort:true,numeric:true,sky:true},
  {key:'galactic_l_deg',label:'Gl',unit:'deg',sort:true,numeric:true,sky:true},
  {key:'galactic_b_deg',label:'Gb',unit:'deg',sort:true,numeric:true,sky:true},
  {key:'preferred_distance_pc',label:'Distance',unit:'pc',sort:true,numeric:true},
  {key:'preferred_orbital_period_h',label:'Orbital period',unit:'h',sort:true,numeric:true},
- {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true},
- {key:'preferred_radio_recurrence_period_s',label:'Radio recurrence',unit:'s',sort:true,numeric:true},
- {key:'radio_observation_count',label:'Radio observations',unit:'rows',sort:true,numeric:true}
+ {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true}
 ];
 function tableHead(key='source_name',ascending=true){return '<tr>'+columnDefinitions.map(c=>{
- const k=c.key,label=esc(c.label)+(c.unit?'<span class="column-unit">'+esc(c.unit)+'</span>':'');
+ const k=c.key,label=esc(c.label)+(c.frame?'<span class="column-unit">'+esc(c.frame)+'</span>':'')+(c.unit?'<span class="column-unit">'+esc(c.unit)+'</span>':'');
  return '<th scope="col"'+(c.numeric?' class="numeric"':'')+(c.sort&&k===key?' aria-sort="'+(ascending?'ascending':'descending')+'"':'')+'>'+(c.sort?'<button data-sort="'+k+'">'+label+'<span aria-hidden="true"> ↕</span></button>':label)+'</th>';
 }).join('')+'</tr>';}
 function tags(s){return displayClassCodes(s).map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
@@ -32,17 +30,25 @@ function compareSystems(a,b,key,ascending){
  const numeric=column?.numeric;
  const c=numeric?Number(av)-Number(bv):av.localeCompare(bv,undefined,{numeric:true});return ascending?c:-c;
 }
+function sexagesimal(v,isRA=false){
+ if(!present(v)||!Number.isFinite(Number(v)))return '—';
+ const n=Number(v),digits=isRA?3:2,scale=10**digits,angle=isRA?((n%360+360)%360)/15:Math.abs(n);
+ let ticks=Math.round(angle*3600*scale);
+ if(isRA)ticks%=24*3600*scale;
+ const major=Math.floor(ticks/(3600*scale)),minutes=Math.floor(ticks/(60*scale))%60,seconds=(ticks%(60*scale))/scale;
+ return (isRA?'':(n<0||Object.is(n,-0)?'−':'+'))+[String(major).padStart(2,'0'),String(minutes).padStart(2,'0'),seconds.toFixed(digits).padStart(3+digits,'0')].join(':');
+}
 function tableRow(x,radioLabel=''){
  const s=x.summary,classes=displayClassCodes(s).map(t=>({cataclysmic_variable:'CV',magnetic_cv:'mCV',white_dwarf_pulsar:'WD pulsar',long_period_radio_transient:'LPT'}[t]||pretty(t))).join(' · ');
  const cells={
  source_name:`<td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button>${radioLabel?`<button class="matching-radio-link" data-source="${esc(s.source_id)}" data-section="radio-observations" data-match-radio="${esc(radioLabel)}">View matching radio observations</button>`:''}</td>`,
- classification_labels:`<td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>`,
- radio_observation_count:`<td class="numeric"><button class="emission-link" data-source="${esc(s.source_id)}" data-section="radio-observations" aria-label="${esc(s.source_name)}: ${esc(s.radio_observation_count)} radio observation ${s.radio_observation_count==='1'?'row':'rows'}">${esc(s.radio_observation_count)}</button></td>`
+ classification_labels:`<td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>`
  };
- for(const key of ['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s'])cells[key]='<td class="numeric">'+esc(tableNumber(s[key]))+'</td>';
+ for(const key of ['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'])cells[key]='<td class="numeric">'+esc(tableNumber(s[key]))+'</td>';
  for(const key of ['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg']){
- const v=x.sky?.[key],origin=key==='ra_deg'&&present(v)?'<span class="coordinate-origin">'+(x.sky.fallback_status==='Gaia DR3'?'ICRS · J2016.0':'Radio · published J2000')+'</span>':'';
- cells[key]='<td class="numeric" title="'+esc([x.sky?.coordinate_frame,x.sky?.coordinate_epoch,x.sky?.coordinate_qualification].filter(Boolean).join(' · '))+'">'+(present(v)?Number(v).toFixed(6):'—')+origin+'</td>';
+ const v=x.sky?.[key],equatorial=key==='ra_deg'||key==='dec_deg',origin=equatorial&&present(v)&&x.sky.fallback_status!=='Gaia DR3'?'<span class="coordinate-origin">Published J2000*</span>':'';
+ const text=equatorial?sexagesimal(v,key==='ra_deg'):(present(v)?Number(v).toFixed(6):'—');
+ cells[key]='<td class="numeric" title="'+esc([x.sky?.coordinate_frame,x.sky?.coordinate_epoch,x.sky?.coordinate_qualification].filter(Boolean).join(' · '))+'">'+esc(text)+origin+'</td>';
  }
  return '<tr>'+columnDefinitions.map(c=>cells[c.key]).join('')+'</tr>';
 }

@@ -4,7 +4,7 @@
 #systems{font-size:.8125rem}#systems th,#systems td{padding:.55rem .5rem}#systems th button{line-height:1.25}#systems .column-unit{display:block;font-weight:400;font-size:.75rem;margin-top:.25rem}#systems .numeric{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}#systems th.numeric{text-align:right;white-space:normal}#systems .table-class{max-width:110px;font-size:.75rem}#systems th:first-child,#systems td:first-child{position:sticky;left:0;z-index:1;background:var(--paper)}#systems th:first-child{background:var(--wash);z-index:2}#systems th:first-child[aria-sort]{background:#e0ebf5}#systems tr:hover td:first-child{background:#f5f8fb}.table-note,.mobile-table-hint{font-size:.8125rem;color:var(--muted)}.mobile-table-hint{display:none}@media(max-width:850px){.mobile-table-hint{display:block}}
 @media(max-width:500px){#systems th:first-child,#systems td:first-child{min-width:140px;max-width:140px;width:140px}#systems .system-link{white-space:normal;overflow-wrap:anywhere}}
 
-.emission-link{border:0;padding:0;background:none;color:var(--blue);font-weight:650;text-align:left;overflow-wrap:anywhere}.emission-link:hover{text-decoration:underline}.xray-record{border-bottom:1px solid var(--line);padding:.6rem 0}.xray-record p{font-size:.875rem;margin:.3rem 0}#detail-body h3[id]{scroll-margin-top:85px}
+.xray-record{border-bottom:1px solid var(--line);padding:.6rem 0}.xray-record p{font-size:.875rem;margin:.3rem 0}#detail-body h3[id]{scroll-margin-top:85px}
 
 /* The fixed catalog table keeps filter/sort state visible. */
 .intro{gap:1.5rem;padding-bottom:1rem;margin-block:1.5rem}.intro h1{font-size:clamp(1.4rem,2.3vw,1.9rem)}.intro p{margin-block:.65rem}.stats strong{font-size:1.6rem}

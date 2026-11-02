@@ -10,6 +10,17 @@ assert.equal(context.tableNumber('199.6'),'199.60');
 assert.equal(context.tableNumber('0'),'0.00');
 assert.equal(context.tableNumber(''),'—');
 assert.equal(context.tableNumber(null),'—');
+assert.equal(context.sexagesimal(15,true),'01:00:00.000');
+assert.equal(context.sexagesimal(359.9999999,true),'00:00:00.000');
+assert.equal(context.sexagesimal(360,true),'00:00:00.000');
+assert.equal(context.sexagesimal(-15,true),'23:00:00.000');
+assert.equal(context.sexagesimal(15*(1+59/60+59.9996/3600),true),'02:00:00.000');
+assert.equal(context.sexagesimal(-0.5),'−00:30:00.00');
+assert.equal(context.sexagesimal(-0),'−00:00:00.00');
+assert.equal(context.sexagesimal(0),'+00:00:00.00');
+assert.equal(context.sexagesimal(89+59/60+59.999/3600),'+90:00:00.00');
+assert.equal(context.sexagesimal(-90),'−90:00:00.00');
+for(const v of ['',null,undefined,NaN,'not a coordinate'])assert.equal(context.sexagesimal(v),'—');
 assert.match(format('91.3424377','0.13150020','0.12361910','','','pc'),/^91\.34.*asymmetric-error.*\+0\.12.*−0\.13.* pc$/);
 assert.equal(format('42.7','0.2','0.2','','','G'),'42.7 ± 0.2 G');
 assert.equal(format('0','0','0','','','G'),'0 ± 0 G');
@@ -24,7 +35,7 @@ const rawCatalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'
 const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r10/emission_evidence.json'))),emissionMap=new Map(emissions.systems.map(e=>[e.source_id,e]));
 const cmd=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r13/cmd_plot_input.json'))),cmdMap=new Map(cmd.systems.map(c=>[c.source_id,c]));
 const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,cmd:cmdMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
-const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','radio_observation_count'];
+const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'];
 for(const key of numericColumns)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
  let missing=false,previous=null;
@@ -32,17 +43,17 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 }
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- assert.equal(cells.length,11);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ assert.equal(cells.length,9);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
  if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[1].includes('mCV'));assert(!cells[1].includes('CV · mCV'));}
- for(let i=0;i<4;i++)assert.equal(cells[i+6],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
- assert(cells[10].includes('data-section="radio-observations"'));assert(cells[10].includes('>'+x.summary.radio_observation_count+'</button>'));
+ for(let i=0;i<3;i++)assert.equal(cells[i+6],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
 }
 const gleamRow=context.tableRow(catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37'));
-assert.match(gleamRow,/3010\.02/);assert.match(gleamRow,/<td class="numeric">—<\/td><td class="numeric">10496\.55<\/td>/);
+assert.match(gleamRow,/3010\.02/);assert(!gleamRow.includes('10496.55'));
 const gleam=catalog.systems.find(x=>x.summary.source_name==='GLEAM-X J0704-37');
 assert.match(context.cmdNote({summary:gleam.summary},gleam.cmd),/spectrum\/SED distance \(model dependent\) 380 pc/);
 assert.match(context.cmdNote({summary:gleam.summary},gleam.cmd),/M_G 12\.9/);
 assert.equal(gleam.cmd.distance_measurement_ids,'M04418');
+assert.match(context.propertyOverview(gleam.summary),/Radio recurrence period/);
 const sections=['Source overview','Selected properties & periods','CMD placement','Radio observations','X-ray luminosity','Evidence & references'];
 const observationLabels=['Observation ID','Band / method &amp; state','Observable','Reported flux or limit','Radio evidence','Reference'];
 for(const x of catalog.systems){
@@ -131,16 +142,26 @@ assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
 assert(html.includes('aria-labelledby="detail-name"'));
 assert.equal((html.match(/data-jump=/g)||[]).length,6);
 const definitions=vm.runInContext('columnDefinitions',context);
-assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','preferred_radio_recurrence_period_s','radio_observation_count']);
-assert.equal((context.tableHead().match(/<th\b/g)||[]).length,11);
-assert.equal((context.tableHead().match(/data-sort=/g)||[]).length,11);
+assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s']);
+assert.equal((context.tableHead().match(/<th\b/g)||[]).length,9);
+assert.equal((context.tableHead().match(/data-sort=/g)||[]).length,9);
+assert.equal((context.tableHead().match(/ICRS · J2016\.0\*/g)||[]).length,2);
+assert(!context.tableHead().includes('Radio recurrence'));assert(!context.tableHead().includes('Radio observations'));
 assert(!html.includes('id="columns"'));assert(!app.includes('columnPresets'));assert(!app.includes('column hidden'));
 for(const c of definitions.filter(c=>c.unit))assert(context.tableHead().includes(c.unit));
 const coordinateKeys=['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg'];
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- coordinateKeys.forEach((key,i)=>assert(cells[i+2].startsWith(Number(x.sky[key]).toFixed(6)),x.summary.source_name+': '+key));
- if(x.sky.fallback_status==='Gaia DR3')assert(row.includes('ICRS · J2016.0'));else assert(row.includes('Radio · published J2000'));
+ const ra=cells[2].split('<')[0],dec=cells[3].split('<')[0];
+ assert.match(ra,/^\d{2}:\d{2}:\d{2}\.\d{3}$/);assert.match(dec,/^[+−]\d{2}:\d{2}:\d{2}\.\d{2}$/);
+ const parsedRA=ra.split(':').map(Number),parsedDec=dec.slice(1).split(':').map(Number);
+ assert(parsedRA[0]<24&&parsedRA[1]<60&&parsedRA[2]<60);assert(parsedDec[1]<60&&parsedDec[2]<60);
+ const raDeg=15*(parsedRA[0]+parsedRA[1]/60+parsedRA[2]/3600),decDeg=(dec[0]==='−'?-1:1)*(parsedDec[0]+parsedDec[1]/60+parsedDec[2]/3600),raError=Math.abs(raDeg-x.sky.ra_deg);
+ assert(Math.min(raError,360-raError)<=0.0005*15/3600+1e-12,'RA rounding: '+x.summary.source_name);
+ assert(Math.abs(decDeg-x.sky.dec_deg)<=0.005/3600+1e-12,'Dec rounding: '+x.summary.source_name);
+ coordinateKeys.slice(2).forEach((key,i)=>assert.equal(cells[i+4],Number(x.sky[key]).toFixed(6)));
+ if(x.sky.fallback_status==='Gaia DR3')assert(!cells[2].includes('coordinate-origin'));
+ else {assert(cells[2].includes('Published J2000*'));assert(cells[3].includes('Published J2000*'));}
 }
 for(const key of coordinateKeys)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
@@ -152,7 +173,8 @@ for(const key of coordinateKeys)for(const ascending of [true,false]){
  assert(context.compareSystems(a,b,key,true)<0,'Sort retains sub-display precision');
 }
 const zeroPosition={...added,sky:{...added.sky,ra_deg:0,dec_deg:0,galactic_l_deg:0,galactic_b_deg:0}};
-assert.equal((context.tableRow(zeroPosition).match(/0\.000000/g)||[]).length,4);
+assert.match(context.tableRow(zeroPosition),/00:00:00\.000/);assert.match(context.tableRow(zeroPosition),/\+00:00:00\.00/);
+assert.equal((context.tableRow(zeroPosition).match(/0\.000000/g)||[]).length,2);
 const missingPosition={...added,sky:{...added.sky,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
 assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(2,6).every(c=>c==='—'));
 assert(html.includes('id="coordinate-note"'));assert(!html.includes('id="coordinate-note" class="help" hidden'));
@@ -183,4 +205,4 @@ async function checkSourceFailures(){
  assert(nodes['#detail-body'].innerHTML.includes('download the versioned evidence CSV'));assert.equal(nodes['.detail-nav'].hidden,true);
  await sourceContext.openSource('<unknown>',false);assert(nodes['#detail-body'].innerHTML.includes('&lt;unknown>'));
 }
-checkSourceFailures().then(()=>console.log('PASS: 58 systems, one fixed 11-column table, sky-coordinate values/precision/sorting, exact source Gaia IDs, bounds-only properties, CSV precision, source evidence, safe asynchronous failures and unchanged scientific data.')).catch(e=>{console.error(e);process.exitCode=1;});
+checkSourceFailures().then(()=>console.log('PASS: 58 systems, one fixed 9-column table, sexagesimal RA/Dec with carry/sign/wrap checks, frame/epoch exception, full-precision sorting, source evidence and unchanged scientific data.')).catch(e=>{console.error(e);process.exitCode=1;});

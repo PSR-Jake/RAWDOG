@@ -61,6 +61,19 @@ Passed:
 - At 390 px, document client/scroll widths both equal 375 px; the 1,057 px main table scrolls within its 343 px region, including access to the last column while source names stay visible. Desktop and mobile screenshots were inspected.
 - Identical path sets and SHA-256 values for all 157 protected files under `data/`, `figures/`, `assets/sources/` and `assets/catalog.json`.
 
+## Sexagesimal coordinates / web r18 — 2026-11-02
+
+The fixed table now has nine columns: System, Class, RA, Dec, Gl, Gb, Distance, Orbital period and WD spin. Radio recurrence and observation counts remain in source details and the original downloads. RA displays hh:mm:ss.sss; Dec displays ±dd:mm:ss.ss. Both headers give ICRS and reference epoch J2016.0 for the 57 Gaia positions; repeated Gaia labels are removed from the rows. ASKAP J144834−685644 retains a published-J2000 marker in both cells and a visible table note. Its metadata does not support asserting a new ICRS J2016.0 position. No frame conversion, epoch propagation or data selection is introduced.
+
+Passed:
+
+- `node scripts/check_presentation.js`: all 58 systems render the same nine columns; removed fields remain in source evidence. New formatter checks cover RA hours, wrapping/rounding to 00h, carry across minutes/hours, signed sub-degree Dec, negative zero, poles and missing values. All displayed coordinate pairs round-trip within the stated display rounding; numeric sorting still uses stored degree values, including sub-display precision and missing-last behavior.
+- Independent comparison of the actual JavaScript formatter output with Astropy `Angle.to_string`: exact agreement for all 58 RA/Dec pairs at 0.001 seconds of RA time and 0.01 arcseconds of Dec. This validates display conversion and rounding, not the literature astrometry.
+- `python scripts/check.py`: existing scientific consistency checks pass (58 systems, 96 observation rows, 7,175 provenance records, 669 references; 58 sky systems and 56 CMD systems).
+- Browser: nine headers; sexagesimal values and shared frame/epoch labels; both RA and Dec sort directions; positive and negative Dec; published-J2000 exception in both cells. GLEAM-X J0704−37's recurrence remains 10496.5522 ± 0.0008 s in the source property overview, with M04430 and its original radio row available.
+- At a 1280 px viewport, all nine columns fit the 1163 px table region. At 390 px, document client/scroll widths both equal 375 px; the 884 px table scrolls inside its 343 px region. Desktop/mobile screenshots inspected; viewport override reset afterward.
+- Protected path sets and SHA-256 values remain identical for all 157 data, figure, catalog-index and source-bundle files. Full-precision degree inputs and all 210 source-summary export fields are unchanged. No new export format or cross-browser certification is claimed.
+
 ## Scope and remaining release checks
 
 These results concern the local implementation. No merge or production deployment was performed. External-reference reachability, a full screen-reader audit and complete WCAG certification were not established. The selected source and figure interactions above were checked in the in-app browser; no cross-browser certification is claimed.

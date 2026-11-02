@@ -1,3 +1,11 @@
+# Website revision web r18 — 2026-11-02
+
+Reduces the fixed catalog table to nine columns by moving Radio recurrence and Radio observations to source details. Their data, the full observation tables and all 210 source-summary export fields remain intact.
+
+RA now displays hours/minutes/seconds (hh:mm:ss.sss); Dec displays signed degrees/arcminutes/arcseconds (±dd:mm:ss.ss). Formatting handles rounding carry, RA wrap and negative sub-degree declinations. Sorting still uses the unchanged full-precision degree inputs; Gl and Gb retain their decimal-degree display.
+
+Both equatorial headers state ICRS and reference epoch J2016.0 for the 57 Gaia positions. Removes repeated per-row Gaia epoch labels. The published-J2000 radio localization of ASKAP J144834−685644 remains explicitly marked in both coordinate cells and in a visible table note. A uniform ICRS J2016.0 position for that source cannot be asserted from the released metadata; no reference-frame conversion or proper-motion propagation is introduced. Catalog data stays 1.0.2 and CMD stays web r13. [Checks and limitations](P0_VERIFICATION.md).
+
 # Website revision web r17 — 2026-11-02
 
 Replaces column presets with one fixed 11-column catalog table: System, Class, RA, Dec, Gl, Gb, Distance, Orbital period, WD spin, Radio recurrence and Radio observations. All columns remain present during filtering and sorting. The coordinate inputs, decimal display precision, frame/epoch qualifications and full-precision numeric sorting are unchanged.
