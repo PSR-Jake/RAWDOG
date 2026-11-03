@@ -50,7 +50,7 @@ function tableRow(x,radioLabel=''){
  for(const key of ['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'])cells[key]='<td class="numeric">'+esc(tableNumber(s[key]))+'</td>';
  for(const key of ['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg']){
  const v=x.position?.[key],equatorial=key==='ra_deg'||key==='dec_deg',origin=equatorial&&present(v)&&x.position.assumed_alignment?'<span class="coordinate-origin">Frame assumed*</span>':'';
- const text=equatorial?sexagesimal(v,key==='ra_deg'):(present(v)?Number(v).toFixed(6):'—');
+ const text=equatorial?sexagesimal(v,key==='ra_deg'):(present(v)?Number(v).toFixed(4):'—');
  cells[key]='<td class="numeric" title="'+esc([x.position?.coordinate_frame,x.position?.coordinate_equinox,x.position?.position_epoch,x.position?.qualification].filter(Boolean).join(' · '))+'">'+esc(text)+origin+'</td>';
  }
  return '<tr>'+columnDefinitions.map(c=>cells[c.key]).join('')+'</tr>';

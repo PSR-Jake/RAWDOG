@@ -176,7 +176,7 @@ for(const x of catalog.systems){
  const raDeg=15*(parsedRA[0]+parsedRA[1]/60+parsedRA[2]/3600),decDeg=(dec[0]==='−'?-1:1)*(parsedDec[0]+parsedDec[1]/60+parsedDec[2]/3600),raError=Math.abs(raDeg-x.position.ra_deg);
  assert(Math.min(raError,360-raError)<=0.0005*15/3600+1e-12,'RA rounding: '+x.summary.source_name);
  assert(Math.abs(decDeg-x.position.dec_deg)<=0.005/3600+1e-12,'Dec rounding: '+x.summary.source_name);
- coordinateKeys.slice(2).forEach((key,i)=>assert.equal(cells[i+5],Number(x.position[key]).toFixed(6)));
+ coordinateKeys.slice(2).forEach((key,i)=>assert.equal(cells[i+5],Number(x.position[key]).toFixed(4)));
  if(!x.position.assumed_alignment)assert(!cells[3].includes('coordinate-origin'));
  else {assert(cells[3].includes('Frame assumed*'));assert(cells[4].includes('Frame assumed*'));}
 }
@@ -191,7 +191,7 @@ for(const key of coordinateKeys)for(const ascending of [true,false]){
 }
 const zeroPosition={...added,position:{...added.position,ra_deg:0,dec_deg:0,galactic_l_deg:0,galactic_b_deg:0}};
 assert.match(context.tableRow(zeroPosition),/00:00:00\.000/);assert.match(context.tableRow(zeroPosition),/\+00:00:00\.00/);
-assert.equal((context.tableRow(zeroPosition).match(/0\.000000/g)||[]).length,2);
+assert.equal((context.tableRow(zeroPosition).match(/0\.0000/g)||[]).length,2);
 const missingPosition={...added,position:{...added.position,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
 assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(3,7).every(c=>c==='—'));
 assert(html.includes('id="coordinate-note"'));assert(!html.includes('id="coordinate-note" class="help" hidden'));

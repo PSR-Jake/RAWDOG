@@ -1,3 +1,7 @@
+# Website revision web r20 — 2026-11-02
+
+Gl and Gb now display four decimal places in degrees. Numeric sorting, full-precision coordinate downloads, RA/Dec formatting and all coordinate products are unchanged.
+
 # Website revision web r19 — 2026-11-02
 
 Adds the exact Gaia DR3 identifier and VizieR source link back to the fixed main table (ten columns). Identifiers stay strings in display, search, sorting and exports; ASKAP J144834−685644 remains without an assigned Gaia counterpart.

@@ -12,7 +12,7 @@ The 57 Gaia-counterpart inputs are the existing `gaia_ra_j2000_deg` and `gaia_de
 
 Gl/Gb are transformed from the same adopted table positions. The published sky map and its original Galactic-coordinate inputs retain native Gaia ICRS positions at J2016.0 (plus the qualified radio fallback); main-table and sky-map values therefore have different, documented position-epoch conventions. Neither the map nor its source data are rebuilt by this change.
 
-RA displays hh:mm:ss.sss and Dec displays ±dd:mm:ss.ss; Galactic coordinates display six decimal degrees. Sorting uses full-precision derived values. Display precision is not an uncertainty estimate. Source details expose the table coordinates, original coordinate values, input frame/file, SHA-256 and qualifications alongside the unchanged original evidence.
+RA displays hh:mm:ss.sss and Dec displays ±dd:mm:ss.ss; Galactic coordinates display four decimal places in degrees (web r20). Sorting and coordinate downloads retain full-precision derived values. Display precision is not an uncertainty estimate. Source details expose the table coordinates, original coordinate values, input frame/file, SHA-256 and qualifications alongside the unchanged original evidence.
 
 Products:
 
