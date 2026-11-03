@@ -8,7 +8,6 @@ const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog
 $('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 const columnDefinitions=[
  {key:'source_name',label:'System',sort:true},
- {key:'gaia_dr3_id',label:'Gaia DR3 ID',sort:true},
  {key:'classification_labels',label:'Class',sort:true},
  {key:'ra_deg',label:'RA',frame:'FK5 · J2000*',unit:'hh:mm:ss.sss',sort:true,numeric:true,position:true},
  {key:'dec_deg',label:'Dec',frame:'FK5 · J2000*',unit:'±dd:mm:ss.ss',sort:true,numeric:true,position:true},
@@ -16,7 +15,8 @@ const columnDefinitions=[
  {key:'galactic_b_deg',label:'Gb',unit:'deg',sort:true,numeric:true,position:true},
  {key:'preferred_distance_pc',label:'Distance',unit:'pc',sort:true,numeric:true},
  {key:'preferred_orbital_period_h',label:'Orbital period',unit:'h',sort:true,numeric:true},
- {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true}
+ {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true},
+ {key:'gaia_dr3_id',label:'Gaia DR3 ID',sort:true}
 ];
 function tableHead(key='source_name',ascending=true){return '<tr>'+columnDefinitions.map(c=>{
  const k=c.key,label=esc(c.label)+(c.frame?'<span class="column-unit">'+esc(c.frame)+'</span>':'')+(c.unit?'<span class="column-unit">'+esc(c.unit)+'</span>':'');

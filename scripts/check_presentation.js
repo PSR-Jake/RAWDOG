@@ -47,14 +47,14 @@ for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
  assert.equal(cells.length,10);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
  assert.equal(x.position.gaia_dr3_id,x.summary.gaia_dr3_id);
- assert.equal(cells[1].replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
+ assert.equal(cells[9].replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
  if(x.summary.gaia_dr3_id){
-  const url=new URL(cells[1].match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
+  const url=new URL(cells[9].match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
   assert.equal(url.origin,'https://vizier.cds.unistra.fr');assert.equal(url.searchParams.get('-source'),'I/355/gaiadr3');assert.equal(url.searchParams.get('Source'),x.summary.gaia_dr3_id);
-  assert.match(cells[1],/target="_blank" rel="noopener"/);
- }else assert(!cells[1].includes('<a'));
- if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[2].includes('mCV'));assert(!cells[2].includes('CV · mCV'));}
- for(let i=0;i<3;i++)assert.equal(cells[i+7],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
+  assert.match(cells[9],/target="_blank" rel="noopener"/);
+ }else assert(!cells[9].includes('<a'));
+ if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[1].includes('mCV'));assert(!cells[1].includes('CV · mCV'));}
+ for(let i=0;i<3;i++)assert.equal(cells[i+6],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
 }
 for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,'gaia_dr3_id',ascending));
@@ -159,7 +159,7 @@ assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
 assert(html.includes('aria-labelledby="detail-name"'));
 assert.equal((html.match(/data-jump=/g)||[]).length,6);
 const definitions=vm.runInContext('columnDefinitions',context);
-assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','gaia_dr3_id','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s']);
+assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','gaia_dr3_id']);
 assert.equal((context.tableHead().match(/<th\b/g)||[]).length,10);
 assert.equal((context.tableHead().match(/data-sort=/g)||[]).length,10);
 assert.equal((context.tableHead().match(/FK5 · J2000\*/g)||[]).length,2);
@@ -169,16 +169,16 @@ for(const c of definitions.filter(c=>c.unit))assert(context.tableHead().includes
 const coordinateKeys=['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg'];
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- const ra=cells[3].split('<')[0],dec=cells[4].split('<')[0];
+ const ra=cells[2].split('<')[0],dec=cells[3].split('<')[0];
  assert.match(ra,/^\d{2}:\d{2}:\d{2}\.\d{3}$/);assert.match(dec,/^[+−]\d{2}:\d{2}:\d{2}\.\d{2}$/);
  const parsedRA=ra.split(':').map(Number),parsedDec=dec.slice(1).split(':').map(Number);
  assert(parsedRA[0]<24&&parsedRA[1]<60&&parsedRA[2]<60);assert(parsedDec[1]<60&&parsedDec[2]<60);
  const raDeg=15*(parsedRA[0]+parsedRA[1]/60+parsedRA[2]/3600),decDeg=(dec[0]==='−'?-1:1)*(parsedDec[0]+parsedDec[1]/60+parsedDec[2]/3600),raError=Math.abs(raDeg-x.position.ra_deg);
  assert(Math.min(raError,360-raError)<=0.0005*15/3600+1e-12,'RA rounding: '+x.summary.source_name);
  assert(Math.abs(decDeg-x.position.dec_deg)<=0.005/3600+1e-12,'Dec rounding: '+x.summary.source_name);
- coordinateKeys.slice(2).forEach((key,i)=>assert.equal(cells[i+5],Number(x.position[key]).toFixed(4)));
- if(!x.position.assumed_alignment)assert(!cells[3].includes('coordinate-origin'));
- else {assert(cells[3].includes('Frame assumed*'));assert(cells[4].includes('Frame assumed*'));}
+ coordinateKeys.slice(2).forEach((key,i)=>assert.equal(cells[i+4],Number(x.position[key]).toFixed(4)));
+ if(!x.position.assumed_alignment)assert(!cells[2].includes('coordinate-origin'));
+ else {assert(cells[2].includes('Frame assumed*'));assert(cells[3].includes('Frame assumed*'));}
 }
 for(const key of coordinateKeys)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
@@ -193,7 +193,7 @@ const zeroPosition={...added,position:{...added.position,ra_deg:0,dec_deg:0,gala
 assert.match(context.tableRow(zeroPosition),/00:00:00\.000/);assert.match(context.tableRow(zeroPosition),/\+00:00:00\.00/);
 assert.equal((context.tableRow(zeroPosition).match(/0\.0000/g)||[]).length,2);
 const missingPosition={...added,position:{...added.position,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
-assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(3,7).every(c=>c==='—'));
+assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(2,6).every(c=>c==='—'));
 assert(html.includes('id="coordinate-note"'));assert(!html.includes('id="coordinate-note" class="help" hidden'));
 assert(html.includes('data/v1.0.2/sky_plot_input.csv'));
 assert(html.includes('assets/table_coordinates_fk5_j2000.csv'));

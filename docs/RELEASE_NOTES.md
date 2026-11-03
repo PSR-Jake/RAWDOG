@@ -1,3 +1,7 @@
+# Website revision web r21 — 2026-11-03
+
+Moves Gaia DR3 ID to the last column of the fixed main table. Exact-ID links, search, sorting, coordinate formatting and downloads are unchanged.
+
 # Website revision web r20 — 2026-11-02
 
 Gl and Gb now display four decimal places in degrees. Numeric sorting, full-precision coordinate downloads, RA/Dec formatting and all coordinate products are unchanged.
