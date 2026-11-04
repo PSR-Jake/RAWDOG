@@ -16,6 +16,7 @@ const columnDefinitions=[
  {key:'preferred_distance_pc',label:'Distance',unit:'pc',sort:true,numeric:true},
  {key:'preferred_orbital_period_h',label:'Orbital period',unit:'h',sort:true,numeric:true},
  {key:'preferred_wd_spin_period_s',label:'WD spin',unit:'s',sort:true,numeric:true},
+ {key:'radio_measurements',label:'Radio measurements'},
  {key:'gaia_dr3_id',label:'Gaia DR3 ID',sort:true}
 ];
 function tableHead(key='source_name',ascending=true){return '<tr>'+columnDefinitions.map(c=>{
@@ -40,10 +41,46 @@ function sexagesimal(v,isRA=false){
  const major=Math.floor(ticks/(3600*scale)),minutes=Math.floor(ticks/(60*scale))%60,seconds=(ticks%(60*scale))/scale;
  return (isRA?'':(n<0||Object.is(n,-0)?'−':'+'))+[String(major).padStart(2,'0'),String(minutes).padStart(2,'0'),seconds.toFixed(digits).padStart(3+digits,'0')].join(':');
 }
+function radioTableCell(x){
+ const observations=x.emission?.radio??[];
+ if(!observations.length)return '<td>—</td>';
+ const source=esc(x.summary.source_id),groups=new Map();
+ for(const record of observations){
+  const band=record.radio_band_ghz_as_reported;
+  if(!groups.has(band))groups.set(band,[]);
+  groups.get(band).push(record);
+ }
+ const bands=Array.from(groups,([band,records])=>{
+  const frequency=band?band.replace(/(\d)-(\d)/g,'$1–$2')+' GHz':'Band unspecified';
+  const entries=records.map(r=>{
+   const kind=r.flux_quantity_kind,peak=kind.startsWith('Peak-brightness'),missing=kind==='Missing';
+   let value=r.reported_flux_text.replace(/\+\/-/g,'±');
+   if(kind==='Peak-brightness range'&&present(r.peak_brightness_lower_uJy)&&present(r.peak_brightness_upper_uJy))value=r.peak_brightness_lower_uJy+'–'+r.peak_brightness_upper_uJy;
+   if(kind==='Peak-brightness upper envelope')value=value.replace(/ peak brightness$/,'');
+   const flux=missing?'No flux listed':value+' '+radioUnit(r);
+   const label=missing?r.radio_evidence_label.split(';')[0]:peak?'Peak brightness':r.is_upper_limit==='true'?'Upper limit':'';
+   const marginal=r.radio_evidence_label==='Marginal reported signal'&&!missing?'Marginal signal':'';
+   let epoch='';
+   if(records.length>1){
+    const method=r.flux_method_and_state;
+    const dates=method.match(/\b\d{4}-\d{2}-\d{2}(?: \d{2}:\d{2}:\d{2} UT(?:C)?\b)?/g);
+    epoch=dates?.length===1?dates[0]:(method.match(/\bMJD (?:start )?\d+(?:\.\d+)?\b/)?.[0]||r.observation_id);
+   }
+   const context=[label,marginal,epoch].filter(Boolean).join(' · ');
+   const linkLabel=[x.summary.source_name,frequency,flux,context,r.observation_id].filter(Boolean).join(' · ');
+   return `<div class="radio-preview"><button type="button" class="radio-preview-link" data-source="${source}" data-section="observation-${esc(r.observation_id)}" aria-label="${esc(linkLabel)}">${esc(flux)}</button>${context?'<span class="radio-preview-context">'+esc(context)+'</span>':''}</div>`;
+  }).join('');
+  if(observations.length>3&&records.length>1)return `<details class="radio-preview-band"><summary>${esc(frequency)} · ${records.length} records</summary>${entries}</details>`;
+  return `<div class="radio-preview-band"><span class="radio-preview-context">${esc(frequency)}</span>${entries}</div>`;
+ }).join('');
+ const all=observations.length>3?`<button type="button" class="radio-preview-link" data-source="${source}" data-section="radio-observations">View all ${observations.length} measurements</button>`:'';
+ return '<td class="radio-measurements">'+bands+all+'</td>';
+}
 function tableRow(x,radioLabel=''){
  const s=x.summary,classes=displayClassCodes(s).map(t=>({cataclysmic_variable:'CV',magnetic_cv:'mCV',white_dwarf_pulsar:'WD pulsar',long_period_radio_transient:'LPT'}[t]||pretty(t))).join(' · ');
  const cells={
  source_name:`<td><button class="system-link" data-source="${esc(s.source_id)}">${symbol(x)}${esc(s.source_name)}</button>${radioLabel?`<button class="matching-radio-link" data-source="${esc(s.source_id)}" data-section="radio-observations" data-match-radio="${esc(radioLabel)}">View matching radio observations</button>`:''}</td>`,
+ radio_measurements:radioTableCell(x),
  gaia_dr3_id:'<td class="gaia-id">'+gaiaLink(s.gaia_dr3_id)+'</td>',
  classification_labels:`<td class="table-class" title="${esc(pretty(s.magnetic_subclass_or_status||s.proposed_or_disputed_interpretation||s.published_subclass_labels))}">${esc(classes)}</td>`
  };

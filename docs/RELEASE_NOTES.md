@@ -1,3 +1,7 @@
+# Website revision web r22 — 2026-11-04
+
+Adds Radio measurements before Gaia DR3 ID in the main table. Each value links to its observation and shows the reported band. Repeated records in systems with more than three observations can be expanded by band. Limits, marginal signals and peak brightness have explicit labels.
+
 # Website revision web r21 — 2026-11-03
 
 Moves Gaia DR3 ID to the last column of the fixed main table. Exact-ID links, search, sorting, coordinate formatting and downloads are unchanged.

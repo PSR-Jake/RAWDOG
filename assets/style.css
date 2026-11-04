@@ -26,3 +26,13 @@ header a:focus-visible,.detail-bar button:focus-visible{outline-color:white}
 #systems .coordinate-origin{display:block;font-size:.75rem;line-height:1.4;color:var(--muted);font-weight:400;white-space:normal;margin-top:.25rem}
 
 #systems .gaia-id{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+#systems th.numeric{min-width:0}
+#systems .system-link{white-space:normal}
+#systems .radio-measurements{min-width:180px;width:200px;font-variant-numeric:tabular-nums}
+.radio-preview-band + .radio-preview-band{margin-top:.45rem}
+.radio-preview-band summary,.radio-preview-context{font-size:.75rem}
+.radio-preview-context{display:block;color:var(--muted)}
+.radio-preview + .radio-preview{margin-top:.2rem}
+.radio-preview-link{border:0;padding:0;background:none;color:var(--blue);text-align:left;font-size:inherit;font-weight:650;text-decoration:underline;text-underline-offset:.15em}
+.radio-preview-band + .radio-preview-link{margin-top:.45rem;font-size:.75rem}

@@ -45,14 +45,15 @@ for(const key of numericColumns)for(const ascending of [true,false]){
 }
 for(const x of catalog.systems){
  const row=context.tableRow(x),cells=Array.from(row.matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]);
- assert.equal(cells.length,10);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
+ assert.equal(cells.length,11);assert(!/NaN|undefined/.test(row));assert(row.includes(x.summary.source_id));
  assert.equal(x.position.gaia_dr3_id,x.summary.gaia_dr3_id);
- assert.equal(cells[9].replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
+ const gaiaCell=cells.at(-1);
+ assert.equal(gaiaCell.replace(/<[^>]*>/g,''),x.summary.gaia_dr3_id||'—');
  if(x.summary.gaia_dr3_id){
-  const url=new URL(cells[9].match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
+  const url=new URL(gaiaCell.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
   assert.equal(url.origin,'https://vizier.cds.unistra.fr');assert.equal(url.searchParams.get('-source'),'I/355/gaiadr3');assert.equal(url.searchParams.get('Source'),x.summary.gaia_dr3_id);
-  assert.match(cells[9],/target="_blank" rel="noopener"/);
- }else assert(!cells[9].includes('<a'));
+  assert.match(gaiaCell,/target="_blank" rel="noopener"/);
+ }else assert(!gaiaCell.includes('<a'));
  if(x.summary.classification_labels.includes('magnetic_cv')){assert(cells[1].includes('mCV'));assert(!cells[1].includes('CV · mCV'));}
  for(let i=0;i<3;i++)assert.equal(cells[i+6],escapeText(context.tableNumber(x.summary[numericColumns[i]])));
 }
@@ -159,8 +160,8 @@ assert(html.includes('id="host"'));assert(html.includes('assets/logo.svg'));
 assert(html.includes('aria-labelledby="detail-name"'));
 assert.equal((html.match(/data-jump=/g)||[]).length,6);
 const definitions=vm.runInContext('columnDefinitions',context);
-assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','gaia_dr3_id']);
-assert.equal((context.tableHead().match(/<th\b/g)||[]).length,10);
+assert.deepEqual(Array.from(definitions,c=>c.key),['source_name','classification_labels','ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s','radio_measurements','gaia_dr3_id']);
+assert.equal((context.tableHead().match(/<th\b/g)||[]).length,11);
 assert.equal((context.tableHead().match(/data-sort=/g)||[]).length,10);
 assert.equal((context.tableHead().match(/FK5 · J2000\*/g)||[]).length,2);
 assert(!context.tableHead().includes('Radio recurrence'));assert(!context.tableHead().includes('Radio observations'));
@@ -201,7 +202,22 @@ const qs=catalog.systems.find(x=>x.summary.source_name==='QS Vir'),qsData=JSON.p
 assert(context.matchesFilters(qs,'qs vir','cataclysmic_variable','established',radioLabel));
 assert(!context.matchesFilters(qs,'qs vir','white_dwarf_pulsar','established',radioLabel));
 assert.equal((context.sourceDetail(qsData,qs,radioLabel).match(/radio-row radio-match/g)||[]).length,9);
-assert(!context.tableRow(qs).includes('970 ± 160'));
+const qsTable=context.radioTableCell(qs);
+assert.match(qsTable,/<summary>2–4 GHz · 4 records<\/summary>/);
+assert.equal((qsTable.match(/<details /g)||[]).length,3);
+assert.match(qsTable,/View all 10 measurements/);
+assert.match(qsTable,/620 ± 20 µJy<\/button><span[^>]*>2022-11-28/);
+const radioCell=name=>context.radioTableCell(catalog.systems.find(x=>x.summary.source_name===name));
+assert.match(radioCell('CM Phe'),/&lt; 30 µJy<\/button><span[^>]*>Upper limit/);
+assert.match(radioCell('Cas 1'),/Marginal signal/);
+assert.match(radioCell('J191213.72-441045.1'),/up to ~15000 µJy beam⁻¹<\/button><span[^>]*>Peak brightness/);
+assert.match(radioCell('ILT J1101+5521'),/41000–256000 µJy beam⁻¹/);
+assert.match(radioCell('GLEAM-X J0704-37'),/No flux listed<\/button><span[^>]*>Reported detection/);
+for(const x of catalog.systems){
+ const source=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',x.token+'.json')));
+ const targets=Array.from(context.radioTableCell(x).matchAll(/data-section="observation-([^"]+)"/g),m=>m[1]);
+ assert.deepEqual(targets.sort(),source.observations.map(r=>r.observation_id).sort(),x.summary.source_name);
+}
 assert.match(context.sourceDetail(qsData,qs,radioLabel),/970 ± 160 µJy/);
 assert.match(context.tableRow(qs,radioLabel),/View matching radio observations/);
 const columns=Object.keys(catalog.systems[0].summary),csv=context.csvText([qs],columns);
@@ -223,4 +239,4 @@ async function checkSourceFailures(){
  assert(nodes['#detail-body'].innerHTML.includes('download the versioned evidence CSV'));assert.equal(nodes['.detail-nav'].hidden,true);
  await sourceContext.openSource('<unknown>',false);assert(nodes['#detail-body'].innerHTML.includes('&lt;unknown>'));
 }
-checkSourceFailures().then(()=>console.log('PASS: 58 systems, fixed 10-column FK5/J2000 table, exact Gaia ID links/sorting, sexagesimal display, coordinate joins/provenance, source evidence and unchanged released data.')).catch(e=>{console.error(e);process.exitCode=1;});
+checkSourceFailures().then(()=>console.log('PASS: 58 systems, 11 columns, radio bands and observation links, Gaia IDs, coordinate formatting, and source evidence.')).catch(e=>{console.error(e);process.exitCode=1;});
