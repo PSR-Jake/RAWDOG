@@ -8,7 +8,7 @@ RAWDOG（RAdio White Dwarf catalOG）汇集白矮星系统及相关候选体的�
 
 | 位置 | 内容 |
 | --- | --- |
-| [README.md](README.md) | 项目说明、复现步骤和引用方式 |
+| [README.md](README.md) | 项目概览、公开入口和引用方式 |
 | [index.html](index.html) | 网站入口 |
 | [assets/](assets/) | 网页样式、交互、逐源详情和主表坐标 |
 | [data/v1.0.2/](data/v1.0.2/) | 正式目录、射电观测、物理性质、证据、参考文献和校验和 |
@@ -30,7 +30,7 @@ python -m http.server 8000 --bind 127.0.0.1
 
 ## 发布前检查
 
-在安装了项目科学计算依赖的 Python 环境中运行以下检查。网页检查使用 Node.js。
+在安装了项目科学计算依赖的 Python 环境中运行以下检查。网页检查使用 Node.js。完整构建和打包步骤见[复现说明](docs/REPRODUCING.md)。
 
 ```sh
 python scripts/check.py

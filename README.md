@@ -1,44 +1,49 @@
-# RAWDOG — RAdio White Dwarf catalOG
+<p align="center">
+  <img src="assets/logo.svg" width="96" height="96" alt="RAWDOG dog and white-dwarf star logo">
+</p>
 
-Catalog data version **1.0.2**; website revision **web r22**. Public version **1.0.2**, prepared **2026-10-01**. A literature-curated catalog of radio observations and reported radio emission from white-dwarf systems and related candidates: 58 systems, 96 observation rows, 7,175 provenance records and 669 references. CHIME/ILT J1634+44 was withdrawn from active membership because its nature and white-dwarf interpretation are unclear; previous snapshots are retained. Membership, classifications and radio evidence are qualified and nonexclusive; this is not a complete or uniformly surveyed population.
+<h1 align="center">RAWDOG</h1>
 
-[Project guide](PROJECT_GUIDE.md) · [Website](https://PSR-Jake.github.io/RAWDOG/) · [Release decisions](docs/RELEASE_NOTES.md) · [Data dictionary](docs/DATA_DICTIONARY.md) · [Methods](docs/PLOTTING_METHODS.md) · [Validation](docs/VALIDATION_REPORT.md)
+<p align="center">
+  <strong>RAdio White Dwarf catalOG</strong><br>
+  Radio observations and evidence for white-dwarf systems.
+</p>
 
-## Explore and download
+<p align="center">
+  <a href="https://psr-jake.github.io/RAWDOG/"><strong>Browse the catalog →</strong></a> ·
+  <a href="https://github.com/PSR-Jake/RAWDOG/releases/latest">Download data</a> ·
+  <a href="PROJECT_GUIDE.md">Project guide</a>
+</p>
 
-The static website provides search, sorting, overlapping-class/host/radio filters, every observation row, selected properties, all alternatives, source methods, uncertainty conventions, references and unresolved issues. Figures: dual equatorial/Galactic Mollweide sky distribution (58 systems) and observed unresolved Gaia CMD (56 systems; two documented exclusions), with a separate Gaia/SED comparison of two LPT systems. The current CMD uses per-source distance adoptions, including the author-approved published spectrum/SED distance for GLEAM-X; other placements retain their geometric distances. No source name is permanently singled out on the plot. Concise source overviews disclose full evidence on expansion. Versioned CSVs and source-keyed plot inputs are in `data/v1.0.2/`; Sky exports remain in `figures/v1.0.2/`; current CMD exports and inputs are in `figures/v1.0.2-web-r13/` and `data/v1.0.2-web-r13/`; comparison inputs are in `data/v1.0.0-web-r1/`. Original `figures/v1.0.0/`, data, archive and tag remain immutable. [Current CMD adoption](docs/CMD_REVISION_WEB_R13.md); [historical comparison audit](docs/CMD_AUDIT_WEB_R1.md). The background is a retained density product, not hundreds of thousands of browser points.
+| Systems | Radio observations | Evidence records | References |
+| :---: | :---: | :---: | :---: |
+| **58** | **96** | **7,175** | **669** |
 
-The compact dog-and-white-dwarf [SVG logo](assets/logo.svg) is used in the header and favicon. Main-table periods and distances display two decimal places; sorting, source evidence and exports retain stored precision. Common downloads stay visible; additional tables and audit documentation are collapsed. Host confidence remains in each source detail and the host filter; the main table omits its separate column.
+**Catalog v1.0.2** · **Website web r22**
 
-The system-parameter table shows all matching systems without pagination in one fixed set of eleven columns: System, Class, RA, Dec, Gl (Galactic longitude), Gb (Galactic latitude), Distance, Orbital period, WD spin, Radio measurements and Gaia DR3 ID. Each exact string Gaia ID links to its corresponding VizieR record in a new tab; missing counterparts remain unassigned. RA/Dec use FK5, equinox J2000, displayed as hh:mm:ss.sss and ±dd:mm:ss.ss. The table reuses the released epoch-2000 positions: 56 ICRS inputs are transformed to FK5 and U Gem’s explicitly FK5 input is retained without double conversion. The published J2000 radio localization of ASKAP J144834−685644 retains an explicit assumed-alignment marker. Gl/Gb display four decimal places from the same table position; all four coordinates sort at full precision, and coordinate downloads retain full precision. The existing native sky-map inputs/figures remain unchanged. [Coordinate methods, qualifications and downloads](docs/TABLE_COORDINATES_FK5_J2000.md). The concise class display uses mCV without its redundant CV parent; original tags and filter membership remain unchanged. Distinct clocks stay separate, and missing values remain last in either sort direction. Radio recurrence and observation counts remain in source details. Narrow screens scroll inside the table while source names stay visible. Filtered systems CSV retains all 210 original summary fields at stored precision and the current sort order; empty selections export headers only. The separate FK5/J2000 coordinate CSV contains all four table coordinates, exact Gaia IDs and provenance.
+Search and compare systems, inspect radio and X-ray evidence, and explore the sky map and Gaia color–magnitude diagram. Individual records include their reported bands, uncertainties, limits and references.
 
-Stellar temperatures, masses, companion spectral types and radio-evidence wording are in source details. WD mass and photospheric-temperature ranges or bounds without a selected central value remain visible in the property overview, with their recorded qualifications and direct evidence links. Radio and X-ray measurements appear by observation or luminosity record, retaining bands, epochs, models, components, limits, uncertainties and references. The main table shows radio measurements by their reported frequency bands, with links to each observation and its evidence. Repeated bands in systems with more than three observations can be expanded. Upper limits, marginal signals and peak brightness have explicit labels. X-ray records are available in source details. Radio-label filtering still selects systems with any matching observation and highlights the matching records without hiding alternatives. The frozen ledger supplies 52 available luminosity/limit/scaling records in 26 systems; other entries remain missing or flux-only. No luminosities are calculated or rescaled. [Emission methods and qualifications](docs/EMISSION_COLUMNS_WEB_R10.md); supplementary source-keyed inputs and checksums are in `data/v1.0.2-web-r10/`.
+Literature-selected sample with heterogeneous coverage. Host confidence and classification qualifications are documented per source.
 
-Every source detail follows the same order: source overview, selected properties and periods, CMD placement, radio observations, X-ray luminosity, then evidence and references. Selected properties use compact quantity/value rows with units and brief qualifications; full components, uncertainty conventions, methods, assumptions and evidence IDs are under “Property notes & uncertainty conventions.” Radio and X-ray records use compact comparison tables on desktop and labeled blocks on narrow screens, retaining original record IDs/order, units, errors/limits, context and references. A fixed source name and six section controls keep long evidence views navigable; observation metadata can be expanded individually or collapsed together. Every selected property has a direct link that opens its original measurement evidence. Unselected quantities expose their recorded reasons; J1912 retains a blank catalog preferred distance and a separately labeled CMD-only distance adoption. X-ray records retain distinct models, components, states, limits, historical distances and logarithmic/scaled units, with full methods expandable. Missing selections are explicit without empty property rows; all detailed evidence remains available.
+## Data & documentation
 
-## Reproduce
+| Resource | Links |
+| --- | --- |
+| Catalog data | [Latest release](https://github.com/PSR-Jake/RAWDOG/releases/latest) · [CSV tables](data/v1.0.2/) · [Data dictionary](docs/DATA_DICTIONARY.md) |
+| Scientific methods | [Figures](docs/PLOTTING_METHODS.md) · [Current CMD](docs/CMD_REVISION_WEB_R13.md) · [Coordinates](docs/TABLE_COORDINATES_FK5_J2000.md) · [Radio / X-ray](docs/EMISSION_COLUMNS_WEB_R10.md) |
+| Development | [Project guide](PROJECT_GUIDE.md) · [Reproduce & validate](docs/REPRODUCING.md) · [Version history](docs/RELEASE_NOTES.md) |
 
-Python 3.12 or later; install `requirements.txt` in an isolated environment:
+## Local preview
+
+Run from the repository root, then open <http://localhost:8000/>.
 
 ```sh
-python -m venv .venv
-. .venv/bin/activate
-python -m pip install -r requirements.txt
-python scripts/build.py --version 1.0.2
-python scripts/check.py
-python scripts/cmd_revision.py --check
-python scripts/package.py --version 1.0.2
-python -m http.server 8000
+python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Regenerate only the current CMD inputs/exports with `python scripts/cmd_revision.py`; the original 1.0.2 tables, figures and source bundles remain unchanged.
-
-For the presentation check (Node.js, no dependencies), run `node scripts/check_presentation.js`. Regenerate supplementary emission inputs with `python scripts/emission_inputs.py`; validate their frozen evidence joins and exact products with `python scripts/emission_inputs.py --check` (standard library only).
-
-The public snapshot and retained background density CSV suffice to regenerate figures and website evidence. The scientific check covers membership/joins, coordinates/wrapping/Galactic agreement, CMD formulas and reversed distance endpoints, exclusions, candidates/uncertainty conventions, rejected counterpart separation, exact ID strings, unrelated-field preservation and versioned products. The versioned builder reads frozen plot inputs and writes figures only; it does not overwrite published tables, original figures or source bundles. The earlier LPT comparison and 1.0.0 archive remain preserved. Use the explicit `--version 1.0.2` option when packaging this withdrawal. To import a reviewed RC3 directory into a separate unpublished staging copy, run `python scripts/prepare_snapshot.py <rc3-directory>` before building; never run a legacy physical-property builder. To regenerate the background from the original local Gaia TAP cache, run `python scripts/background.py <cache.csv>`. Its actual hash/cuts and unknown original selection are recorded in the background provenance JSON.
-
-GitHub Pages serves repository root `main` with `.nojekyll`; all project assets are relative and work under `/RAWDOG/`. No JavaScript library or remote CDN is required. JavaScript enables exploration; static figure/data/document downloads remain available without it.
 
 ## Citation
 
-RAWDOG catalog, version 1.0.2, prepared 2026-10-01, https://github.com/PSR-Jake/RAWDOG (include access date). No DOI, author list or license has been assigned. Primary-source references retain their own bibliographic metadata; no paper PDFs are redistributed.
+RAWDOG catalog, version **1.0.2**, prepared **2026-10-01**. Cite [this repository](https://github.com/PSR-Jake/RAWDOG) with the version and access date.
+
+Author list, DOI and license are pending.
