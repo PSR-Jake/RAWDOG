@@ -1,10 +1,31 @@
 // Exercise the actual browser formatter without a browser or new dependency.
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),app=fs.readFileSync(path.join(root,'assets/app.js'),'utf8');
-const context={};vm.createContext(context);
+const preferredReferences=JSON.parse(fs.readFileSync(path.join(root,'assets/reference_links.json'),'utf8'));
+const context={referenceLinks:preferredReferences.references};vm.createContext(context);
 vm.runInContext(app.split('\n').filter(l=>/^const (\$|labels=|styles=|pretty=)/.test(l)).join('\n')+'\n'+app.slice(app.indexOf('const columnDefinitions'),app.indexOf('function render'))+'\n'+app.slice(app.indexOf('function fields'),app.indexOf('async function openSource')),context);
 const format=(...args)=>context.estimate(...args);
 const escapeText=vm.runInContext('esc',context);
+assert.equal(Object.keys(preferredReferences.references).length,669);
+assert.equal(Object.values(preferredReferences.references).filter(r=>r.arxiv_id).length,316);
+for(const reference of Object.values(preferredReferences.references))if(reference.arxiv_id){
+ assert.equal(reference.url,'https://arxiv.org/abs/'+reference.arxiv_id);
+}
+assert.equal(preferredReferences.references['Marsh+16'].url,'https://arxiv.org/abs/1607.08265');
+assert.equal(preferredReferences.references['Pelisoli+23'].url,'https://arxiv.org/abs/2306.09272');
+assert.equal(preferredReferences.references['Suleimanov+24_TTAri'].url,'https://arxiv.org/abs/2403.15254');
+assert.equal(preferredReferences.references['Campbell+08_STLMi'].url,'https://arxiv.org/abs/0807.1143');
+assert.equal(preferredReferences.references['Campbell+08_EQCet'].url,'https://doi.org/10.1086/533488');
+assert.equal(preferredReferences.references['vanDerHeyden+02_V1043Cen'].url,'https://doi.org/10.1046/j.1365-8711.2002.05320.x');
+assert.equal(preferredReferences.references['deRuiter+25_correction'].url,'https://doi.org/10.1038/s41550-025-02540-8');
+assert.equal(preferredReferences.references['Ridder+25corr_QSVir'].url,'https://doi.org/10.1051/0004-6361/202555525e');
+const originalReference={key:'Marsh+16',public_reference_url:'https://doi.org/10.1038/nature18620',public_reference_link_status:'Automated access restricted'};
+assert.match(context.refLink(originalReference),/href="https:\/\/arxiv.org\/abs\/1607.08265"/);
+assert.equal(context.referenceStatus(originalReference),'arXiv:1607.08265');
+context.referenceLinks={};
+assert.match(context.refLink(originalReference),/doi.org\/10.1038\/nature18620/);
+assert.equal(context.referenceStatus(originalReference),'Automated access restricted');
+context.referenceLinks=preferredReferences.references;
 assert.equal(context.tableNumber('9.87973152'),'9.88');
 assert.equal(context.tableNumber('199.6'),'199.60');
 assert.equal(context.tableNumber('0'),'0.00');
@@ -100,7 +121,10 @@ for(const x of catalog.systems){
  for(const [,id] of html.matchAll(/data-measurement="([^"]+)"/g))assert(ids.has(id),'Evidence link must resolve within source: '+id);
  assert(!/<details[^>]*\sopen(?:\s|>)/.test(html),'Evidence should start collapsed');
  for(const r of d.measurements)assert.equal(html.split('id="'+r.measurement_id+'"').length-1,1,r.measurement_id);
- for(const r of d.references)assert(html.includes(escapeText(r.key)));
+ for(const r of d.references){
+  assert(html.includes(escapeText(r.key)));
+  assert(html.includes(context.refLink(r)),'Preferred reference destination: '+r.key);
+ }
  assert(html.includes('Unresolved issues & review history'));
  assert.equal(JSON.stringify(d),original,'Presentation must not mutate source data');
 }

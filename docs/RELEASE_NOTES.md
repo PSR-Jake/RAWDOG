@@ -1,3 +1,7 @@
+# Website revision web r23 — 2026-11-06
+
+Prioritizes verified arXiv abstract links in radio, X-ray and complete-reference views. The link index covers 669 reference keys, selecting 316 arXiv links and 353 fallbacks. The audit records exact metadata matches and reviewed identifier conflicts. Data/service query links retain their endpoints. [Matching rules and audit](REFERENCE_LINKS_WEB_R23.md).
+
 # Website revision web r22 — 2026-11-04
 
 Adds Radio measurements before Gaia DR3 ID in the main table. Each value links to its observation and shows the reported band. Repeated records in systems with more than three observations can be expanded by band. Limits, marginal signals and peak brightness have explicit labels.
