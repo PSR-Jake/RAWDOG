@@ -2,7 +2,7 @@
 
 RAWDOG（RAdio White Dwarf catalOG）汇集白矮星系统及相关候选体的射电观测、物理性质、文献和证据。
 
-当前目录数据版本为 **1.0.2**，网站版本为 **web r22**。目录包含 58 个系统、96 条射电观测、7,175 条证据记录和 669 条参考文献。
+当前目录数据版本为 **1.0.2**，网站版本为 **web r23**。目录包含 58 个系统、96 条射电观测、7,175 条证据记录和 669 条参考文献。
 
 ## 核心文件
 
@@ -37,6 +37,7 @@ python scripts/check.py
 python scripts/cmd_revision.py --check
 python scripts/table_coordinates.py --check
 python scripts/emission_inputs.py --check
+python scripts/reference_links.py --check
 node scripts/check_presentation.js
 ```
 

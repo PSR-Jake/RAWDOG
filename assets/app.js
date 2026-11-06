@@ -3,7 +3,7 @@ const $=s=>document.querySelector(s), esc=v=>String(v??'').replace(/[&<>"']/g,c=
 const labels={cataclysmic_variable:'CV',magnetic_cv:'Magnetic-CV tag',white_dwarf_pulsar:'WD pulsar',long_period_transient:'Long-period transient',long_period_radio_transient:'Long-period radio transient',established:'Established',inferred_or_proposed:'Inferred or proposed',unresolved:'Unresolved'};
 const styles={magnetic_cv:['#1864ab','●','○'],cataclysmic_variable:['#087f5b','■','□'],white_dwarf_pulsar:['#7048a5','◆','◇'],long_period_transient:['#b95000','▲','△']};
 const pretty=k=>({non_magnetic_cv:'Non-magnetic CV',AM:'Polar (AM Her)',IP:'Intermediate polar (IP)'}[k]||k).replaceAll('_',' ').replace(/\bgaia\b/g,'Gaia').replace(/\bwd\b/g,'WD');
-let systems=[],shown=[],sortKey='source_name',sortAsc=true,lastFocus=null,detailRequest=0;
+let systems=[],shown=[],sortKey='source_name',sortAsc=true,lastFocus=null,detailRequest=0,referenceLinks={};
 const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog_measurements.csv','rawdog_references.csv','rawdog_physical_properties.csv','rawdog_gaia_counterparts.csv','rawdog_source_references.csv','rawdog_review_issues.csv','rawdog_excluded_counterparts.csv','rawdog_reference_link_checks.csv'];
 $('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 const columnDefinitions=[
@@ -134,7 +134,16 @@ function exportCSV(){const text=csvText(shown,Object.keys(systems[0].summary));c
 $('#export').addEventListener('click',exportCSV);
 function fields(r,keys){return `<dl class="raw-fields">${keys.filter(k=>r[k]!==''&&r[k]!=null).map(k=>`<dt>${esc(pretty(k))}</dt><dd>${esc(k==='component'||k.endsWith('_component')||k==='gaia_match_status'?pretty(r[k]):r[k])}</dd>`).join('')}</dl>`;}
 function value(r){return estimate(r.value_numeric!==''&&r.value_numeric!=null?r.value_numeric:r.value_text||'No numeric value selected/reported',r.error_minus,r.error_plus,r.lower_bound,r.upper_bound,r.unit);}
-function refLink(r){let url=r.public_reference_url;return /^https?:\/\//.test(url)?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(r.key)}</a>`:esc(r.key);}
+function refLink(r){
+ const url=referenceLinks[r.key]?.url||r.public_reference_url;
+ return /^https?:\/\//.test(url)?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(r.key)}</a>`:esc(r.key);
+}
+function referenceStatus(r){
+ const preferred=referenceLinks[r.key];
+ if(preferred?.arxiv_id)return 'arXiv:'+preferred.arxiv_id;
+ if(preferred?.url&&preferred.url!==r.public_reference_url)return 'ADS record';
+ return r.public_reference_link_status;
+}
 function displayNumber(v,digits=4){if(v===''||v==null)return '—';return Number.isFinite(Number(v))?String(Number(Number(v).toPrecision(digits))):String(v);}
 function tableNumber(v){return v===''||v==null?'—':Number.isFinite(Number(v))?Number(v).toFixed(2):String(v);}
 function present(v){return v!==''&&v!=null;}
@@ -246,7 +255,7 @@ function sourceDetail(d,x,radioLabel=''){
  const groups={};for(let r of d.measurements)(groups[r.public_property_group]??=[]).push(r);
  for(let [group,records] of Object.entries(groups).sort(([a],[b])=>a.localeCompare(b))){html+=`<details class="record"><summary><strong>${esc(group)}</strong> · ${records.length} records</summary>`;for(let r of records)html+=`<details class="record" id="${esc(r.measurement_id)}"><summary>${esc(r.measurement_id)} · ${esc(pretty(r.parameter))} · ${value(r)}</summary>${fields(r,['component','value_numeric','value_text','unit','error_minus','error_plus','lower_bound','upper_bound','public_limit_label','uncertainty_convention','public_uncertainty_label','method','assumption','epoch_or_state','reference_key','location','evidence_label','is_derived','derived_from','adoption_reason','research_date'])}</details>`;html+='</details>';}
  html+='</details><details class="record"><summary><strong>Unresolved issues & review history</strong> · '+d.issues.length+' records</summary>';for(let r of d.issues)html+=`<details class="issue"><summary>${esc(r.issue_id)} · ${esc(r.parameter)} · ${esc(r.issue_state)}</summary>${fields(r,['competing_evidence','references','why_it_matters','needed_action','public_status','research_date'])}</details>`;
- html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${r.public_reference_link_status?'<span class="subtext">'+esc(r.public_reference_link_status)+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.2 source evidence JSON</a></p>';
+ html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${referenceStatus(r)?'<span class="subtext">'+esc(referenceStatus(r))+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.2 source evidence JSON</a></p>';
  return html;
 }
 function jumpToEvidence(target){
@@ -276,4 +285,5 @@ $('#detail-body').addEventListener('click',ev=>{
 });
 function route(){if(location.hash.startsWith('#source=')){let sid=location.hash.slice(8);try{sid=decodeURIComponent(sid);}catch(e){}openSource(sid,false);}else if($('#detail').open)closeSource(false);}
 window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
-Promise.all(['assets/catalog.json?v=1.0.2','data/v1.0.2-web-r10/emission_evidence.json','data/v1.0.2-web-r13/cmd_plot_input.json','assets/table_coordinates_fk5_j2000.json?v=web-r19'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();}))).then(([data,evidence,currentCmd,positions])=>{const cmdById=new Map(currentCmd.systems.map(c=>[c.source_id,c]));const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));const positionById=new Map(positions.systems.map(p=>[p.source_id,p]));systems=data.systems.map(x=>{const position=positionById.get(x.summary.source_id);if(!position||position.gaia_dr3_id!==x.summary.gaia_dr3_id)throw Error('Table coordinate join mismatch');return {...x,position,cmd:cmdById.get(x.summary.source_id),emission:byid.get(x.summary.source_id)};});render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});
+const referenceRequest=fetch('assets/reference_links.json?v=web-r23').then(response=>{if(!response.ok)throw Error('Reference links unavailable');return response.json();}).catch(()=>({references:{}}));
+Promise.all(['assets/catalog.json?v=1.0.2','data/v1.0.2-web-r10/emission_evidence.json','data/v1.0.2-web-r13/cmd_plot_input.json','assets/table_coordinates_fk5_j2000.json?v=web-r19'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();})).concat(referenceRequest)).then(([data,evidence,currentCmd,positions,preferredReferences])=>{referenceLinks=preferredReferences.references;const cmdById=new Map(currentCmd.systems.map(c=>[c.source_id,c]));const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));const positionById=new Map(positions.systems.map(p=>[p.source_id,p]));systems=data.systems.map(x=>{const position=positionById.get(x.summary.source_id);if(!position||position.gaia_dr3_id!==x.summary.gaia_dr3_id)throw Error('Table coordinate join mismatch');return {...x,position,cmd:cmdById.get(x.summary.source_id),emission:byid.get(x.summary.source_id)};});render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});
