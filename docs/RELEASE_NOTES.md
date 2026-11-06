@@ -1,3 +1,61 @@
+# Website revision web r22 — 2026-11-04
+
+Adds Radio measurements before Gaia DR3 ID in the main table. Each value links to its observation and shows the reported band. Repeated records in systems with more than three observations can be expanded by band. Limits, marginal signals and peak brightness have explicit labels.
+
+# Website revision web r21 — 2026-11-03
+
+Moves Gaia DR3 ID to the last column of the fixed main table. Exact-ID links, search, sorting, coordinate formatting and downloads are unchanged.
+
+# Website revision web r20 — 2026-11-02
+
+Gl and Gb now display four decimal places in degrees. Numeric sorting, full-precision coordinate downloads, RA/Dec formatting and all coordinate products are unchanged.
+
+# Website revision web r19 — 2026-11-02
+
+Adds the exact Gaia DR3 identifier and VizieR source link back to the fixed main table (ten columns). Identifiers stay strings in display, search, sorting and exports; ASKAP J144834−685644 remains without an assigned Gaia counterpart.
+
+The equatorial main-table frame is now FK5, equinox J2000, with sexagesimal display. A separate derived coordinate product uses the released epoch-2000 fields: 56 ICRS positions are transformed, while U Gem’s explicitly FK5 input is retained unchanged. The published radio localization keeps a visible assumed-FK5-alignment qualification. Gl/Gb are derived from the same table position. No new proper-motion or covariance propagation is performed. Source details and a full-precision CSV expose input values/frame, SHA-256 and qualifications. [Methods and reproduction](TABLE_COORDINATES_FK5_J2000.md).
+
+All 157 existing released data, source-bundle, catalog-index and figure files remain unchanged; the original sky map retains its native position-epoch convention. Filtered systems CSV keeps its original 210-field schema. Catalog data stays 1.0.2 and CMD stays web r13. [Checks and limitations](P0_VERIFICATION.md).
+
+# Website revision web r18 — 2026-11-02
+
+Reduces the fixed catalog table to nine columns by moving Radio recurrence and Radio observations to source details. Their data, the full observation tables and all 210 source-summary export fields remain intact.
+
+RA now displays hours/minutes/seconds (hh:mm:ss.sss); Dec displays signed degrees/arcminutes/arcseconds (±dd:mm:ss.ss). Formatting handles rounding carry, RA wrap and negative sub-degree declinations. Sorting still uses the unchanged full-precision degree inputs; Gl and Gb retain their decimal-degree display.
+
+Both equatorial headers state ICRS and reference epoch J2016.0 for the 57 Gaia positions. Removes repeated per-row Gaia epoch labels. The published-J2000 radio localization of ASKAP J144834−685644 remains explicitly marked in both coordinate cells and in a visible table note. A uniform ICRS J2016.0 position for that source cannot be asserted from the released metadata; no reference-frame conversion or proper-motion propagation is introduced. Catalog data stays 1.0.2 and CMD stays web r13. [Checks and limitations](P0_VERIFICATION.md).
+
+# Website revision web r17 — 2026-11-02
+
+Replaces column presets with one fixed 11-column catalog table: System, Class, RA, Dec, Gl, Gb, Distance, Orbital period, WD spin, Radio recurrence and Radio observations. All columns remain present during filtering and sorting. The coordinate inputs, decimal display precision, frame/epoch qualifications and full-precision numeric sorting are unchanged.
+
+Gaia identifiers, stellar temperature/mass/companion properties, radio-evidence wording and individual radio/X-ray measurements are presented in source details. Removes first-record radio/X-ray previews from the main table; no source-level flux or luminosity is newly selected. Existing WD-temperature and mass ranges/bounds without central values now appear directly in the property overview with their notes, uncertainty conventions and evidence links. J1912’s unselected preferred distance and separate CMD adoption remain distinct.
+
+The table guide states the fixed column set, observation-row counting semantics and where the detailed quantities live. Filters, matching-record navigation, all 210 summary-export fields, the coordinate CSV and source evidence remain available. Catalog data stays 1.0.2 and CMD stays web r13. [Checks and limitations](P0_VERIFICATION.md).
+
+# Website revision web r16 — 2026-11-02
+
+Adds sortable RA, Dec, Gl (Galactic longitude) and Gb (Galactic latitude) columns, available together in a seven-column Positions view and in All columns (18). Values come directly from the unchanged released sky inputs; there is no new coordinate transform, epoch propagation or Gaia association. Coordinates display six decimal degrees and sort on full-precision values, including zero and signed latitude/declination.
+
+Row origin labels and the coordinate key distinguish 57 Gaia ICRS J2016.0 positions from ASKAP J144834−685644's published J2000 radio position and qualified Galactic transformation. The existing coordinate-input CSV provides complete precision and provenance; filtered systems CSV retains its 210-field source-summary contract. Catalog data remains 1.0.2 and CMD revision remains web r13.
+
+# Website revision web r15 — 2026-10-30
+
+Adds a named source dialog with a sticky source heading and local navigation, preserving the existing hash routes and section order. Radio and X-ray comparisons retain original row/measurement IDs, values, uncertainty conventions, bands, states, components, models and references. Narrow screens show the same records as labeled blocks without horizontal scrolling; metadata stays individually expandable with a collapse control.
+
+Selected properties link directly to their measurement evidence, automatically opening the relevant disclosures. Recorded missing-selection reasons are accessible without inventing values. J1912's catalog preferred distance remains blank, with its existing geometric adoption explicitly labeled CMD-only. Existing period evidence-key variants are resolved without changing any clock or source data. Browser Back/Escape restore catalog context and focus; unknown routes and unavailable source bundles provide recovery guidance. Late request failures cannot overwrite a newer source view.
+
+Catalog data remains 1.0.2; CMD inputs/exports remain web r13. All 157 protected files remain byte-identical to the reviewed baseline. [Checks and limitations](P0_VERIFICATION.md).
+
+# Website revision web r14 — 2026-10-30
+
+Adds Essentials (7), Physical properties (10), Radio/X-ray (7) and All columns (14) views, retaining all original table fields. Filter tokens, result counts and a visible sort summary preserve context when a sorted column is hidden. WD-host confidence remains in its independent filter and source detail. The compact header exposes version, download and citation links.
+
+Radio evidence uses existing source-level label counts without a new confidence ranking. Radio filtering still matches any observation; first-record previews are unchanged. Matching-record actions highlight the corresponding source observations while retaining every row. Filtered systems CSV downloads preserve the complete 210-field summary schema, stored strings, current row order and exact Gaia IDs, including header-only empty exports.
+
+Catalog data remains 1.0.2 and CMD figure/input revision remains web r13. All 157 protected data, figure, archive, catalog-index and source-bundle files are unchanged. [Implementation checks](P0_VERIFICATION.md).
+
 # Website / CMD figure revision web r13 — 2026-10-18
 
 Removes the permanent GLEAM-X source-name/prior-sensitivity annotation. At the author request, that source's CMD-only distance now uses M04418, 380±10 pc from the published spectrum/SED fit, reaffirmed in Rodriguez et al. (2026), Table 2. With unchanged observed Gaia photometry this gives M_G=12.885594 mag at BP−RP=1.851223. The recorded p16/p84 distance endpoints are transformed nonlinearly, with model dependence retained in inputs, hover and details. Other 57 input rows, membership and both exclusions are unchanged.
