@@ -7,6 +7,7 @@ The 57 Gaia-counterpart inputs are the existing `gaia_ra_j2000_deg` and `gaia_de
 | Inputs | Count | Table treatment |
 | --- | ---: | --- |
 | Released propagated ICRS epoch-2000 positions | 56 | Transform with Astropy `SkyCoord(..., frame='icrs').transform_to(FK5(equinox='J2000'))`. |
+| GPM J071507−114153 | 1 | Transform the native Gaia ICRS J2016.0 position to FK5, equinox J2000. The position epoch remains J2016.0 because proper motion is unavailable. |
 | U Gem, Gaia DR3 `674214551557961984` | 1 | The source-specific saved VizieR-output qualification and M05820/M05821 explicitly declare FK5/J2000. Retain these values without a second frame conversion; this qualification takes precedence over the generic dictionary convention. |
 | ASKAP J144834−685644 | 1 | Retain the published J2000 radio RA/Dec numerically. Its exact reference system and astrometric reference epoch are unspecified. FK5/J2000 alignment is an explicit approximation for this source, not a newly established frame identification. No Gaia ID is assigned. |
 
@@ -16,7 +17,7 @@ RA displays hh:mm:ss.sss and Dec displays ±dd:mm:ss.ss; Galactic coordinates di
 
 Products:
 
-- [`assets/table_coordinates_fk5_j2000.json`](../assets/table_coordinates_fk5_j2000.json): 58 positions, exact string Gaia IDs, per-row provenance, input SHA-256 values and Astropy version.
+- [`assets/table_coordinates_fk5_j2000.json`](../assets/table_coordinates_fk5_j2000.json): 59 positions, exact string Gaia IDs, per-row provenance, input SHA-256 values and Astropy version.
 - [`assets/table_coordinates_fk5_j2000.csv`](../assets/table_coordinates_fk5_j2000.csv): the same full-precision coordinate rows and provenance for reuse. This is the main table's coordinate download.
 - Filtered systems CSV keeps its original 210-field source-summary contract. The frozen native sky-map coordinate CSV remains separately available.
 

@@ -11,8 +11,8 @@ from pathlib import Path
 from urllib.parse import quote, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-REFERENCES = ROOT / 'data/v1.0.3/rawdog_references.csv'
-METADATA = ROOT / 'data/v1.0.3/reference_metadata.json'
+REFERENCES = ROOT / 'data/v1.0.4/rawdog_references.csv'
+METADATA = ROOT / 'data/v1.0.4/reference_metadata.json'
 LINKS = ROOT / 'assets/reference_links.json'
 AUDIT = METADATA.with_name('reference_links.csv')
 ARXIV = re.compile(r'arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5}|[a-z.-]+/\d{7})(?:v\d+)?(?:\.pdf)?(?:[?#].*)?$', re.I)
@@ -71,7 +71,7 @@ def products():
     metadata = json.loads(METADATA.read_text())
     assert hashlib.sha256(REFERENCES.read_bytes()).hexdigest() == metadata['reference_csv_sha256']
     references = list(csv.DictReader(REFERENCES.open()))
-    assert len(references) == len({r['key'] for r in references}) == 669
+    assert len(references) == len({r['key'] for r in references}) == 672
     by_bibcode, by_doi = {}, defaultdict(list)
     for record in metadata['records']:
         for bibcode in [record['bibcode'], *record.get('alternate_bibcode', [])]:
@@ -91,7 +91,7 @@ def products():
                       'preferred_url': url, 'arxiv_id': identifier, 'matched_ads_bibcode': bibcode,
                       'match_basis': basis, 'arxiv_title': primary[identifier]['title'] if identifier else ''})
 
-    output = {'catalog_version': '1.0.3', 'checked_on': metadata['checked_on'],
+    output = {'catalog_version': '1.0.4', 'checked_on': metadata['checked_on'],
               'reference_csv_sha256': metadata['reference_csv_sha256'], 'references': links}
     json_text = json.dumps(output, ensure_ascii=False, separators=(',', ':')) + '\n'
     stream = io.StringIO(newline='')

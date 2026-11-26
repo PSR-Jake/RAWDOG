@@ -1,3 +1,11 @@
+# RAWDOG 1.0.4 — 2026-11-26 (web r25)
+
+Adds GPM J071507−114153, the white dwarf and G-type star binary reported by [McSweeney et al. (2026)](https://www.nature.com/articles/s41550-026-03016-z). Table 1 gives a 474.059218(3) s radio recurrence and a likely orbital period of 1.3529 (+0.001/−0.0005) d. The WD mass is a conditional upper limit of 0.68 M☉. The companion's spectral type is G7 ± 5 and its reported temperature is 5,500 ± 300 K. The 474 s signal is listed under radio recurrence, with the spin interpretation documented in the evidence.
+
+Four radio rows summarize the largest fitted pulse peak at each telescope/frequency center in the [authors' dataset](https://zenodo.org/records/21386095). The Gaia counterpart has a position-only solution and no adopted distance. The source appears on the sky map and remains outside the Gaia CMD.
+
+The release contains 59 systems, 100 radio summaries, 7,219 evidence records, and 672 references. The new entry draws on the public abstract, table, figures, supplements, peer-review file and released pulse data.
+
 # RAWDOG 1.0.3 — 2026-11-26 (web r24)
 
 Updates ASKAP J1745-5051 after review of Table 1, Figs. 5–6 and §§2–5 in [Knigge et al. (2026), arXiv v2](https://arxiv.org/html/2606.28993v2). The entry records an established WD host, a favored polar interpretation with subtype unresolved, and a candidate period bouncer.

@@ -1,14 +1,14 @@
-# RAWDOG 1.0.3 plotting methods
+# RAWDOG 1.0.4 plotting methods
 
 Website web r10 adds [radio/X-ray evidence columns](EMISSION_COLUMNS_WEB_R10.md). These reuse frozen observations and luminosity records without changing plot inputs, CMD distances, membership or figure products. X-ray distances and model scalings retain their original context and must not be assumed to match the CMD's source-specific distance adoptions.
 
-Both plots use the v1.0.3 input tables and figures. Run `python scripts/build.py --version 1.0.3` to regenerate them. The CMD carries forward the [author-approved GLEAM-X distance adoption](CMD_REVISION_WEB_R13.md). The input tables contain 58 members and record the reasons for the two CMD exclusions.
+Both plots use the v1.0.4 input tables and figures. Run `python scripts/build.py --version 1.0.4` to regenerate them. The CMD carries forward the [author-approved GLEAM-X distance adoption](CMD_REVISION_WEB_R13.md). The input tables contain 59 members and record the reasons for the three CMD exclusions.
 
 CHIME/ILT J1634+44 was withdrawn from active membership on 2026-10-01 because its nature and white-dwarf interpretation are unclear. It is absent from the current sky and CMD inputs; previous snapshots remain available.
 
 ## Sky coordinates and longitude convention
 
-58 / 58 systems are plotted in each panel; none are excluded. 57 use the audited Gaia DR3 native ICRS position at reference epoch J2016.0. Input columns carry measurement IDs, reference keys, frame, epoch and fallback status. Coordinates propagated to epoch 2000 are not used and are not described as FK5.
+59 / 59 systems are plotted in each panel; none are excluded. 58 use the audited Gaia DR3 native ICRS position at reference epoch J2016.0. Input columns carry measurement IDs, reference keys, frame, epoch and fallback status. Coordinates propagated to epoch 2000 are not used and are not described as FK5.
 
 ASKAP J144834-685644 uses the MeerKAT J2000 radio position reported by Anumarlapudi et al. (2025): RA 222.142875°, Dec −68.9455833333° (M07187–M07188). No secure Gaia identifier or adopted distance is assigned. The coarse Galactic transformation assumes ICRS alignment of the published position; no epoch propagation or precision-frame identification is inferred.
 
@@ -18,7 +18,7 @@ Matplotlib Mollweide projection uses `x = -radians((longitude + 180) % 360 - 180
 
 ## Observed Gaia CMD
 
-56 / 58 systems are plotted. Mean Gaia G, BP and RP represent **unresolved system light, not extinction corrected**. The diagram does not isolate WD/donor/accretion light or infer intrinsic component colors. Horizontal coordinate is BP−RP; the magnitude axis increases downward (bright systems at the top).
+56 / 59 systems are plotted. Mean Gaia G, BP and RP represent **unresolved system light, not extinction corrected**. The diagram does not isolate WD/donor/accretion light or infer intrinsic component colors. Horizontal coordinate is BP−RP; the magnitude axis increases downward (bright systems at the top).
 
 49 foreground distances retain release-selected geometric posterior values, six additional plot-specific geometric posterior adoptions are documented below, and GLEAM-X uses its published 380±10 pc spectrum/SED distance (M04418), verified in Rodriguez et al. (2026), Table 2. This author-approved CMD-only choice supersedes the earlier all-geometric policy for that one source; catalog summary distances remain unselected where RC3 withheld them. No compatibility absolute magnitude, Gaia single-star pipeline estimate, photogeometric estimate or parallax inversion is automatically consumed.
 
@@ -33,7 +33,7 @@ Matplotlib Mollweide projection uses `x = -radians((longitude + 180) % 360 - 180
 
 These six audited records were not promoted by RC3's narrower summary-selection rules (method naming or bounds encoding). They are defensible plot-specific choices, not changes to the preferred-distance catalog. All historical and alternative distances remain in the ledger; the CMD input records the method, reference, adoption reason and uncertainty convention.
 
-Exclusions: **ASKAP J144834-685644**, no secure Gaia counterpart, complete Gaia photometry or adopted distance; **ASKAP J174508.9-505149**, Gaia BP/RP blends the secure counterpart with an unrelated star 0.9 arcsec away. Knigge et al. v2 uses Gaia G and excludes BP/RP. The competing distance estimates remain in the evidence ledger. Published alternatives are retained in source details. We do not resolve that modeling disagreement by arbitrarily choosing a CMD position.
+Exclusions: **GPM J071507−114153** has Gaia photometry but a position-only astrometric solution and no adopted distance. **ASKAP J144834-685644**, no secure Gaia counterpart, complete Gaia photometry or adopted distance; **ASKAP J174508.9-505149**, Gaia BP/RP blends the secure counterpart with an unrelated star 0.9 arcsec away. Knigge et al. v2 uses Gaia G and excludes BP/RP. The competing distance estimates remain in the evidence ledger. Published alternatives are retained in source details. We do not resolve that modeling disagreement by arbitrarily choosing a CMD position.
 
 `M_G = G + 5 − 5 log10(d / pc)`. Where recorded, transform distance endpoints at fixed G: `M_lower = M(G, d_upper)` and `M_upper = M(G, d_lower)`. Larger distance gives brighter/lower absolute magnitude. Posterior p16/p84 distance quantiles map to reversed magnitude endpoints; they are never converted to Gaussian errors. Some ledger endpoint conventions are unspecified (e.g. SS Cyg and V2400 Oph); those recorded bounds remain explicitly unspecified and are not assigned a confidence level. Figure vertical segments show these transformed endpoints, **not a joint photometry-distance confidence interval**. Recorded G errors stay in a separate input column. Horizontal segments use `sqrt(error_BP² + error_RP²)` only when both errors exist, assuming independence and ignoring covariance/variability. These are approximate quoted-error propagation, not guaranteed Gaussian 1σ intervals. Missing uncertainties remain blank.
 
@@ -55,7 +55,7 @@ Filtering is opt-in for foreground symbols. Plotted and eligible counts update v
 
 ## Publication captions
 
-**Sky:** Celestial distribution of RAWDOG 1.0.3: 58 systems, one point per system in both equatorial and Galactic Mollweide panels. 57 native Gaia ICRS J2016.0 positions and one qualified literature radio position; Galactic coordinates follow the same selected positions. RA in hours and Galactic longitude in degrees increase leftward with the ±180° seam. Colors/symbols indicate broad display groups with nonexclusive tags; open symbols indicate qualified hosts/subclasses. The literature-selected sample is not complete or uniformly surveyed.
+**Sky:** Celestial distribution of RAWDOG 1.0.4: 59 systems, one point per system in both equatorial and Galactic Mollweide panels. 58 native Gaia ICRS J2016.0 positions and one qualified literature radio position; Galactic coordinates follow the same selected positions. RA in hours and Galactic longitude in degrees increase leftward with the ±180° seam. Colors/symbols indicate broad display groups with nonexclusive tags; open symbols indicate qualified hosts/subclasses. The literature-selected sample is not complete or uniformly surveyed.
 
 **CMD:** Observed unresolved Gaia BP−RP versus absolute G for 56 RAWDOG systems; not extinction corrected and not component WD magnitudes. 49 release-selected geometric, six documented plot-specific geometric and one published model-dependent spectrum/SED distance; two sources excluded for missing secure photometry or competing unselected distances. Vertical segments transform posterior distance endpoints at fixed G, horizontal segments approximate independent BP/RP quoted-error propagation, and G errors remain separate in the input table. Grey density provides cached high-significance Gaia field context under documented cuts; it is not a completeness model. Symbols match the sky plot; candidate/subclass and astrometry qualifications remain linked to source evidence.
 

@@ -2,7 +2,7 @@
 
 RAWDOG（RAdio White Dwarf catalOG）汇集白矮星系统及相关候选体的射电观测、物理性质、文献和证据。
 
-当前目录数据版本为 **1.0.3**，网站版本为 **web r24**。目录包含 58 个系统、96 条射电观测、7,182 条证据记录和 669 条参考文献。
+当前目录数据版本为 **1.0.4**，网站版本为 **web r25**。目录包含 59 个系统、100 条射电观测、7,219 条证据记录和 672 条参考文献。
 
 ## 核心文件
 
@@ -11,8 +11,8 @@ RAWDOG（RAdio White Dwarf catalOG）汇集白矮星系统及相关候选体的�
 | [README.md](README.md) | 项目概览、公开入口和引用方式 |
 | [index.html](index.html) | 网站入口 |
 | [assets/](assets/) | 网页样式、交互、逐源详情和主表坐标 |
-| [data/v1.0.3/](data/v1.0.3/) | 正式目录、射电观测、物理性质、证据、参考文献和校验和 |
-| [data/v1.0.2-web-r10/](data/v1.0.2-web-r10/) | 网页使用的射电和 X-ray 证据索引 |
+| [data/v1.0.4/](data/v1.0.4/) | 正式目录、射电观测、物理性质、证据、参考文献和校验和 |
+| [data/v1.0.4/emission_evidence.json](data/v1.0.4/emission_evidence.json) | 网页使用的射电和 X-ray 证据索引 |
 | [CMD 距离采用记录](docs/CMD_REVISION_WEB_R13.md) | GLEAM-X 的 Gaia CMD 距离采用依据 |
 | [figures/](figures/) | 各版本科学图件及可下载文件 |
 | [docs/](docs/) | 数据字典、方法、版本记录和验证报告 |

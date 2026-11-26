@@ -9,11 +9,11 @@ def main(version):
     (data/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+str(p.relative_to(ROOT))+'\n' for p in products))
     archive=ROOT/('data/RAWDOG-v'+version+'.zip')
     dates = {'1.0.0': (2026, 9, 28), '1.0.1': (2026, 9, 30),
-             '1.0.2': (2026, 10, 1), '1.0.3': (2026, 11, 26)}
+             '1.0.2': (2026, 10, 1), '1.0.3': (2026, 11, 26), '1.0.4': (2026, 11, 26)}
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED) as z:
         paths=products+[data/'SHA256SUMS.txt']+sorted((ROOT/'docs').glob('*'))+[ROOT/'README.md',ROOT/'requirements.txt']+sorted((ROOT/'scripts').glob('*.py'))
         for p in paths:
             entry=zipfile.ZipInfo('RAWDOG-v'+version+'/'+str(p.relative_to(ROOT)),date_time=(*dates[version],0,0,0));entry.compress_type=zipfile.ZIP_DEFLATED;z.writestr(entry,p.read_bytes())
     print('Archive:',archive.name,'products:',len(products),'size:',archive.stat().st_size)
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1','1.0.2','1.0.3']);main(parser.parse_args().version)
+    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1','1.0.2','1.0.3','1.0.4']);main(parser.parse_args().version)

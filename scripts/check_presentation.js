@@ -6,7 +6,7 @@ const context={referenceLinks:preferredReferences.references};vm.createContext(c
 vm.runInContext(app.split('\n').filter(l=>/^const (\$|labels=|styles=|pretty=)/.test(l)).join('\n')+'\n'+app.slice(app.indexOf('const columnDefinitions'),app.indexOf('function render'))+'\n'+app.slice(app.indexOf('function fields'),app.indexOf('async function openSource')),context);
 const format=(...args)=>context.estimate(...args);
 const escapeText=vm.runInContext('esc',context);
-assert.equal(Object.keys(preferredReferences.references).length,669);
+assert.equal(Object.keys(preferredReferences.references).length,672);
 assert.equal(Object.values(preferredReferences.references).filter(r=>r.arxiv_id).length,316);
 for(const reference of Object.values(preferredReferences.references))if(reference.arxiv_id){
  assert.equal(reference.url,'https://arxiv.org/abs/'+reference.arxiv_id);
@@ -54,9 +54,9 @@ assert.equal(format('','','','0.81','1.29','M☉'),'[0.81, 1.29] M☉');
 assert.equal(format('','','','','9750','K'),'≤ 9750 K');
 assert.equal(format('','','','0','','M☉'),'≥ 0 M☉');
 const rawCatalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'))),rawBefore=JSON.stringify(rawCatalog);
-const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r10/emission_evidence.json'))),emissionMap=new Map(emissions.systems.map(e=>[e.source_id,e]));
+const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.4/emission_evidence.json'))),emissionMap=new Map(emissions.systems.map(e=>[e.source_id,e]));
 const positions=JSON.parse(fs.readFileSync(path.join(root,'assets/table_coordinates_fk5_j2000.json'))),positionMap=new Map(positions.systems.map(p=>[p.source_id,p]));
-assert.equal(positionMap.size,58);assert.equal(positions.systems.filter(p=>p.assumed_alignment).length,1);
+assert.equal(positionMap.size,59);assert.equal(positions.systems.filter(p=>p.assumed_alignment).length,1);
 const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,position:positionMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
 const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'];
 for(const key of numericColumns)for(const ascending of [true,false]){
@@ -128,6 +128,12 @@ for(const x of catalog.systems){
  assert(html.includes('Unresolved issues & review history'));
  assert.equal(JSON.stringify(d),original,'Presentation must not mutate source data');
 }
+const gpm=catalog.systems.find(x=>x.summary.gaia_dr3_id==='3045265579628659968');
+const gpmData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',gpm.token+'.json')));
+assert.match(context.sourceDetail(gpmData,gpm),/≤ 0\.68 M☉/);
+assert.match(context.radioTableCell(gpm),/Pulse peak/);
+assert.match(gpm.position.position_epoch,/J2016\.0/);
+assert.match(context.cmdNote(gpmData,gpm.cmd),/position-only/);
 const askap=catalog.systems.find(x=>x.summary.source_id==='gaia-dr3:5946454415417964032');
 const askapData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',askap.token+'.json')));
 const askapHTML=context.sourceDetail(askapData,askap);
@@ -227,7 +233,7 @@ assert.equal((context.tableRow(zeroPosition).match(/0\.0000/g)||[]).length,2);
 const missingPosition={...added,position:{...added.position,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
 assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(2,6).every(c=>c==='—'));
 assert(html.includes('id="coordinate-note"'));assert(!html.includes('id="coordinate-note" class="help" hidden'));
-assert(html.includes('data/v1.0.3/sky_plot_input.csv'));
+assert(html.includes('data/v1.0.4/sky_plot_input.csv'));
 assert(html.includes('assets/table_coordinates_fk5_j2000.csv'));
 const qs=catalog.systems.find(x=>x.summary.source_name==='QS Vir'),qsData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',qs.token+'.json'))),radioLabel='Reported flux; significance not harmonized';
 assert(context.matchesFilters(qs,'qs vir','cataclysmic_variable','established',radioLabel));
@@ -262,12 +268,12 @@ async function checkSourceFailures(){
  vm.createContext(sourceContext);
  vm.runInContext(`const $=s=>nodes[s],esc=s=>String(s).replaceAll('<','&lt;');let detailRequest=0,lastFocus;const systems=['older','newer'].map(id=>({token:id,summary:{source_id:id,source_name:id}}));function sourceDetail(d,x){return x.summary.source_name;}`+app.slice(app.indexOf('async function openSource'),app.indexOf('function closeSource')),sourceContext);
  const older=sourceContext.openSource('older',false),newer=sourceContext.openSource('newer',false);
- pending.get('assets/sources/newer.json?v=1.0.3').resolve({ok:true,json:async()=>({})});await newer;
- pending.get('assets/sources/older.json?v=1.0.3').reject(new Error('Delayed failure'));await older;
+ pending.get('assets/sources/newer.json?v=1.0.4').resolve({ok:true,json:async()=>({})});await newer;
+ pending.get('assets/sources/older.json?v=1.0.4').reject(new Error('Delayed failure'));await older;
  assert.equal(nodes['#detail-body'].innerHTML,'newer');assert.equal(nodes['.detail-nav'].hidden,false);
  const broken=sourceContext.openSource('older',false);
- pending.get('assets/sources/older.json?v=1.0.3').resolve({ok:true,json:async()=>{throw new SyntaxError('Invalid JSON');}});await broken;
+ pending.get('assets/sources/older.json?v=1.0.4').resolve({ok:true,json:async()=>{throw new SyntaxError('Invalid JSON');}});await broken;
  assert(nodes['#detail-body'].innerHTML.includes('download the versioned evidence CSV'));assert.equal(nodes['.detail-nav'].hidden,true);
  await sourceContext.openSource('<unknown>',false);assert(nodes['#detail-body'].innerHTML.includes('&lt;unknown>'));
 }
-checkSourceFailures().then(()=>console.log('PASS: 58 systems, 11 columns, radio bands and observation links, Gaia IDs, coordinate formatting, and source evidence.')).catch(e=>{console.error(e);process.exitCode=1;});
+checkSourceFailures().then(()=>console.log('PASS: 59 systems, 11 columns, radio bands and observation links, Gaia IDs, coordinate formatting, and source evidence.')).catch(e=>{console.error(e);process.exitCode=1;});

@@ -5,7 +5,7 @@ const styles={magnetic_cv:['#1864ab','●','○'],cataclysmic_variable:['#087f5b
 const pretty=k=>({non_magnetic_cv:'Non-magnetic CV',AM:'Polar (AM Her)',IP:'Intermediate polar (IP)'}[k]||k).replaceAll('_',' ').replace(/\bgaia\b/g,'Gaia').replace(/\bwd\b/g,'WD');
 let systems=[],shown=[],sortKey='source_name',sortAsc=true,lastFocus=null,detailRequest=0,referenceLinks={};
 const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog_measurements.csv','rawdog_references.csv','rawdog_physical_properties.csv','rawdog_gaia_counterparts.csv','rawdog_source_references.csv','rawdog_review_issues.csv','rawdog_excluded_counterparts.csv','rawdog_reference_link_checks.csv'];
-$('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.3/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
+$('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.4/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 const columnDefinitions=[
  {key:'source_name',label:'System',sort:true},
  {key:'classification_labels',label:'Class',sort:true},
@@ -58,7 +58,7 @@ function radioTableCell(x){
    if(kind==='Peak-brightness range'&&present(r.peak_brightness_lower_uJy)&&present(r.peak_brightness_upper_uJy))value=r.peak_brightness_lower_uJy+'–'+r.peak_brightness_upper_uJy;
    if(kind==='Peak-brightness upper envelope')value=value.replace(/ peak brightness$/,'');
    const flux=missing?'No flux listed':value+' '+radioUnit(r);
-   const label=missing?r.radio_evidence_label.split(';')[0]:peak?'Peak brightness':r.is_upper_limit==='true'?'Upper limit':'';
+   const label=missing?r.radio_evidence_label.split(';')[0]:peak?'Peak brightness':kind==='Fitted pulse peak flux density'?'Pulse peak':r.is_upper_limit==='true'?'Upper limit':'';
    const marginal=r.radio_evidence_label==='Marginal reported signal'&&!missing?'Marginal signal':'';
    let epoch='';
    if(records.length>1){
@@ -114,7 +114,7 @@ function render(){
  $('#active-filters').innerHTML=['search','classification','host','radio'].filter(id=>$('#'+id).value).map(id=>{const el=$('#'+id),label=id==='search'?'Search: '+el.value:el.selectedOptions[0].textContent;return '<button type="button" data-clear-filter="'+id+'" aria-label="Remove '+esc(label)+' filter">'+esc(label)+' <span aria-hidden="true">×</span></button>';}).join('')||'<span>No active filters</span>';
  $('#radio-filter-note').hidden=!radio;
  $('#active-filters').hidden=![q,cls,host,radio].some(Boolean);
- $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.3`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
+ $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.4`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){
  const on=$('#plot-filter').checked,allowed=new Set(shown.map(x=>x.token));
@@ -130,7 +130,7 @@ for(let obj of document.querySelectorAll('.plot'))obj.addEventListener('load',()
 $('#filters').addEventListener('input',render);$('#filters').addEventListener('submit',e=>e.preventDefault());$('#filters').addEventListener('reset',()=>setTimeout(render,0));$('#plot-filter').addEventListener('change',updatePlots);
 $('#active-filters').addEventListener('click',ev=>{const b=ev.target.closest('[data-clear-filter]');if(b){const el=$('#'+b.dataset.clearFilter);el.value='';render();el.focus();}});
 $('#systems').addEventListener('click',ev=>{const s=ev.target.closest('[data-source]');if(s)openSource(s.dataset.source,true,s.dataset.section,s.dataset.matchRadio);const b=ev.target.closest('[data-sort]');if(b){sortAsc=sortKey===b.dataset.sort?!sortAsc:true;sortKey=b.dataset.sort;render();$('#systems [data-sort="'+sortKey+'"]').focus();}});
-function exportCSV(){const text=csvText(shown,Object.keys(systems[0].summary));const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.3-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportCSV(){const text=csvText(shown,Object.keys(systems[0].summary));const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.4-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('#export').addEventListener('click',exportCSV);
 function fields(r,keys){return `<dl class="raw-fields">${keys.filter(k=>r[k]!==''&&r[k]!=null).map(k=>`<dt>${esc(pretty(k))}</dt><dd>${esc(k==='component'||k.endsWith('_component')||k==='gaia_match_status'?pretty(r[k]):r[k])}</dd>`).join('')}</dl>`;}
 function value(r){return estimate(r.value_numeric!==''&&r.value_numeric!=null?r.value_numeric:r.value_text||'No numeric value selected/reported',r.error_minus,r.error_plus,r.lower_bound,r.upper_bound,r.unit);}
@@ -262,7 +262,7 @@ function sourceDetail(d,x,radioLabel=''){
  const groups={};for(let r of d.measurements)(groups[r.public_property_group]??=[]).push(r);
  for(let [group,records] of Object.entries(groups).sort(([a],[b])=>a.localeCompare(b))){html+=`<details class="record"><summary><strong>${esc(group)}</strong> · ${records.length} records</summary>`;for(let r of records)html+=`<details class="record" id="${esc(r.measurement_id)}"><summary>${esc(r.measurement_id)} · ${esc(pretty(r.parameter))} · ${value(r)}</summary>${fields(r,['component','value_numeric','value_text','unit','error_minus','error_plus','lower_bound','upper_bound','public_limit_label','uncertainty_convention','public_uncertainty_label','method','assumption','epoch_or_state','reference_key','location','evidence_label','is_derived','derived_from','adoption_reason','research_date'])}</details>`;html+='</details>';}
  html+='</details><details class="record"><summary><strong>Unresolved issues & review history</strong> · '+d.issues.length+' records</summary>';for(let r of d.issues)html+=`<details class="issue"><summary>${esc(r.issue_id)} · ${esc(r.parameter)} · ${esc(r.issue_state)}</summary>${fields(r,['competing_evidence','references','why_it_matters','needed_action','public_status','research_date'])}</details>`;
- html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${referenceStatus(r)?'<span class="subtext">'+esc(referenceStatus(r))+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.3 source evidence JSON</a></p>';
+ html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${referenceStatus(r)?'<span class="subtext">'+esc(referenceStatus(r))+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.4 source evidence JSON</a></p>';
  return html;
 }
 function jumpToEvidence(target){
@@ -277,10 +277,10 @@ async function openSource(sid,hash=true,section='',radioLabel=''){
  if(hash)history.pushState(null,'','#source='+encodeURIComponent(sid));
  $('#detail-name').textContent=x?x.summary.source_name:'Source not found';$('.detail-nav').hidden=true;$('#detail-status').hidden=true;
  $('#detail-body').innerHTML='<p role="status">Loading source evidence…</p>';if(!$('#detail').open)$('#detail').showModal();$('#close').focus();
- if(!x){$('#detail-body').innerHTML='<p role="alert">No source in catalog 1.0.3 matches '+esc(sid)+'. Close this view and search the catalog.</p>';return;}
- try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.3');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;
+ if(!x){$('#detail-body').innerHTML='<p role="alert">No source in catalog 1.0.4 matches '+esc(sid)+'. Close this view and search the catalog.</p>';return;}
+ try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.4');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;
  $('#detail-body').innerHTML=sourceDetail(d,x,radioLabel);$('.detail-nav').hidden=false;$('#detail').scrollTop=0;$('#close').focus();if(section)jumpToEvidence((radioLabel&&$('#detail-body .radio-match'))||$('#'+section));
- }catch(e){if(seq!==detailRequest)return;$('.detail-nav').hidden=true;$('#detail-body').innerHTML='<p role="alert">Source evidence could not be loaded. Try reopening this source or <a download href="data/v1.0.3/rawdog_measurements.csv">download the versioned evidence CSV</a>.</p>';}
+ }catch(e){if(seq!==detailRequest)return;$('.detail-nav').hidden=true;$('#detail-body').innerHTML='<p role="alert">Source evidence could not be loaded. Try reopening this source or <a download href="data/v1.0.4/rawdog_measurements.csv">download the versioned evidence CSV</a>.</p>';}
 }
 function closeSource(updateHash=true){++detailRequest;$('#detail').close();if(updateHash&&location.hash.startsWith('#source='))history.replaceState(null,'',location.pathname+location.search+'#catalog');if(lastFocus?.isConnected&&lastFocus!==document.body)lastFocus.focus();else $('#search').focus();}
 $('#close').addEventListener('click',()=>closeSource());$('#detail').addEventListener('cancel',e=>{e.preventDefault();closeSource();});
@@ -292,5 +292,5 @@ $('#detail-body').addEventListener('click',ev=>{
 });
 function route(){if(location.hash.startsWith('#source=')){let sid=location.hash.slice(8);try{sid=decodeURIComponent(sid);}catch(e){}openSource(sid,false);}else if($('#detail').open)closeSource(false);}
 window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
-const referenceRequest=fetch('assets/reference_links.json?v=web-r24').then(response=>{if(!response.ok)throw Error('Reference links unavailable');return response.json();}).catch(()=>({references:{}}));
-Promise.all(['assets/catalog.json?v=1.0.3','data/v1.0.2-web-r10/emission_evidence.json','assets/table_coordinates_fk5_j2000.json?v=web-r24'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();})).concat(referenceRequest)).then(([data,evidence,positions,preferredReferences])=>{referenceLinks=preferredReferences.references;const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));const positionById=new Map(positions.systems.map(p=>[p.source_id,p]));systems=data.systems.map(x=>{const position=positionById.get(x.summary.source_id);if(!position||position.gaia_dr3_id!==x.summary.gaia_dr3_id)throw Error('Table coordinate join mismatch');return {...x,position,emission:byid.get(x.summary.source_id)};});render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});
+const referenceRequest=fetch('assets/reference_links.json?v=web-r25').then(response=>{if(!response.ok)throw Error('Reference links unavailable');return response.json();}).catch(()=>({references:{}}));
+Promise.all(['assets/catalog.json?v=1.0.4','data/v1.0.4/emission_evidence.json','assets/table_coordinates_fk5_j2000.json?v=web-r25'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();})).concat(referenceRequest)).then(([data,evidence,positions,preferredReferences])=>{referenceLinks=preferredReferences.references;const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));const positionById=new Map(positions.systems.map(p=>[p.source_id,p]));systems=data.systems.map(x=>{const position=positionById.get(x.summary.source_id);if(!position||position.gaia_dr3_id!==x.summary.gaia_dr3_id)throw Error('Table coordinate join mismatch');return {...x,position,emission:byid.get(x.summary.source_id)};});render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});

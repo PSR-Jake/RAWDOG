@@ -9,8 +9,8 @@ from decimal import Decimal
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / 'data/v1.0.2'
-OUT = ROOT / 'data/v1.0.2-web-r10'
+DATA = ROOT / 'data/v1.0.4'
+OUT = DATA
 # These five ledger records contain explicit ranges/scalings/limits only as text.
 TEXT_VALUES = {'M00772', 'M02093', 'M02188', 'M04373', 'M04374'}
 NUMERIC_FIELDS = ['value_numeric', 'error_minus', 'error_plus', 'lower_bound', 'upper_bound']
@@ -46,7 +46,7 @@ def products():
     systems = [{'source_id': s['source_id'], 'radio': [r for r in radio if r['source_id'] == s['source_id']],
                 'xray': [r for r in lx if r['source_id'] == s['source_id']],
                 'xray_flux_record_count': sum(r['source_id'] == s['source_id'] and r['public_property_group'] == 'X-ray flux' for r in measurements)} for s in summaries]
-    assert len(systems) == len(ids) == 58 and len(radio) == 96 and len(lx) == 58
+    assert len(systems) == len(ids) == 59 and len(radio) == 100 and len(lx) == 58
     assert sum(r['available'] for r in lx) == 52
     assert sum(any(r['available'] for r in s['xray']) for s in systems) == 26
     assert all(r['source_id'] in ids for r in radio + lx)
@@ -68,7 +68,7 @@ def products():
     assert out['M06586']['log10_luminosity'] and out['M02358']['distance_normalization_pc'] == '100'
     assert out['M06209']['distance_normalization_pc'] == '260'
     assert not next(s for s in systems if s['source_id'] == 'name:askap-j144834-685644')['xray']
-    payload = {'catalog_version': '1.0.2', 'website_revision': 'web r10', 'systems': systems}
+    payload = {'catalog_version': '1.0.4', 'website_revision': 'web r25', 'systems': systems}
     csv_columns = list(lx[0])
     import io
     buf = io.StringIO(newline='')
@@ -84,11 +84,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
     files = products()
     checksums = ''.join(hashlib.sha256(v).hexdigest() + '  ' + k + '\n' for k, v in files.items()).encode()
-    files['SHA256SUMS.txt'] = checksums
+    files['EMISSION_SHA256SUMS.txt'] = checksums
     for name, content in files.items():
         if args.check:
             assert (OUT / name).read_bytes() == content, name
         else:
             OUT.mkdir(parents=True, exist_ok=True)
             (OUT / name).write_bytes(content)
-    print('PASS: 58 source joins, 96 radio rows, 52 available luminosity records in 26 systems; units, limits, distances, references and original values preserved.')
+    print('PASS: 59 source joins, 100 radio rows, 52 available luminosity records in 26 systems; units, limits, distances, references and original values preserved.')

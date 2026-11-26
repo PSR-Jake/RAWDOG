@@ -106,7 +106,7 @@ def plots(sky,cmd):
         ax=fig.add_subplot(2,1,n,projection='mollweide');ax.grid(alpha=.35,linewidth=.6);ticks=np.arange(-150,180,30);ax.set_xticks(np.radians(ticks));ax.set_xticklabels([str(int((-t)%360/15))+'h' if n==1 else str(int((-t)%360))+'°' for t in ticks]);ax.set_xlabel(label);ax.set_ylabel('Declination' if n==1 else 'Galactic latitude');ax.set_title(title,fontsize=12,pad=16)
         for r in sky:point(ax,r,wrap(r[lon]),math.radians(r[lat]))
     fig.suptitle(f'RAWDOG {version} · {len(sky)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_sky',sky)
-    if version == '1.0.3':
+    if version in {'1.0.3','1.0.4'}:
         cmd_plot(cmd, version, annotate_gleam=False, basis='observed Gaia CMD')
     else:
         cmd_plot(cmd, version)
@@ -147,7 +147,7 @@ def main():
     plots(sky,cmd)
     print(f'Revised figures from {DATA.name} inputs; no catalog tables written.')
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1','1.0.2','1.0.3']);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1','1.0.2','1.0.3','1.0.4']);args=parser.parse_args()
     if args.version!='1.0.0':
         DATA=ROOT/('data/v'+args.version);FIG=ROOT/('figures/v'+args.version)
     main()

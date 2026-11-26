@@ -1,3 +1,7 @@
+# RAWDOG 1.0.4 publication validation
+
+The scientific check verifies the new membership, exact Gaia ID, periods, WD mass limit, pulse flux joins, CMD exclusion and preservation of prior rows. Sky coverage is 59 systems and CMD coverage is 56 systems. Run `python scripts/check.py` from the repository. The current result is in `scientific_check.json`.
+
 # RAWDOG 1.0.3 publication validation
 
 The scientific check verifies the v2 SED values and offsets, versioned citation, established host, CMD exclusion, evidence joins and preservation of other source values. The current CMD inputs preserve all 56 plotted positions from web r13. There are 58 members, 96 observations, 7,182 evidence records and 669 references. Run `python scripts/check.py` in the repository and see `scientific_check.json` for the result.

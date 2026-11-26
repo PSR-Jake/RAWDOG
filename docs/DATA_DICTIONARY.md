@@ -1,4 +1,4 @@
-# RAWDOG 1.0.3 public data dictionary
+# RAWDOG 1.0.4 public data dictionary
 
 All files are UTF-8 CSV. Blank fields mean no selected or reported value in that field; they do not mean zero. Text from audited source records may still contain strings such as “not reported” or “NA”. The summary cleans explicit NA-like Gaia-ID sentinels to blank while preserving accepted Gaia IDs as exact decimal strings.
 
@@ -6,14 +6,14 @@ All files are UTF-8 CSV. Blank fields mean no selected or reported value in that
 
 | Table | Rows | Key and relationship |
 |---|---:|---|
-| rawdog_source_summary.csv | 58 | One row per member; primary key source_id. |
-| rawdog_radio_observations.csv | 96 | Primary key observation_id; source_id joins to the summary. |
-| rawdog_measurements.csv | 7,182 | Version-scoped measurement_id; source_id joins member rows to the summary. Includes 7,108 members and 74 excluded MM Hya counterpart records. |
-| rawdog_references.csv | 669 | Preserves existing reference key and manifest ID. Other tables join through reference keys; reference_ids are manifest IDs. |
-| rawdog_physical_properties.csv | 58 | Audited compatibility fields plus source_id. |
-| rawdog_gaia_counterparts.csv | 58 | Audited counterpart fields plus source_id. Gaia source IDs are text. |
-| rawdog_source_references.csv | 58 | Source-level reference lists plus source_id. |
-| rawdog_review_issues.csv | 320 | issue_id identifies the review row; optional source_id joins to a member or excluded counterpart. |
+| rawdog_source_summary.csv | 59 | One row per member; primary key source_id. |
+| rawdog_radio_observations.csv | 100 | Primary key observation_id; source_id joins to the summary. |
+| rawdog_measurements.csv | 7,219 | Version-scoped measurement_id; source_id joins member rows to the summary. Includes 7,145 members and 74 excluded MM Hya counterpart records. |
+| rawdog_references.csv | 672 | Preserves existing reference key and manifest ID. Other tables join through reference keys; reference_ids are manifest IDs. |
+| rawdog_physical_properties.csv | 59 | Audited compatibility fields plus source_id. |
+| rawdog_gaia_counterparts.csv | 59 | Audited counterpart fields plus source_id. Gaia source IDs are text. |
+| rawdog_source_references.csv | 59 | Source-level reference lists plus source_id. |
+| rawdog_review_issues.csv | 323 | issue_id identifies the review row; optional source_id joins to a member or excluded counterpart. |
 | rawdog_excluded_counterparts.csv | 1 | Identity-audit index; its measurement_ids join to the measurement ledger. |
 | rawdog_reference_link_checks.csv | Generated | One row per unique URL checked on the stated date. |
 
@@ -34,7 +34,7 @@ The catalog contains literature-selected detections, marginal signals, and expli
 ## Radio observations
 
 - **radio_band_ghz_as_reported** retains the source catalog band value. Exact sub-bands and frequencies remain in linked measurement rows.
-- **reported_flux_text** preserves the original summary string. **flux_quantity_kind** identifies point flux density, peak brightness, a range, an upper envelope, an upper limit, missing text, or an ambiguous compound statement. Parsed **flux_density_uJy**, **error_minus_uJy**, and **error_plus_uJy** are in microjanskys; symmetric and asymmetric errors are non-negative magnitudes.
+- **reported_flux_text** preserves the original summary string. **flux_quantity_kind** identifies point flux density, fitted pulse peak flux density, peak brightness, a range, an upper envelope, an upper limit, missing text, or an ambiguous compound statement. Parsed **flux_density_uJy**, **error_minus_uJy**, and **error_plus_uJy** are in microjanskys; symmetric and asymmetric errors are non-negative magnitudes.
 - **upper_limit_uJy** is separate from flux density. **is_upper_limit** is a lowercase true/false flag. **reported_range_lower_uJy** and **reported_range_upper_uJy** preserve true intervals; peak-brightness values and ranges use their own columns. **numeric_value_withheld_reason** explains why any numeric value was not promoted. A marginal measurement is not an upper limit.
 - **flux_uncertainty_convention** carries the linked source convention or a catalog-note convention when the displayed value uses a stated compilation floor. If the value matches but a reported error differs from the linked source record, **measurement_link_basis** qualifies that association and the applicable convention is retained. If no convention is specified, the field says so; never assume an unspecified error is 1σ. The detailed ledger retains the raw uncertainty_convention text.
 - **flux_method_and_state** carries the linked observable's method and observing state, including Stokes-I and peak-brightness records when applicable. Band and established observing-epoch clauses are scoped to the displayed observation; unspecified exact dates or states remain explicitly unspecified.
@@ -44,7 +44,7 @@ The catalog contains literature-selected detections, marginal signals, and expli
 - In the summary, **radio_detection_labels** is a semicolon-separated filter field; **radio_detection_status** gives readable counts by label across the system’s observation rows.
 - **epoch_band_state_and_other_notes** preserves the audited observation notes.
 
-The observation table represents 96 source-catalog rows, not every integration or time bin. Additional epochs, bands, Stokes products, polarization limits, variability, and state information appear as distinct rows in the measurement ledger.
+The observation table represents 100 source-catalog rows, not every integration or time bin. Additional epochs, bands, Stokes products, polarization limits, variability, and state information appear as distinct rows in the measurement ledger.
 
 Observation epochs are taken from structured epoch/state fields or text that identifies an observing date, MJD, or semester. Semester years, ISO dates, and MJDs are normalized before matching; an MJD unit may carry through an associated list of observing epochs. Audit, research, publication, compilation, astrometric reference, and explicitly conflicting prose dates do not constrain observation matching. Unknown epochs remain unknown.
 

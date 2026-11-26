@@ -13,7 +13,7 @@ from astropy.coordinates import FK5, SkyCoord
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = 'assets/catalog.json'
-COUNTERPARTS = 'data/v1.0.3/rawdog_gaia_counterparts.csv'
+COUNTERPARTS = 'data/v1.0.4/rawdog_gaia_counterparts.csv'
 OUTPUT = 'assets/table_coordinates_fk5_j2000'
 UGEM = 'gaia-dr3:674214551557961984'
 RADIO = 'name:askap-j144834-685644'
@@ -26,7 +26,7 @@ def products():
     with (ROOT / COUNTERPARTS).open(newline='') as f:
         counterparts = list(csv.DictReader(f))
     by_id = {r['source_id']: r for r in counterparts}
-    assert len(by_id) == len(counterparts) == len(sources) == 58
+    assert len(by_id) == len(counterparts) == len(sources) == 59
     target = FK5(equinox='J2000')
     rows = []
     for x in sources:
@@ -38,7 +38,6 @@ def products():
         assumed = not bool(s['gaia_dr3_id'])
         if not assumed:
             ra, dec = r['gaia_ra_j2000_deg'], r['gaia_dec_j2000_deg']
-            assert ra and dec
             # U Gem's saved VizieR output explicitly declares FK5/J2000.
             already_fk5 = sid == UGEM
             if already_fk5:
@@ -51,6 +50,12 @@ def products():
                              'Released ICRS epoch-2000 position transformed to FK5, equinox J2000. '
                              'Original proper-motion propagation and its limitations are inherited; '
                              'no new motion or covariance propagation is applied.')
+            if not ra and not dec:
+                ra, dec = r['gaia_ra_icrs_deg'], r['gaia_dec_icrs_deg']
+                position_epoch = 'J2016.0 (Gaia position-only solution)'
+                qualification = ('Native Gaia position transformed from ICRS to FK5, equinox J2000. '
+                                 'The epoch remains J2016.0 because proper motion is unavailable.')
+            assert ra and dec
             coord = SkyCoord(ra=float(ra)*u.deg, dec=float(dec)*u.deg,
                              frame=target if already_fk5 else 'icrs')
         else:
@@ -79,8 +84,8 @@ def products():
                          input_file=input_file, input_sha256=hashes[input_file],
                          qualification=qualification))
     assert sum(r['assumed_alignment'] for r in rows) == 1
-    assert sum(r['input_frame'] == 'ICRS' for r in rows) == 56
-    payload = dict(catalog_version='1.0.3', website_revision='web r24',
+    assert sum(r['input_frame'] == 'ICRS' for r in rows) == 57
+    payload = dict(catalog_version='1.0.4', website_revision='web r25',
                    astropy_version=astropy.__version__, input_sha256=hashes, systems=rows)
     buf = io.StringIO(newline='')
     writer = csv.DictWriter(buf, fieldnames=list(rows[0]))
@@ -100,5 +105,5 @@ if __name__ == '__main__':
             assert (ROOT / name).read_bytes() == expected, name+' needs regeneration'
         else:
             (ROOT / name).write_bytes(expected)
-    print('PASS: 58 table positions; 56 ICRS→FK5 conversions, U Gem FK5 retained, '
+    print('PASS: 59 table positions; 57 ICRS→FK5 conversions, U Gem FK5 retained, '
           'one qualified radio alignment; equatorial/Galactic round trips <1 microarcsecond.')

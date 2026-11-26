@@ -6,13 +6,13 @@ from collections import Counter
 from astropy.coordinates import SkyCoord
 import astropy.units as u
 from build import absolute,wrap,ADOPTIONS,token
-ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data/v1.0.3'
+ROOT=Path(__file__).resolve().parents[1];DATA=ROOT/'data/v1.0.4'
 def read(n):return list(csv.DictReader((DATA/n).open()))
 def fingerprint(r):return hashlib.sha256(json.dumps(r,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 def main():
     s=read('rawdog_source_summary.csv');m=read('rawdog_measurements.csv');o=read('rawdog_radio_observations.csv');sky=read('sky_plot_input.csv');cmd=read('cmd_plot_input.csv');refs=read('rawdog_references.csv')
     ids={r['source_id'] for r in s};byid={r['measurement_id']:r for r in m};ss={r['source_name']:r for r in s}
-    assert len(s)==len(ids)==58 and len(o)==96 and len(m)==len(byid)==7182 and len(refs)==669
+    assert len(s)==len(ids)==59 and len(o)==100 and len(m)==len(byid)==7219 and len(refs)==672
     assert all(r['source_id'] in ids for r in o)
     assert all(r['source_id'] in ids for r in m if r['source_membership']=='Member')
     rejected=[r for r in m if r['source_membership'].startswith('Excluded')]
@@ -48,15 +48,23 @@ def main():
     issue_rows=[r for r in read('rawdog_review_issues.csv') if r['source_id']==sid]
     assert len(issue_rows)==5 and all(r['issue_state']=='Open' for r in issue_rows)
     target=askap['source_id'];withdrawn='name:chime-ilt-j1634-plus-44'
-    for old_path in sorted((ROOT/'data/v1.0.2').glob('*.csv')):
+    for old_path in sorted((ROOT/'data/v1.0.3').glob('*.csv')):
         old=list(csv.DictReader(old_path.open()))
-        if old_path.name=='cmd_plot_input.csv':
-            old=list(csv.DictReader((ROOT/'data/v1.0.2-web-r13/cmd_plot_input.csv').open()))
-            for r in old:r['website_revision']='web r24'
-        def unrelated(r):
-            return r.get('source_id')!=target and r.get('key')!='Knigge+26' and not (
-                old_path.name=='rawdog_reference_link_checks.csv' and r['url']=='https://arxiv.org/abs/2606.28993v2')
-        assert [r for r in read(old_path.name) if unrelated(r)]==[r for r in old if unrelated(r)],old_path.name
+        assert read(old_path.name)[:len(old)]==old,old_path.name
+    gpm=ss['GPM J071507-114153'];gpm_sid=gpm['source_id']
+    assert gpm['gaia_dr3_id']=='3045265579628659968' and gpm['white_dwarf_host_confidence']=='established'
+    assert gpm['preferred_radio_recurrence_period_s']=='474.059218' and gpm['radio_recurrence_error_plus_s']=='0.000003'
+    assert math.isclose(float(gpm['preferred_orbital_period_h']),1.3529*24)
+    assert gpm['wd_mass_upper_bound_msun']=='0.68' and gpm['wd_mass_limit_type']=='upper'
+    assert not any(gpm[k] for k in ['preferred_distance_pc','preferred_wd_spin_period_s','preferred_wd_mass_msun'])
+    source_o=[r for r in o if r['source_id']==gpm_sid]
+    assert len(source_o)==4 and len({r['radio_band_ghz_as_reported'] for r in source_o})==4
+    for r in source_o:
+        row=byid[r['measurement_ids']]
+        assert row['parameter']=='radio_fitted_pulse_peak_flux_density' and row['unit']=='uJy'
+        assert r['flux_density_uJy']==row['value_numeric'] and not r['error_plus_uJy']
+    exclusion,=[r for r in cmd if r['source_id']==gpm_sid]
+    assert exclusion['included']=='false' and 'parallax' in exclusion['exclusion_reason']
     assert not any(askap[k] for k in ['preferred_distance_pc','preferred_wd_photospheric_teff_k','preferred_wd_mass_msun','preferred_companion_mass_msun','preferred_wd_spin_period_s'])
     fit={r['parameter']: r for r in m if r['source_id']==target and r['reference_key']=='Knigge+26'}
     assert len(fit)==24 and all('v2' in r['location'] for r in fit.values())
@@ -72,11 +80,11 @@ def main():
     assert next(r for r in refs if r['key']=='Knigge+26')['public_reference_url']=='https://arxiv.org/abs/2606.28993v2'
     placement,=[r for r in cmd if r['source_id']==target]
     assert placement['included']=='false' and 'blended' in placement['exclusion_reason']
-    assert len(read('rawdog_review_issues.csv'))==320
-    assert sum(r['issue_state']=='Open' for r in read('rawdog_review_issues.csv'))==312
+    assert len(read('rawdog_review_issues.csv'))==323
+    assert sum(r['issue_state']=='Open' for r in read('rawdog_review_issues.csv'))==315
     assert not any(r['source_id']==withdrawn for r in m)
-    assert Counter(r['radio_evidence_label'] for r in o)=={'Reported detection; significance not harmonized':63,'Reported flux; significance not harmonized':17,'Upper limit':8,'Marginal reported signal':5,'Secure reported detection':3}
-    assert len(sky)==58 and {r['source_id'] for r in sky}==ids
+    assert Counter(r['radio_evidence_label'] for r in o)=={'Reported detection; significance not harmonized':63,'Reported flux; significance not harmonized':17,'Upper limit':8,'Marginal reported signal':5,'Secure reported detection':7}
+    assert len(sky)==59 and {r['source_id'] for r in sky}==ids
     assert abs(wrap(0))<1e-12 and abs(wrap(360))<1e-12 and wrap(90)<0 and wrap(270)>0 and abs(abs(wrap(180))-math.pi)<1e-12
     residuals=[]
     for r in sky:
@@ -92,7 +100,7 @@ def main():
                 delta=min(abs((v-calc+180)%360-180) if k=='l' else abs(v-calc) for v in old)
                 assert delta<.005,(r['source_name'],k,delta);residuals.append(delta)
     ae=next(r for r in sky if r['source_name']=='AE Aqr');assert abs(float(ae['galactic_l_deg'])-45.28064971049)<1e-5 and abs(float(ae['galactic_b_deg'])+24.41887756883)<1e-5
-    assert len(cmd)==58 and {r['source_id'] for r in cmd}==ids and sum(r['included']=='true' for r in cmd)==56
+    assert len(cmd)==59 and {r['source_id'] for r in cmd}==ids and sum(r['included']=='true' for r in cmd)==56
     assert abs(absolute(15,100)-10)<1e-12 and absolute(15,200)<absolute(15,100)
     for r in cmd:
         if r['included']=='false':assert r['exclusion_reason'] and not r['M_G_observed_mag'];continue
@@ -110,23 +118,23 @@ def main():
             assert r['distance_measurement_ids']=='M04418' and d==380
         else:
             assert 'geometric' in (r['distance_method']+' '+r['distance_uncertainty_convention']).lower()
-    assert {r['source_name'] for r in cmd if r['included']=='false'}=={'ASKAP J174508.9-505149','ASKAP J144834-685644'}
+    assert {r['source_name'] for r in cmd if r['included']=='false'}=={'ASKAP J174508.9-505149','ASKAP J144834-685644','GPM J071507-114153'}
     for p in DATA.glob('*.csv'):assert not re.search(r'/Users/|/home/|/tmp/|tmp/records/|file://',p.read_text()),p.name
-    index=json.loads((ROOT/'assets/catalog.json').read_text());assert index['version']=='1.0.3' and len(index['systems'])==58
+    index=json.loads((ROOT/'assets/catalog.json').read_text());assert index['version']=='1.0.4' and len(index['systems'])==59
     for item in index['systems']:
         detail=json.loads((ROOT/'assets/sources'/(item['token']+'.json')).read_text())
         assert detail['summary']==item['summary'] and detail['summary'] in s
         assert detail['sky']==item['sky'] and detail['cmd']==item['cmd']
         assert len(detail['observations'])==int(item['summary']['radio_observation_count'])
         assert detail['measurements']==[r for r in m if r['source_id']==item['summary']['source_id']]
-    for name,count in [('rawdog_sky',116),('rawdog_cmd',56)]:
-        root=ET.parse(ROOT/'figures/v1.0.3'/(name+'.svg')).getroot()
+    for name,count in [('rawdog_sky',118),('rawdog_cmd',56)]:
+        root=ET.parse(ROOT/'figures/v1.0.4'/(name+'.svg')).getroot()
         gids=[e.get('id') for e in root.iter() if e.get('id')];assert len(gids)==len(set(gids))
         points=[e for e in root.iter() if e.get('id','').startswith('point-')];assert len(points)==count
         assert all(e.get('data-source') in ids and e.get('data-token') for e in points)
         if name=='rawdog_cmd':
             segments=[e for e in root.iter() if e.get('id','').startswith(('bound-','color-'))]
             assert segments and all(e.get('data-token') for e in segments)
-    info={'status':'PASS','systems':58,'observations':96,'measurements':7182,'references':669,'rejected_counterpart_records':74,'sky_included':58,'sky_excluded':0,'cmd_included':56,'cmd_excluded':2,'audited_galactic_components_compared':len(residuals),'max_agreement_difference_deg':max(residuals),'radio_region_selected_coverage':sum(bool(r['preferred_radio_emission_region_field_gauss']) for r in s),'wd_polar_selected_coverage':sum(bool(r['preferred_wd_polar_field_mg']) for r in s)}
+    info={'status':'PASS','systems':59,'observations':100,'measurements':7219,'references':672,'rejected_counterpart_records':74,'sky_included':59,'sky_excluded':0,'cmd_included':56,'cmd_excluded':3,'audited_galactic_components_compared':len(residuals),'max_agreement_difference_deg':max(residuals),'radio_region_selected_coverage':sum(bool(r['preferred_radio_emission_region_field_gauss']) for r in s),'wd_polar_selected_coverage':sum(bool(r['preferred_wd_polar_field_mg']) for r in s)}
     (ROOT/'docs/scientific_check.json').write_text(json.dumps(info,indent=2));print(info)
 if __name__=='__main__':main()
