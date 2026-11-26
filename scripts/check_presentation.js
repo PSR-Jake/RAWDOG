@@ -58,6 +58,15 @@ const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.4/emission_
 const positions=JSON.parse(fs.readFileSync(path.join(root,'assets/table_coordinates_fk5_j2000.json'))),positionMap=new Map(positions.systems.map(p=>[p.source_id,p]));
 assert.equal(positionMap.size,59);assert.equal(positions.systems.filter(p=>p.assumed_alignment).length,1);
 const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,position:positionMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
+// All source classes use host confidence alone for fill, including provisional subclasses.
+const markerShapes={
+ magnetic_cv:['●','○'],cataclysmic_variable:['■','□'],
+ white_dwarf_pulsar:['◆','◇'],long_period_transient:['▲','△']
+};
+for(const item of catalog.systems){
+ const expected=markerShapes[item.sky.display_group][item.summary.white_dwarf_host_confidence==='established'?0:1];
+ assert(context.symbol(item).includes('>'+expected+'</span>'),item.summary.source_name);
+}
 const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'];
 for(const key of numericColumns)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));

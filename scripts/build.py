@@ -75,10 +75,11 @@ def build_inputs(summary,by_source,by_id):
     write('sky_plot_input.csv',sky);write('cmd_plot_input.csv',cmd)
     return sky,cmd
 
-def point(ax,row,x,y):
+def point(ax,row,x,y,*,host_only=False):
     color,marker,_=STYLES[row['display_group']]
     edge='#1864ab' if row['display_group']=='long_period_transient' and 'magnetic_cv' in row['classification_labels'] else color
-    p=ax.scatter([x],[y],s=55,marker=marker,facecolors='none' if row['qualified_status']=='true' else color,edgecolors=edge,linewidths=1.3,zorder=5)
+    open_marker = row['white_dwarf_host_confidence'] != 'established' if host_only else row['qualified_status'] == 'true'
+    p=ax.scatter([x],[y],s=55,marker=marker,facecolors='none' if open_marker else color,edgecolors=edge,linewidths=1.3,zorder=5)
     p.set_gid('point-'+row.get('glyph_token',row['token'])+'-'+str(len(ax.figure.axes)));p.set_urls(['../../index.html#source='+urllib.parse.quote(row['source_id'],safe='')])
 
 def exports(fig,name,rows):
@@ -93,25 +94,28 @@ def exports(fig,name,rows):
             for a in node.iter(ns+'a'):a.set('target','_top');a.set('aria-label','Open '+r['source_name']);a.set('tabindex','0')
     tree.write(path,encoding='unicode',xml_declaration=True)
 
-def legend(fig):
+def legend(fig,*,host_only=False):
     handles=[Line2D([],[],marker=m,color=c,linestyle='',markersize=7,label=l) for c,m,l in STYLES.values()]
-    handles.append(Line2D([],[],marker='o',markerfacecolor='none',color='#333',linestyle='',label='Host/subclass qualified'))
+    open_label = 'WD host inferred or unresolved' if host_only else 'Host/subclass qualified'
+    if host_only:
+        handles.append(Line2D([],[],marker='o',color='#333',linestyle='',label='WD host established'))
+    handles.append(Line2D([],[],marker='o',markerfacecolor='none',color='#333',linestyle='',label=open_label))
     fig.legend(handles=handles,loc='lower center',ncol=3,frameon=False,fontsize=10)
 
-def plots(sky,cmd):
+def plots(sky,cmd,*,host_only=False):
     plt.rcParams.update({'font.size':11,'svg.fonttype':'none','font.family':'DejaVu Sans','axes.spines.top':False,'axes.spines.right':False})
     fig=plt.figure(figsize=(14,11));fig.subplots_adjust(top=.89,bottom=.13,hspace=.46,left=.08,right=.96)
     version=DATA.name.removeprefix('v');fallback=sum(r['fallback_status']=='literature radio position' for r in sky)
     for n,(lon,lat,title,label) in enumerate([('ra_deg','dec_deg',f'Equatorial · Gaia ICRS J2016.0 + {fallback} literature radio position(s)','Right ascension (hours; increases leftward)'),('galactic_l_deg','galactic_b_deg','Galactic · transformed from the same selected position','Galactic longitude (degrees; increases leftward)')],1):
         ax=fig.add_subplot(2,1,n,projection='mollweide');ax.grid(alpha=.35,linewidth=.6);ticks=np.arange(-150,180,30);ax.set_xticks(np.radians(ticks));ax.set_xticklabels([str(int((-t)%360/15))+'h' if n==1 else str(int((-t)%360))+'°' for t in ticks]);ax.set_xlabel(label);ax.set_ylabel('Declination' if n==1 else 'Galactic latitude');ax.set_title(title,fontsize=12,pad=16)
-        for r in sky:point(ax,r,wrap(r[lon]),math.radians(r[lat]))
-    fig.suptitle(f'RAWDOG {version} · {len(sky)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_sky',sky)
+        for r in sky:point(ax,r,wrap(r[lon]),math.radians(r[lat]),host_only=host_only)
+    fig.suptitle(f'RAWDOG {version} · {len(sky)} systems',fontsize=16);legend(fig,host_only=host_only);exports(fig,'rawdog_sky',sky)
     if version in {'1.0.3','1.0.4'}:
-        cmd_plot(cmd, version, annotate_gleam=False, basis='observed Gaia CMD')
+        cmd_plot(cmd, version, annotate_gleam=False, basis='observed Gaia CMD',host_only=host_only)
     else:
-        cmd_plot(cmd, version)
+        cmd_plot(cmd, version, host_only=host_only)
 
-def cmd_plot(cmd,version,annotate_gleam=True,basis='geometric-distance CMD'):
+def cmd_plot(cmd,version,annotate_gleam=True,basis='geometric-distance CMD',*,host_only=False):
     plt.rcParams.update({'font.size':11,'svg.fonttype':'none','font.family':'DejaVu Sans','axes.spines.top':False,'axes.spines.right':False})
     fig,ax=plt.subplots(figsize=(9,9));fig.subplots_adjust(bottom=.18,top=.91,left=.12,right=.96)
     density=read('cmd_background_density.csv');h=np.zeros((220,230))
@@ -123,9 +127,9 @@ def cmd_plot(cmd,version,annotate_gleam=True,basis='geometric-distance CMD'):
         x,y=r['BP_RP_observed_mag'],r['M_G_observed_mag'];color=STYLES[r['display_group']][0]
         if r['M_G_lower_from_distance_upper'] is not None and r['M_G_upper_from_distance_lower'] is not None:ax.vlines(x,r['M_G_lower_from_distance_upper'],r['M_G_upper_from_distance_lower'],color=color,lw=.7,alpha=.6,zorder=4).set_gid('bound-'+r['token'])
         if r['BP_RP_error_approx_mag'] is not None:ax.hlines(y,x-r['BP_RP_error_approx_mag'],x+r['BP_RP_error_approx_mag'],color=color,lw=.7,alpha=.6,zorder=4).set_gid('color-'+r['token'])
-        point(ax,r,x,y)
+        point(ax,r,x,y,host_only=host_only)
         if annotate_gleam and r['source_name']=='GLEAM-X J0704-37':ax.annotate('GLEAM-X\nprior sensitive',(x,y),xytext=(9,-16),textcoords='offset points',fontsize=8,color=color).set_gid('bound-'+r['token']+'-label')
-    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle(f'RAWDOG {version} · {basis} · {len(used)} / {len(cmd)} systems',fontsize=16);legend(fig);exports(fig,'rawdog_cmd',used)
+    ax.set_xlim(-1,4.5);ax.set_ylim(18,-5);ax.set_xlabel('Observed Gaia BP − RP (mag)');ax.set_ylabel('Absolute Gaia G magnitude (mag)');ax.grid(alpha=.15);ax.set_title('Unresolved system light · NOT extinction corrected',fontsize=12);fig.suptitle(f'RAWDOG {version} · {basis} · {len(used)} / {len(cmd)} systems',fontsize=16);legend(fig,host_only=host_only);exports(fig,'rawdog_cmd',used)
 
 def website_data(summary,measurements,sky,cmd):
     out=ROOT/'assets/sources';out.mkdir(parents=True,exist_ok=True)
@@ -139,15 +143,20 @@ def website_data(summary,measurements,sky,cmd):
         index.append({'summary':s,'sky':coord,'cmd':cm,'token':coord['token'],'radio_labels':sorted(set(r['radio_evidence_label'] for r in obs))})
     (ROOT/'assets/catalog.json').write_text(json.dumps({'version':DATA.name.removeprefix('v'),'systems':index},ensure_ascii=False,separators=(',',':')))
 
-def main():
+def main(*,host_only=False):
     sky=read('sky_plot_input.csv');cmd=read('cmd_plot_input.csv')
     for rows,keys in [(sky,['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg']),(cmd,['BP_RP_observed_mag','M_G_observed_mag','M_G_lower_from_distance_upper','M_G_upper_from_distance_lower','BP_RP_error_approx_mag'])]:
         for r in rows:
             for k in keys:r[k]=number(r[k])
-    plots(sky,cmd)
+    plots(sky,cmd,host_only=host_only)
     print(f'Revised figures from {DATA.name} inputs; no catalog tables written.')
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1','1.0.2','1.0.3','1.0.4']);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--version',default='1.0.0',choices=['1.0.0','1.0.1','1.0.2','1.0.3','1.0.4'])
+    parser.add_argument('--host-markers', action='store_true', help='Build the 1.0.4 web r26 figures using host confidence for marker fill')
+    args=parser.parse_args()
     if args.version!='1.0.0':
         DATA=ROOT/('data/v'+args.version);FIG=ROOT/('figures/v'+args.version)
-    main()
+    if args.host_markers:
+        if args.version != '1.0.4':parser.error('--host-markers requires --version 1.0.4')
+        FIG=ROOT/'figures/v1.0.4-web-r26'
+    main(host_only=args.host_markers)

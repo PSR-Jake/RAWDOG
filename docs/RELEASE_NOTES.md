@@ -1,3 +1,7 @@
+# Website web r26 — 2026-11-26
+
+Symbol fill now tracks white dwarf host confidence across the catalogue table, sky map, and Gaia CMD. ASKAP J144834−685644 and ASKAP J174508.9−505149 have filled triangles because their hosts are established. GLEAM-X J0704−37 and ILT J1101+5521 have open triangles because their hosts are inferred. Subclass qualifications remain in source details. This is a presentation revision of catalog v1.0.4.
+
 # RAWDOG 1.0.4 — 2026-11-26 (web r25)
 
 Adds GPM J071507−114153, the white dwarf and G-type star binary reported by [McSweeney et al. (2026)](https://www.nature.com/articles/s41550-026-03016-z). Table 1 gives a 474.059218(3) s radio recurrence and a likely orbital period of 1.3529 (+0.001/−0.0005) d. The WD mass is a conditional upper limit of 0.68 M☉. The companion's spectral type is G7 ± 5 and its reported temperature is 5,500 ± 300 K. The 474 s signal is listed under radio recurrence, with the spin interpretation documented in the evidence.

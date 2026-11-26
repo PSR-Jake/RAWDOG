@@ -26,7 +26,11 @@ function tableHead(key='source_name',ascending=true){return '<tr>'+columnDefinit
 function tags(s){return displayClassCodes(s).map(t=>`<span class="tag">${esc(labels[t]||pretty(t))}</span>`).join('');}
 function displayClassCodes(s){const codes=[...new Set(s.classification_labels.split(';').map(t=>t.trim()).filter(Boolean))];return codes.filter(t=>t!=='long_period_transient'&&(t!=='cataclysmic_variable'||!codes.includes('magnetic_cv')));}
 function gaiaLink(id){return id?`<a href="https://vizier.cds.unistra.fr/viz-bin/VizieR-5?-source=I%2F355%2Fgaiadr3&amp;Source=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="View this Gaia DR3 source in VizieR (opens in a new tab)">${esc(id)}</a>`:'—';}
-function symbol(x){let [c,a,b]=styles[x.sky.display_group];return `<span class="symbol" style="color:${c}" aria-label="${x.sky.qualified_status==='true'?'Qualified':'Established'} ${esc(labels[x.sky.display_group])}">${x.sky.qualified_status==='true'?b:a}</span> `;}
+function symbol(x){
+ const [color,filled,open]=styles[x.sky.display_group];
+ const host=x.summary.white_dwarf_host_confidence;
+ return `<span class="symbol" style="color:${color}" aria-label="${esc(labels[x.sky.display_group])}, WD host: ${esc(labels[host])}">${host==='established'?filled:open}</span> `;
+}
 function compareSystems(a,b,key,ascending){
  const column=columnDefinitions.find(c=>c.key===key),av=column?.position?a.position?.[key]:a.summary[key],bv=column?.position?b.position?.[key]:b.summary[key];
  if(!present(av)||!present(bv))return !present(av)?(!present(bv)?0:1):-1;
@@ -257,7 +261,7 @@ function sourceDetail(d,x,radioLabel=''){
  html+=radioOverview(d,refs,radioLabel);
  html+='<h3 id="xray-luminosity" tabindex="-1">X-ray luminosity</h3>'+xrayOverview(x,refs);
  html+='<h3 id="source-evidence" tabindex="-1">Evidence & references</h3><details class="record"><summary><strong>Selected-property methods, assumptions & evidence links</strong></summary>'+fields(s,Object.keys(s).filter(k=>k!=='aliases'&&k!=='source_id'))+'</details>';
- html+='<details class="record"><summary><strong>Plot inputs, coordinate provenance & distance qualifications</strong></summary><h4>Sky coordinates</h4>'+fields(d.sky,Object.keys(d.sky).filter(k=>!['token','display_group'].includes(k)))+'<h4>Main Gaia CMD</h4>'+fields(x.cmd,Object.keys(x.cmd).filter(k=>!['token','display_group'].includes(k)))+'</details>';
+ html+='<details class="record"><summary><strong>Plot inputs, coordinate provenance & distance qualifications</strong></summary><h4>Sky coordinates</h4>'+fields(d.sky,Object.keys(d.sky).filter(k=>!['token','display_group','qualified_status'].includes(k)))+'<h4>Main Gaia CMD</h4>'+fields(x.cmd,Object.keys(x.cmd).filter(k=>!['token','display_group','qualified_status'].includes(k)))+'</details>';
  html+='<details class="record"><summary><strong>All measurement evidence & alternatives</strong> · '+d.measurements.length+' records</summary><p class="muted">Original values, components, methods, assumptions and uncertainty conventions retained.</p>';
  const groups={};for(let r of d.measurements)(groups[r.public_property_group]??=[]).push(r);
  for(let [group,records] of Object.entries(groups).sort(([a],[b])=>a.localeCompare(b))){html+=`<details class="record"><summary><strong>${esc(group)}</strong> · ${records.length} records</summary>`;for(let r of records)html+=`<details class="record" id="${esc(r.measurement_id)}"><summary>${esc(r.measurement_id)} · ${esc(pretty(r.parameter))} · ${value(r)}</summary>${fields(r,['component','value_numeric','value_text','unit','error_minus','error_plus','lower_bound','upper_bound','public_limit_label','uncertainty_convention','public_uncertainty_label','method','assumption','epoch_or_state','reference_key','location','evidence_label','is_derived','derived_from','adoption_reason','research_date'])}</details>`;html+='</details>';}

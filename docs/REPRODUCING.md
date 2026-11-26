@@ -8,7 +8,7 @@ Python 3.12 or later; install `requirements.txt` in an isolated environment:
 python -m venv .venv
 . .venv/bin/activate
 python -m pip install -r requirements.txt
-python scripts/build.py --version 1.0.4
+python scripts/build.py --version 1.0.4 --host-markers
 python scripts/check.py
 python scripts/cmd_revision.py --check
 python scripts/package.py --version 1.0.4

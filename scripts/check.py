@@ -135,6 +135,21 @@ def main():
         if name=='rawdog_cmd':
             segments=[e for e in root.iter() if e.get('id','').startswith(('bound-','color-'))]
             assert segments and all(e.get('data-token') for e in segments)
+    # Web r26 uses host confidence alone. Historical figure files retain their original fill convention.
+    by_source = {row['source_id']: row for row in s}
+    sky_sources = Counter({sid: 2 for sid in ids})
+    cmd_sources = Counter({row['source_id']: 1 for row in cmd if row['included'] == 'true'})
+    for name, expected in [('rawdog_sky', sky_sources), ('rawdog_cmd', cmd_sources)]:
+        svg = ET.parse(ROOT/'figures/v1.0.4-web-r26'/(name+'.svg')).getroot()
+        points = [e for e in svg.iter() if e.get('id', '').startswith('point-')]
+        assert Counter(point.get('data-source') for point in points) == expected
+        assert 'WD host established' in ''.join(svg.itertext())
+        assert 'WD host inferred or unresolved' in ''.join(svg.itertext())
+        for point in points:
+            sid = point.get('data-source')
+            styles = [node.get('style', '') for node in point.iter()]
+            is_open = any('fill: none' in style for style in styles)
+            assert is_open == (by_source[sid]['white_dwarf_host_confidence'] != 'established'), (name, sid)
     info={'status':'PASS','systems':59,'observations':100,'measurements':7219,'references':672,'rejected_counterpart_records':74,'sky_included':59,'sky_excluded':0,'cmd_included':56,'cmd_excluded':3,'audited_galactic_components_compared':len(residuals),'max_agreement_difference_deg':max(residuals),'radio_region_selected_coverage':sum(bool(r['preferred_radio_emission_region_field_gauss']) for r in s),'wd_polar_selected_coverage':sum(bool(r['preferred_wd_polar_field_mg']) for r in s)}
     (ROOT/'docs/scientific_check.json').write_text(json.dumps(info,indent=2));print(info)
 if __name__=='__main__':main()

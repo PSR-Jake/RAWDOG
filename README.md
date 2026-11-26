@@ -19,7 +19,7 @@
 | :---: | :---: | :---: | :---: |
 | **59** | **100** | **7,219** | **672** |
 
-**Catalog v1.0.4** · **Website web r25**
+**Catalog v1.0.4** · **Website web r26**
 
 Search and compare systems, inspect radio and X-ray evidence, and explore the sky map and Gaia color–magnitude diagram. Individual records include their reported bands, uncertainties, limits and references.
 
