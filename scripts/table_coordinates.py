@@ -13,7 +13,7 @@ from astropy.coordinates import FK5, SkyCoord
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = 'assets/catalog.json'
-COUNTERPARTS = 'data/v1.0.2/rawdog_gaia_counterparts.csv'
+COUNTERPARTS = 'data/v1.0.3/rawdog_gaia_counterparts.csv'
 OUTPUT = 'assets/table_coordinates_fk5_j2000'
 UGEM = 'gaia-dr3:674214551557961984'
 RADIO = 'name:askap-j144834-685644'
@@ -80,7 +80,7 @@ def products():
                          qualification=qualification))
     assert sum(r['assumed_alignment'] for r in rows) == 1
     assert sum(r['input_frame'] == 'ICRS' for r in rows) == 56
-    payload = dict(catalog_version='1.0.2', website_revision='web r19',
+    payload = dict(catalog_version='1.0.3', website_revision='web r24',
                    astropy_version=astropy.__version__, input_sha256=hashes, systems=rows)
     buf = io.StringIO(newline='')
     writer = csv.DictWriter(buf, fieldnames=list(rows[0]))

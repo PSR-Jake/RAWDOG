@@ -1,4 +1,4 @@
-# RAWDOG 1.0.2 public data dictionary
+# RAWDOG 1.0.3 public data dictionary
 
 All files are UTF-8 CSV. Blank fields mean no selected or reported value in that field; they do not mean zero. Text from audited source records may still contain strings such as “not reported” or “NA”. The summary cleans explicit NA-like Gaia-ID sentinels to blank while preserving accepted Gaia IDs as exact decimal strings.
 
@@ -8,7 +8,7 @@ All files are UTF-8 CSV. Blank fields mean no selected or reported value in that
 |---|---:|---|
 | rawdog_source_summary.csv | 58 | One row per member; primary key source_id. |
 | rawdog_radio_observations.csv | 96 | Primary key observation_id; source_id joins to the summary. |
-| rawdog_measurements.csv | 7,175 | Version-scoped measurement_id; source_id joins member rows to the summary. Includes 7,101 members and 74 excluded MM Hya counterpart records. |
+| rawdog_measurements.csv | 7,182 | Version-scoped measurement_id; source_id joins member rows to the summary. Includes 7,108 members and 74 excluded MM Hya counterpart records. |
 | rawdog_references.csv | 669 | Preserves existing reference key and manifest ID. Other tables join through reference keys; reference_ids are manifest IDs. |
 | rawdog_physical_properties.csv | 58 | Audited compatibility fields plus source_id. |
 | rawdog_gaia_counterparts.csv | 58 | Audited counterpart fields plus source_id. Gaia source IDs are text. |

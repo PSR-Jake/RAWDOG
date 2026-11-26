@@ -11,6 +11,7 @@ assert.equal(Object.values(preferredReferences.references).filter(r=>r.arxiv_id)
 for(const reference of Object.values(preferredReferences.references))if(reference.arxiv_id){
  assert.equal(reference.url,'https://arxiv.org/abs/'+reference.arxiv_id);
 }
+assert.equal(preferredReferences.references['Knigge+26'].url,'https://arxiv.org/abs/2606.28993v2');
 assert.equal(preferredReferences.references['Marsh+16'].url,'https://arxiv.org/abs/1607.08265');
 assert.equal(preferredReferences.references['Pelisoli+23'].url,'https://arxiv.org/abs/2306.09272');
 assert.equal(preferredReferences.references['Suleimanov+24_TTAri'].url,'https://arxiv.org/abs/2403.15254');
@@ -54,10 +55,9 @@ assert.equal(format('','','','','9750','K'),'≤ 9750 K');
 assert.equal(format('','','','0','','M☉'),'≥ 0 M☉');
 const rawCatalog=JSON.parse(fs.readFileSync(path.join(root,'assets/catalog.json'))),rawBefore=JSON.stringify(rawCatalog);
 const emissions=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r10/emission_evidence.json'))),emissionMap=new Map(emissions.systems.map(e=>[e.source_id,e]));
-const cmd=JSON.parse(fs.readFileSync(path.join(root,'data/v1.0.2-web-r13/cmd_plot_input.json'))),cmdMap=new Map(cmd.systems.map(c=>[c.source_id,c]));
 const positions=JSON.parse(fs.readFileSync(path.join(root,'assets/table_coordinates_fk5_j2000.json'))),positionMap=new Map(positions.systems.map(p=>[p.source_id,p]));
 assert.equal(positionMap.size,58);assert.equal(positions.systems.filter(p=>p.assumed_alignment).length,1);
-const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,position:positionMap.get(x.summary.source_id),cmd:cmdMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
+const catalog={...rawCatalog,systems:rawCatalog.systems.map(x=>({...x,position:positionMap.get(x.summary.source_id),emission:emissionMap.get(x.summary.source_id)}))},before=JSON.stringify(catalog);
 const numericColumns=['preferred_distance_pc','preferred_orbital_period_h','preferred_wd_spin_period_s'];
 for(const key of numericColumns)for(const ascending of [true,false]){
  const sorted=[...catalog.systems].sort((a,b)=>context.compareSystems(a,b,key,ascending));
@@ -128,6 +128,13 @@ for(const x of catalog.systems){
  assert(html.includes('Unresolved issues & review history'));
  assert.equal(JSON.stringify(d),original,'Presentation must not mutate source data');
 }
+const askap=catalog.systems.find(x=>x.summary.source_id==='gaia-dr3:5946454415417964032');
+const askapData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',askap.token+'.json')));
+const askapHTML=context.sourceDetail(askapData,askap);
+assert.match(askapHTML,/Published SED estimates/);
+assert.match(askapHTML,/Evidence M04669/);
+assert.match(askapHTML,/arxiv.org\/abs\/2606.28993v2/);
+assert.match(askapHTML,/Main CMD: excluded. Gaia BP\/RP is blended/);
 const added=catalog.systems.find(x=>x.summary.source_name==='ASKAP J144834-685644');
 const addedData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',added.token+'.json')));
 const addedHTML=context.sourceDetail(addedData,added);
@@ -157,7 +164,7 @@ assert.match(aeOverview,/Property notes & uncertainty conventions/);assert.match
 assert.match(aeOverview,/M02945/);assert.match(aeOverview,/no adopted error/);
 assert(!context.propertyOverview({preferred_wd_mass_msun:'0',wd_mass_error_minus_msun:'0',wd_mass_error_plus_msun:'0'}).includes('no adopted error'));
 const j1912=catalog.systems.find(x=>x.summary.source_name==='J191213.72-441045.1'),j1912Overview=context.propertyOverview(j1912.summary);
-assert.equal(j1912.summary.preferred_distance_pc,'');assert.equal(j1912.cmd.distance_pc,'236.729919');
+assert.equal(j1912.summary.preferred_distance_pc,'');assert.equal(Number(j1912.cmd.distance_pc),236.729919);
 assert(j1912Overview.includes(escapeText(j1912.summary.distance_status)));
 assert(!j1912Overview.match(/<dl class="property-list">(.*?)<\/dl>/)[1].includes('<dt>Distance</dt>'));
 assert.match(context.cmdNote({summary:j1912.summary},j1912.cmd),/CMD-only distance adoption/);
@@ -220,7 +227,7 @@ assert.equal((context.tableRow(zeroPosition).match(/0\.0000/g)||[]).length,2);
 const missingPosition={...added,position:{...added.position,ra_deg:'',dec_deg:null,galactic_l_deg:undefined,galactic_b_deg:''}};
 assert(Array.from(context.tableRow(missingPosition).matchAll(/<td\b[^>]*>(.*?)<\/td>/g),m=>m[1]).slice(2,6).every(c=>c==='—'));
 assert(html.includes('id="coordinate-note"'));assert(!html.includes('id="coordinate-note" class="help" hidden'));
-assert(html.includes('data/v1.0.2/sky_plot_input.csv'));
+assert(html.includes('data/v1.0.3/sky_plot_input.csv'));
 assert(html.includes('assets/table_coordinates_fk5_j2000.csv'));
 const qs=catalog.systems.find(x=>x.summary.source_name==='QS Vir'),qsData=JSON.parse(fs.readFileSync(path.join(root,'assets/sources',qs.token+'.json'))),radioLabel='Reported flux; significance not harmonized';
 assert(context.matchesFilters(qs,'qs vir','cataclysmic_variable','established',radioLabel));
@@ -255,11 +262,11 @@ async function checkSourceFailures(){
  vm.createContext(sourceContext);
  vm.runInContext(`const $=s=>nodes[s],esc=s=>String(s).replaceAll('<','&lt;');let detailRequest=0,lastFocus;const systems=['older','newer'].map(id=>({token:id,summary:{source_id:id,source_name:id}}));function sourceDetail(d,x){return x.summary.source_name;}`+app.slice(app.indexOf('async function openSource'),app.indexOf('function closeSource')),sourceContext);
  const older=sourceContext.openSource('older',false),newer=sourceContext.openSource('newer',false);
- pending.get('assets/sources/newer.json?v=1.0.2').resolve({ok:true,json:async()=>({})});await newer;
- pending.get('assets/sources/older.json?v=1.0.2').reject(new Error('Delayed failure'));await older;
+ pending.get('assets/sources/newer.json?v=1.0.3').resolve({ok:true,json:async()=>({})});await newer;
+ pending.get('assets/sources/older.json?v=1.0.3').reject(new Error('Delayed failure'));await older;
  assert.equal(nodes['#detail-body'].innerHTML,'newer');assert.equal(nodes['.detail-nav'].hidden,false);
  const broken=sourceContext.openSource('older',false);
- pending.get('assets/sources/older.json?v=1.0.2').resolve({ok:true,json:async()=>{throw new SyntaxError('Invalid JSON');}});await broken;
+ pending.get('assets/sources/older.json?v=1.0.3').resolve({ok:true,json:async()=>{throw new SyntaxError('Invalid JSON');}});await broken;
  assert(nodes['#detail-body'].innerHTML.includes('download the versioned evidence CSV'));assert.equal(nodes['.detail-nav'].hidden,true);
  await sourceContext.openSource('<unknown>',false);assert(nodes['#detail-body'].innerHTML.includes('&lt;unknown>'));
 }

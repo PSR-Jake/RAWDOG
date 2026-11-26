@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-01",
+  "source_name": "CHIME/ILT J1634+44",
+  "source_id": "name:chime-ilt-j1634-plus-44",
+  "base_version": "1.0.1",
+  "decision": "Withdrawn from active membership at author request because source nature and white-dwarf interpretation are unclear.",
+  "policy": "Not a rejected counterpart. 117 evidence records and six review items removed from active tables; historical snapshots and the bibliographic manifest remain intact.",
+  "preservation": "All surviving source values, IDs, uncertainty conventions and plot rows unchanged."
+}

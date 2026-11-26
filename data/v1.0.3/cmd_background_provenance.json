@@ -1,0 +1,11 @@
+{
+  "cache_basename": "gaia_cmd_background_gaia_tap.csv",
+  "cache_sha256": "b1913fb103e6e7073e7bc698b9023aa0e03071fc576f32c97f25457e309ec50e",
+  "cache_rows": 212828,
+  "quality_selected": 212828,
+  "within_density_extent": 212236,
+  "outside_density_extent": 592,
+  "cuts": "Finite G, BP−RP, parallax, parallax_over_error, RUWE; parallax > 0 mas; parallax_over_error >= 10; 0 < RUWE < 1.4. No extinction correction. M_G=G+5 log10(parallax_mas)−10.",
+  "historical_query": "Not recovered for this cache. Filename and columns identify a Gaia TAP cache, not its original selection or sky coverage. Related Rose analysis uses extinction-corrected aggregation; that query is not attributed to this cache.",
+  "product": "220 × 230 fixed bins: BP−RP [−1,4.5], M_G [−5,18]. Counts retained; no source IDs or individual interactive field stars. Inverse parallax used only for high-significance field background, never for RAWDOG."
+}

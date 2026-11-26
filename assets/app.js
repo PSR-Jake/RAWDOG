@@ -5,7 +5,7 @@ const styles={magnetic_cv:['#1864ab','●','○'],cataclysmic_variable:['#087f5b
 const pretty=k=>({non_magnetic_cv:'Non-magnetic CV',AM:'Polar (AM Her)',IP:'Intermediate polar (IP)'}[k]||k).replaceAll('_',' ').replace(/\bgaia\b/g,'Gaia').replace(/\bwd\b/g,'WD');
 let systems=[],shown=[],sortKey='source_name',sortAsc=true,lastFocus=null,detailRequest=0,referenceLinks={};
 const files=['rawdog_source_summary.csv','rawdog_radio_observations.csv','rawdog_measurements.csv','rawdog_references.csv','rawdog_physical_properties.csv','rawdog_gaia_counterparts.csv','rawdog_source_references.csv','rawdog_review_issues.csv','rawdog_excluded_counterparts.csv','rawdog_reference_link_checks.csv'];
-$('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.2/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
+$('#download-list').innerHTML=files.slice(2).map(f=>`<li><a download href="data/v1.0.3/${f}">${esc(pretty(f.replace('rawdog_','').replace('.csv','')))} CSV</a></li>`).join('');
 const columnDefinitions=[
  {key:'source_name',label:'System',sort:true},
  {key:'classification_labels',label:'Class',sort:true},
@@ -114,7 +114,7 @@ function render(){
  $('#active-filters').innerHTML=['search','classification','host','radio'].filter(id=>$('#'+id).value).map(id=>{const el=$('#'+id),label=id==='search'?'Search: '+el.value:el.selectedOptions[0].textContent;return '<button type="button" data-clear-filter="'+id+'" aria-label="Remove '+esc(label)+' filter">'+esc(label)+' <span aria-hidden="true">×</span></button>';}).join('')||'<span>No active filters</span>';
  $('#radio-filter-note').hidden=!radio;
  $('#active-filters').hidden=![q,cls,host,radio].some(Boolean);
- $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.2`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
+ $('#count').textContent=`${shown.length} / ${systems.length} systems · RAWDOG 1.0.3`;$('#empty').hidden=shown.length!==0;$('#export').disabled=false;updatePlots();
 }
 function updatePlots(){
  const on=$('#plot-filter').checked,allowed=new Set(shown.map(x=>x.token));
@@ -130,7 +130,7 @@ for(let obj of document.querySelectorAll('.plot'))obj.addEventListener('load',()
 $('#filters').addEventListener('input',render);$('#filters').addEventListener('submit',e=>e.preventDefault());$('#filters').addEventListener('reset',()=>setTimeout(render,0));$('#plot-filter').addEventListener('change',updatePlots);
 $('#active-filters').addEventListener('click',ev=>{const b=ev.target.closest('[data-clear-filter]');if(b){const el=$('#'+b.dataset.clearFilter);el.value='';render();el.focus();}});
 $('#systems').addEventListener('click',ev=>{const s=ev.target.closest('[data-source]');if(s)openSource(s.dataset.source,true,s.dataset.section,s.dataset.matchRadio);const b=ev.target.closest('[data-sort]');if(b){sortAsc=sortKey===b.dataset.sort?!sortAsc:true;sortKey=b.dataset.sort;render();$('#systems [data-sort="'+sortKey+'"]').focus();}});
-function exportCSV(){const text=csvText(shown,Object.keys(systems[0].summary));const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.2-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportCSV(){const text=csvText(shown,Object.keys(systems[0].summary));const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='RAWDOG-v1.0.3-filtered-systems.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('#export').addEventListener('click',exportCSV);
 function fields(r,keys){return `<dl class="raw-fields">${keys.filter(k=>r[k]!==''&&r[k]!=null).map(k=>`<dt>${esc(pretty(k))}</dt><dd>${esc(k==='component'||k.endsWith('_component')||k==='gaia_match_status'?pretty(r[k]):r[k])}</dd>`).join('')}</dl>`;}
 function value(r){return estimate(r.value_numeric!==''&&r.value_numeric!=null?r.value_numeric:r.value_text||'No numeric value selected/reported',r.error_minus,r.error_plus,r.lower_bound,r.upper_bound,r.unit);}
@@ -243,6 +243,13 @@ function sourceDetail(d,x,radioLabel=''){
  if(x.position)html+='<details class="record"><summary>Table coordinates — FK5/J2000 & provenance</summary>'+fields(x.position,['ra_deg','dec_deg','galactic_l_deg','galactic_b_deg','coordinate_frame','coordinate_equinox','position_epoch','input_ra_deg','input_dec_deg','input_frame','input_file','input_sha256','qualification'])+'</details>';
  const overview=propertyOverview(s);html+='<h3 id="selected-properties" tabindex="-1">Selected properties & periods</h3>'+(overview||'<p class="muted">No selected physical properties or periods. Published alternatives remain in the evidence below.</p>');
  if(s.source_name==='AR Sco')html+='<p class="help"><strong>Field interpretation:</strong> 42.7±0.2 G describes the modeled synchrotron region (MCSE, not physical confidence). The separately inferred WD polar field is approximately 15 MG. The abstract’s 43 MG remains in the evidence as a likely unit typo—an inference.</p>';
+ if(s.source_id==='gaia-dr3:5946454415417964032'){
+  const fitIds=['M04669','M04690','M04701','M04704'];
+  const fit=d.measurements.filter(r=>fitIds.includes(r.measurement_id));
+  const names={'M04669':'Distance','M04690':'WD temperature','M04701':'Donor mass','M04704':'Donor temperature'};
+  const paper=d.references.find(r=>r.key==='Knigge+26');
+  html+='<h4>Published SED estimates</h4><p class="help">Two-component fit with a fixed 0.8 M☉ WD and a donor constrained to the CV sequence. '+refLink(paper)+'</p><dl class="raw-fields">'+fit.map(r=>'<dt>'+names[r.measurement_id]+'</dt><dd>'+value(r)+' '+evidenceLinks(r.measurement_id)+'</dd>').join('')+'</dl>';
+ }
  html+='<h3 id="cmd-placement" tabindex="-1">CMD placement</h3><p class="help">'+esc(cmdNote(d,x.cmd))+'</p>';
  html+='<h3 id="radio-observations" tabindex="-1">Radio observations</h3><p class="muted">'+d.observations.length+' observation '+(d.observations.length===1?'row':'rows')+'. Expand an observation for methods and full metadata.</p><button type="button" data-collapse-observations>Collapse observation details</button>';
  if(radioLabel)html+='<p id="radio-match-note" class="help">Matching '+esc(radioLabel)+' records are highlighted. All observations remain shown. <button type="button" data-show-all-radio>Show all observations</button></p>';
@@ -255,7 +262,7 @@ function sourceDetail(d,x,radioLabel=''){
  const groups={};for(let r of d.measurements)(groups[r.public_property_group]??=[]).push(r);
  for(let [group,records] of Object.entries(groups).sort(([a],[b])=>a.localeCompare(b))){html+=`<details class="record"><summary><strong>${esc(group)}</strong> · ${records.length} records</summary>`;for(let r of records)html+=`<details class="record" id="${esc(r.measurement_id)}"><summary>${esc(r.measurement_id)} · ${esc(pretty(r.parameter))} · ${value(r)}</summary>${fields(r,['component','value_numeric','value_text','unit','error_minus','error_plus','lower_bound','upper_bound','public_limit_label','uncertainty_convention','public_uncertainty_label','method','assumption','epoch_or_state','reference_key','location','evidence_label','is_derived','derived_from','adoption_reason','research_date'])}</details>`;html+='</details>';}
  html+='</details><details class="record"><summary><strong>Unresolved issues & review history</strong> · '+d.issues.length+' records</summary>';for(let r of d.issues)html+=`<details class="issue"><summary>${esc(r.issue_id)} · ${esc(r.parameter)} · ${esc(r.issue_state)}</summary>${fields(r,['competing_evidence','references','why_it_matters','needed_action','public_status','research_date'])}</details>`;
- html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${referenceStatus(r)?'<span class="subtext">'+esc(referenceStatus(r))+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.2 source evidence JSON</a></p>';
+ html+='</details><details class="record"><summary><strong>Complete references</strong> · '+d.references.length+'</summary><ul class="refs">'+d.references.map(r=>`<li>${refLink(r)} · ${esc(r.full_citation||r.short_citation)}${referenceStatus(r)?'<span class="subtext">'+esc(referenceStatus(r))+'</span>':''}</li>`).join('')+'</ul></details><p><a download href="assets/sources/'+x.token+'.json">Download catalog 1.0.3 source evidence JSON</a></p>';
  return html;
 }
 function jumpToEvidence(target){
@@ -270,10 +277,10 @@ async function openSource(sid,hash=true,section='',radioLabel=''){
  if(hash)history.pushState(null,'','#source='+encodeURIComponent(sid));
  $('#detail-name').textContent=x?x.summary.source_name:'Source not found';$('.detail-nav').hidden=true;$('#detail-status').hidden=true;
  $('#detail-body').innerHTML='<p role="status">Loading source evidence…</p>';if(!$('#detail').open)$('#detail').showModal();$('#close').focus();
- if(!x){$('#detail-body').innerHTML='<p role="alert">No source in catalog 1.0.2 matches '+esc(sid)+'. Close this view and search the catalog.</p>';return;}
- try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.2');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;
+ if(!x){$('#detail-body').innerHTML='<p role="alert">No source in catalog 1.0.3 matches '+esc(sid)+'. Close this view and search the catalog.</p>';return;}
+ try{const response=await fetch('assets/sources/'+x.token+'.json?v=1.0.3');if(!response.ok)throw Error('Source evidence unavailable');const d=await response.json();if(seq!==detailRequest)return;
  $('#detail-body').innerHTML=sourceDetail(d,x,radioLabel);$('.detail-nav').hidden=false;$('#detail').scrollTop=0;$('#close').focus();if(section)jumpToEvidence((radioLabel&&$('#detail-body .radio-match'))||$('#'+section));
- }catch(e){if(seq!==detailRequest)return;$('.detail-nav').hidden=true;$('#detail-body').innerHTML='<p role="alert">Source evidence could not be loaded. Try reopening this source or <a download href="data/v1.0.2/rawdog_measurements.csv">download the versioned evidence CSV</a>.</p>';}
+ }catch(e){if(seq!==detailRequest)return;$('.detail-nav').hidden=true;$('#detail-body').innerHTML='<p role="alert">Source evidence could not be loaded. Try reopening this source or <a download href="data/v1.0.3/rawdog_measurements.csv">download the versioned evidence CSV</a>.</p>';}
 }
 function closeSource(updateHash=true){++detailRequest;$('#detail').close();if(updateHash&&location.hash.startsWith('#source='))history.replaceState(null,'',location.pathname+location.search+'#catalog');if(lastFocus?.isConnected&&lastFocus!==document.body)lastFocus.focus();else $('#search').focus();}
 $('#close').addEventListener('click',()=>closeSource());$('#detail').addEventListener('cancel',e=>{e.preventDefault();closeSource();});
@@ -285,5 +292,5 @@ $('#detail-body').addEventListener('click',ev=>{
 });
 function route(){if(location.hash.startsWith('#source=')){let sid=location.hash.slice(8);try{sid=decodeURIComponent(sid);}catch(e){}openSource(sid,false);}else if($('#detail').open)closeSource(false);}
 window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
-const referenceRequest=fetch('assets/reference_links.json?v=web-r23').then(response=>{if(!response.ok)throw Error('Reference links unavailable');return response.json();}).catch(()=>({references:{}}));
-Promise.all(['assets/catalog.json?v=1.0.2','data/v1.0.2-web-r10/emission_evidence.json','data/v1.0.2-web-r13/cmd_plot_input.json','assets/table_coordinates_fk5_j2000.json?v=web-r19'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();})).concat(referenceRequest)).then(([data,evidence,currentCmd,positions,preferredReferences])=>{referenceLinks=preferredReferences.references;const cmdById=new Map(currentCmd.systems.map(c=>[c.source_id,c]));const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));const positionById=new Map(positions.systems.map(p=>[p.source_id,p]));systems=data.systems.map(x=>{const position=positionById.get(x.summary.source_id);if(!position||position.gaia_dr3_id!==x.summary.gaia_dr3_id)throw Error('Table coordinate join mismatch');return {...x,position,cmd:cmdById.get(x.summary.source_id),emission:byid.get(x.summary.source_id)};});render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});
+const referenceRequest=fetch('assets/reference_links.json?v=web-r24').then(response=>{if(!response.ok)throw Error('Reference links unavailable');return response.json();}).catch(()=>({references:{}}));
+Promise.all(['assets/catalog.json?v=1.0.3','data/v1.0.2-web-r10/emission_evidence.json','assets/table_coordinates_fk5_j2000.json?v=web-r24'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Catalog/evidence unavailable');return r.json();})).concat(referenceRequest)).then(([data,evidence,positions,preferredReferences])=>{referenceLinks=preferredReferences.references;const byid=new Map(evidence.systems.map(e=>[e.source_id,e]));const positionById=new Map(positions.systems.map(p=>[p.source_id,p]));systems=data.systems.map(x=>{const position=positionById.get(x.summary.source_id);if(!position||position.gaia_dr3_id!==x.summary.gaia_dr3_id)throw Error('Table coordinate join mismatch');return {...x,position,emission:byid.get(x.summary.source_id)};});render();for(let obj of document.querySelectorAll('.plot'))setupPlot(obj);route();}).catch(e=>{$('#count').textContent=e.message+' — use the versioned CSV downloads.';});

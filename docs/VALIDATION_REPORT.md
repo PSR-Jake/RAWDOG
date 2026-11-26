@@ -1,3 +1,7 @@
+# RAWDOG 1.0.3 publication validation
+
+The scientific check verifies the v2 SED values and offsets, versioned citation, established host, CMD exclusion, evidence joins and preservation of other source values. The current CMD inputs preserve all 56 plotted positions from web r13. There are 58 members, 96 observations, 7,182 evidence records and 669 references. Run `python scripts/check.py` in the repository and see `scientific_check.json` for the result.
+
 # RAWDOG 1.0.2 publication validation
 
 Prepared 2026-10-01. Run `python scripts/check.py`; the result is recorded in `scientific_check.json`. The check compares every surviving current CSV record with 1.0.1, asserts the withdrawn source is absent from membership, observations, evidence and plot inputs, and verifies 58 systems, 96 observations, 7,175 evidence records, 320 review items and 669 retained bibliographic references. The sanitization log row numbers are remapped to the filtered tables.

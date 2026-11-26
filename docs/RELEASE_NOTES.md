@@ -1,3 +1,11 @@
+# RAWDOG 1.0.3 — 2026-11-26 (web r24)
+
+Updates ASKAP J1745-5051 after review of Table 1, Figs. 5–6 and §§2–5 in [Knigge et al. (2026), arXiv v2](https://arxiv.org/html/2606.28993v2). The entry records an established WD host, a favored polar interpretation with subtype unresolved, and a candidate period bouncer.
+
+The two-component SED gives 322 (+70/−61) pc, WD temperature 14,500 (+5,000/−1,200) K, and a donor mass of 0.052 ± 0.008 M☉ with temperature near 1,800 K. RAWDOG records these as model estimates alongside the alternatives. The Moffat photometry refit yields 0.049 M☉. Gaia BP/RP blending excludes the source from the main Gaia CMD.
+
+The update refreshes 17 existing evidence records and adds seven. The release has 58 systems, 96 observations, 7,182 evidence records, and 669 references. Sky and CMD coverage are 58 and 56 systems, respectively. Earlier versions remain available.
+
 # Website revision web r23 — 2026-11-06
 
 Prioritizes verified arXiv abstract links in radio, X-ray and complete-reference views. The link index covers 669 reference keys, selecting 316 arXiv links and 353 fallbacks. The audit records exact metadata matches and reviewed identifier conflicts. Data/service query links retain their endpoints. [Matching rules and audit](REFERENCE_LINKS_WEB_R23.md).
